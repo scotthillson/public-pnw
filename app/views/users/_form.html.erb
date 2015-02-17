@@ -1,0 +1,33 @@
+<% if @user.errors.any? %>
+  <% @user.errors.full_messages.each do |msg| %>
+		<div class="alert alert alert-info flash text-center">
+			<button type="button" class="close" aria-hidden="true">×</button>
+    	<li><%= msg %></li>
+		</div>
+  <% end %>
+<% end %>
+<%= form_for(@user, html: { style: 'width:300px;margin:auto' })  do |f| %>
+  <div class="field text-center">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class: 'form-control text-center' %>
+  </div>
+  <div class="field text-center">
+   <%= f.label :email %><br>
+   <%= f.text_field :email, class: 'form-control text-center' %>
+  </div>
+  <div class="field text-center">
+    <%= f.label :password %><br>
+    <%= f.password_field :password, class: 'form-control text-center' %>
+  </div>
+  <div class="field text-center">
+    <%= f.label :password_confirmation, 'Password Confirmation' %><br>
+    <%= f.password_field :password_confirmation, class: 'form-control text-center' %>
+  </div>
+  <br>
+  <div class="actions text-center">
+    <input name="commit" type="submit" value="Save" class="btn btn-sm btn-success">
+  </div>
+  <div class="text-center">
+    <%= link_to request.referer do %><div class="btn btn-sm btn-primary text-center">Back</div><% end %>
+  </div>
+<% end %>

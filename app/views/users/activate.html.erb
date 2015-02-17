@@ -1,0 +1,25 @@
+<h3 class="text-center">user activation</h3>
+<%= form_for @user, url: complete_path(params[:id]), html: { style: 'width:300px;margin:auto' } do |f| %>
+  <% if @user.errors.any? %>
+    <div class="alert flash">
+      <ul>
+        <% for message in @user.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field text-center">
+   <%= f.label :email %><br>
+   <%= f.text_field :email, class: 'form-control' %>
+  </div>
+  <div class="field text-center">
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control' %>
+  </div>
+  <div class="field text-center">
+    <%= f.label :password_confirmation, 'Confirm New Password' %>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+  </div>
+  <div class="actions"><%= f.submit 'Activate Account' %></div>
+<% end %>

@@ -1,0 +1,99 @@
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="6"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="7"></li>
+  </ol>
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <%= image_tag 'banner-chopper.jpg' %>
+    </div>
+    <div class="item">
+      <%= image_tag 'banner-packaging.jpg' %>
+    </div>
+    <div class="item">
+      <%= image_tag 'banner-snow.jpg' %>
+    </div>
+    <div class="item">
+      <%= image_tag 'banner-hood.jpg' %>
+    </div>
+    <div class="item">
+      <%= image_tag 'banner-ropes.jpg' %>
+    </div>
+    <div class="item">
+      <%= image_tag 'banner-erin.jpg' %>
+    </div>
+    <div class="item">
+      <%= image_tag 'banner-map.jpg' %>
+    </div>
+    <div class="item">
+      <%= image_tag 'banner-fire.jpg' %>
+    </div>
+  </div>
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
+<div class="container-fluid">
+	<div class="panel panel-info">
+		<div class="panel-heading"><b>Announcement:</b> Pacific Northwest Search and Rescue is now accepting applications for 2015</div>
+		<div class="row">
+			<div class="col-md-12">
+			    <p>PNWSAR is now accepting applications for our 2015 trainee class. Please click the 'join us' link above to find out more. Interviews will take place in the fall of 2014, and training will begin in January of 2015.</p>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading"><b>Announcement:</b> Save the date for Northwest SARCON 2014!</div>
+		<div class="row">
+			<div class="col-md-12">
+			<div class="pnw-wrap"><p>Dates have been announced for the 2014 edition of the Northwest Search and Rescue Conference, hosted by the Clackamas County Sherrif's office. The conference returns to Camp Kuratli at Trestle Glen in Boring Oregon September 26th through the 28th. Registration and information about the 2014 conference is available at http://www.co.clackamas.or.us/sheriff/sarcon/</p></div>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="row">
+			<div class="col-md-12">
+				<%= image_tag 'large-tera.jpg' %>
+			    <div class="pnw-wrap"><p>Pacific Northwest Search and Rescue (PNWSAR) is an all volunteer non-profit organization dedicated to providing Search and Rescue assistance for people who are lost or injured out of doors. Our organization exists to provide ground search teams and other types of assistance to the official agencies responsible for search and rescue activities in our region (by Oregon law, the county Sheriff).</p></div>
+			</div>
+		</div>
+	</div>	
+	<div class="panel panel-default">
+		<div class="row">
+			<div class="col-md-6">
+				<%= image_tag 'tall-night.jpg' %>
+				<div class="pnw-wrap"><p>Our specialty is ground search operations. We focus our training on the development and maintenance of outdoor navigation, searching, patient evacuation and survival skills. We also have a certified mountain bike team and a rope support team to augment our ground searches when appropriate. All field operation team members will meet PNWSAR and Oregon State Sheriff’s Association basic search and rescue certification standards. We also train to develop skills that will be utilized in command post and base camp functions during a SAR incident.</p></div>
+			</div>
+			<div class="col-md-6">
+				<%= image_tag 'tall-kevin.jpg' %>
+				<div class="pnw-wrap"><p>We work very closely with the Clackamas County Sheriff Department’s search and rescue coordinators for training and testing as well as other regional search and rescue organizations. We belong to the Mt. Hood SAR Council. We also participate in joint training operations with other search and rescue groups. This prepares our teams to effectively participate in missions that require high levels of cooperation and teamwork with the many diverse resource groups (i.e. dog teams, snowmobiles, high angle rescue, medical teams, and other ground search teams).</p></div>
+		 	</div>
+	 	</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="row">
+			<div class="col-md-12">
+				<%= image_tag 'large-training.jpg' %>
+			    <div class="pnw-wrap">
+			    	<p>PNWSAR is a non-profit all volunteer organization. We rely entirely on donations and grants for our funding. Donations are tax-deductible. Please visit the <u><%= link_to 'donations', donate_path %></u> page to donate via paypal or mail. 
+					Or, help support PNWSAR simply by shopping at your favorite online retailers like like Amazon.com, iTunes and many others. PNWSAR earns a portion of every purchase you make if you access their site through our provider, clickbuyhelp.org, Check it out and tell your family and friends! Click. Buy. Help.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%= link_to 'http://www.clickbuyhelp.org/pnwsar/', target: '_blank' do %>
+		<button class="btn btn-info btn-block">Click Here. Buy Online. Help PNWSAR. ClickBuyHelp.org</button>
+	<% end %>
+</div>

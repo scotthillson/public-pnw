@@ -1,0 +1,14 @@
+<% @searches.each do |search| %>
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<%= search.title %>
+			<br>
+			Submitted by <%= search.author %>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+			    <p><%= search.body.gsub(/\n/, '</p><p>').html_safe %></p>
+			</div>
+		</div>
+	</div>
+<% end %>
