@@ -1,0 +1,14 @@
+<div class="row">
+	<% @members.each do |member| %>	
+		<div class="col-xs-4 col-sm-3 col-md-3">
+	    	<div class="thumbnail popover-dismiss houser" data-toggle="popover" title="<%= member.name %>" data-image="<%= member.image_big %>">
+	    		<%= image_tag member.image %>
+	    		<div class="text-center"><%= member.name %></div>
+	    		<div class="text-center"><%= member.title %></div>
+	    	</div>
+		</div>
+	<% end %>
+</div>
+<% if admin? %>
+	<%= link_to new_member_path do %><div class="btn btn-primary">New Board Member</div><% end %>
+<% end %>

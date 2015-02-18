@@ -1,0 +1,27 @@
+<%= form_for(@member) do |f| %>
+  <% if @member.errors.any? %>
+    <div id="error_explanation">
+      <p><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</p>
+      <ul>
+      <% @member.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :image %><br>
+    <%= f.text_field :image %>
+  </div>
+  <br>
+  <%= submit_tag 'Save', class: 'btn btn-sm btn-success' %>
+  <%= link_to members_path do %><div class="btn btn-sm btn-primary">Back</div><% end %>
+<% end %>
