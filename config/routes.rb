@@ -2,31 +2,21 @@ Rails.application.routes.draw do
 
   resources :users, :posts, :members, :searches, :sessions
 
-  root to: 'posts#index'
+  root to: 'posts#home'
 
   get 'sessions/new'
-
   get 'join', to: 'posts#join', as: 'join'
-
   get 'signup', to: 'users#new', as: 'signup'
-
   get 'donate', to: 'posts#donate', as: 'donate'
-
   get 'signin', to: 'sessions#new', as: 'signin'
-
   get 'contact', to: 'posts#contact', as: 'contact'
-
   get 'signout', to: 'sessions#destroy', as: 'signout'
-
   get 'sponsors', to: 'posts#sponsors', as: 'sponsors'
-
   get 'donation_download', to: 'posts#download_donation'
-
   get 'equipment_download', to: 'posts#download_equipment'
-
   get 'application_download', to: 'posts#download_application'
 
-  # a get route to destroy a record comes in handy, and even requires admin privs
+  # get route to destroy a record comes in handy, requires admin privs
   get 'searches/:id/destroy', to: 'searches#destroy', via: :delete, as: 'destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
