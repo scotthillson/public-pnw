@@ -54,22 +54,16 @@
     <div class="col-xs-9 col-sm-6">
     </div>
     <div class="col-xs-6 col-sm-4">
-      <div class="panel panel-info">
-        <div class="panel-heading"><b>Announcement:</b> Pacific Northwest Search and Rescue is now accepting applications for 2015</div>
-        <div class="row">
-          <div class="col-md-12">
-            <p>PNWSAR is now accepting applications for our 2015 trainee class. Please click the 'join us' link above to find out more. Interviews will take place in the fall of 2014, and training will begin in January of 2015.</p>
-            </div>
-        </div>
-      </div>
-      <div class="panel panel-info">
-        <div class="panel-heading"><b>Announcement:</b> Save the date for Northwest SARCON 2014!</div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="pnw-wrap"><p>Dates have been announced for the 2014 edition of the Northwest Search and Rescue Conference, hosted by the Clackamas County Sherrif's office. The conference returns to Camp Kuratli at Trestle Glen in Boring Oregon September 26th through the 28th. Registration and information about the 2014 conference is available at http://www.co.clackamas.or.us/sheriff/sarcon/</p></div>
+      <% @posts.each do |post| %>
+        <div class="panel panel-info">
+          <div class="panel-heading"><b>Announcement: </b><%= post.title %></div>
+          <div class="row">
+            <div class="col-md-12">
+              <p><%= post.body %></p>
+              </div>
           </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
   <div class="panel panel-default">
