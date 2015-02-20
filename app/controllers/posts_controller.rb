@@ -12,17 +12,29 @@ class PostsController < ApplicationController
   #### No images of Al Tong or Jamien
 
   before_action :turn_back, only: [:new, :edit, :update, :destroy]
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :activate, :deactivate]
 
   def index
     @posts = Post.all
   end
 
   def home
-    @posts = Post.all
+    @posts = Post.active
   end
 
   def show
+  end
+
+  def activate
+    @post.active = true
+    @post.save
+    redirect_to posts_path
+  end
+
+  def deactivate
+    @post.active = false
+    @post.save
+    redirect_to posts_path
   end
 
   def new

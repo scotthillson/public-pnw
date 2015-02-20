@@ -1,5 +1,12 @@
 <div class="panel panel-info">
-  <div class="panel-heading"><b>Announcement: </b><%= post.title %></div>
+  <div class="panel-heading">
+    <b>Announcement: </b><%= post.title %>
+    <% if post.active == true %>
+      <%= link_to 'deactivate', deactivate_post_path(post), class: 'btn btn-sm btn-danger pull-right' %>
+    <% else %>
+      <%= link_to 'activate', activate_post_path(post), class: 'btn btn-sm btn-success pull-right' %>
+    <% end %>
+  </div>
   <div class="row">
     <div class="col-md-12">
       <p><%= post.body %></p>
