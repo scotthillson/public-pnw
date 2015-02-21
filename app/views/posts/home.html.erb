@@ -47,10 +47,10 @@
 </div>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-2">
+    <div class="col-xs-2 col-sm-2 col-md-2">
       <a class="twitter-timeline" href="https://twitter.com/pnwsar" data-widget-id="568921599600889856">Tweets by @pnwsar</a>
     </div>
-    <div class="col-md-6">
+    <div class="col-xs-6 col-sm-6 col-md-6">
       <%= image_tag 'tall-night.jpg', style: 'margin: 0 45px' %>
       <div class="pnw-wrap">
         <p>Pacific Northwest Search and Rescue (PNWSAR) is an all volunteer non-profit organization dedicated to providing Search and Rescue assistance for people who are lost or injured out of doors. Our organization exists to provide ground search teams and other types of assistance to the official agencies responsible for search and rescue activities in our region (by Oregon law, the county Sheriff).</p>
@@ -68,7 +68,7 @@
           <p>PNWSAR is a non-profit all volunteer organization. We rely entirely on donations and grants for our funding. Donations are tax-deductible. Please visit the <u><%= link_to 'donations', donate_path %></u> page to donate via paypal or mail. Or, help support PNWSAR simply by shopping at your favorite online retailers like like Amazon.com, iTunes and many others. PNWSAR earns a portion of every purchase you make if you access their site through our provider, clickbuyhelp.org, Check it out and tell your family and friends! Click. Buy. Help.</p>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-xs-4 col-sm-4 col-md-4">
       <% @posts.each do |post| %>
         <div class="panel panel-info">
           <div class="panel-heading"><b>Announcement: </b><%= post.title %></div>
