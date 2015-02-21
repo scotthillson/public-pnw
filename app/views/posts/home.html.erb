@@ -82,12 +82,11 @@
         </div>
       <% end %>
     </div>
+  </div>
   <div class="btn btn-block btn-primary paypal-button">Donate to PNWSAR via Paypal</div>
   <%= form_tag 'https://www.paypal.com/cgi-bin/webscr', method: 'post', id: 'paypal-form', target: '_blank' do %>
     <input name="cmd" type="hidden" value="_s-xclick">
     <input name="hosted_button_id" type="hidden" value="9JXFT9UC9NUFC">
   <% end %>
-  <%= link_to 'http://www.clickbuyhelp.org/pnwsar/', target: '_blank' do %>
-    <button class="btn btn-info btn-block">Click Here. Buy Online. Help PNWSAR. ClickBuyHelp.org</button>
-  <% end %>
+  <%= link_to 'Click Here. Buy Online. Help PNWSAR. ClickBuyHelp.org', 'http://www.clickbuyhelp.org/pnwsar/', target: '_blank', class: 'btn btn-info btn-block' %>
 </div>
