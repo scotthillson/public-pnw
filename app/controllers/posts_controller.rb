@@ -1,15 +1,16 @@
 class PostsController < ApplicationController
 
-  #### Make the logo about 10% bigger
-  # Use a larger font size for our name, use a more aggressive font
+  # Make the logo about 10% bigger
+  # Use a larger font size for our name,
+  # Use a more aggressive font
   # Make the top photo gallery a bit smaller
   # Make the rest of the photos on the front page smaller
   # Put the "who we are" text right under the top photo gallery
   # Put a "Donate" button somewhere on the home page
   # Put our latest tweets on the left side
   # Put announcements on the right side
-  #### Sheriff is misspelled
-  #### No images of Al Tong or Jamien
+  # Sheriff is misspelled
+  # No images of Al Tong or Jamien
 
   before_action :turn_back, only: [:new, :edit, :update, :destroy]
   before_action :set_post, only: [:show, :edit, :update, :destroy, :activate, :deactivate]
