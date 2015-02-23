@@ -16,7 +16,7 @@ var ready = function(){
   $(document).on('click','.logo',function(){window.location.href='/';});
   $(document).on('click','.close',function(){$(this).parent().hide();});  
   load_twitter(document,"script","twitter-wjs");
-  //console.log('all clear boss');
+  //console.log('all clear boss?');
 };
 $(document).on('page:load',ready);
 $(document).ready(ready);

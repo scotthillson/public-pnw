@@ -1,14 +1,20 @@
+<div class="pnw-wrap">
+  <p>Pacific Northwest Search and Rescue (PNWSAR) is an all volunteer non-profit organization dedicated to providing Search and Rescue assistance for people who are lost or injured out of doors. Our organization exists to provide ground search teams and other types of assistance to the official agencies responsible for search and rescue activities in our region (by Oregon law, the county Sheriff).</p>
+</div>
 <div class="row">
-	<% @members.each do |member| %>	
-		<div class="col-xs-4 col-sm-3 col-md-3">
-	    	<div class="thumbnail popover-dismiss houser" data-toggle="popover" title="<%= member.name %>" data-image="<%= member.image_big %>">
-	    		<%= image_tag member.image %>
-	    		<div class="text-center"><%= member.name %></div>
-	    		<div class="text-center"><%= member.title %></div>
-	    	</div>
-		</div>
-	<% end %>
+  <% @members.each do |member| %>	
+    <div class="col-xs-4 col-sm-3 col-md-3">
+      <div class="thumbnail popover-dismiss houser" data-toggle="popover" title="<%= member.name %>" data-image="<%= member.image_big %>">
+        <%= image_tag member.image %>
+        <div class="text-center"><%= member.name %></div>
+        <div class="text-center"><%= member.title %></div>
+      </div>
+      <% if admin? %>
+        <%= link_to 'destroy', member, method: :delete, data: {confirm: "Are you sure you want to delete this member?"}, class: 'btn btn-danger' %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 <% if admin? %>
-	<%= link_to new_member_path do %><div class="btn btn-primary">New Board Member</div><% end %>
+  <%= link_to new_member_path do %><div class="btn btn-primary">New Board Member</div><% end %>
 <% end %>
