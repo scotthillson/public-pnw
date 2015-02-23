@@ -32,28 +32,30 @@
 </div>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-2 col-sm-2 col-md-2" style="left:0">
-      <a class="twitter-timeline" href="https://twitter.com/pnwsar" data-widget-id="568921599600889856">@pnwsar twitter feed</a>
+    <div class="col-xs-4 col-sm-4 col-md-4" >
+      <a class="twitter-timeline" href="https://twitter.com/pnwsar" data-widget-id="568921599600889856" height="3000" >@pnwsar twitter feed</a>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-6">
-      <%= image_tag 'tall-night.jpg', style: 'margin: 0 45px' %>
+    <div class="col-xs-8 col-sm-8 col-md-8">
       <div class="pnw-wrap">
         <p>Pacific Northwest Search and Rescue (PNWSAR) is an all volunteer non-profit organization dedicated to providing Search and Rescue assistance for people who are lost or injured out of doors. Our organization exists to provide ground search teams and other types of assistance to the official agencies responsible for search and rescue activities in our region (by Oregon law, the county Sheriff).</p>
       </div>
-      <%= image_tag 'large-tera.jpg' %>
+      <%= image_tag 'tall-night.jpg', style: 'margin: auto;display: block' %>
       <div class="pnw-wrap">
         <p>Our specialty is ground search operations. We focus our training on the development and maintenance of outdoor navigation, searching, patient evacuation and survival skills. We also have a certified mountain bike team and a rope support team to augment our ground searches when appropriate. All field operation team members will meet PNWSAR and Oregon State Sheriff’s Association basic search and rescue certification standards. We also train to develop skills that will be utilized in command post and base camp functions during a SAR incident.</p>
       </div>
-      <%= image_tag 'tall-kevin.jpg', style: 'margin: 0 45px' %>
+      <%= image_tag 'large-tera.jpg' %>
       <div class="pnw-wrap">
         <p>We work very closely with the Clackamas County Sheriff Department’s search and rescue coordinators for training and testing as well as other regional search and rescue organizations. We belong to the Mt. Hood SAR Council. We also participate in joint training operations with other search and rescue groups. This prepares our teams to effectively participate in missions that require high levels of cooperation and teamwork with the many diverse resource groups (i.e. dog teams, snowmobiles, high angle rescue, medical teams, and other ground search teams).</p>
       </div>
-      <%= image_tag 'large-training.jpg', style: 'margin: 0 60px' %>
+      <%= image_tag 'tall-kevin.jpg', style: 'margin: auto;display: block' %>
       <div class="pnw-wrap">
           <p>PNWSAR is a non-profit all volunteer organization. We rely entirely on donations and grants for our funding. Donations are tax-deductible. Please visit the <u><%= link_to 'donations', donate_path %></u> page to donate via paypal or mail. Or, help support PNWSAR simply by shopping at your favorite online retailers like like Amazon.com, iTunes and many others. PNWSAR earns a portion of every purchase you make if you access their site through our provider, clickbuyhelp.org, Check it out and tell your family and friends! Click. Buy. Help.</p>
       </div>
+      <%= image_tag 'large-training.jpg' %>
     </div>
-    <div class="col-xs-4 col-sm-4 col-md-4">
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
       <% @posts.each do |post| %>
         <div class="panel panel-info">
           <div class="panel-heading">
