@@ -39,26 +39,7 @@
 </div>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-      <% @posts.each do |post| %>
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <b>Announcement: </b><%= post.title %>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <p><%= post.body %></p>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-4 col-sm-4 col-md-4" >
-      <a class="twitter-timeline" href="https://twitter.com/pnwsar" data-widget-id="568921599600889856" height="2300" >@pnwsar twitter feed</a>
-    </div>
-    <div class="col-xs-8 col-sm-8 col-md-8">
+    <div class="col-md-12">
       <div class="pnw-wrap">
         <p>Pacific Northwest Search and Rescue (PNWSAR) is an all volunteer non-profit organization dedicated to providing Search and Rescue assistance for people who are lost or injured out of doors. Our organization exists to provide ground search teams and other types of assistance to the official agencies responsible for search and rescue activities in our region (by Oregon law, the county Sheriff).</p>
       </div>
@@ -75,6 +56,22 @@
           <p>PNWSAR is a non-profit all volunteer organization. We rely entirely on donations and grants for our funding. Donations are tax-deductible. Please visit the <u><%= link_to 'donations', donate_path %></u> page to donate via paypal or mail. Or, help support PNWSAR simply by shopping at your favorite online retailers like like Amazon.com, iTunes and many others. PNWSAR earns a portion of every purchase you make if you access their site through our provider, clickbuyhelp.org, Check it out and tell your family and friends! Click. Buy. Help.</p>
       </div>
       <%= image_tag 'large-white.jpg' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <% @posts.each do |post| %>
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <b>Announcement: </b><%= post.title %>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p><%= post.body %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="btn btn-block btn-primary paypal-button">Donate to PNWSAR via Paypal</div>
