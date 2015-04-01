@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Use seed dump to make our seed file out of developement data
+# Use seed dump to make our seed file out of development data
 gem 'seed_dump'
 
 # We need jquery and turbolinks to play nice
