@@ -14,11 +14,15 @@
     <li data-target="#carousel-example-generic" data-slide-to="10"></li>
     <li data-target="#carousel-example-generic" data-slide-to="11"></li>
     <li data-target="#carousel-example-generic" data-slide-to="12"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="13"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="14"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="15"></li>
   </ol>
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active"><%= image_tag 'banner-chopper.jpg' %></div>
     <div class="item"><%= image_tag 'banner-packaging.jpg' %></div>
+    <div class="item"><%= image_tag 'banner-josh.jpg' %></div>
     <div class="item"><%= image_tag 'banner-snow.jpg' %></div>
     <div class="item"><%= image_tag 'banner-hood.jpg' %></div>
     <div class="item"><%= image_tag 'banner-truck.jpg' %></div>
@@ -30,6 +34,8 @@
     <div class="item"><%= image_tag 'banner-packaging-alt.jpg' %></div>
     <div class="item"><%= image_tag 'banner-smoke.jpg' %></div>
     <div class="item"><%= image_tag 'banner-white.jpg' %></div>
+    <div class="item"><%= image_tag 'banner-tera.jpg' %></div>
+    <div class="item"><%= image_tag 'banner-ropes.jpg' %></div>
   </div>
   <!-- Controls -->
   <a class="left carousel-control" href="#front-carousel" role="button" data-slide="prev">
@@ -94,5 +100,6 @@
     <input name="cmd" type="hidden" value="_s-xclick">
     <input name="hosted_button_id" type="hidden" value="9JXFT9UC9NUFC">
   <% end %>
-  <%= link_to 'Click Here. Buy Online. Help PNWSAR. ClickBuyHelp.org', 'http://www.clickbuyhelp.org/pnwsar/', target: '_blank', class: 'btn btn-info btn-block' %>
+  <%= link_to 'Donate Your Car', donate_vehicle_path, target: '_blank', class: 'btn btn-info btn-block' %>
+  <%= link_to 'Click Here. Buy Online. Help PNWSAR. ClickBuyHelp.org', 'http://www.clickbuyhelp.org/pnwsar/', target: '_blank', class: 'btn btn-primary btn-block' %>
 </div>
