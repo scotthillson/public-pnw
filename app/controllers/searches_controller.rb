@@ -30,8 +30,6 @@ class SearchesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /searches/1
-  # PATCH/PUT /searches/1.json
   def update
     respond_to do |format|
       if @search.update(search_params)
@@ -44,8 +42,6 @@ class SearchesController < ApplicationController
     end
   end
 
-  # DELETE /searches/1
-  # DELETE /searches/1.json
   def destroy
     @search.destroy
     respond_to do |format|
@@ -55,13 +51,12 @@ class SearchesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_search
-      @search = Search.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def search_params
-      params.require(:search).permit(:title, :author, :body, :search_date)
-    end
+  def set_search
+    @search = Search.find(params[:id])
+  end
+
+  def search_params
+    params.require(:search).permit(:title, :author, :body, :search_date)
+  end
 end

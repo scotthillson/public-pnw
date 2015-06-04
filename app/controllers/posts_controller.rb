@@ -75,12 +75,12 @@ class PostsController < ApplicationController
   end
 
   private
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet.
-    def post_params
-      params.require(:post).permit(:title, :author, :body)
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :author, :body)
+  end
 end
