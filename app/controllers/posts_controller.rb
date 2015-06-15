@@ -36,16 +36,22 @@ class PostsController < ApplicationController
   def sponsors
   end
 
-  def download_application
-    send_file 'public/application.pdf', type: 'application/pdf', filename: 'pnwsar-application.pdf'
+  def application_download
+    send_file "#{Rails.root}/public/application.pdf",
+    type: 'application/pdf',
+    filename: 'pnwsar-application.pdf'
   end
 
-  def download_equipment
-    send_file 'public/equipment.pdf', type: 'application/pdf', filename: 'equipment-list.pdf'
+  def equipment_download
+    send_file "#{Rails.root}/public/equipment.pdf",
+    type: 'application/pdf',
+    filename: 'equipment-list.pdf'
   end
 
-  def download_donation
-    send_file 'public/donate.pdf', type: 'application/pdf', filename: 'donation-form.pdf'
+  def donation_download
+    send_file "#{Rails.root}/public/donate.pdf",
+    type: 'application/pdf',
+    filename: 'donation-form.pdf'
   end
 
   def create
@@ -58,29 +64,26 @@ class PostsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @post.update(post_params)
+      redirect_to @post, notice: 'Post was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @post.destroy
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-    end
+    redirect_to posts_url, notice: 'Post was successfully destroyed.'
   end
 
   private
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet.
-    def post_params
-      params.require(:post).permit(:title, :author, :body)
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :author, :body)
+  end
+
 end
