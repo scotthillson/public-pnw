@@ -261,24 +261,6 @@ th {
     border: 1px solid #ddd !important;
   }
 }
-@font-face {
-  font-family: 'Glyphicons Halflings';
-
-  src: url('/assets/glyphicons-halflings-regular.eot');
-  src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/glyphicons-halflings-regular.woff2') format('woff2'), url('/assets/glyphicons-halflings-regular.woff') format('woff'), url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
-}
-.glyphicon {
-  position: absolute;
-  top: 50%;
-  display: inline-block;
-  font-family: 'Glyphicons Halflings';
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1;
-
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 .glyphicon-asterisk:before {
   content: "\2a";
 }
