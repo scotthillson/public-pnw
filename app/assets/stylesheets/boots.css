@@ -1,0 +1,41 @@
+html {
+  font-family: 'Lato', sans-serif;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+}
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 17px;
+  line-height: 1.428571429;
+  color: #222;
+  margin: 0;
+}
+.container {
+  padding:10px;
+  margin-right: auto;
+  margin-left: auto;
+  box-shadow: 0 0 10px 0 #111;
+  background-color:#fff;
+}
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin: 10px 7px;
+  background-color: #D4E2FC;
+  color: black;
+  border: 1px solid transparent;
+}
+p {
+  margin:5px 2px;
+  text-indent:1em;
+}
+.navbar-default .navbar-text {
+  /*color: #777;*/
+}
+.navbar-default {
+  /*background-color: #f8f8f8;*/
+  /*border-color: #e7e7e7;*/
+}
+.navbar-default .navbar-brand {
+  /*color: #777;*/
+}
