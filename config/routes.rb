@@ -20,12 +20,12 @@ Rails.application.routes.draw do
   get 'donate', to: 'posts#donate', as: 'donate'
   get 'contact', to: 'posts#contact', as: 'contact'
   get 'sponsors', to: 'posts#sponsors', as: 'sponsors'
-  get 'donate_vehicle', to: 'posts#donate_vehicle', as: 'donate_vehicle'
+  get 'donate_vehi-cle', to: 'posts#donate_vehicle', as: 'donate_vehicle'
   get 'posts/:id/activate', to: 'posts#activate', as: 'activate_post'
   get 'posts/:id/deactivate', to: 'posts#deactivate', as: 'deactivate_post'
-  get 'donation_download', to: 'posts#download_donation'
-  get 'equipment_download', to: 'posts#download_equipment'
-  get 'application_download', to: 'posts#download_application'
+  get 'donation_download', to: 'posts#donation_download'
+  get 'equipment_download', to: 'posts#equipment_download'
+  get 'application_download', to: 'posts#application_download'
 
   resources :searches, constraints: { format: :html }
   # get route to destroy a record comes in handy, requires admin privs

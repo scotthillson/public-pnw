@@ -1,6 +1,7 @@
 <% if admin? %>
   <%= link_to 'New Search', new_search_path, class: 'btn btn-primary' %>
 <% end %>
+>>>>>>> 4ab11019ab6c66c6a181d4c2ff81c1fc62a20f7e
 <% @searches.each do |search| %>
   <div class="panel panel-info">
     <div class="panel-heading">
@@ -11,7 +12,7 @@
     <div class="row">
       <div class="col-md-12">
         <p><%= search.body.gsub(/\n/, '</p><p>').html_safe %></p>
-        </div>
+      </div>
     </div>
   </div>
 <% end %>
