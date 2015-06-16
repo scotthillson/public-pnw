@@ -37,6 +37,9 @@ class PostsController < ApplicationController
   end
 
   def application_download
+    redirect_to '/join'
+    return false
+    # start here when you're accepting applications
     send_file "#{Rails.root}/public/application.pdf",
     type: 'application/pdf',
     filename: 'pnwsar-application.pdf'
