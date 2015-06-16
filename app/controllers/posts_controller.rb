@@ -37,7 +37,7 @@ class PostsController < ApplicationController
   end
 
   def application_download
-    redirect_to '/join'
+    redirect_to '/join', notice: 'Our application period is closed until Summer 2015. Please check back for updates!'
     return false
     # start here when you're accepting applications
     send_file "#{Rails.root}/public/application.pdf",
