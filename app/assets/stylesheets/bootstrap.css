@@ -60,10 +60,6 @@ mark {
   color: #000;
   background: #ff0;
 }
-.pnw-wrap{
-  margin:0 10px;
-  padding:20px 10px;
-}
 small {
   font-size: 80%;
 }
@@ -1886,7 +1882,7 @@ pre code {
 }
 @media (min-width: 992px) {
   .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
-    left: 100px;
+    position: relative;
     float: left;
   }
   .col-md-12 {
