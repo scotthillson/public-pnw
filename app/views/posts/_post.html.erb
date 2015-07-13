@@ -1,15 +1,16 @@
 <div class="panel panel-info">
   <div class="panel-heading">
     <b>Announcement: </b><%= post.title %>
+    <%= link_to 'edit', edit_post_path(post), class: 'btn btn-sm btn-warning' %>
     <% if post.active == true %>
-      <%= link_to 'deactivate', deactivate_post_path(post), class: 'btn btn-sm btn-danger pull-right' %>
+      <%= link_to 'deactivate', deactivate_post_path(post), class: 'btn btn-sm btn-danger' %>
     <% else %>
-      <%= link_to 'activate', activate_post_path(post), class: 'btn btn-sm btn-success pull-right' %>
+      <%= link_to 'activate', activate_post_path(post), class: 'btn btn-sm btn-success' %>
     <% end %>
   </div>
   <div class="row">
     <div class="col-md-12">
-      <p><%= post.body %></p>
+      <p><%= post.body.html_safe %></p>
       </div>
   </div>
 </div>

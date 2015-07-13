@@ -37,8 +37,8 @@ class PostsController < ApplicationController
   end
 
   def application_download
-    redirect_to '/join', notice: 'Our application period is closed until Summer 2015. Please check back for updates!'
-    return false
+    # redirect_to request.referer, notice: 'Our application period is closed until Summer 2015. Please check back for updates!'
+    # return false
     # start here when you're accepting applications
     send_file "#{Rails.root}/public/application.pdf",
     type: 'application/pdf',
@@ -60,7 +60,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
-      redirect_to posts_path, notice: 'Post was successfully created.'
+      redirect_to posts_url, notice: 'Post was successfully created.'
     else
       render :new
     end
@@ -68,7 +68,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: 'Post was successfully updated.'
+      redirect_to posts_url
     else
       render :edit
     end
