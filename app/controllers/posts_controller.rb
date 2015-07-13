@@ -54,7 +54,7 @@ class PostsController < ApplicationController
   def donation_download
     send_file "#{Rails.root}/public/donate.pdf",
     type: 'application/pdf',
-    filename: 'donation-form.pdf'
+    filename: 'PNW Search and Rescue Donations.pdf'
   end
 
   def create
