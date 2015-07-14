@@ -29,14 +29,14 @@
     <p>If you've read all of that and you're still interested, again, please come to a general meeting!</p>
   </div>
   <div class="btn btn-primary paypal-button">Pay via Paypal</div>
-  <%= link_to application_download_path do %>
+  <a href="/application_download">
     <div class="btn btn-info">Download Application Form</div>
-  <% end %>
-  <%= link_to equipment_download_path do %>
+  </a>
+  <a href="/equipment_download">
     <div class="btn btn-primary">Download Equipment List</div>
-  <% end %>
-  <%= form_tag 'https://www.paypal.com/cgi-bin/webscr', method: 'post', id: 'paypal-form', target: '_blank' do %>
-  <input name="cmd" type="hidden" value="_s-xclick">
-  <input name="hosted_button_id" type="hidden" value="9JXFT9UC9NUFC">
-  <% end %>
+  </a>
+  <form accept-charset="UTF-8" action="https://www.paypal.com/cgi-bin/webscr" id="paypal-form" method="post" target="_blank"><div style="display:none"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="k5U+u+xnZUObqGHD5fVjxs5+zJgYZK9oh5L+LwKEUME="></div>
+    <input name="cmd" type="hidden" value="_s-xclick">
+    <input name="hosted_button_id" type="hidden" value="9JXFT9UC9NUFC">
+  </form>
 </div>

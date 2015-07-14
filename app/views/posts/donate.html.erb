@@ -12,19 +12,19 @@
   <p>Pacific Northwest Search and Rescue</p>
 </div>
 <div class="btn btn-lg btn-primary paypal-button">Donate via Paypal</div>
-<%= link_to donation_download_path do %>
+<a href="/donation_download">
   <div class="btn btn-lg btn-info">Download Donation Form</div>
-<% end %>
-<%= link_to donate_vehicle_path do %>
+</a>
+<a href="/donate_vehicle">
   <div class="btn btn-lg btn-primary">Vehicle Donation</div>
-<% end %>
-<%= link_to 'http://www.clickbuyhelp.org/pnwsar/', target: '_blank' do %>
+</a>
+<a href="http://www.clickbuyhelp.org/pnwsar/" target="_blank">
   <div class="btn btn-lg btn-primary">ClickBuyHelp.org</div>
-<% end %>
-<%= link_to sponsors_path do %>
-<div class="btn btn-lg btn-info">Visit Our Spnsors</div>
-<% end %>
-<%= form_tag 'https://www.paypal.com/cgi-bin/webscr', method: 'post', id: 'paypal-form', target: '_blank' do %>
+</a>
+<a href="/sponsors">
+  <div class="btn btn-lg btn-info">Visit Our Spnsors</div>
+</a>
+<form accept-charset="UTF-8" action="https://www.paypal.com/cgi-bin/webscr" id="paypal-form" method="post" target="_blank"><div style="display:none"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="k5U+u+xnZUObqGHD5fVjxs5+zJgYZK9oh5L+LwKEUME="></div>
   <input name="cmd" type="hidden" value="_s-xclick">
   <input name="hosted_button_id" type="hidden" value="9JXFT9UC9NUFC">
-<% end %>
+</form>
