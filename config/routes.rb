@@ -2,14 +2,16 @@ Rails.application.routes.draw do
 
   root to: 'posts#home'
 
-  resources :members, constraints: { format: :html }
+  resources :members, constraints: {format: :html}
+  get 'about', to: 'members#about'
 
-  resources :faqs, constrains: { format: :html }
+  resources :faqs, constraints: {format: :html}
+  resources :pages, constraints: {format: :html}
 
   resources :sessions, constraints: { format: :html }
-  get 'sessions/new'
-  get 'signin', to: 'sessions#new', as: 'signin'
   get 'signout', to: 'sessions#destroy', as: 'signout'
+  get 'signin', to: 'sessions#new', as: 'signin'
+  get 'sessions/new'
 
   resources :users, constriants: { format: :html }
   get 'signup', to: 'users#new', as: 'signup'
