@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'posts#home'
 
   resources :members, constraints: {format: :html}
-  get 'about', to: 'members#about'
+  get 'about', to: 'pages#about'
 
   resources :faqs, constraints: {format: :html}
   resources :pages, constraints: {format: :html}
