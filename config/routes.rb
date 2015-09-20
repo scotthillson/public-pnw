@@ -2,11 +2,15 @@ Rails.application.routes.draw do
 
   root to: 'posts#home'
 
-  resources :members, constraints: {format: :html}
-  get 'about', to: 'pages#about'
-
-  resources :faqs, constraints: {format: :html}
   resources :pages, constraints: {format: :html}
+  get 'faqs', to: 'pages#faqs'
+  get 'about', to: 'pages#about'
+  get 'meetings', to: 'pages#meetings'
+  get 'join', to: 'pages#join', as: 'join'
+  get 'donate', to: 'pages#donate', as: 'donate'
+  get 'contact', to: 'pages#contact', as: 'contact'
+  get 'sponsors', to: 'pages#sponsors', as: 'sponsors'
+  get 'donate_vehicle', to: 'pagess#donate_vehicle', as: 'donate_vehicle'
 
   resources :sessions, constraints: { format: :html }
   get 'signout', to: 'sessions#destroy', as: 'signout'
@@ -17,12 +21,6 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new', as: 'signup'
 
   resources :posts, constraints: { format: :html }
-  get 'meetings', to: 'posts#meetings'
-  get 'join', to: 'posts#join', as: 'join'
-  get 'donate', to: 'posts#donate', as: 'donate'
-  get 'contact', to: 'posts#contact', as: 'contact'
-  get 'sponsors', to: 'posts#sponsors', as: 'sponsors'
-  get 'donate_vehicle', to: 'posts#donate_vehicle', as: 'donate_vehicle'
   get 'posts/:id/activate', to: 'posts#activate', as: 'activate_post'
   get 'posts/:id/deactivate', to: 'posts#deactivate', as: 'deactivate_post'
   get 'donation_download', to: 'posts#donation_download'

@@ -9,6 +9,7 @@ class PostsController < ApplicationController
 
   def home
     @posts = Post.active
+    @paragraph_one = Page.where(name:'Paragraph One').last
   end
 
   def show
@@ -31,9 +32,6 @@ class PostsController < ApplicationController
   end
 
   def edit
-  end
-
-  def sponsors
   end
 
   def application_download
