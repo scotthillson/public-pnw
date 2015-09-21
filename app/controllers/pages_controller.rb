@@ -25,10 +25,10 @@ class PagesController < ApplicationController
 
   def home
     @posts = Post.active
-    @paragraph_one = Page.where(name:'Paragraph One').last
-    @paragraph_two = Page.where(name:'Paragraph Two').last
-    @paragraph_three = Page.where(name:'Paragraph Three').last
-    @paragraph_four = Page.where(name:'Paragraph Four').last
+    @paragraph_one = Page.where(name:'Paragraph One').last.body
+    @paragraph_two = Page.where(name:'Paragraph Two').last.body
+    @paragraph_three = Page.where(name:'Paragraph Three').last.body
+    @paragraph_four = Page.where(name:'Paragraph Four').last.body
   end
 
   def about
