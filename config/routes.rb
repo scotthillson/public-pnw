@@ -4,13 +4,14 @@ Rails.application.routes.draw do
 
   resources :pages, constraints: {format: :html}
   get 'faqs', to: 'pages#faqs'
+  get 'join', to: 'pages#join'
   get 'about', to: 'pages#about'
+  get 'donate', to: 'pages#donate'
+  get 'contact', to: 'pages#contact'
+  get 'sponsors', to: 'pages#sponsors'
   get 'meetings', to: 'pages#meetings'
-  get 'join', to: 'pages#join', as: 'join'
-  get 'donate', to: 'pages#donate', as: 'donate'
-  get 'contact', to: 'pages#contact', as: 'contact'
-  get 'sponsors', to: 'pages#sponsors', as: 'sponsors'
-  get 'donate_vehicle', to: 'pagess#donate_vehicle', as: 'donate_vehicle'
+  get 'last_version', to: 'pages#last_version'
+  get 'donate_vehicle', to: 'pages#donate_vehicle'
 
   resources :sessions, constraints: { format: :html }
   get 'signout', to: 'sessions#destroy', as: 'signout'

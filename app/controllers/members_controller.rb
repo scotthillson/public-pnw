@@ -4,7 +4,6 @@ class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
 
   def index
-    @page = Page.where(name:'About').order(:created_at).last.body.html_safe
   end
 
   def show
