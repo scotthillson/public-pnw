@@ -23,6 +23,14 @@ class PagesController < ApplicationController
   def destroy
   end
 
+  def home
+    @posts = Post.active
+    @paragraph_one = Page.where(name:'Paragraph One').last
+    @paragraph_two = Page.where(name:'Paragraph Two').last
+    @paragraph_three = Page.where(name:'Paragraph Three').last
+    @paragraph_four = Page.where(name:'Paragraph Four').last
+  end
+
   def about
     @page = Page.where(name:'About').last
     just_body

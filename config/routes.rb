@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'posts#home'
+  root to: 'pages#home'
 
   resources :pages, constraints: {format: :html}
   get 'faqs', to: 'pages#faqs'
