@@ -34,6 +34,6 @@ Search.create!([
   {title: "Wahkeena Falls Injured Hiker", author: "Scott Houser", body: "On 12/14 the Multnomah County Sheriff's Office (MCSO) requested support from PNWSAR in the packout of an injured hiker above Wahkeena Falls in the Columbia Gorge.  The subject had been injured and was being taken by litter down the Wahkeena Falls trail by Corbett Fire and AMR RAT team members.\r\n\r\nPNWSAR members arrived at dusk and proceeded up the trail where they encountered the subject and litter. Rescuers slowly descended the trail several miles down multiple switchbacks in challenging conditions to the trailhead and finally transferred the subject to an ambulance at 8 p.m.", search_date: "2014/12/15", active: nil}
 ])
 User.create!([
-  {name: "Scott Hillson", email: "scott.hillson@gmail.com", token: "2aNOh4B5_9_S2zl-W87fdw", admin: true, password_digest: "$2a$10$1JNUZt3dCQOwe6Do9/f.mO6x96rTUkI9hMPed7Pa3L7kl2P/SOzHO", activated: false},
-  {name: "Scott Houser", email: "scotthouser@live.com", token: "_aaWrP3KNTXeOQDo7rzoUA", admin: true, password_digest: "$2a$10$mnPbURry2zLU6TVCY/Ohdukg7HpFvOVSUdLjC..AEA1iGnga3.yCu", activated: false}
+  {name: "Scott Hillson", email: "scott.hillson@gmail.com", admin: true, password: "tinypeoplegiantmountain", activated: true},
+  {name: "Scott Houser", email: "scotthouser@live.com", admin: true, password: "tinypeoplegiantmountain", activated: true}
 ])
