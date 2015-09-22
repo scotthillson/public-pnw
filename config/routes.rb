@@ -2,14 +2,12 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
+  resources :searches, constraints: { format: :html }
+  # get route to destroy a record comes in handy, requires admin privs
+  get 'searches/:id/destroy', to: 'searches#destroy', via: :delete, as: 'destroy'
+
   resources :pages, constraints: {format: :html}
-  get 'faqs', to: 'pages#faqs'
-  get 'join', to: 'pages#join'
-  get 'about', to: 'pages#about'
-  get 'donate', to: 'pages#donate'
-  get 'contact', to: 'pages#contact'
-  get 'sponsors', to: 'pages#sponsors'
-  get 'meetings', to: 'pages#meetings'
+  get '/:page', to: 'pages#page'
   get 'last_version', to: 'pages#last_version'
   get 'donate_vehicle', to: 'pages#donate_vehicle'
 
@@ -27,9 +25,5 @@ Rails.application.routes.draw do
   get 'donation_download', to: 'posts#donation_download'
   get 'equipment_download', to: 'posts#equipment_download'
   get 'application_download', to: 'posts#application_download'
-
-  resources :searches, constraints: { format: :html }
-  # get route to destroy a record comes in handy, requires admin privs
-  get 'searches/:id/destroy', to: 'searches#destroy', via: :delete, as: 'destroy'
 
 end
