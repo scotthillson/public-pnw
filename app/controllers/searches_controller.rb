@@ -4,7 +4,7 @@ class SearchesController < ApplicationController
   before_action :set_search, only: [:show, :edit, :update, :destroy]
 
   def index
-    @searches = Search.all.order(:search_date).reverse.first(20)
+    @searches = Search.all.order(:search_date).reverse
   end
 
   def show
