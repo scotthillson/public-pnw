@@ -6,15 +6,15 @@ Rails.application.routes.draw do
   # get route to destroy a record comes in handy, requires admin privs
   get 'searches/:id/destroy', to: 'searches#destroy', via: :delete, as: 'destroy'
 
-  resources :pages, constraints: {format: :html}
-  get '/:page', to: 'pages#page'
-  get 'last_version', to: 'pages#last_version'
-  get 'donate_vehicle', to: 'pages#donate_vehicle'
-
   resources :sessions, constraints: { format: :html }
   get 'signout', to: 'sessions#destroy', as: 'signout'
   get 'signin', to: 'sessions#new', as: 'signin'
   get 'sessions/new'
+
+  resources :pages, constraints: {format: :html}
+  get '/:page', to: 'pages#page'
+  get 'last_version', to: 'pages#last_version'
+  get 'donate_vehicle', to: 'pages#donate_vehicle'
 
   resources :users, constriants: { format: :html }
   get 'signup', to: 'users#new', as: 'signup'
