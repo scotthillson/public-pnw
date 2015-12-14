@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20151029212250) do
     t.string   "title"
     t.string   "author"
     t.string   "body"
-    t.date     "search_date", limit: 255
+    t.date     "search_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active"
