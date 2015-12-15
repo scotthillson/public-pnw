@@ -11,11 +11,6 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new', as: 'signin'
   get 'sessions/new'
 
-  resources :pages, constraints: {format: :html}
-  get '/:page', to: 'pages#page'
-  get 'last_version', to: 'pages#last_version'
-  get 'donate_vehicle', to: 'pages#donate_vehicle'
-
   resources :users, constriants: { format: :html }
   get 'signup', to: 'users#new', as: 'signup'
 
@@ -25,5 +20,10 @@ Rails.application.routes.draw do
   get 'donation_download', to: 'posts#donation_download'
   get 'equipment_download', to: 'posts#equipment_download'
   get 'application_download', to: 'posts#application_download'
+
+  resources :pages, constraints: {format: :html}
+  get 'donate_vehicle', to: 'pages#donate_vehicle' # don't move this it's required for link_tos
+  get 'last_version', to: 'pages#last_version'
+  get '/:page', to: 'pages#page'
 
 end
