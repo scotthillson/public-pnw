@@ -13,7 +13,14 @@
 
 ActiveRecord::Schema.define(version: 20151029212250) do
 
-  create_table "members", force: true do |t|
+  create_table :images, force: true do |t|
+    t.string   "name"
+    t.string   "path"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table :members, force: true do |t|
     t.string   "name"
     t.string   "title"
     t.string   "image"
@@ -22,7 +29,7 @@ ActiveRecord::Schema.define(version: 20151029212250) do
     t.datetime "updated_at"
   end
 
-  create_table "pages", force: true do |t|
+  create_table :pages, force: true do |t|
     t.string   "name"
     t.string   "body"
     t.integer  "active"
@@ -31,7 +38,7 @@ ActiveRecord::Schema.define(version: 20151029212250) do
     t.datetime "updated_at"
   end
 
-  create_table "posts", force: true do |t|
+  create_table :posts, force: true do |t|
     t.string   "title"
     t.string   "author"
     t.string   "body"
@@ -40,17 +47,17 @@ ActiveRecord::Schema.define(version: 20151029212250) do
     t.boolean  "active"
   end
 
-  create_table "searches", force: true do |t|
+  create_table :searches, force: true do |t|
     t.string   "title"
     t.string   "author"
     t.string   "body"
-    t.date     "search_date"
+    t.string   "search_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active"
   end
 
-  create_table "users", force: true do |t|
+  create_table :users, force: true do |t|
     t.string   "name"
     t.string   "email"
     t.string   "token"
