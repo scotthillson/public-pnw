@@ -42,5 +42,6 @@ Search.create!([
 ])
 User.create!([
   {name: "Scott Hillson", email: "scott.hillson@gmail.com", token: nil, admin: true, password_digest: "$2a$10$pFkRAGcPvtS/aOWnj2dyFOz/jztF45SMTGqwVd/1gLgCaWB6Mc./G", activated: true},
-  {name: "Scott Houser", email: "scotthouser@live.com", token: nil, admin: true, password_digest: "$2a$10$LYPH7l8izmVUiE7L0XhWQOXMzoz5bAARH7BCYB/F8DyE.gmEPXRzS", activated: true}
+  {name: "Scott Houser", email: "scotthouser@live.com", token: nil, admin: true, password_digest: "$2a$10$LYPH7l8izmVUiE7L0XhWQOXMzoz5bAARH7BCYB/F8DyE.gmEPXRzS", activated: true},
+  {name: "Tony Hobkirk", email:"thobkirk@frontier.com",token: nil, admin: true, password: "tinypeoplegiantmountain"}
 ])
