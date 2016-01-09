@@ -24,7 +24,7 @@ class ImagesController < ApplicationController
   end
   
   def destroy
-    form = Upload.find params[:id]
+    form = Form.find params[:id]
     redirect_to forms_path if !form # form not found
     redirect_to forms_path if form.in_use # form is in use
     form.destroy
