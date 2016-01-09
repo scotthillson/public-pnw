@@ -1,4 +1,4 @@
-class Media < ActiveRecord::Base
+class Upload < ActiveRecord::Base
   
   validates_presence_of :file
   

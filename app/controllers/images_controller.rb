@@ -1,13 +1,17 @@
 class ImagesController < ApplicationController
   
   def index
+    @images = Image.all
   end
   
   def show
   end
   
+  def new
+  end
+  
   def import
-    Media.import_file(params[:file])
+    Upload.import_file(params[:file])
   end
   
   def edit
@@ -20,7 +24,7 @@ class ImagesController < ApplicationController
   end
   
   def destroy
-    form = Media.find params[:id]
+    form = Upload.find params[:id]
     redirect_to forms_path if !form # form not found
     redirect_to forms_path if form.in_use # form is in use
     form.destroy
