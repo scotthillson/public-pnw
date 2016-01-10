@@ -10,8 +10,9 @@ class FormsController < ApplicationController
   def new
   end
   
-  def import
-    Upload.import_form(params[:file])
+  def upload
+    Form.import_form(params[:file])
+    redirect_to forms_path
   end
   
   def edit

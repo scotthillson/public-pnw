@@ -1,0 +1,8 @@
+<div class="container">
+  <h3>Upload Image</h3>
+  <%= form_tag upload_image_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <br>
+    <%= submit_tag 'upload', class: 'btn btn-primary' %>
+  <% end %>
+</div>

@@ -30,10 +30,14 @@ class PagesController < ApplicationController
 
   def home
     @posts = Post.active
-    @paragraph_one = Page.where(name:'paragraph one').last.body
-    @paragraph_two = Page.where(name:'paragraph two').last.body
-    @paragraph_three = Page.where(name:'paragraph three').last.body
-    @paragraph_four = Page.where(name:'paragraph four').last.body
+    @paragraph_one = Page.where(name:'paragraph one').last
+    @paragraph_one = @paragraph_one.body if @paragraph_one
+    @paragraph_two = Page.where(name:'paragraph two').last
+    @paragraph_two = @paragraph_two.body if @paragraph_two
+    @paragraph_three = Page.where(name:'paragraph three').last
+    @paragraph_three = @paragraph_three.body if @paragraph_three
+    @paragraph_four = Page.where(name:'paragraph four').last
+    @paragraph_four = @paragraph_four.body if @paragraph_four
   end
 
   def about

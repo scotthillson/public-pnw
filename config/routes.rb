@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
-  
   root to: 'pages#home'
   
+  resources :images, constraints: { format: :html }
+  post 'upload_image', to: 'images#upload'
+  get 'upload_image', to: 'images#upload'
+  
+  resources :forms, constraints: { format: :html }
+  post 'upload_form', to: 'forms#upload'
+  get 'upload_form', to: 'forms#upload'
+  
   resources :searches, constraints: { format: :html }
-  # get route to destroy a record comes in handy, requires admin privs
   get 'searches/:id/destroy', to: 'searches#destroy', via: :delete, as: 'destroy'
   
   resources :sessions, constraints: { format: :html }
@@ -22,12 +28,8 @@ Rails.application.routes.draw do
   get 'application_download', to: 'posts#application_download'
   
   resources :pages, constraints: { format: :html }
-  get 'donate_vehicle', to: 'pages#donate_vehicle' # don't move this it's required for link_tos
+  get 'donate_vehicle', to: 'pages#donate_vehicle' # don't move this it's required for link_to
   get 'last_version', to: 'pages#last_version'
   get '/:page', to: 'pages#page'
-  
-  resources :images, constraints: { format: :html }
-  
-  resources :forms, constraints: { format: :html }
   
 end

@@ -10,8 +10,9 @@ class ImagesController < ApplicationController
   def new
   end
   
-  def import
-    Upload.import_file(params[:file])
+  def upload
+    Image.import_file(params[:file])
+    redirect_to images_path
   end
   
   def edit
@@ -24,11 +25,11 @@ class ImagesController < ApplicationController
   end
   
   def destroy
-    form = Form.find params[:id]
-    redirect_to forms_path if !form # form not found
-    redirect_to forms_path if form.in_use # form is in use
-    form.destroy
-    redirect_to forms_path # successful
+    image = Image.find params[:id]
+    redirect_to images_path if !image # form not found
+    redirect_to images_path if image.in_use # form is in use
+    image.destroy
+    redirect_to images_path # successful
   end
   
 end

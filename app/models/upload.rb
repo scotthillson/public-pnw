@@ -8,4 +8,8 @@ class Upload < ActiveRecord::Base
     File.rename(file.path,path)
   end
   
+  def self.dup_check(file)
+    Dir.entries('public/').include? file
+  end
+  
 end
