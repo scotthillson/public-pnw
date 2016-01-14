@@ -40,30 +40,6 @@ class PagesController < ApplicationController
     @paragraph_four = @paragraph_four.body if @paragraph_four
   end
 
-  def about
-  end
-
-  def contact
-  end
-
-  def donate
-  end
-
-  def donate_vehicle
-  end
-
-  def faqs
-  end
-
-  def join
-  end
-
-  def meetings
-  end
-
-  def sponsors
-  end
-
   private
 
   def page_params

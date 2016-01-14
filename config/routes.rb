@@ -28,7 +28,6 @@ Rails.application.routes.draw do
   get 'application_download', to: 'posts#application_download'
   
   resources :pages, constraints: { format: :html }
-  get 'donate_vehicle', to: 'pages#donate_vehicle' # don't move this it's required for link_to
   get 'last_version', to: 'pages#last_version'
   get '/:page', to: 'pages#page'
   
