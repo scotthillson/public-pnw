@@ -11,7 +11,7 @@ class FormsController < ApplicationController
   end
   
   def upload
-    Form.import_form(params[:file])
+    Form.upload(params[:file])
     redirect_to forms_path
   end
   

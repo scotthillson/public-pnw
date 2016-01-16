@@ -11,7 +11,7 @@ class ImagesController < ApplicationController
   end
   
   def upload
-    Image.import_file(params[:file])
+    Image.upload(params[:file])
     redirect_to images_path
   end
   
