@@ -1,12 +1,13 @@
 class Image < ActiveRecord::Base
   
-  def self.get_started
+  def self.banners
+    array = []
     Dir.entries('public').each do |file|
       if file.include? 'banner'
-        puts file.class
-        upload file
+        array.push file
       end
     end
+    array
   end
   
   def self.upload(file)

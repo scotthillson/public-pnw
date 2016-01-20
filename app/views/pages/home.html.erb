@@ -1,13 +1,12 @@
 <div id="front-carousel" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <% @carousel_images.each_with_index do |img,i| %>
-      <li data-target="#carousel-example-generic" data-slide-to="<%= "#{i}" %>"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="<%= "#{i}" %>" class="<%= "active" if i == 0 %>"></li>
     <% end %>
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
   </ol>
   <div class="carousel-inner">
-    <% @carousel_images.each do |img| %>
-      <div class="item"><img src="<%= img %>"></div>
+    <% @carousel_images.each_with_index do |img,i| %>
+      <div class="item<%= " active" if i == 0 %>"><img src="<%= img %>"></div>
     <% end %>
   </div>
   <div class="left carousel-control" href="#front-carousel" role="button" data-slide="prev">
@@ -24,7 +23,7 @@
         <p><%= p.body.html_safe %></p>
       <% elsif i%2 == 0 %>
         <div class="col-md-8">
-          <img src="<%= @images[i] %>">
+          <img src="<%= @images[i-1] %>">
         </div>
         <div class="col-md-4">
           <div class="pnw-wrap">
@@ -38,7 +37,7 @@
           </div>
         </div>
         <div class="col-md-8">
-          <img src="<%= @images[i] %>">
+          <img src="<%= @images[i-1] %>">
         </div>
       <% end %>
     </div>

@@ -29,10 +29,13 @@ class PagesController < ApplicationController
   end
   
   def home
-    @posts = Post.active
     @images = []
+    @posts = Post.active
+    @carousel_images = Image.banners.shuffle
+    @images.push @carousel_images.pop
+    @images.push @carousel_images.pop
+    @images.push @carousel_images.pop
     @paragraphs = Page.where("name LIKE '%paragraph%'").order(:name)
-    @carousel_images = Image.where(type:'carousel').order(:rank)
   end
   
   private
