@@ -1,6 +1,7 @@
 <div id="front-carousel" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
   <ol class="carousel-indicators">
+    <% @carousel_images.each do |img| %>
+    <% end %>
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
     <li data-target="#carousel-example-generic" data-slide-to="2"></li>
@@ -20,8 +21,9 @@
     <li data-target="#carousel-example-generic" data-slide-to="16"></li>
     <li data-target="#carousel-example-generic" data-slide-to="17"></li>
   </ol>
-  <!-- Wrapper for slides -->
   <div class="carousel-inner">
+    <% @carousel_images.each_with_index do |img,i| %>
+    <% end %>
     <div class="item active"><img src="banner-chopper.jpg"></div>
     <div class="item"><img src="banner-monkey-face.jpg"></div>
     <div class="item"><img src="banner-packaging.jpg"></div>
@@ -41,7 +43,6 @@
     <div class="item"><img src="banner-tera.jpg"></div>
     <div class="item"><img src="banner-ropes.jpg"></div>
   </div>
-  <!-- Controls -->
   <div class="left carousel-control" href="#front-carousel" role="button" data-slide="prev">
     <i class="fa fa-chevron-left fa-6"></i>
   </div>

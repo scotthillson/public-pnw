@@ -1,1 +1,4 @@
 <%= link_to 'New Image', new_image_path, class: 'btn btn-primary' %>
+<% @images.each do |image| %>
+  <img src="<%= image.filename %>" alt="image">
+<% end %>

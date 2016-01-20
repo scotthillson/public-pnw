@@ -4,6 +4,10 @@ class ImagesController < ApplicationController
     @images = Image.all
   end
   
+  def manage_images
+    @images = Image.all
+  end
+  
   def show
   end
   

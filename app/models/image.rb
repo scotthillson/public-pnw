@@ -3,10 +3,19 @@ class Image < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :image
   
+  def self.get_started
+    Dir.entries('public').each do |file|
+      if file.include? 'jpg'
+        puts file.class
+        upload file
+      end
+    end
+  end
+  
   def self.upload(file)
-    filename = file.original_filename
-    path = "public/forms/#{filename}"
-    File.rename(file.path,path)
+    filename = file
+    path = "public/#{filename}"
+    #File.rename(file.path,path)
     i = new
     i.path = path
     i.name = filename

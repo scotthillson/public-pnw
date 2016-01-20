@@ -30,6 +30,7 @@ class PagesController < ApplicationController
 
   def home
     @posts = Post.active
+    @carousel_images = Image.where(type:'carousel').order(:rank)
     @paragraph_one = Page.where(name:'paragraph one').last
     @paragraph_one = @paragraph_one.body if @paragraph_one
     @paragraph_two = Page.where(name:'paragraph two').last
