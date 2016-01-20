@@ -2,7 +2,7 @@ class Image < ActiveRecord::Base
   
   def self.get_started
     Dir.entries('public').each do |file|
-      if file.include? '.jpg' || file.include? '.png'
+      if file.include? 'banner'
         puts file.class
         upload file
       end
