@@ -1,11 +1,8 @@
 class Image < ActiveRecord::Base
   
-  validates_presence_of :name
-  validates_presence_of :image
-  
   def self.get_started
     Dir.entries('public').each do |file|
-      if file.include? 'jpg'
+      if file.include? '.jpg' || file.include? '.png'
         puts file.class
         upload file
       end
@@ -18,7 +15,7 @@ class Image < ActiveRecord::Base
     #File.rename(file.path,path)
     i = new
     i.path = path
-    i.name = filename
+    i.filename = filename
     i.save
   end
   
