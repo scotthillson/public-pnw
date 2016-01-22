@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# Image magick stuff!
+gem 'mini_magick'
 # Use seed dump to make our seed file out of development data
 gem 'seed_dump'
 # We need jquery and turbolinks to play nice

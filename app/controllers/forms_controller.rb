@@ -1,5 +1,7 @@
 class FormsController < ApplicationController
   
+  before_action :turn_back
+  
   def index
     @forms = Form.all
   end
@@ -25,11 +27,10 @@ class FormsController < ApplicationController
   end
   
   def destroy
-    form = Upload.find params[:id]
-    redirect_to forms_path if !form # form not found
-    redirect_to forms_path if form.in_use # form is in use
+    form = Form.find params[:id]
+    redirect_to forms_path if !form
     form.destroy
-    redirect_to forms_path # successful
+    redirect_to forms_path
   end
   
 end

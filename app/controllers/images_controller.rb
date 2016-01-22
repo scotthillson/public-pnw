@@ -1,5 +1,7 @@
 class ImagesController < ApplicationController
   
+  before_action :turn_back
+  
   def index
     @images = Image.all
   end
@@ -15,8 +17,14 @@ class ImagesController < ApplicationController
   end
   
   def upload
-    Image.upload(params[:file])
-    redirect_to images_path
+    result = Image.upload(params[:file])
+    if result == 'dup'
+      redirect_to new_image_path, notice: 'An image with that name already exists'
+    elsif result == 'small'
+      redirect_to new_image_path, notice: 'The image must be at least 1000px wide'
+    else
+      redirect_to images_path
+    end
   end
   
   def edit
@@ -30,10 +38,10 @@ class ImagesController < ApplicationController
   
   def destroy
     image = Image.find params[:id]
-    redirect_to images_path if !image # form not found
-    redirect_to images_path if image.in_use # form is in use
+    redirect_to images_path if !image
+    image.delete
     image.destroy
-    redirect_to images_path # successful
+    redirect_to images_path
   end
   
 end
