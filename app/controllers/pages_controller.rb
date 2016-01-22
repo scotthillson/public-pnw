@@ -1,7 +1,8 @@
 class PagesController < ApplicationController
   
   def page
-    @page = Page.where(name:params[:page].downcase).last.body.html_safe
+    @page = Page.where(name:params[:page].downcase).last
+    @page = @page.body.html_safe if @page
   end
   
   def index

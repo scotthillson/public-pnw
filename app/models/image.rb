@@ -1,23 +1,22 @@
 class Image < ActiveRecord::Base
-
+  
   def self.get_started
     Dir.entries('public').each do |file|
       if file.include? 'banner'
+        i = new
+        i.type = 'Banner'
+        i.filename = file
+        i.path = "public/#{file}"
+        i.save
       end
     end
   end
   
   def self.banners
-    array = []
-    Dir.entries('public').each do |file|
-      if file.include? 'banner'
-        array.push file
-      end
-    end
-    array
+    where(type:'Banner')
   end
   
-  def self.upload(file)
+  def self.upload(file,type="")
     filename = file.original_filename
     return 'dup' if Dir.entries('public').include? filename
     path = "public/#{filename}"

@@ -1,8 +1,9 @@
-<div class="container">
-  <h3>Upload Form</h3>
-  <%= form_tag upload_form_path, multipart: true do %>
-    <%= file_field_tag :file, id: 'choose-file' %>
-    <br>
-    <%= submit_tag 'upload', class: 'btn btn-primary' %>
-  <% end %>
-</div>
+<h3>Upload Form</h3>
+<%= form_for @form do |f| %>
+  <%= f.file_field :file, id: 'choose-file' %>
+  <br>
+  <%= f.select :type, ['Equipment List','Application','Donation Form']%>
+  <br>
+  <br>
+  <%= f.submit 'upload', class: 'btn btn-primary' %>
+<% end %>

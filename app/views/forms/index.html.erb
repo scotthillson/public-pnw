@@ -1,1 +1,5 @@
 <%= link_to 'New Form', new_form_path, class: 'btn btn-primary' %>
+<% @forms.each do |form| %>
+<br>
+<div><%= form.name %></div>
+<% end %>

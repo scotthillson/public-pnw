@@ -1,6 +1,6 @@
 class FormsController < ApplicationController
   
-  before_action :turn_back
+  #before_action :turn_back
   
   def index
     @forms = Form.all
@@ -10,20 +10,21 @@ class FormsController < ApplicationController
   end
   
   def new
+    @form = Form.new
+  end
+  
+  def dup
+    dups = Dir.entries('public').include? params[:file]
+    render json: dups
   end
   
   def upload
-    Form.upload(params[:file])
-    redirect_to forms_path
-  end
-  
-  def edit
-  end
-  
-  def create
-  end
-  
-  def update
+    result = Form.upload(params[:file],params[:type])
+    if result == 'no pdf'
+      redirect_to new_form_path, notice: 'The file must be a PDF'
+    else
+      redirect_to forms_path
+    end
   end
   
   def destroy

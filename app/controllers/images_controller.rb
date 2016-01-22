@@ -17,7 +17,7 @@ class ImagesController < ApplicationController
   end
   
   def upload
-    result = Image.upload(params[:file])
+    result = Image.upload(params[:file],params[:type])
     if result == 'dup'
       redirect_to new_image_path, notice: 'An image with that name already exists'
     elsif result == 'small'
@@ -25,15 +25,6 @@ class ImagesController < ApplicationController
     else
       redirect_to images_path
     end
-  end
-  
-  def edit
-  end
-  
-  def create
-  end
-  
-  def update
   end
   
   def destroy

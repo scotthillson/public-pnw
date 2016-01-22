@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
+  
   root to: 'pages#home'
   
   resources :images, constraints: { format: :html }
   post 'upload_image', to: 'images#upload'
   get 'upload_image', to: 'images#upload'
   
-  resources :forms, constraints: { format: :html }
+  resources :forms
   post 'upload_form', to: 'forms#upload'
   get 'upload_form', to: 'forms#upload'
+  get 'dup_form_check', to: 'forms#dup'
   
   resources :searches, constraints: { format: :html }
   get 'searches/:id/destroy', to: 'searches#destroy', via: :delete, as: 'destroy'
