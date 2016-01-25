@@ -19,7 +19,7 @@ class FormsController < ApplicationController
   end
   
   def upload
-    result = Form.upload(params[:file],params[:type])
+    result = Form.upload(params[:file],params[:page])
     if result == 'no pdf'
       redirect_to new_form_path, notice: 'The file must be a PDF'
     else

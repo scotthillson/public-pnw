@@ -2,7 +2,7 @@
 <%= form_for @form do |f| %>
   <%= f.file_field :file, id: 'choose-file' %>
   <br>
-  <%= f.select :type, ['Equipment List','Application','Donation Form']%>
+  <%= f.select :page, ['Equipment List','Application','Donation Form']%>
   <br>
   <br>
   <%= f.submit 'upload', class: 'btn btn-primary' %>

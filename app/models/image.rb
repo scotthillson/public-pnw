@@ -14,7 +14,7 @@ class Image < ActiveRecord::Base
     end
   end
   
-  def self.upload(file,type="")
+  def self.upload(file,page="")
     filename = file.original_filename
     return 'dup' if Dir.entries('public').include? filename
     path = "public/#{filename}"
@@ -31,6 +31,7 @@ class Image < ActiveRecord::Base
       return 'small'
     end
     i = new
+    i.page = page
     i.path = path
     i.filename = filename
     i.save
