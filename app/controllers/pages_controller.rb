@@ -32,7 +32,7 @@ class PagesController < ApplicationController
   def home
     @images = []
     @posts = Post.active
-    @carousel_images = Image.banners.shuffle
+    @carousel_images = Image.banners
     @images.push @carousel_images.pop
     @images.push @carousel_images.pop
     @images.push @carousel_images.pop

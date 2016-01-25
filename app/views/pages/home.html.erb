@@ -6,7 +6,7 @@
   </ol>
   <div class="carousel-inner">
     <% @carousel_images.each_with_index do |img,i| %>
-      <div class="item<%= " active" if i == 0 %>"><img src="<%= img %>"></div>
+      <div class="item<%= " active" if i == 0 %>"><img src="<%= img.filename %>"></div>
     <% end %>
   </div>
   <div class="left carousel-control" href="#front-carousel" role="button" data-slide="prev">
@@ -23,7 +23,7 @@
         <p><%= p.body.html_safe %></p>
       <% elsif i%2 == 0 %>
         <div class="col-md-8">
-          <img src="<%= @images[i-1] %>">
+          <img src="<%= @images[i-1].filename %>">
         </div>
         <div class="col-md-4">
           <div class="pnw-wrap">
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="col-md-8">
-          <img src="<%= @images[i-1] %>">
+          <img src="<%= @images[i-1].filename %>">
         </div>
       <% end %>
     </div>

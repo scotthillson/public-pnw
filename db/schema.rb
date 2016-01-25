@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122000053) do
+ActiveRecord::Schema.define(version: 20160126071448) do
 
   create_table "forms", force: true do |t|
     t.string   "name"
@@ -24,8 +24,17 @@ ActiveRecord::Schema.define(version: 20160122000053) do
     t.datetime "created_at"
   end
 
-# Could not dump table "images" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "images", force: true do |t|
+    t.string   "filename"
+    t.string   "path"
+    t.string   "page"
+    t.string   "width"
+    t.string   "height"
+    t.integer  "rank"
+    t.integer  "created_by"
+    t.datetime "updated_at"
+    t.datetime "created_at"
+  end
 
   create_table "members", force: true do |t|
     t.string   "name"

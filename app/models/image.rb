@@ -1,19 +1,17 @@
 class Image < ActiveRecord::Base
   
+  scope :banners, -> {where(page:'Banner').shuffle}
+  
   def self.get_started
     Dir.entries('public').each do |file|
       if file.include? 'banner'
         i = new
-        i.type = 'Banner'
+        i.page = 'Banner'
         i.filename = file
         i.path = "public/#{file}"
         i.save
       end
     end
-  end
-  
-  def self.banners
-    where(type:'Banner')
   end
   
   def self.upload(file,type="")

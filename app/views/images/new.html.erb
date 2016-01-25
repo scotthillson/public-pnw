@@ -1,6 +1,8 @@
 <h3>Upload Image</h3>
-<%= form_tag upload_image_path, multipart: true do %>
-  <%= file_field_tag :file, id: 'choose-file' %>
+<%= form_for @image do |f| %>
+  <%= f.file_field :file, id: 'choose-file' %>
   <br>
-  <%= submit_tag 'upload', class: 'btn btn-primary' %>
+  <%= f.select :page, ['Banner','Albums']%>
+  <br>
+  <%= f.submit 'upload', class: 'btn btn-primary' %>
 <% end %>
