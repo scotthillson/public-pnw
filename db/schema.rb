@@ -11,13 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160126071448) do
+ActiveRecord::Schema.define(version: 20160126071449) do
 
   create_table "forms", force: true do |t|
     t.string   "name"
     t.string   "filename"
     t.string   "path"
-    t.string   "type"
     t.string   "page"
     t.integer  "created_by"
     t.datetime "updated_at"
