@@ -22,6 +22,8 @@ class FormsController < ApplicationController
     result = Form.upload(params[:file],params[:page])
     if result == 'no pdf'
       redirect_to new_form_path, notice: 'The file must be a PDF'
+    elsif result == 'no page'
+      redirect_to new_form_path, notice: 'Please choose what form this will be'
     else
       redirect_to forms_path
     end
