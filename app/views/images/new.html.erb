@@ -2,7 +2,7 @@
 <%= form_for @image do |f| %>
   <%= f.file_field :file, id: 'choose-file' %>
   <br>
-  <%= f.select :page, ['Banner','Albums']%>
+  <%= f.select :page, ['Banner']%>
   <br>
   <%= f.submit 'upload', class: 'btn btn-primary' %>
 <% end %>

@@ -18,8 +18,8 @@ class FormsController < ApplicationController
     render json: dups
   end
   
-  def upload
-    result = Form.upload(params[:file],params[:page])
+  def create
+    result = Form.upload(params[:image][:file],params[:image][:page])
     if result == 'no pdf'
       redirect_to new_form_path, notice: 'The file must be a PDF'
     elsif result == 'no page'
