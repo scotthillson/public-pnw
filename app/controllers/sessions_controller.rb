@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
-
+  
   def new
   end
-
+  
   def create
     user = User.find_by_email(params[:email].downcase)
     if user && user.authenticate(params[:password])
@@ -14,12 +14,12 @@ class SessionsController < ApplicationController
       redirect_to signin_path(email: params[:email]), notice: 'sorry, but those credentials don\'t stack up'
     end
   end
-
+  
   def destroy
     session[:admin] = nil
     session[:user_id] = nil
     session[:user_email] = nil
     redirect_to signin_path, notice: 'logged out!'
   end
-
+  
 end
