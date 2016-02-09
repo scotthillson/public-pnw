@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20160126071447) do
     t.string   "name"
     t.string   "filename"
     t.string   "path"
+    t.string   "type"
     t.string   "page"
     t.integer  "created_by"
     t.datetime "updated_at"
