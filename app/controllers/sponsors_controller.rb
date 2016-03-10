@@ -9,10 +9,13 @@ class SponsorsController < ApplicationController
   
   def new
     @sponsor = Sponsor.new
+    @images = Dir.entries('public/logos')
   end
   
   def create
     @sponsor = Sponsor.new(sponsor_params)
+    @sponsor.created_at = user_session
+    @sponsor.image = "logos/#{@sponsor.image}"
     if @sponsor.save
       redirect_to sponsors_url
     else
@@ -43,7 +46,7 @@ class SponsorsController < ApplicationController
   end
   
   def sponsor_params
-    params.require(:sponsor).permit(:name, :link, :image)
+    params.require(:sponsor).permit(:name, :sponsor_url, :image)
   end
   
 end

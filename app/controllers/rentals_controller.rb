@@ -16,6 +16,7 @@ class RentalsController < ApplicationController
   
   def create
     @rental = Rental.new(rental_params)
+    @rental.created_by = user_session
     if @rental.save
       redirect_to @rental
     else

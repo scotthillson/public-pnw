@@ -1,3 +1,16 @@
 <% if admin? %>
   <%= link_to 'New Sponsor', new_sponsor_path, class: 'btn btn-primary' %>
 <% end %>
+  <div class="row">
+<% @sponsors.each_with_index do |s,i| %>
+  <% if i%3 == 0 %>
+  </div>
+  <div class="row" style="margin:auto; width:880px; padding-top:30px">
+  <% end %>
+  <div class="col-md-4">
+    <%= link_to s.sponsor_url, target: '_blank' do %>
+      <img src="<%= s.image %>" alt="<%= s.name %>" width="180">
+    <% end %>
+  </div>
+<% end %>
+</div>

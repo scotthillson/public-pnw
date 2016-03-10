@@ -4,6 +4,8 @@ class SponsorsAndCarpools < ActiveRecord::Migration
       t.string   "name"
       t.string   "link"
       t.string   "image"
+      t.integer  "created_by"
+      t.datetime "created_at"
     end
     create_table :carpools, force: true do |t|
       t.string   "event"
@@ -23,7 +25,8 @@ class SponsorsAndCarpools < ActiveRecord::Migration
       t.datetime "created_at"
     end
     create_table :rentals, force: true do |t|
-      t.string   "name"
+      t.date     "event_date"
+      t.string   "description"
       t.string   "event"
       t.string   "notes"
       t.integer  "claimed_by"
@@ -38,6 +41,7 @@ class SponsorsAndCarpools < ActiveRecord::Migration
       t.string   "importance"
       t.string   "notes"
       t.string   "status"
+      t.integer  "quantity"
       t.integer  "created_by"
       t.datetime "created_at"
       t.datetime "updated_at"

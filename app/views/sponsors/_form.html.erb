@@ -10,15 +10,18 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name %>
+    <br>
     <%= f.text_field :name, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :link %><br>
-    <%= f.text_field :link, class: 'form-control' %>
+    <%= f.label :sponsor_url, 'Link' %>
+    <br>
+    <%= f.text_field :sponsor_url, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :image %><br>
+    <%= f.label :image %>
+    <br>
     <%= f.select :image, @images, class: 'form-control' %>
   </div>
   <br>

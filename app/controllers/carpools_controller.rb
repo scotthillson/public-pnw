@@ -16,6 +16,7 @@ class CarpoolsController < ApplicationController
   
   def create
     @carpool = Carpool.new(carpool_params)
+    @carpool.created_by = user_session
     if @carpool.save
       redirect_to @carpool
     else

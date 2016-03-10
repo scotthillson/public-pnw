@@ -11,7 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160126071447) do
+ActiveRecord::Schema.define(version: 20160310061058) do
+
+  create_table "carpools", force: true do |t|
+    t.string   "event"
+    t.string   "address"
+    t.string   "notes"
+    t.datetime "depart"
+    t.datetime "return"
+    t.integer  "seats_offered"
+    t.integer  "created_by"
+    t.datetime "updated_at"
+    t.datetime "created_at"
+  end
+
+  create_table "equipment", force: true do |t|
+    t.string   "category"
+    t.string   "description"
+    t.string   "expiration"
+    t.string   "importance"
+    t.string   "notes"
+    t.string   "status"
+    t.integer  "quantity"
+    t.integer  "created_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "forms", force: true do |t|
     t.string   "name"
@@ -64,6 +89,17 @@ ActiveRecord::Schema.define(version: 20160126071447) do
     t.datetime "updated_at"
   end
 
+  create_table "rentals", force: true do |t|
+    t.date     "event_date"
+    t.string   "description"
+    t.string   "event"
+    t.string   "notes"
+    t.integer  "claimed_by"
+    t.integer  "created_by"
+    t.datetime "updated_at"
+    t.datetime "created_at"
+  end
+
   create_table "searches", force: true do |t|
     t.string   "title"
     t.string   "author"
@@ -73,6 +109,21 @@ ActiveRecord::Schema.define(version: 20160126071447) do
     t.integer  "creatd_by"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "seats", force: true do |t|
+    t.integer  "carpool_id"
+    t.integer  "created_by"
+    t.datetime "updated_at"
+    t.datetime "created_at"
+  end
+
+  create_table "sponsors", force: true do |t|
+    t.string   "name"
+    t.string   "sponsor_url"
+    t.string   "image"
+    t.integer  "created_by"
+    t.datetime "created_at"
   end
 
   create_table "users", force: true do |t|
