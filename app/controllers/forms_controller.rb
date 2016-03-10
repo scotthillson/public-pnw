@@ -1,6 +1,6 @@
 class FormsController < ApplicationController
   
-  #before_action :turn_back
+  before_action :admin_only
   
   def index
     @forms = Form.all

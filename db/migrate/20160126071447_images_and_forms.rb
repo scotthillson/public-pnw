@@ -1,6 +1,6 @@
 class ImagesAndForms < ActiveRecord::Migration
   def change
-    if !table_exists? :iamges
+    if !table_exists? :images
       create_table :images, force: true do |t|
         t.string   "filename"
         t.string   "path"

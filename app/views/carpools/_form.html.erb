@@ -1,0 +1,43 @@
+<%= form_for(@carpool) do |f| %>
+  <% if @carpool.errors.any? %>
+    <div id="error_explanation">
+      <p><%= pluralize(@carpool.errors.count, "error") %> prohibited this from being saved:</p>
+      <ul>
+      <% @carpool.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label, 'Meeting Location' :address %><br>
+    <%= f.text_field :address, class: 'form-control' %>
+  </div>
+  <div class="field">
+    <%= f.label, :notes %><br>
+    <%= f.text_field :notes, class: 'form-control' %>
+  </div>
+  <div class="field">
+    <%= f.label :event %>
+    <br>
+    <%= f.select :event, ['Monthly Training','RST Training','Conference','Incident'], class: 'form-control text-center' %>
+  </div>
+  <div class="field">
+    <%= f.label :seats_offered %>
+    <br>
+    <%= f.select :seats_offered, [1,2,3,4], class: 'form-control text-center' %>
+  </div>
+  <div class="field">
+    <%= f.label 'Departs At' :depart %>
+    <br>
+    <%= f.datetime_field :depart, class: 'form-control' %>
+  </div>
+  <div class="field">
+    <%= f.label 'Estimated Return Time' :return %>
+    <br>
+    <%= f.datetime_field :return, class: 'form-control' %>
+  </div>
+  <br>
+  <%= submit_tag 'Save', class: 'btn btn-sm btn-success' %>
+  <%= link_to carpools_path do %><div class="btn btn-sm btn-primary">Back</div><% end %>
+<% end %>

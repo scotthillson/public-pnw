@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
   
+  before_action :admin_only, only: [:new, :edit, :update, :destroy]
+  
   def page
     @page = Page.where(name:params[:page].downcase).last
     @page = @page.body.html_safe if @page

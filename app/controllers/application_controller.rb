@@ -1,15 +1,20 @@
 class ApplicationController < ActionController::Base
   
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
+  # For APIs, you may want to use :null_session instead?
   protect_from_forgery
-  #force_ssl??
+  # force_ssl?
   
   helper_method :user_session
   helper_method :admin?
   
-  def turn_back
+  def admin_only
     if !admin?
+      redirect_to signin_path
+    end
+  end
+  
+  def turn_back
+    if !user_session
       redirect_to signin_path
     end
   end

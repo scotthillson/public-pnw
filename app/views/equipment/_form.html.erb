@@ -1,0 +1,31 @@
+<%= form_for(@search) do |f| %>
+  <% if @search.errors.any? %>
+    <div id="error_explanation">
+      <p><%= pluralize(@search.errors.count, "error") %> prohibited this from being saved:</p>
+      <ul>
+      <% @search.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+  <div class="field">
+    <%= f.label :author %><br>
+    <%= f.text_field :author, class: 'form-control' %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br>
+    <%= f.text_area :body, class: 'form-control' %>
+  </div>
+  <div class="field">
+    <%= f.label :search_date %><br>
+    <%= f.date_field :search_date, class: 'form-control' %>
+  </div>
+  <br>
+  <%= submit_tag 'Save', class: 'btn btn-sm btn-success' %>
+  <%= link_to equipment_path do %><div class="btn btn-sm btn-primary">Back</div><% end %>
+<% end %>

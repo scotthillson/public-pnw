@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
   
-  before_action :turn_back, only: [:new, :edit, :update, :destroy]
+  before_action :admin_only, only: [:new, :edit, :update, :destroy]
   before_action :set_member, only: [:show, :edit, :update, :destroy]
   
   def index

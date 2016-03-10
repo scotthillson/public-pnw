@@ -31,6 +31,10 @@ Rails.application.routes.draw do
   
   resources :sponsors, contraints: {format: :html}
   
+  resources :carpools, constraints: {format: :html}
+  
+  resources :equipment, constraints: {format: :html}
+  
   resources :pages, constraints: {format: :html}
   get 'last_version', to: 'pages#last_version'
   get '/:page', to: 'pages#page'
