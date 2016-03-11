@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   get 'dup_form_check', to: 'forms#dup'
   
   resources :searches, constraints: {format: :html}
-  get 'searches/:id/destroy', to: 'searches#destroy', via: :delete, as: 'destroy'
   
   resources :sessions, constraints: {format: :html}
   get 'signout', to: 'sessions#destroy', as: 'signout'
@@ -32,6 +31,7 @@ Rails.application.routes.draw do
   resources :sponsors, contraints: {format: :html}
   
   resources :carpools, constraints: {format: :html}
+  get 'carpools/:id/reserve', to: 'carpools#reserve'
   
   resources :equipment, constraints: {format: :html}
   

@@ -10,32 +10,32 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.label, 'Meeting Location' :address %><br>
+    <%= f.label 'Meeting Location', :address %><br>
     <%= f.text_field :address, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label, :notes %><br>
+    <%= f.label :notes %><br>
     <%= f.text_field :notes, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :event %>
     <br>
-    <%= f.select :event, ['Monthly Training','RST Training','Conference','Incident'], class: 'form-control text-center' %>
+    <%= f.select :event, ['Monthly Training','RST Training','Conference','Incident'], {}, {class: 'form-control text-center'} %>
   </div>
   <div class="field">
     <%= f.label :seats_offered %>
     <br>
-    <%= f.select :seats_offered, [1,2,3,4], class: 'form-control text-center' %>
+    <%= f.select :seats_offered, [1,2,3,4], {}, {class: 'form-control text-center'} %>
   </div>
   <div class="field">
-    <%= f.label 'Departs At' :depart %>
+    <%= f.label 'Departs At', :depart %>
     <br>
-    <%= f.datetime_field :depart, class: 'form-control' %>
+    <%= f.time_field :depart, class: 'form-control', value: '09:00' %>
   </div>
   <div class="field">
-    <%= f.label 'Estimated Return Time' :return %>
+    <%= f.label 'Estimated Return Time', :return %>
     <br>
-    <%= f.datetime_field :return, class: 'form-control' %>
+    <%= f.time_field :return, class: 'form-control', value: '17:00' %>
   </div>
   <br>
   <%= submit_tag 'Save', class: 'btn btn-sm btn-success' %>

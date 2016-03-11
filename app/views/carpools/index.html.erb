@@ -1,0 +1,16 @@
+<%= link_to 'Offer To Drive', new_carpool_path, class: 'btn btn-primary' %>
+<table class="table">
+  <thead>
+    <tr>
+      <th class="text-center">Event</th>
+      <th class="text-center">Driver</th>
+      <th class="text-center">Meetup Location</th>
+      <th class="text-center">Departs At</th>
+      <th class="text-center">Seats Remaining</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @carpools %>
+  </tbody>
+</table>

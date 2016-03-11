@@ -4,6 +4,11 @@ class CarpoolsController < ApplicationController
   before_action :set_carpool, only: [:show, :edit, :update, :destroy, :reserve]
   
   def index
+    departs = Carpool.arel_table[:depart]
+    @carpools = Carpool.where(departs.lt(Time.now))
+  end
+  
+  def manage_carpools
     @carpools = Carpool.all
   end
   
@@ -25,8 +30,10 @@ class CarpoolsController < ApplicationController
   end
   
   def reserve
-    if @carpool.reserve
+    if @carpool.reserve(user_session)
       redirect_to @carpool, notice: 'You successfully reserved a seat!'
+    else
+      redirect_to @carpool, notice: 'No dice'
     end
   end
   

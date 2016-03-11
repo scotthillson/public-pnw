@@ -1,3 +1,10 @@
+#error_explanation {
+  background-color: #B396EF;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -khtml-border-radius: 10px;
+}
 .pnw-wrap{
   margin:0 10px;
   padding:20px 10px;
