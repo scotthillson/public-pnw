@@ -16,6 +16,7 @@ class EquipmentController < ApplicationController
   
   def create
     @equipment = Equipment.new(equipment_params)
+    @equipment.created_by = user_session
     if @equipment.save
       redirect_to @equipment
     else
@@ -35,7 +36,9 @@ class EquipmentController < ApplicationController
   end
   
   def destroy
-    @equipment.destroy
+    if @equipment.created_by = user_session
+      @equipment.destroy
+    end
     redirect_to equipment_url
   end
   
@@ -46,7 +49,7 @@ class EquipmentController < ApplicationController
   end
   
   def equipment_params
-    params.require(:equipment).permit(:description)
+    params.require(:equipment).permit(:description,:category)
   end
   
 end

@@ -11,8 +11,6 @@ Rails.application.routes.draw do
   get 'upload_form', to: 'forms#upload'
   get 'dup_form_check', to: 'forms#dup'
   
-  resources :searches, constraints: {format: :html}
-  
   resources :sessions, constraints: {format: :html}
   get 'signout', to: 'sessions#destroy', as: 'signout'
   get 'signin', to: 'sessions#new', as: 'signin'
@@ -27,6 +25,10 @@ Rails.application.routes.draw do
   get 'donation_download', to: 'posts#donation_download'
   get 'equipment_download', to: 'posts#equipment_download'
   get 'application_download', to: 'posts#application_download'
+  
+  resources :rentals, constraints: {format: :html}
+  
+  resources :searches, constraints: {format: :html}
   
   resources :sponsors, contraints: {format: :html}
   

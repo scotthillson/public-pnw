@@ -1,29 +1,29 @@
-<%= form_for(@search) do |f| %>
-  <% if @search.errors.any? %>
+<%= form_for(@rental, html: {style: 'width:500px'}) do |f| %>
+  <% if @rental.errors.any? %>
     <div id="error_explanation">
-      <p><%= pluralize(@search.errors.count, "error") %> prohibited this from being saved:</p>
+      <p><%= pluralize(@rental.errors.count, "error") %> prohibited this from being saved:</p>
       <ul>
-      <% @search.errors.full_messages.each do |message| %>
+      <% @rental.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title, class: 'form-control' %>
+  <div class="field text-center">
+    <%= f.label :description %><br>
+    <%= f.text_field :description, class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :author %><br>
-    <%= f.text_field :author, class: 'form-control' %>
+  <div class="field text-center">
+    <%= f.label :event %><br>
+    <%= f.text_field :event, class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_area :body, class: 'form-control' %>
+  <div class="field text-center">
+    <%= f.label :event_date %><br>
+    <%= f.date_field :event, class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :search_date %><br>
-    <%= f.date_field :search_date, class: 'form-control' %>
+  <div class="field text-center">
+    <%= f.label :notes %><br>
+    <%= f.text_field :notes, class: 'form-control' %>
   </div>
   <br>
   <%= submit_tag 'Save', class: 'btn btn-sm btn-success' %>

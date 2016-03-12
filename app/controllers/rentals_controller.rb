@@ -11,7 +11,7 @@ class RentalsController < ApplicationController
   end
   
   def new
-    @rentals = Rental.new
+    @rental = Rental.new
   end
   
   def create
@@ -39,7 +39,9 @@ class RentalsController < ApplicationController
   end
   
   def destroy
-    @rental.destroy
+    if @rental.created_by = user_session
+      @rental.destroy
+    end
     redirect_to rentals_url
   end
   
@@ -50,7 +52,7 @@ class RentalsController < ApplicationController
   end
   
   def rental_params
-    params.require(:rental).permit(:name,:notes,:event,:claimed_by)
+    params.require(:rental).permit(:event,:event_date,:description,:notes)
   end
   
 end

@@ -49,7 +49,9 @@ class CarpoolsController < ApplicationController
   end
   
   def destroy
-    @carpool.destroy
+    if @carpool.created_by = user_session
+      @carpool.destroy
+    end
     redirect_to carpools_url
   end
   
