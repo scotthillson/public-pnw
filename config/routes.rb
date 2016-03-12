@@ -27,13 +27,14 @@ Rails.application.routes.draw do
   get 'application_download', to: 'posts#application_download'
   
   resources :rentals, constraints: {format: :html}
+  get 'rentals/:id/reserve', to: 'rentals#reserve', as: :reserve_rental
   
   resources :searches, constraints: {format: :html}
   
   resources :sponsors, contraints: {format: :html}
   
   resources :carpools, constraints: {format: :html}
-  get 'carpools/:id/reserve', to: 'carpools#reserve'
+  get 'carpools/:id/reserve', to: 'carpools#reserve', as: :reserve_seat
   
   resources :equipment, constraints: {format: :html}
   

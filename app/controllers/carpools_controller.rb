@@ -5,7 +5,7 @@ class CarpoolsController < ApplicationController
   
   def index
     departs = Carpool.arel_table[:depart]
-    @carpools = Carpool.where(departs.lt(Time.now))
+    @carpools = Carpool.all#where(departs.gt(Time.now))
   end
   
   def manage_carpools
@@ -23,7 +23,7 @@ class CarpoolsController < ApplicationController
     @carpool = Carpool.new(carpool_params)
     @carpool.created_by = user_session
     if @carpool.save
-      redirect_to @carpool
+      redirect_to carpools_url
     else
       render :new
     end
@@ -31,9 +31,9 @@ class CarpoolsController < ApplicationController
   
   def reserve
     if @carpool.reserve(user_session)
-      redirect_to @carpool, notice: 'You successfully reserved a seat!'
+      redirect_to carpools_url, notice: 'You successfully reserved a seat!'
     else
-      redirect_to @carpool, notice: 'No dice'
+      redirect_to carpools_url, notice: 'No dice'
     end
   end
   
@@ -42,7 +42,7 @@ class CarpoolsController < ApplicationController
   
   def update
     if @carpool.update(carpool_params)
-      redirect_to @carpool
+      redirect_to carpools_url
     else
       render :edit
     end
@@ -62,7 +62,7 @@ class CarpoolsController < ApplicationController
   end
   
   def carpool_params
-    params.require(:carpool).permit(:address,:notes,:leave,:return,:seats)
+    params.require(:carpool).permit(:event,:event_date,:address,:notes,:depart,:return,:seats_offered)
   end
   
 end

@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310061058) do
+ActiveRecord::Schema.define(version: 20160312050247) do
 
   create_table "carpools", force: true do |t|
     t.string   "event"
     t.string   "address"
     t.string   "notes"
-    t.datetime "depart"
-    t.datetime "return"
+    t.time     "depart"
+    t.time     "return"
+    t.date     "event_date"
     t.integer  "seats_offered"
     t.integer  "created_by"
     t.datetime "updated_at"

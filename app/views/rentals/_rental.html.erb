@@ -1,8 +1,15 @@
-<tr>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><%= link_to? %></td>
+<tr class="text-center ">
+  <td><%= rental.event %></td>
+  <td><%= rental.event_date %></td>
+  <td><%= rental.description %></td>
+  <td><%= rental.user.name %></td>
+  <td><%= rental.claimant.name if rental.claimed_by %></td>
+  <td><%= rental.notes %></td>
+  <td>
+    <% if rental.created_by = user_session %>
+      <%= link_to 'Edit', edit_rental_path(rental), class: 'btn btn-sm btn-warning' %>
+    <% else %>
+      <%= link_to 'Reserve', reserve_rental_path(rental), class: 'btn btn-sm btn-success' %>
+    <% end %>
+  </td>
 </tr>

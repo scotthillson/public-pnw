@@ -1,7 +1,7 @@
 class RentalsController < ApplicationController
   
   before_action :turn_back
-  before_action :set_rental, only: [:show, :edit, :update, :destroy, :claim]
+  before_action :set_rental, only: [:show, :edit, :update, :destroy, :reserve]
   
   def index
     @rentals = Rental.all
@@ -18,13 +18,18 @@ class RentalsController < ApplicationController
     @rental = Rental.new(rental_params)
     @rental.created_by = user_session
     if @rental.save
-      redirect_to @rental
+      redirect_to rentals_path
     else
       render :new
     end
   end
   
-  def claim
+  def reserve
+    if @rental.reserve(user_session)
+      redirect_to rentals_path, notice: 'You successfully claimed this item, congrats!'
+    else
+      redirect_to rentals_path, notice: 'No dice muchacho'
+    end
   end
   
   def edit
