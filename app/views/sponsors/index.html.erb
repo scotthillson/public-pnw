@@ -5,11 +5,19 @@
 <% @sponsors.each_with_index do |s,i| %>
   <% if i%3 == 0 %>
   </div>
-  <div class="row" style="margin:auto; width:880px; padding-top:30px">
+  <div class="row" style="margin:auto; width:960px; padding-top:30px">
   <% end %>
-  <div class="col-md-4">
-    <%= link_to s.sponsor_url, target: '_blank' do %>
-      <img src="<%= s.image %>" alt="<%= s.name %>" width="180">
+  <div class="col-md-4" style="width:320px">
+    <% if s.sponsor_url.present? %>
+      <%= link_to s.sponsor_url, target: '_blank' do %>
+        <% if s.image.length > 7 and File.exist? "public/#{s.image}" %>
+          <img src="<%= s.image %>" alt="<%= s.name %>" width="180">
+        <% else %>
+          <p><%= s.name %></p>
+        <% end %>
+      <% end %>
+    <% else%>
+      <p><%= s.name %></p>
     <% end %>
   </div>
 <% end %>

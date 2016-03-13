@@ -24,10 +24,13 @@ class SponsorsController < ApplicationController
   end
   
   def edit
+    @images = Dir.entries('public/logos') - ['.'] - ['..']
   end
   
   def update
     if @sponsor.update(sponsor_params)
+      @sponsor.image = "logos/#{@sponsor.image}"
+      @sponsor.save
       redirect_to sponsors_url
     else
       render :edit

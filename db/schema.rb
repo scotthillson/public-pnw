@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160312050247) do
+ActiveRecord::Schema.define(version: 20160313050309) do
 
   create_table "carpools", force: true do |t|
     t.string   "event"
@@ -19,8 +19,24 @@ ActiveRecord::Schema.define(version: 20160312050247) do
     t.string   "notes"
     t.time     "depart"
     t.time     "return"
-    t.date     "event_date"
     t.integer  "seats_offered"
+    t.integer  "created_by"
+    t.datetime "updated_at"
+    t.datetime "created_at"
+    t.date     "event_date"
+  end
+
+  create_table "comments", force: true do |t|
+    t.text     "body"
+    t.integer  "discussion_id"
+    t.integer  "created_by"
+    t.datetime "updated_at"
+    t.datetime "created_at"
+  end
+
+  create_table "discussions", force: true do |t|
+    t.text     "body"
+    t.string   "subject"
     t.integer  "created_by"
     t.datetime "updated_at"
     t.datetime "created_at"
@@ -124,6 +140,13 @@ ActiveRecord::Schema.define(version: 20160312050247) do
     t.string   "sponsor_url"
     t.string   "image"
     t.integer  "created_by"
+    t.datetime "created_at"
+  end
+
+  create_table "subscriptions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "discussion_id"
+    t.datetime "updated_at"
     t.datetime "created_at"
   end
 

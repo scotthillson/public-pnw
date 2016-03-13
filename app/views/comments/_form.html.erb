@@ -1,0 +1,13 @@
+<%= form_for(@comment, html: {style: 'width:500px'}) do |f| %>
+  <div class="field">
+    <%= f.label :address, 'Meeting Location' %><br>
+    <%= f.text_field :address, class: 'form-control' %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br>
+    <%= f.text_field :notes, class: 'form-control' %>
+  </div>
+  <br>
+  <%= submit_tag 'Save', class: 'btn btn-sm btn-success' %>
+  <%= link_to discussions_path do %><div class="btn btn-sm btn-primary">Back</div><% end %>
+<% end %>

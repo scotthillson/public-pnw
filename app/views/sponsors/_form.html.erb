@@ -22,7 +22,7 @@
   <div class="field">
     <%= f.label :image %>
     <br>
-    <%= f.select :image, @images, class: 'form-control' %>
+    <%= f.select :image, @images, include_blank: true, class: 'form-control' %>
   </div>
   <br>
   <%= submit_tag 'Save', class: 'btn btn-sm btn-success' %>

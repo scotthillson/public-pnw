@@ -33,6 +33,8 @@ Rails.application.routes.draw do
   
   resources :sponsors, contraints: {format: :html}
   
+  resources :discussions, contraints: {format: :html}
+  
   resources :carpools, constraints: {format: :html}
   get 'carpools/:id/reserve', to: 'carpools#reserve', as: :reserve_seat
   

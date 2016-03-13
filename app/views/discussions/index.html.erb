@@ -1,0 +1,13 @@
+<%= link_to 'New Discussion', new_discussion_path, class: 'btn btn-primary' %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Author</th>
+      <th>Subject</th>
+      <th>Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @discussions %>
+  </tbody>
+</table>
