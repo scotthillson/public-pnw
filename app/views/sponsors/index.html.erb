@@ -10,7 +10,7 @@
   <div class="col-md-4" style="width:320px">
     <% if s.sponsor_url.present? %>
       <%= link_to s.sponsor_url, target: '_blank' do %>
-        <% if s.image.length > 7 and File.exist? "public/#{s.image}" %>
+        <% if s.image.length > 8 and File.exist?("#{Rails.root}/public/#{s.image}") %>
           <img src="<%= s.image %>" alt="<%= s.name %>" width="180">
         <% else %>
           <p><%= s.name %></p>
