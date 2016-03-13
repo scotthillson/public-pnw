@@ -1,7 +1,6 @@
 <%= form_for(@rental, html: {style: 'width:500px'}) do |f| %>
   <% if @rental.errors.any? %>
     <div id="error_explanation">
-      <p><%= pluralize(@rental.errors.count, "error") %> prohibited this from being saved:</p>
       <ul>
       <% @rental.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -15,11 +14,11 @@
   </div>
   <div class="field text-center">
     <%= f.label :event %><br>
-    <%= f.text_field :event, class: 'form-control' %>
+    <%= f.select :event, ['Monthly Training','RST Training','Conference','Incident'], {}, {class: 'form-control text-center'} %>
   </div>
   <div class="field text-center">
     <%= f.label :event_date %><br>
-    <%= f.date_field :event, class: 'form-control' %>
+    <%= f.date_field :event_date, class: 'form-control' %>
   </div>
   <div class="field text-center">
     <%= f.label :notes %><br>
@@ -28,4 +27,7 @@
   <br>
   <%= submit_tag 'Save', class: 'btn btn-sm btn-success' %>
   <%= link_to rentals_path do %><div class="btn btn-sm btn-primary">Back</div><% end %>
+  <% if @rental.created_by == user_session %>
+    <%= link_to 'Destroy',  @rental,  method: :delete, data: { confirm: @rental.destroy_message }, class: 'btn btn-danger pull-right' %>
+  <% end %>
 <% end %>

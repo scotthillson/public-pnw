@@ -1,3 +1,11 @@
 <tr>
+  <td><%= discussion.author.name %></td>
+  <td><%= link_to discussion.subject, discussion %></td>
+  <td><%= link_to discussion.body.split[0...19].join(' '), discussion %></td>
+  <td>
+    <% if discussion.created_by == user_session %>
+      <%= link_to 'Edit', edit_discussion_path(discussion), class: 'btn btn-sm btn-warning' %>
+    <% end %>
+  </td>
   <td></td>
 </tr>

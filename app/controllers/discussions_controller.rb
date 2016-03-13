@@ -4,7 +4,7 @@ class DiscussionsController < ApplicationController
   before_action :set_discussion, only: [:show, :edit, :update, :destroy]
   
   def index
-    @dicussions = Discussion.all.reverse
+    @discussions = Discussion.all.reverse
   end
   
   def show
@@ -18,7 +18,7 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.new(discussion_params)
     @discussion.created_by = user_session
     if @discussion.save
-      redirect_to @discussion
+      redirect_to discussions_url
     else
       render :new
     end

@@ -1,7 +1,7 @@
 class Seat < ActiveRecord::Base
   
   belongs_to :carpool
-  belongs_to :carpoolee, foreign_key: :claimed_by, class_name: 'User'
+  belongs_to :carpoolee, foreign_key: :created_by, class_name: 'User'
   
   def self.reserve(user, carpool)
     if where(created_by:user, carpool_id:carpool).count > 0

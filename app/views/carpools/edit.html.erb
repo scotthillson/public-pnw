@@ -1,1 +1,9 @@
 <%= render 'form' %>
+<div style="width:500px;float:left;margin:50px 100px">
+  <% @carpool.seats.each do |s| %>
+    <div class="field">
+      <%= s.carpoolee.name if s.carpoolee %>
+    </div>
+    <br>
+  <% end %>
+</div>

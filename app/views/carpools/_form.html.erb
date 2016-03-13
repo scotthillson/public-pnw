@@ -1,7 +1,6 @@
-<%= form_for(@carpool, html: {style: 'width:500px'}) do |f| %>
+<%= form_for(@carpool, html: {style: 'width:500px; float:left'}) do |f| %>
   <% if @carpool.errors.any? %>
     <div id="error_explanation">
-      <p><%= pluralize(@carpool.errors.count, "error") %> prohibited this from being saved:</p>
       <ul>
       <% @carpool.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -45,4 +44,7 @@
   <br>
   <%= submit_tag 'Save', class: 'btn btn-sm btn-success' %>
   <%= link_to carpools_path do %><div class="btn btn-sm btn-primary">Back</div><% end %>
+  <% if @carpool.created_by == user_session %>
+    <%= link_to 'Destroy',  @carpool,  method: :delete, data: { confirm: @carpool.destroy_message }, class: 'btn btn-danger pull-right' %>
+  <% end %>
 <% end %>

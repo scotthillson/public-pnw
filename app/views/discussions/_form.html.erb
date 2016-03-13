@@ -1,48 +1,24 @@
-<%= form_for(@carpool, html: {style: 'width:500px'}) do |f| %>
-  <% if @carpool.errors.any? %>
+<%= form_for @discussion do |f| %>
+  <% if @discussion.errors.any? %>
     <div id="error_explanation">
-      <p><%= pluralize(@carpool.errors.count, "error") %> prohibited this from being saved:</p>
       <ul>
-      <% @carpool.errors.full_messages.each do |message| %>
+      <% @discussion.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :address, 'Meeting Location' %><br>
-    <%= f.text_field :address, class: 'form-control' %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %><br>
-    <%= f.text_field :notes, class: 'form-control' %>
-  </div>
-  <div class="field">
-    <%= f.label :event %>
+    <%= f.label :subject %>
     <br>
-    <%= f.select :event, ['Monthly Training','RST Training','Conference','Incident'], {}, {class: 'form-control text-center'} %>
+    <%= f.text_field :subject, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :seats_offered, 'Seats Offered' %>
+    <%= f.label :body %>
     <br>
-    <%= f.select :seats_offered, [1,2,3,4], {}, {class: 'form-control text-center'} %>
-  </div>
-  <div class="field">
-    <%= f.label :event_date, 'Date' %>
-    <br>
-    <%= f.date_field :event_date, class: 'form-control' %>
-  </div>
-  <div class="field">
-    <%= f.label :depart, 'Departs At' %>
-    <br>
-    <%= f.time_field :depart, class: 'form-control', value: '09:00' %>
-  </div>
-  <div class="field">
-    <%= f.label :return, 'Estimated Return Time' %>
-    <br>
-    <%= f.time_field :return, class: 'form-control', value: '17:00' %>
+    <%= f.text_area :body, class: 'form-control', rows: 10 %>
   </div>
   <br>
   <%= submit_tag 'Save', class: 'btn btn-sm btn-success' %>
-  <%= link_to dicsussions_path do %><div class="btn btn-sm btn-primary">Back</div><% end %>
+  <%= link_to discussions_path do %><div class="btn btn-sm btn-primary">Back</div><% end %>
 <% end %>

@@ -1,7 +1,6 @@
 <%= form_for(@sponsor) do |f| %>
   <% if @sponsor.errors.any? %>
     <div id="error_explanation">
-      <p><%= pluralize(@sponsor.errors.count, "error") %> prohibited this sponsor from being saved:</p>
       <ul>
       <% @sponsor.errors.full_messages.each do |message| %>
         <li><%= message %></li>
