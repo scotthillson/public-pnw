@@ -17,7 +17,7 @@ class Image < ActiveRecord::Base
   def self.upload(file,page="")
     filename = file.original_filename
     return 'dup' if Dir.entries("#{Rails.root}/public").include? filename
-    path = "public/#{filename}"
+    path = "#{Rails.root}public/#{filename}"
     File.rename(file.path,path)
     image = MiniMagick::Image.open("#{Rails.root}/public/#{filename}")
     width = image.width
