@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' >
+  </head>
+  <body>
+    <h2>PNWSAR </h2>
+    <p>You have been invited to create an account!</p>
+    <p>The link below will allow you to create a password and complete the setup process.</p>
+    <p>
+      <%= link_to 'click here to finish setting up your account', signup_url(token: @token)  %>
+    </p>
+  </body>
+</html>
