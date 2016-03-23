@@ -46,7 +46,7 @@ class EventsController < ApplicationController
   
   def destroy
     @event.destroy
-    redirect_to root_url
+    redirect_to events_url
   end
   
   private

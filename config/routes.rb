@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   
   root to: 'pages#home'
   
+  resources :events, contraints: {format: :html}
+  get 'calendar', to: 'events#index'
+  
   resources :images, constraints: {format: :html}
   post 'upload_image', to: 'images#upload'
   get 'upload_image', to: 'images#upload'
