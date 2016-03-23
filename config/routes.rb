@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   get 'dup_form_check', to: 'forms#dup'
   
   resources :sessions, constraints: {format: :html}
-  get 'signout', to: 'sessions#destroy', as: 'signout'
-  get 'signin', to: 'sessions#new', as: 'signin'
+  get 'signout', to: 'sessions#destroy'
+  get 'signin', to: 'sessions#new'
   get 'sessions/new'
   
   resources :users, constriants: {format: :html}
