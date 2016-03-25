@@ -1,3 +1,6 @@
+.simple-calendar .day {
+  height: 110px;
+}
 tr th, tr td {
   font-size: 15px;
   font-weight: normal;
