@@ -20,7 +20,10 @@ Rails.application.routes.draw do
   get 'sessions/new'
   
   resources :users, constriants: {format: :html}
-  get 'signup', to: 'users#new', as: 'signup'
+  get :signup, to: 'users#begin_signup'
+  patch :set_password, to: 'users#set_password'
+  get :forgot_password, to: 'users#forgot_password'
+  post :password_email, to: 'users#password_email'
   
   resources :posts, constraints: {format: :html}
   get 'posts/:id/activate', to: 'posts#activate', as: 'activate_post'

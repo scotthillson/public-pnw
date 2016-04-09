@@ -1,7 +1,10 @@
 class UserMailer < ActionMailer::Base
-  default from: "from@example.com"
-  def user_invite(user)
-    @greeting = "Hi"
-    mail to: user.email, subject: 'PNW Invitation'
+  
+  default from: "scott.hillson@gmail.com"
+  
+  def signup_email(subject,token,to)
+    @token = token
+    mail(to: to, subject: subject)
   end
+  
 end

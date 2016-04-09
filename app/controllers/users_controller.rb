@@ -8,6 +8,56 @@ class UsersController < ApplicationController
   end
   
   def show
+    redirect_to '/404'
+  end
+  
+  def begin_signup
+    if !@user
+      not_found
+    end
+  end
+  
+  def digest_token
+    if current_user
+      redirect_to root_path, notice: 'You can\'t sign up if you\'re already signed in...'
+    else
+      @user = User.find_by_token params[:token]
+    end
+  end
+  
+  def set_password
+    if params[:user][:password].length < 8
+      flash[:notice] = 'Minimum password length is 8'
+      render :begin_signup
+      return
+    end
+    if params[:user][:password] != params[:user][:password_confirmation]
+      flash[:notice] = 'We must insist that your passwords match'
+      render :begin_signup
+      return
+    end
+    @user.update(user_params)
+    if @user.set_password
+      redirect_to signin_path
+    else
+      render :begin_signup
+    end
+  end
+  
+  def forgot_password
+  end
+  
+  def password_email
+    if !@user
+      redirect_to signin_url
+      return
+    end
+    @user.refresh
+    if current_user
+      redirect_to users_url
+    else
+      redirect_to signin_url, notice: 'We sent you an email with further instructions and we await your return.'
+    end
   end
   
   def new
@@ -35,8 +85,11 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    @user.destroy
-    redirect_to users_url, notice: 'User was successfully destroyed'
+    if @user.destroy
+      redirect_to users_url, notice: 'User was successfully destroyed.'
+    else
+      redirect_to users_url, notice: 'Something didn\'t work.'
+    end
   end
   
   private

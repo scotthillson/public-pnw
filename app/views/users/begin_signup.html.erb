@@ -1,0 +1,16 @@
+<h2 class="text-center">Sign Up</h2>
+<h3 class="text-center"><%= @user.email %></h3>
+<%= form_for @user, url: set_password_path, html:{style: 'width:400px;margin:auto'}, class: 'text-center' do |f| %>
+  <p>
+    <%= f.label :password %>
+    <br>
+    <%= f.password_field :password, class: 'form-control' %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation, 'Confirm Password' %>
+    <br>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+  </p>
+  <%= hidden_field_tag :token, @user.token %>
+  <input name="commit" type="submit" value="Sign Up" class="btn btn-sm btn-primary">
+<% end %>
