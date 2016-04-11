@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   before_action :set_user, only: [:show, :edit, :update, :destroy, :password_email]
-  before_action :admin_only, :only: [:index, :new, :create, :edit, :destroy]
+  before_action :admin_only, only: [:index, :new, :create, :edit, :destroy]
   before_action :digest_token, only: :begin_signup
   
   def index
