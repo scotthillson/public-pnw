@@ -55,7 +55,7 @@ class UsersController < ApplicationController
       return
     end
     @user.refresh
-    if current_user
+    if user_session
       redirect_to users_url
     else
       redirect_to signin_url, notice: 'We sent you an email with further instructions and we await your return.'
