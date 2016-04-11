@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   
-  before_action :admin_only
+  before_action :admin_only, except: [:digest_token, :begin_signup, :forgot_password, :password_email, :update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :digest_token, only: :begin_signup
   
   def index
     @users = User.all
@@ -18,7 +19,7 @@ class UsersController < ApplicationController
   end
   
   def digest_token
-    if current_user
+    if user_session
       redirect_to root_path, notice: 'You can\'t sign up if you\'re already signed in...'
     else
       @user = User.find_by_token params[:token]
@@ -66,8 +67,12 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
-    if @user.save
-      redirect_to @user, notice: 'User was successfully created'
+    if @user.refresh
+      if @user.save
+        redirect_to users_url, notice: 'User was successfully created'
+      else
+        render :new
+      end
     else
       render :new
     end
@@ -78,7 +83,7 @@ class UsersController < ApplicationController
   
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'User was successfully updated'
+      redirect_to users_url, notice: 'User was successfully updated'
     else
       render :edit
     end
@@ -88,7 +93,7 @@ class UsersController < ApplicationController
     if @user.destroy
       redirect_to users_url, notice: 'User was successfully destroyed.'
     else
-      redirect_to users_url, notice: 'Something didn\'t work.'
+      redirect_to users_url, notice: 'Something didn\'t work?'
     end
   end
   

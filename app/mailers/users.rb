@@ -1,4 +1,4 @@
-class UserMailer < ActionMailer::Base
+class Users < ActionMailer::Base
   
   default from: "scott.hillson@gmail.com"
   

@@ -4,7 +4,9 @@
     <tr>
       <th class="text-center">Name</th>
       <th class="text-center">Email</th>
+      <th class="text-center">Pword Token</th>
       <th class="text-center">Admin</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -12,7 +14,13 @@
       <tr class="text-center">
         <td><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= 'Si' if user.admin %></td>
+        <td><%= user.token.present? %></td>
+        <td><%= 'si' if user.admin %></td>
+        <td>
+          <% if !user.admin and admin? %>
+            <%= link_to 'destroy', user, method: :delete, data: { confirm: 'Are you sure about that?' }, class: 'btn btn-xs btn-danger' %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
