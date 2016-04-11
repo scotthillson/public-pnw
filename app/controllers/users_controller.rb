@@ -49,6 +49,7 @@ class UsersController < ApplicationController
   end
   
   def password_email
+    @user = User.find_by_email params[:email]
     if !@user
       redirect_to signin_url
       return
