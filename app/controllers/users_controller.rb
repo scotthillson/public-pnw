@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   
   before_action :admin_only, only: [:index, :new, :create, :edit, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :digest_token, only: :begin_signup
+  before_action :digest_token, only: [:begin_signup, :set_password]
   
   def index
     @users = User.all
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   
   def begin_signup
     if !@user
-      not_found
+      redirect_to '/404'
     end
   end
   
