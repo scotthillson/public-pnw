@@ -1,15 +1,22 @@
 class ApplicationController < ActionController::Base
   
-  # For APIs, you may want to use :null_session instead?
+  # For APIs, you may want to use :null_session instead??
   protect_from_forgery
-  # force_ssl?
+  # force_ssl??
   
   helper_method :user_session
+  helper_method :advanced?
   helper_method :admin?
   
   def admin_only
     if !admin?
-      redirect_to signin_path
+      redirect_to root_path
+    end
+  end
+  
+  def advanced_only
+    if !advanced?
+      redirect_to root_path
     end
   end
   
@@ -20,7 +27,11 @@ class ApplicationController < ActionController::Base
   end
   
   def admin?
-    return session[:admin]
+    session[:role] == 'admin'
+  end
+  
+  def advanced?
+    session[:role] == 'advanced' || admin?
   end
   
   def user_session

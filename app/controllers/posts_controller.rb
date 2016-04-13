@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   
-  before_action :admin_only, only: [:new, :edit, :update, :destroy]
+  before_action :advanced_only, only: [:new, :edit, :update, :destroy]
   before_action :set_post, only: [:show, :edit, :update, :destroy, :activate, :deactivate]
   
   def index

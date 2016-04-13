@@ -5,5 +5,7 @@
   <%= f.select :page, ['Equipment List','Application','Donation Form']%>
   <br>
   <br>
-  <%= f.submit 'upload', class: 'btn btn-primary' %>
+  <%= f.submit 'upload', class: 'btn btn-sm btn-primary' %>
+  <br>
+  <%= link_to 'cancel', forms_url, class: 'btn btn-sm btn-warning' %>
 <% end %>

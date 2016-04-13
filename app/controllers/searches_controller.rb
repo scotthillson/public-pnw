@@ -1,6 +1,6 @@
 class SearchesController < ApplicationController
   
-  before_action :admin_only, only: [:new, :edit, :update, :destroy]
+  before_action :advanced_only, only: [:new, :edit, :update, :destroy]
   before_action :set_search, only: [:show, :edit, :update, :destroy]
   
   def index

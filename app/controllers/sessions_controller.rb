@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email].downcase)
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      session[:admin] = user.admin
+      session[:role] = user.role
       session[:user_email] = user.email
       redirect_to root_path, notice: 'logged in'
     else
@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
   end
   
   def destroy
-    session[:admin] = nil
+    session[:role] = nil
     session[:user_id] = nil
     session[:user_email] = nil
     redirect_to signin_path, notice: 'logged out!'

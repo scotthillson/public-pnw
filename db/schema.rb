@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323025826) do
+ActiveRecord::Schema.define(version: 20160413054001) do
 
   create_table "carpools", force: true do |t|
     t.string   "event"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20160323025826) do
     t.string   "name"
     t.string   "filename"
     t.string   "path"
+    t.string   "type"
     t.string   "page"
     t.integer  "created_by"
     t.datetime "updated_at"
@@ -170,7 +171,7 @@ ActiveRecord::Schema.define(version: 20160323025826) do
     t.string   "name"
     t.string   "email"
     t.string   "token"
-    t.boolean  "admin",           default: false
+    t.string   "role",            default: "f"
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
