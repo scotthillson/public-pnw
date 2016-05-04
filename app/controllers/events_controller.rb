@@ -52,11 +52,11 @@ class EventsController < ApplicationController
   private
   
   def set_event
-    @event = Ride.find params[:id]
+    @event = Event.find params[:id]
   end
   
   def event_params
-    params.require(:event).permit(:name,:category,:start_hour,:start_time,:address,:notes,:weather,:hours,:link,:miles)
+    params.require(:event).permit(:name,:category,:start_hour,:start_time,:start_date,:end_date,:address,:notes,:weather,:hours,:link,:miles)
   end
   
 end

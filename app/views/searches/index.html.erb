@@ -1,10 +1,9 @@
-<% if admin? %>
-  <%= link_to 'New Search', new_search_path, class: 'btn btn-primary' %>
-<% end %>
+<%= link_to 'New Search', new_search_path, class: 'btn btn-primary' if admin? %>
 <% @searches.each do |search| %>
   <div class="panel panel-info">
     <div class="panel-heading">
       <%= search.title %>
+      <%= link_to 'Edit', edit_search_path(search), class: 'btn btn-danger pull-right' if admin? %>
       <br>
       Submitted by <%= search.author %>
       <br>

@@ -5,8 +5,6 @@ gem 'mini_magick'
 gem 'seed_dump'
 # We need jquery and turbolinks to play nice
 gem 'jquery-turbolinks'
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -27,3 +25,5 @@ gem 'bcrypt'
 gem 'font-awesome-sass'
 # Calendarrrrs!
 gem 'simple_calendar'
+# wtf
+gem 'rails', '4.2.0'

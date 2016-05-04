@@ -1,37 +1,33 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <%= @event.description %>
+<div class="text-center">
+  <h1><%= @event.name %></h1>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <%= @event.notes %>
+      </div>
     </div>
   </div>
-</div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <%= @event.notes %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <%= @event.link %>
+      </div>
     </div>
   </div>
-</div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <%= @event.link %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">Start Time</div>
+      <div class="col-md-6">
+        <%= @event.start_time %>
+      </div>
     </div>
   </div>
-</div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6">Start Time</div>
-    <div class="col-md-6">
-      <%= @event.start_time %>
-    </div>
-  </div>
-</div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6">End Time</div>
-    <div class="col-md-6">
-      <%= @event.end_time %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">End Time</div>
+      <div class="col-md-6">
+        <%= @event.end_time %>
+      </div>
     </div>
   </div>
 </div>
