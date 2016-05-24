@@ -9,11 +9,10 @@ class Carpool < ActiveRecord::Base
   
   def reserve(user)
     if seats.count < seats_offered
-      if Seat.reserve(user, id)
-        return true
-      end
+      Seat.reserve(user, id)
+    else
+      false
     end
-    false
   end
   
   def seats_remaining
