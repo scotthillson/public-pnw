@@ -38,6 +38,7 @@ class PagesController < ApplicationController
     @images.push @carousel_images.pop
     @images.push @carousel_images.pop
     @images.push @carousel_images.pop
+    @paragraphs = []
     @paragraphs[0] = Page.where(name: 'paragraph one').last
     @paragraphs[1] = Page.where(name: 'paragraph two').last
     @paragraphs[2] = Page.where(name: 'paragraph three').last
