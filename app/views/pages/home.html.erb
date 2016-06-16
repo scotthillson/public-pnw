@@ -20,20 +20,20 @@
   <% @paragraphs.each_with_index do |p,i| %>
     <div class="row pnw-wrap">
       <% if i == 0 %>
-        <p><%= p.body.html_safe %></p>
+        <p><%= @paragraphs[i].body.html_safe %></p>
       <% elsif i%2 == 0 %>
         <div class="col-md-8">
           <img src="<%= @images[i-1].filename %>">
         </div>
         <div class="col-md-4">
           <div class="pnw-wrap">
-              <p><%= p.body.html_safe %></p>
+              <p><%= @paragraphs[i].body.html_safe %></p>
           </div>
         </div>
       <% else %>
         <div class="col-md-4">
           <div class="pnw-wrap">
-            <p><%= p.body.html_safe %></p>
+            <p><%= @paragraphs[i].body.html_safe %></p>
           </div>
         </div>
         <div class="col-md-8">
