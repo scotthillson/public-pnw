@@ -4,7 +4,11 @@ class PagesController < ApplicationController
   
   def page
     @page = Page.where(name:params[:page].downcase).last
-    @page = @page.body.html_safe if @page
+    if @page
+      @page = @page.body.html_safe
+    else
+      redirect_to '/404'
+    end
   end
   
   def index
