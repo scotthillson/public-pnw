@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20160413054001) do
 
-  create_table "carpools", force: true do |t|
+  create_table :carpools, force: true do |t|
     t.string   "event"
     t.string   "address"
     t.string   "notes"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20160413054001) do
     t.date     "event_date"
   end
 
-  create_table "comments", force: true do |t|
+  create_table :comments, force: true do |t|
     t.text     "body"
     t.integer  "discussion_id"
     t.integer  "created_by"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20160413054001) do
     t.datetime "created_at"
   end
 
-  create_table "discussions", force: true do |t|
+  create_table :discussions, force: true do |t|
     t.text     "body"
     t.string   "subject"
     t.integer  "created_by"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20160413054001) do
     t.datetime "created_at"
   end
 
-  create_table "equipment", force: true do |t|
+  create_table :equipment, force: true do |t|
     t.string   "category"
     t.string   "description"
     t.string   "expiration"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20160413054001) do
     t.datetime "updated_at"
   end
 
-  create_table "events", force: true do |t|
+  create_table :events, force: true do |t|
     t.string   "description"
     t.string   "category"
     t.string   "address"
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 20160413054001) do
     t.datetime "updated_at"
   end
 
-  create_table "forms", force: true do |t|
+  create_table :forms, force: true do |t|
     t.string   "name"
     t.string   "filename"
     t.string   "path"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20160413054001) do
     t.datetime "created_at"
   end
 
-  create_table "images", force: true do |t|
+  create_table :images, force: true do |t|
     t.string   "filename"
     t.string   "path"
     t.string   "page"

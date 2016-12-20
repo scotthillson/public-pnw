@@ -13,8 +13,8 @@ tr th, tr td {
   -khtml-border-radius: 10px;
 }
 .pnw-wrap{
-  margin:0 10px;
-  padding:20px 10px;
+  margin: 0 10px;
+  padding: 20px 10px;
   white-space: normal;
 }
 html {
@@ -30,11 +30,10 @@ body {
   margin: 0;
 }
 .container {
-  padding:10px;
+  padding: 10px;
   margin-right: auto;
   margin-left: auto;
-  box-shadow: 0 0 10px 0 #111;
-  background-color:#fff;
+  background-color: #fff;
 }
 .navbar {
   position: relative;
@@ -49,6 +48,6 @@ body {
   top: 50%;
 }
 p {
-  margin:5px 2px;
-  text-indent:1em;
+  margin: 5px 2px;
+  text-indent: 1em;
 }

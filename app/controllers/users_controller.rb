@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     redirect_to '/404'
   end
   
-  def begin_signup
+  def signup
     if !@user
       redirect_to '/404'
     end

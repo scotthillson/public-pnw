@@ -27,3 +27,7 @@ gem 'font-awesome-sass'
 gem 'simple_calendar'
 # wtf
 gem 'rails', '4.2.0'
+# twilio
+gem 'twilio-ruby'
+# reactify
+gem 'react-rails'

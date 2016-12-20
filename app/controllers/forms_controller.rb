@@ -13,9 +13,14 @@ class FormsController < ApplicationController
     @form = Form.new
   end
   
-  def dup
+  def dup_form_check
     dups = Dir.entries('public').include? params[:file]
     render json: dups
+  end
+  
+  def prospect_application
+    settings = []
+    render component: 'ProspectApplication', props: { settings: settings }
   end
   
   def create
