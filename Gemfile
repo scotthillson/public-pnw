@@ -31,3 +31,5 @@ gem 'rails', '4.2.0'
 gem 'twilio-ruby'
 # reactify
 gem 'react-rails'
+# party with http
+gem 'httparty'

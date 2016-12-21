@@ -29,14 +29,6 @@ class PostsController < ApplicationController
   def edit
   end
   
-  def application_download
-    # redirect_to request.referer, notice: 'Our application period is closed until Summer 2015. Please check back for updates!'
-    # return false
-    send_file "#{Rails.root}/public/application.pdf",
-    type: 'application/pdf',
-    filename: 'pnwsar-application.pdf'
-  end
-  
   def equipment_download
     send_file "#{Rails.root}/public/equipment.pdf",
     type: 'application/pdf',

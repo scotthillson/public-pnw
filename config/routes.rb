@@ -35,7 +35,6 @@ Rails.application.routes.draw do
     get 'posts/:id/deactivate', to: 'posts#deactivate', as: 'deactivate_post'
     get 'donation_download', to: 'posts#donation_download'
     get 'equipment_download', to: 'posts#equipment_download'
-    get 'application_download', to: 'posts#application_download'
   
   resources :rentals, constraints: {format: :html}
     get 'rentals/:id/reserve', to: 'rentals#reserve', as: :reserve_rental
