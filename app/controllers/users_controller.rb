@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   
   before_action :admin_only, only: [:index, :new, :create, :edit, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :digest_token, only: [:begin_signup, :set_password]
+  before_action :digest_token, only: [:signup, :set_password]
   
   def index
     @users = User.all
@@ -29,19 +29,19 @@ class UsersController < ApplicationController
   def set_password
     if params[:user][:password].length < 8
       flash[:notice] = 'Minimum password length is 8'
-      render :begin_signup
+      render :signup
       return
     end
     if params[:user][:password] != params[:user][:password_confirmation]
       flash[:notice] = 'We must insist that your passwords match'
-      render :begin_signup
+      render :signup
       return
     end
     @user.update(user_params)
     if @user.set_password
       redirect_to signin_path
     else
-      render :begin_signup
+      render :signup
     end
   end
   

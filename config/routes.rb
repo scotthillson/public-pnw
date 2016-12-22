@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   
   root to: 'pages#home'
   
+  resources :activities
+  
   namespace :api do
     namespace :v1 do
       resources :messages
@@ -26,9 +28,7 @@ Rails.application.routes.draw do
   
   resources :incidents, constraints: {format: :html}
   
-  resources :pages, constraints: {format: :html}
-    get 'last_version', to: 'pages#last_version'
-    get '/:page', to: 'pages#page'
+  resources :members
   
   resources :posts, constraints: {format: :html}
     get 'posts/:id/activate', to: 'posts#activate', as: 'activate_post'
@@ -53,4 +53,9 @@ Rails.application.routes.draw do
     patch :set_password, to: 'users#set_password'
     get :forgot_password, to: 'users#forgot_password'
     post :password_email, to: 'users#password_email'
+  
+    resources :pages, constraints: {format: :html} #Not in alphabetical order because it breaks.
+      get 'last_version', to: 'pages#last_version'
+      get '/:page', to: 'pages#page'
+  
 end

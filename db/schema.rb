@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161217052605) do
+ActiveRecord::Schema.define(version: 20161221225059) do
+
+  create_table "activities", force: :cascade do |t|
+    t.integer  "d4h_id"
+    t.string   "reference"
+    t.text     "description"
+    t.string   "lat"
+    t.string   "lng"
+    t.integer  "attendance_percent"
+    t.integer  "attendance"
+    t.integer  "distance"
+    t.datetime "end_on"
+    t.datetime "start_on"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "applications", force: :cascade do |t|
     t.string   "name"
@@ -72,9 +87,9 @@ ActiveRecord::Schema.define(version: 20161217052605) do
   end
 
   create_table "carpools", force: :cascade do |t|
-    t.string   "event"
-    t.string   "address"
-    t.string   "notes"
+    t.string   "event",         limit: 255
+    t.string   "address",       limit: 255
+    t.string   "notes",         limit: 255
     t.time     "depart"
     t.time     "return"
     t.integer  "seats_offered"
@@ -94,19 +109,19 @@ ActiveRecord::Schema.define(version: 20161217052605) do
 
   create_table "discussions", force: :cascade do |t|
     t.text     "body"
-    t.string   "subject"
+    t.string   "subject",    limit: 255
     t.integer  "created_by"
     t.datetime "updated_at"
     t.datetime "created_at"
   end
 
   create_table "equipment", force: :cascade do |t|
-    t.string   "category"
-    t.string   "description"
-    t.string   "expiration"
-    t.string   "importance"
-    t.string   "notes"
-    t.string   "status"
+    t.string   "category",    limit: 255
+    t.string   "description", limit: 255
+    t.string   "expiration",  limit: 255
+    t.string   "importance",  limit: 255
+    t.string   "notes",       limit: 255
+    t.string   "status",      limit: 255
     t.integer  "quantity"
     t.integer  "created_by"
     t.datetime "created_at"
@@ -114,14 +129,14 @@ ActiveRecord::Schema.define(version: 20161217052605) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string   "description"
-    t.string   "category"
-    t.string   "address"
-    t.string   "weather"
-    t.string   "notes"
-    t.string   "miles"
-    t.string   "name"
-    t.string   "link"
+    t.string   "description", limit: 255
+    t.string   "category",    limit: 255
+    t.string   "address",     limit: 255
+    t.string   "weather",     limit: 255
+    t.string   "notes",       limit: 255
+    t.string   "miles",       limit: 255
+    t.string   "name",        limit: 255
+    t.string   "link",        limit: 255
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer  "updated_by"
@@ -131,11 +146,10 @@ ActiveRecord::Schema.define(version: 20161217052605) do
   end
 
   create_table "forms", force: :cascade do |t|
-    t.string   "name"
-    t.string   "filename"
-    t.string   "path"
-    t.string   "type"
-    t.string   "page"
+    t.string   "name",       limit: 255
+    t.string   "filename",   limit: 255
+    t.string   "path",       limit: 255
+    t.string   "page",       limit: 255
     t.integer  "created_by"
     t.datetime "updated_at"
     t.datetime "created_at"
@@ -155,11 +169,11 @@ ActiveRecord::Schema.define(version: 20161217052605) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.string   "filename"
-    t.string   "path"
-    t.string   "page"
-    t.string   "width"
-    t.string   "height"
+    t.string   "filename",   limit: 255
+    t.string   "path",       limit: 255
+    t.string   "page",       limit: 255
+    t.string   "width",      limit: 255
+    t.string   "height",     limit: 255
     t.integer  "rank"
     t.integer  "created_by"
     t.datetime "updated_at"
@@ -182,10 +196,10 @@ ActiveRecord::Schema.define(version: 20161217052605) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.string   "name"
-    t.string   "title"
-    t.string   "image"
-    t.string   "image_big"
+    t.string   "name",                       limit: 255
+    t.string   "title",                      limit: 255
+    t.string   "image",                      limit: 255
+    t.string   "image_big",                  limit: 255
     t.integer  "created_by"
     t.datetime "created_at"
     t.integer  "application_id"
@@ -208,11 +222,12 @@ ActiveRecord::Schema.define(version: 20161217052605) do
     t.string   "emergency_phone_two"
     t.string   "emergency_relationship_two"
     t.datetime "updated_at"
+    t.string   "email"
   end
 
   create_table "pages", force: :cascade do |t|
-    t.string   "name"
-    t.string   "body"
+    t.string   "name",       limit: 255
+    t.string   "body",       limit: 255
     t.integer  "active"
     t.integer  "created_by"
     t.datetime "created_at"
@@ -220,9 +235,9 @@ ActiveRecord::Schema.define(version: 20161217052605) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string   "title"
-    t.string   "author"
-    t.string   "body"
+    t.string   "title",      limit: 255
+    t.string   "author",     limit: 255
+    t.string   "body",       limit: 255
     t.boolean  "active"
     t.integer  "created_by"
     t.datetime "created_at"
@@ -231,9 +246,9 @@ ActiveRecord::Schema.define(version: 20161217052605) do
 
   create_table "rentals", force: :cascade do |t|
     t.date     "event_date"
-    t.string   "description"
-    t.string   "event"
-    t.string   "notes"
+    t.string   "description", limit: 255
+    t.string   "event",       limit: 255
+    t.string   "notes",       limit: 255
     t.integer  "claimed_by"
     t.integer  "created_by"
     t.datetime "updated_at"
@@ -241,14 +256,16 @@ ActiveRecord::Schema.define(version: 20161217052605) do
   end
 
   create_table "searches", force: :cascade do |t|
-    t.string   "title"
-    t.string   "author"
-    t.string   "body"
-    t.string   "search_date"
+    t.string   "title",       limit: 255
+    t.string   "author",      limit: 255
+    t.string   "body",        limit: 255
+    t.string   "search_date", limit: 255
     t.boolean  "active"
     t.integer  "creatd_by"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "incident_id"
+    t.string   "reference"
   end
 
   create_table "seats", force: :cascade do |t|
@@ -259,9 +276,9 @@ ActiveRecord::Schema.define(version: 20161217052605) do
   end
 
   create_table "sponsors", force: :cascade do |t|
-    t.string   "name"
-    t.string   "sponsor_url"
-    t.string   "image"
+    t.string   "name",        limit: 255
+    t.string   "sponsor_url", limit: 255
+    t.string   "image",       limit: 255
     t.integer  "created_by"
     t.datetime "created_at"
   end
@@ -274,14 +291,14 @@ ActiveRecord::Schema.define(version: 20161217052605) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "token"
-    t.string   "role",            default: "f"
-    t.string   "password_digest"
+    t.string   "name",            limit: 255
+    t.string   "email",           limit: 255
+    t.string   "token",           limit: 255
+    t.string   "role",                        default: "f"
+    t.string   "password_digest", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "activated",       default: false
+    t.boolean  "activated",                   default: false
   end
 
   create_table "vacations", force: :cascade do |t|

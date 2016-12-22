@@ -1,41 +1,12 @@
 class MembersController < ApplicationController
   
-  before_action :advanced_only, only: [:new, :edit, :update, :destroy]
+  before_action :advanced_only
   before_action :set_member, only: [:show, :edit, :update, :destroy]
   
   def index
-  end
-  
-  def show
-  end
-  
-  def new
-    @member = Member.new
-  end
-  
-  def edit
-  end
-  
-  def create
-    @member = Member.new(member_params)
-    if @member.save
-      redirect_to @member, notice: 'Member was successfully created.'
-    else
-      render :new
-    end
-  end
-  
-  def update
-    if @member.update(member_params)
-      redirect_to @member, notice: 'Member was successfully updated.'
-    else
-      render :edit
-    end
-  end
-  
-  def destroy
-    @member.destroy
-    redirect_to members_url, notice: 'Member was successfully destroyed.'
+    Member.fast_sync
+    @members = Member.where('d4h_id is not null').order(:name)
+    render component: 'Members', props: { members: @members }
   end
   
   private
@@ -45,7 +16,7 @@ class MembersController < ApplicationController
   end
   
   def member_params
-    params.require(:member).permit(:name, :title, :image)
+    params.require(:member).permit(:name)
   end
   
 end
