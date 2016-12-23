@@ -4,7 +4,7 @@ class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
   
   def index
-    Member.fast_sync
+    Member.get_members('fast_update')
     @members = Member.where('d4h_id is not null').order(:name)
     render component: 'Members', props: { members: @members }
   end

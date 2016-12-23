@@ -11,9 +11,8 @@ window.SharedBoolean = React.createClass
       <label className="radio-inline">
         <input
           type="radio"
-          name="Yes"
           value={true}
-          checked={this.props.value === true}
+          checked={this.props.currentValue == true}
           onChange={this.setToTrue}
         />
         Yes
@@ -21,9 +20,8 @@ window.SharedBoolean = React.createClass
       <label className="radio-inline">
         <input
           type="radio"
-          name="No"
           value={false}
-          checked={this.props.value != true}
+          checked={this.props.currentValue != true}
           onChange={this.setToFalse}
         />
         No

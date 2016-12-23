@@ -1,6 +1,6 @@
 class IncidentsController < ApplicationController
   
-  before_action :advanced_only, only: [:new, :edit, :update, :destroy]
+  before_action :advanced_only
   before_action :set_incident, only: [:show, :edit, :update, :destroy]
   
   def index
