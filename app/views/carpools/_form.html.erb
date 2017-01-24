@@ -13,10 +13,6 @@
     <%= f.text_field :address, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :notes %><br>
-    <%= f.text_field :notes, class: 'form-control' %>
-  </div>
-  <div class="field">
     <%= f.label :event %>
     <br>
     <%= f.select :event, ['Monthly Training','RST Training','Conference','Incident'], {}, {class: 'form-control text-center'} %>
@@ -24,12 +20,12 @@
   <div class="field">
     <%= f.label :seats_offered, 'Seats Offered' %>
     <br>
-    <%= f.select :seats_offered, [1,2,3,4], {}, {class: 'form-control text-center'} %>
+    <%= f.select :seats_offered, [1,2,3,4,5,6,7,8,9], {}, {class: 'form-control text-center'} %>
   </div>
   <div class="field">
     <%= f.label :event_date, 'Date' %>
     <br>
-    <%= f.date_field :event_date, class: 'form-control' %>
+    <%= f.date_field :event_date, class: 'form-control', value: @carpool.event_date %>
   </div>
   <div class="field">
     <%= f.label :depart, 'Departs At' %>
@@ -40,6 +36,10 @@
     <%= f.label :return, 'Estimated Return Time' %>
     <br>
     <%= f.time_field :return, class: 'form-control', value: '17:00' %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br>
+    <%= f.text_field :notes, class: 'form-control' %>
   </div>
   <br>
   <%= submit_tag 'Save', class: 'btn btn-sm btn-success' %>

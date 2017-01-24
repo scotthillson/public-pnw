@@ -4,9 +4,15 @@ class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
   
   def index
-    Member.get_members('fast_update')
-    @members = Member.where('d4h_id is not null').order(:name)
-    render component: 'Members', props: { members: @members }
+    respond_to do |format|
+      format.html do
+        render component: 'Members'
+      end
+      format.json do
+        Member.get_members('fast_update')
+        render json: Member.where('d4h_id is not null').order(:name)
+      end
+    end
   end
   
   private

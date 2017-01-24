@@ -4,8 +4,7 @@ class CarpoolsController < ApplicationController
   before_action :set_carpool, only: [:show, :edit, :update, :destroy, :reserve]
   
   def index
-    departs = Carpool.arel_table[:depart]
-    @carpools = Carpool.all#where(departs.gt(Time.now))
+    @carpools = Carpool.where('event_date >= ?', Date.today)
   end
   
   def manage_carpools
@@ -17,6 +16,7 @@ class CarpoolsController < ApplicationController
   
   def new
     @carpool = Carpool.new
+    @carpool.event_date = Date.today
   end
   
   def create

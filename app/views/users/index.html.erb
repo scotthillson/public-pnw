@@ -1,4 +1,5 @@
 <%= link_to 'New Team Member', new_user_path, class: 'btn btn-primary' %>
+<%= link_to 'Invite All New D4H Members', new_user_path, class: 'btn btn-danger' %>
 <table class="table">
   <thead>
     <tr>
@@ -17,7 +18,7 @@
         <td><%= user.token.present? %></td>
         <td><%= user.role %></td>
         <td>
-          <% if !user.role == 'admin' and admin? %>
+          <% if user.role != 'admin' && admin? %>
             <%= link_to 'destroy', user, method: :delete, data: { confirm: 'Are you sure about that?' }, class: 'btn btn-xs btn-danger' %>
           <% end %>
         </td>

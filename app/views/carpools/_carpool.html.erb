@@ -10,8 +10,6 @@
   <td>
     <% if carpool.created_by = user_session %>
       <%= link_to 'Edit', edit_carpool_path(carpool), class: 'btn btn-sm btn-warning' %>
-    <% else %>
-      
     <% end %>
   </td>
   <td><%= link_to 'Save a Spot', reserve_seat_path(carpool), class: 'btn btn-sm btn-success' %></td>

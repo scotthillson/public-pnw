@@ -7,9 +7,10 @@ class Carpool < ActiveRecord::Base
   validates_presence_of :depart
   validates_presence_of :return
   
-  def reserve(user)
+  def reserve(user_id)
     if seats_are_still_available
-      Seat.reserve(user, id)
+      return false if user_id == created_by
+      Seat.reserve(user_id, id)
     else
       false
     end
