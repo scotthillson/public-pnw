@@ -52,6 +52,7 @@ window.ProspectApplication = React.createClass
       acknowledge: false
       checkField: null
       checkType: null
+      errorMessage: null
     }
   
   hangePhysicalShape: (value) ->
@@ -132,6 +133,8 @@ window.ProspectApplication = React.createClass
     @numberChecks('mobilePhone')
     @dateChecks('birthday')
     @mixChecks('address')
+    document.documentElement.scrollTop = 0
+    #@finishSubmit()
   
   finishSubmit: ->
     $.ajax

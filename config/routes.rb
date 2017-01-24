@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :forms, constraints: {format: :html}
     get 'dup_form_check', to: 'forms#dup_form_check'
     get 'new_prospect_application', to: 'forms#prospect_application'
+    post 'submit_new_member_application', to: 'forms#submit_application'
   
   resources :images, constraints: {format: :html}
   
