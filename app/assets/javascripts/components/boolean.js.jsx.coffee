@@ -1,19 +1,13 @@
 window.SharedBoolean = React.createClass
 
-  setToTrue: ->
-    @props.setValue true
-  
-  setToFalse: ->
-    @props.setValue false
-  
   render: ->
     `<div>
       <label className="radio-inline">
         <input
           type="radio"
           value={true}
-          checked={this.props.currentValue == true}
-          onChange={this.setToTrue}
+          checked={this.props.currentValue == "true"}
+          onChange={this.props.setValue}
         />
         Yes
       </label>
@@ -21,8 +15,8 @@ window.SharedBoolean = React.createClass
         <input
           type="radio"
           value={false}
-          checked={this.props.currentValue != true}
-          onChange={this.setToFalse}
+          checked={this.props.currentValue == "false"}
+          onChange={this.props.setValue}
         />
         No
       </label>

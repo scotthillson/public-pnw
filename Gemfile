@@ -33,3 +33,5 @@ gem 'twilio-ruby'
 gem 'react-rails'
 # party with http
 gem 'httparty'
+# because lint
+gem 'coffeelint'

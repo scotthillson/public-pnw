@@ -16,7 +16,7 @@ class DiscussionsController < ApplicationController
   
   def create
     @discussion = Discussion.new(discussion_params)
-    @discussion.created_by = user_session
+    @discussion.created_by = current_user
     if @discussion.save
       redirect_to discussions_url
     else
@@ -36,7 +36,7 @@ class DiscussionsController < ApplicationController
   end
   
   def destroy
-    if @discussion.created_by = user_session
+    if @discussion.created_by = current_user
       @discussion.destroy
     end
     redirect_to discussions_url

@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   # force_ssl??
   
-  helper_method :user_session
+  helper_method :current_user
   helper_method :advanced?
   helper_method :admin?
   
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
   
   def turn_back
-    if !user_session
+    if !current_user
       redirect_to signin_path
     end
   end
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     session[:role] == 'advanced' || admin?
   end
   
-  def user_session
+  def current_user
     session[:user_id]
   end
   

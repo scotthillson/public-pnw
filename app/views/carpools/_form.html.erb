@@ -44,7 +44,7 @@
   <br>
   <%= submit_tag 'Save', class: 'btn btn-sm btn-success' %>
   <%= link_to carpools_path do %><div class="btn btn-sm btn-primary">Back</div><% end %>
-  <% if @carpool.created_by == user_session %>
+  <% if @carpool.created_by == current_user %>
     <%= link_to 'Destroy',  @carpool,  method: :delete, data: { confirm: @carpool.destroy_message }, class: 'btn btn-danger pull-right' %>
   <% end %>
 <% end %>

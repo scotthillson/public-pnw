@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
   
   def digest_token
-    if user_session
+    if current_user
       redirect_to root_path, notice: 'You can\'t sign up if you\'re already signed in...'
     else
       @user = User.find_by_token params[:token]
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
       return
     end
     @user.refresh
-    if user_session
+    if current_user
       redirect_to users_url
     else
       redirect_to signin_url, notice: 'We sent you an email with further instructions and we await your return.'

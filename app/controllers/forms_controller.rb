@@ -25,7 +25,7 @@ class FormsController < ApplicationController
   
   def submit_application
     respond_to do |format|
-      application = Application.new_with_params(application_params)
+      application = Application.new(application_params)
       if application.save
         format.json { render json: application, status: :ok }
       else

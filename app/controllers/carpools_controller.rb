@@ -21,7 +21,7 @@ class CarpoolsController < ApplicationController
   
   def create
     @carpool = Carpool.new(carpool_params)
-    @carpool.created_by = user_session
+    @carpool.created_by = current_user
     if @carpool.save
       redirect_to carpools_url
     else
@@ -30,7 +30,7 @@ class CarpoolsController < ApplicationController
   end
   
   def reserve
-    if @carpool.reserve(user_session)
+    if @carpool.reserve(current_user)
       redirect_to carpools_url, notice: 'You successfully reserved a seat!'
     else
       redirect_to carpools_url, notice: 'No dice'
@@ -49,7 +49,7 @@ class CarpoolsController < ApplicationController
   end
   
   def destroy
-    if @carpool.created_by = user_session
+    if @carpool.created_by = current_user
       @carpool.destroy
     end
     redirect_to carpools_url

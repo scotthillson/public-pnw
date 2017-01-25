@@ -2,83 +2,63 @@ window.ProspectApplication = React.createClass
 
   getInitialState: ->
     {
-      name: null
-      email: null
-      birthday: null
-      mobilePhone: null
-      homePhone: null
-      workPhone: null
-      address: null
-      city: null
-      addressState: null
-      postal: null
-      employer: null
-      job: null
-      emergencyOne: null
-      emergencyTwo: null
-      emergencyPhoneOne: null
-      emergencyPhoneTwo: null
-      emergencyRelationshipOne: null
-      emergencyRelationshipTwo: null
-      referenceOne: null
-      referencePhoneOne: null
-      referenceAddressOne: null
-      referenceCityOne: null
-      referenceStateOne: null
-      referencePostalOne: null
-      referenceTwo: null
-      referencePhoneTwo: null
-      referenceAddressTwo: null
-      referenceCityTwo: null
-      referenceStateTwo: null
-      referencePostalTwo: null
-      referenceThree: null
-      referencePhoneThree: null
-      referenceAddressThree: null
-      referenceCityThree: null
-      referenceStateThree: null
-      referencePostalThree: null
-      physicalShape: false
-      explainPhysical: null
-      firstAid: false
-      firstAidIssued: null
-      certifications: null
-      specialSkills: null
-      license: false
-      felony: true
-      felonyConviction: true
-      primaryReason: null
-      liability: false
-      acknowledge: false
+      fields:
+        name: {check: 'wordChecks', value: null}
+        email: {check: 'emailChecks', value: null}
+        birthday: {check: 'lengthChecks', value: null}
+        mobilePhone: {check: 'numberChecks', value: null}
+        homePhone: {check: 'numberChecks', value: null}
+        workPhone: {check: 'numberChecks', value: null}
+        address: {check: 'mixChecks', value: null}
+        city: {check: 'wordChecks', value: null}
+        addressState: {check: 'stateChecks', value: null}
+        postal: {check: 'numberChecks', value: null}
+        employer: {check: 'mixChecks', value: null}
+        job: {check: 'mixChecks', value: null}
+        emergencyOne: {check: 'wordChecks', value: null}
+        emergencyTwo: {check: 'wordChecks', value: null}
+        emergencyPhoneOne: {check: 'numberChecks', value: null}
+        emergencyPhoneTwo: {check: 'numberChecks', value: null}
+        emergencyRelationshipOne: {check: 'wordChecks', value: null}
+        emergencyRelationshipTwo: {check: 'wordChecks', value: null}
+        referenceOne: {check: 'wordChecks', value: null}
+        referencePhoneOne: {check: 'numberChecks', value: null}
+        referenceAddressOne: {check: 'mixChecks', value: null}
+        referenceCityOne: {check: 'wordChecks', value: null}
+        referenceStateOne: {check: 'stateChecks', value: null}
+        referencePostalOne: {check: 'numberChecks', value: null}
+        referenceTwo: {check: 'wordChecks', value: null}
+        referencePhoneTwo: {check: 'numberChecks', value: null}
+        referenceAddressTwo: {check: 'mixChecks', value: null}
+        referenceCityTwo: {check: 'wordChecks', value: null}
+        referenceStateTwo: {check: 'stateChecks', value: null}
+        referencePostalTwo: {check: 'numberChecks', value: null}
+        referenceThree: {check: 'wordChecks', value: null}
+        referencePhoneThree: {check: 'numberChecks', value: null}
+        referenceAddressThree: {check: 'mixChecks', value: null}
+        referenceCityThree: {check: 'wordChecks', value: null}
+        referenceStateThree: {check: 'stateChecks', value: null}
+        referencePostalThree: {check: 'numberChecks', value: null}
+        physicalShape: {check: 'skipChecks', value: 'false'}
+        explainPhysical: {check: 'wordChecks', value: null, blank: true}
+        firstAid: {check: 'skipChecks', value: 'false'}
+        firstAidIssued: {check: 'wordChecks', value: null, blank: true}
+        certifications: {check: 'wordChecks', value: null, blank: true}
+        license: {check: 'skipChecks', value: 'false'}
+        felony: {check: 'skipChecks', value: 'true'}
+        felonyConviction: {check: 'skipChecks', value: 'true'}
+        primaryReason: {check: 'mixChecks', value: null}
+        liability: {check: 'checkboxChecks', value: 'false'}
+        acknowledge: {check: 'checkboxChecks', value: 'false'}
       checkField: null
       checkType: null
       errorMessage: null
     }
   
-  hangePhysicalShape: (value) ->
-    @setState(physicalShape: value)
-  
-  changeFirstAid: (value) ->
-    @setState(firstAid: value)
-  
-  changeLicense: (value) ->
-    @setState(license: value)
-  
-  changeFelony: (value) ->
-    @setState({felony: value})
-  
-  changeFelonyConviction: (value) ->
-    @setState({felonyConviction: value})
-  
-  changeLiability: (e) ->
-    @setState(liability: e.target.value)
-  
-  changeAcknowledge: (e) ->
-    @setState(acknowledge: e.target.value)
-  
   fieldChange: (field, type, e) ->
     newState = {}
-    newState[field] = e.target.value
+    newState.fields = _.cloneDeep(@state.fields)
+    newState.fields[field].value = e.target.value
     newState.checkField = field
     newState.checkType = type
     @setState(newState, @sanityChecks)
@@ -88,63 +68,83 @@ window.ProspectApplication = React.createClass
     className = field.className
     unless className.indexOf('error-danger') > -1
       field.className += " error-danger"
+    1
   
   fixErrors: (name) ->
     field = document.getElementsByName(name)[0]
     className = field.className
     fix = className.replace(' error-danger','')
     field.className = fix
+    0
   
   sanityChecks: ->
-    this[@state.checkType](@state.checkField)
+    @[@state.checkType](@state.checkField)
   
   wordChecks: (field) ->
-    if /^[a-zA-z\s]+$/.test(@state[field])
+    if !@state.fields[field].blank and !@state.fields[field].value?
+      @showErrors(field)
+    else if /^[a-zA-z\s]+$/.test(@state.fields[field].value)
       @fixErrors(field)
     else
       @showErrors(field)
   
   numberChecks: (field) ->
-    if /^[\d-]+$/.test(@state[field])
+    if /^[\d-]+$/.test(@state.fields[field].value)
       @fixErrors(field)
     else
       @showErrors(field)
   
   emailChecks: (field) ->
-    if /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(@state[field])
+    if /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(@state.fields[field].value)
       @fixErrors(field)
     else
       @showErrors(field)
   
-  dateChecks: (field) ->
-    true
+  checkboxChecks: (field) ->
+    console.log field
+    console.log @state.fields[field]
+    unless @state.fields[field].value is 'true'
+      return @showErrors(field)
+    @fixErrors(field)
   
   mixChecks: (field) ->
-    true
-    
+    if /^[a-zA-z\s\d-]+$/.test(@state.fields[field].value) and @state.fields[field].value?
+      @fixErrors(field)
+    else
+      @showErrors(field)
+  
   stateChecks: (field) ->
-    true
+    if /^[A-z]+$/.test(@state.fields[field].value) and @state.fields[field].value?
+      @fixErrors(field)
+    else
+      @showErrors(field)
+  
+  lengthChecks: (field) ->
+    unless @state.fields[field].value?
+      return @showErrors(field)
+    @fixErrors(field)
+  
+  skipChecks: ->
+    0
   
   startSubmit: ->
-    @wordChecks('name')
-    @emailChecks('email')
-    @numberChecks('homePhone')
-    @numberChecks('workPhone')
-    @numberChecks('mobilePhone')
-    @dateChecks('birthday')
-    @mixChecks('address')
-    document.documentElement.scrollTop = 0
-    #@finishSubmit()
+    errors = 0
+    for key, field of @state.fields
+      errors += this[field.check](key)
+    if errors > 0
+      window.scrollTo(0,0)
+    else
+      @finishSubmit()
   
   finishSubmit: ->
     $.ajax
       type: 'post'
       url: "/submit_new_member_application"
-      data: @state
+      data: @state.fields
       success: (data) ->
         console.log data
       error: (jqXHR, textStatus, errorThrown) ->
-        console.log errorThrown
+        console.log jqXHR
   
   render: ->
     `<div className="form-container regular-form">
@@ -161,7 +161,7 @@ window.ProspectApplication = React.createClass
                 className="form-control"
                 placeholder="first and last name"
                 type="text"
-                value={this.state.name}
+                value={this.state.fields['name'].value}
                 onChange={this.fieldChange.bind(this, 'name', 'wordChecks')}
               />
             </div>
@@ -173,8 +173,8 @@ window.ProspectApplication = React.createClass
                 name="birthday"
                 className="form-control"
                 type="date"
-                value={this.state.birthday}
-                onChange={this.fieldChange.bind(this, 'birthday', 'dateChecks')}
+                value={this.state.fields['birthday'].value}
+                onChange={this.fieldChange.bind(this, 'birthday', 'lengthChecks')}
               />
             </div>
           </div>
@@ -188,7 +188,7 @@ window.ProspectApplication = React.createClass
                 className="form-control"
                 placeholder="moreinfo@pnwsar.org"
                 type="text"
-                value={this.state.email}
+                value={this.state.fields['email'].value}
                 onChange={this.fieldChange.bind(this, 'email', 'emailChecks')}
               />
             </div>
@@ -203,7 +203,7 @@ window.ProspectApplication = React.createClass
                 className="form-control"
                 type="text"
                 placeholder="555-555-5555"
-                value={this.state.mobilePhone}
+                value={this.state.fields['mobilePhone'].value}
                 onChange={this.fieldChange.bind(this, 'mobilePhone', 'numberChecks')}
               />
             </div>
@@ -216,7 +216,7 @@ window.ProspectApplication = React.createClass
                 className="form-control"
                 type="text"
                 placeholder="555-555-5555"
-                value={this.state.homePhone}
+                value={this.state.fields['homePhone'].value}
                 onChange={this.fieldChange.bind(this, 'homePhone', 'numberChecks')}
               />
             </div>
@@ -229,7 +229,7 @@ window.ProspectApplication = React.createClass
                 className="form-control"
                 type="text"
                 placeholder="555-555-5555"
-                value={this.state.workPhone}
+                value={this.state.fields['workPhone'].value}
                 onChange={this.fieldChange.bind(this, 'workPhone', 'numberChecks')}
               />
             </div>
@@ -243,7 +243,7 @@ window.ProspectApplication = React.createClass
                 name="address"
                 className="form-control"
                 type="text"
-                value={this.state.address}
+                value={this.state.fields['address'].value}
                 onChange={this.fieldChange.bind(this, 'address', 'mixChecks')}
               />
             </div>
@@ -255,7 +255,7 @@ window.ProspectApplication = React.createClass
                 name="city"
                 className="form-control"
                 type="text"
-                value={this.state.city}
+                value={this.state.fields['city'].value}
                 onChange={this.fieldChange.bind(this, 'city', 'wordChecks')}
               />
             </div>
@@ -264,10 +264,10 @@ window.ProspectApplication = React.createClass
             <label>State</label>
             <div>
               <input
-                name="state"
+                name="addressState"
                 className="form-control"
                 type="text"
-                value={this.state.addressState}
+                value={this.state.fields['addressState'].value}
                 onChange={this.fieldChange.bind(this, 'addressState', 'stateChecks')}
               />
             </div>
@@ -279,7 +279,7 @@ window.ProspectApplication = React.createClass
                 name="postal"
                 className="form-control"
                 type="text"
-                value={this.state.postal}
+                value={this.state.fields['postal'].value}
                 onChange={this.fieldChange.bind(this, 'postal', 'numberChecks')}
               />
             </div>
@@ -293,7 +293,7 @@ window.ProspectApplication = React.createClass
                 name="employer"
                 className="form-control"
                 type="text"
-                value={this.state.employer}
+                value={this.state.fields['employer'].value}
                 onChange={this.fieldChange.bind(this, 'employer', 'wordChecks')}
               />
             </div>
@@ -305,7 +305,7 @@ window.ProspectApplication = React.createClass
                 name="job"
                 className="form-control"
                 type="text"
-                value={this.state.job}
+                value={this.state.fields['job'].value}
                 onChange={this.fieldChange.bind(this, 'job', 'wordChecks')}
               />
             </div>
@@ -318,7 +318,7 @@ window.ProspectApplication = React.createClass
               name="emergencyOne"
               className="form-control"
               type="text"
-              value={this.state.emergencyOne}
+              value={this.state.fields['emergencyOne'].value}
               onChange={this.fieldChange.bind(this, 'emergencyOne', 'wordChecks')}
             />
           </div>
@@ -328,7 +328,7 @@ window.ProspectApplication = React.createClass
               name="emergencyPhoneOne"
               className="form-control"
               type="text"
-              value={this.state.emergencyPhoneOne}
+              value={this.state.fields['emergencyPhoneOne'].value}
               onChange={this.fieldChange.bind(this, 'emergencyPhoneOne', 'numberChecks')} />
           </div>
           <div className="col-md-4">
@@ -337,7 +337,7 @@ window.ProspectApplication = React.createClass
               name="emergencyRelationshipOne"
               className="form-control"
               type="text"
-              value={this.state.emergencyRelationshipOne}
+              value={this.state.fields['emergencyRelationshipOne'].value}
               onChange={this.fieldChange.bind(this, 'emergencyRelationshipOne', 'wordChecks')}
             />
           </div>
@@ -349,7 +349,7 @@ window.ProspectApplication = React.createClass
               name="emergencyTwo"
               className="form-control"
               type="text"
-              value={this.state.emergencyTwo}
+              value={this.state.fields['emergencyTwo'].value}
               onChange={this.fieldChange.bind(this, 'emergencyTwo', 'wordChecks')}
             />
           </div>
@@ -359,7 +359,7 @@ window.ProspectApplication = React.createClass
               name="emergencyPhoneTwo"
               className="form-control"
               type="text"
-              value={this.state.emergencyPhoneTwo}
+              value={this.state.fields['emergencyPhoneTwo'].value}
               onChange={this.fieldChange.bind(this, 'emergencyPhoneTwo', 'numberChecks')}
             />
           </div>
@@ -369,7 +369,7 @@ window.ProspectApplication = React.createClass
               name="emergencyRelationshipTwo"
               className="form-control"
               type="text"
-              value={this.state.emergencyRelationshipTwo}
+              value={this.state.fields['emergencyRelationshipTwo'].value}
               onChange={this.fieldChange.bind(this, 'emergencyRelationshipTwo', 'wordChecks')}
             />
           </div>
@@ -382,7 +382,7 @@ window.ProspectApplication = React.createClass
                 name="referenceOne"
                 className="form-control"
                 placeholder="first and last name"
-                value={this.state.referenceOne}
+                value={this.state.fields['referenceOne'].value}
                 type="text"
                 onChange={this.fieldChange.bind(this, 'referenceOne', 'wordChecks')}
               />
@@ -394,7 +394,7 @@ window.ProspectApplication = React.createClass
               name="referencePhoneOne"
               className="form-control"
               type="text"
-              value={this.state.referencePhoneOne}
+              value={this.state.fields['referencePhoneOne'].value}
               onChange={this.fieldChange.bind(this, 'referencePhoneOne','numberChecks')}
             />
           </div>
@@ -407,7 +407,7 @@ window.ProspectApplication = React.createClass
                 name="referenceAddressOne"
                 className="form-control"
                 type="text"
-                value={this.state.referenceAddressOne}
+                value={this.state.fields['referenceAddressOne'].value}
                 onChange={this.fieldChange.bind(this, 'referenceAddressOne', 'mixChecks')}
               />
             </div>
@@ -419,7 +419,7 @@ window.ProspectApplication = React.createClass
                 name="referenceCityOne"
                 className="form-control"
                 type="text"
-                value={this.state.referenceCityeOne}
+                value={this.state.fields['referenceCityOne'].value}
                 onChange={this.fieldChange.bind(this, 'referenceCityOne', 'wordChecks')}
               />
             </div>
@@ -431,7 +431,7 @@ window.ProspectApplication = React.createClass
                 name="referenceStateOne"
                 className="form-control"
                 type="text"
-                value={this.state.referenceStateOne}
+                value={this.state.fields['referenceStateOne'].value}
                 onChange={this.fieldChange.bind(this, 'referenceStateOne', 'stateChecks')}
               />
             </div>
@@ -443,7 +443,7 @@ window.ProspectApplication = React.createClass
                 name="referencePostalOne"
                 className="form-control"
                 type="text"
-                value={this.state.referencePostalOne}
+                value={this.state.fields['referencePostalOne'].value}
                 onChange={this.fieldChange.bind(this, 'referencePostalOne', 'numberChecks')}
               />
             </div>
@@ -456,7 +456,9 @@ window.ProspectApplication = React.createClass
               <input
                 name="referenceTwo"
                 className="form-control"
-                placeholder="first and last name" type="text"
+                placeholder="first and last name"
+                type="text"
+                value={this.state.fields['referenceTwo'].value}
                 onChange={this.fieldChange.bind(this, 'referenceTwo', 'wordChecks')}
               />
             </div>
@@ -467,7 +469,7 @@ window.ProspectApplication = React.createClass
               name="referencePhoneTwo"
               className="form-control"
               type="text"
-              value={this.state.referencePhoneTwo}
+              value={this.state.fields['referencePhoneTwo'].value}
               onChange={this.fieldChange.bind(this, 'referencePhoneTwo', 'numberChecks')}
             />
           </div>
@@ -480,7 +482,7 @@ window.ProspectApplication = React.createClass
                 name="referenceAddressTwo"
                 className="form-control"
                 type="text"
-                value={this.state.referenceAddressTwo}
+                value={this.state.fields['referenceAddressTwo'].value}
                 onChange={this.fieldChange.bind(this, 'referenceAddressTwo', 'mixChecks')}
               />
             </div>
@@ -504,7 +506,7 @@ window.ProspectApplication = React.createClass
                 name="referenceStateTwo"
                 className="form-control"
                 type="text"
-                value={this.state.referenceStateTwo}
+                value={this.state.fields['referenceStateTwo'].value}
                 onChange={this.fieldChange.bind(this, 'referenceStateTwo', 'stateChecks')}
               />
             </div>
@@ -516,7 +518,7 @@ window.ProspectApplication = React.createClass
                 name="referencePostalTwo"
                 className="form-control"
                 type="text"
-                value={this.state.referencePostalTwo}
+                value={this.state.fields['referencePostalTwo'].value}
                 onChange={this.fieldChange.bind(this, 'referencePostalTwo', 'numberChecks')}
               />
             </div>
@@ -531,7 +533,7 @@ window.ProspectApplication = React.createClass
                 className="form-control"
                 placeholder="first and last name"
                 type="text"
-                value={this.state.referenceThree}
+                value={this.state.fields['referenceThree'].value}
                 onChange={this.fieldChange.bind(this, 'referenceThree', 'wordChecks')}
               />
             </div>
@@ -542,7 +544,7 @@ window.ProspectApplication = React.createClass
               name="referencePhoneThree"
               className="form-control"
               type="text"
-              value={this.state.referencePhoneThree}
+              value={this.state.fields['referencePhoneThree'].value}
               onChange={this.fieldChange.bind(this, 'referencePhoneThree', 'numberChecks')}
             />
           </div>
@@ -551,31 +553,57 @@ window.ProspectApplication = React.createClass
           <div className="col-md-7">
             <label>Address</label>
             <div>
-              <input name="referenceAddressThree" className="form-control" type="text" value={this.state.referenceAddressThree} onChange={this.fieldChange.bind(this, 'referenceAddressThree', 'mixChecks')} />
+              <input
+                name="referenceAddressThree"
+                className="form-control"
+                type="text"
+                value={this.state.fields['referenceAddressThree'].value}
+                onChange={this.fieldChange.bind(this, 'referenceAddressThree', 'mixChecks')}
+              />
             </div>
           </div>
           <div className="col-md-2">
             <label>City</label>
             <div>
-              <input name="referenceCityThree" className="form-control" type="text" value={this.state.referenceCityThree} onChange={this.fieldChange.bind(this, 'referenceCityThree', 'wordChecks')} />
+              <input
+                name="referenceCityThree"
+                className="form-control"
+                type="text"
+                value={this.state.fields['referenceCityThree'].value}
+                onChange={this.fieldChange.bind(this, 'referenceCityThree', 'wordChecks')}
+              />
             </div>
           </div>
           <div className="col-md-1">
             <label>State</label>
             <div>
-              <input name="referenceStateThree" className="form-control" type="text" value={this.state.referenceStateThree} onChange={this.fieldChange.bind(this, 'referenceStateThree', 'stateChecks')} />
+              <input
+                name="referenceStateThree"
+                className="form-control"
+                type="text"
+                value={this.state.fields['referenceStateThree'].value}
+                onChange={this.fieldChange.bind(this, 'referenceStateThree', 'stateChecks')}
+              />
             </div>
           </div>
           <div className="col-md-2">
             <label>ZIP</label>
             <div>
-              <input name="referencePostalThree" className="form-control" type="text" value={this.state.referencePostalThree} onChange={this.fieldChange.bind(this, 'referencePostalThree', 'numberChecks')} />
+              <input
+                name="referencePostalThree"
+                className="form-control"
+                type="text"
+                value={this.state.fields['referencePostalThree'].value}
+                onChange={this.fieldChange.bind(this, 'referencePostalThree', 'numberChecks')} />
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col-md-2">
-            <SharedBoolean currentValue={this.state.physicalShape} setValue={this.changePhysicalShape} />
+            <SharedBoolean
+              currentValue={this.state.fields['physicalShape'].value}
+              setValue={this.fieldChange.bind(this, 'physicalShape', 'skipChecks')}
+            />
           </div>
           <div className="col-md-10 height-control">
             <label>Search and Rescue Work is physically demanding!
@@ -588,32 +616,57 @@ window.ProspectApplication = React.createClass
           <div className="col-md-12">
             <label>If yes, please explain</label>
             <div>
-              <input name="explainPhysical" type="text" className="form-control" value={this.state.explainPhysical} onChange={this.fieldChange} />
+              <input
+                name="explainPhysical"
+                type="text"
+                className="form-control"
+                value={this.state.fields['explainPhysical'].value}
+                onChange={this.fieldChange.bind(this, 'explainPhysical', 'skipChecks')}
+              />
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col-md-2">
-            <SharedBoolean currentValue={this.state.firstAid} setValue={this.changeFirstAid} />
+            <SharedBoolean
+              currentValue={this.state.fields['firstAid'].value}
+              setValue={this.fieldChange.bind(this, 'firstAid', 'skipChecks')}
+            />
           </div>
           <div className="col-md-5 height-control">
             <label>Do you have a first aid/CPR card?</label>
           </div>
           <div className="col-md-5">
-            <input name="firstAidIssued" type="text" placeholder="who issued it?" className="form-control" value={this.state.firstAidIssued} onChange={this.fieldChange.bind(this, 'firstAidIssued')} />
+            <input
+              name="firstAidIssued"
+              type="text"
+              placeholder="If yes, who issued it?"
+              className="form-control"
+              value={this.state.fields['firstAidIssued'].value}
+              onChange={this.fieldChange.bind(this, 'firstAidIssued', 'skipChecks')}
+            />
           </div>
         </div>
         <div className="row form-group">
           <div className="col-md-12">
             <label>Do you have any other EMS certifications?</label>
             <div>
-              <input name="certifications" type="text" className="form-control" value={this.state.certifications} onChange={this.fieldChange.bind(this, 'certifications')} />
+              <input
+                name="certifications"
+                type="text"
+                className="form-control"
+                value={this.state.fields['certifications'].value}
+                onChange={this.fieldChange.bind(this, 'certifications', 'skipChecks')}
+              />
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col-md-2">
-            <SharedBoolean currentValue={this.state.license} setValue={this.changeLicense} />
+            <SharedBoolean
+              currentValue={this.state.fields['license'].value}
+              setValue={this.fieldChange.bind(this, 'license', 'skipChecks')}
+            />
           </div>
           <div className="col-md-10 height-control">
             <label>{"Do you have a valid driver's license?"}</label>
@@ -621,7 +674,10 @@ window.ProspectApplication = React.createClass
         </div>
         <div className="row">
           <div className="col-md-2">
-            <SharedBoolean currentValue={this.state.felony} setValue={this.changeFelony} />
+            <SharedBoolean
+              currentValue={this.state.fields['felony'].value}
+              setValue={this.fieldChange.bind(this, 'felony', 'skipChecks')}
+            />
           </div>
           <div className="col-md-10 height-control">
             <label>Have you ever been arrested for a felony?</label>
@@ -629,7 +685,10 @@ window.ProspectApplication = React.createClass
         </div>
         <div className="row form-group">
           <div className="col-md-2">
-            <SharedBoolean currentValue={this.state.felonyConviction} setValue={this.changeFelonyConviction} />
+            <SharedBoolean
+              currentValue={this.state.fields['felonyConviction'].value}
+              setValue={this.fieldChange.bind(this, 'felonyConviction', 'skipChecks')}
+            />
           </div>
           <div className="col-md-10 height-control">
             <label>Have you ever been convicted of a felony?</label>
@@ -639,24 +698,37 @@ window.ProspectApplication = React.createClass
           <div className="col-md-12">
             <label>What is your primary reason for volunteering to join search and rescue?</label>
             <div>
-              <textarea name="primaryReason" className="form-control" value={this.state.primaryReason} onChange={this.fieldChange.bind(this, 'primaryReason')} />
+              <textarea
+                name="primaryReason"
+                className="form-control"
+                value={this.state.fields['primaryReason'].value}
+                onChange={this.fieldChange.bind(this, 'primaryReason', 'mixChecks')}
+              />
             </div>
           </div>
         </div>
         <div className="row form-group">
           <div className="col-md-1">
-            <input name="liability" type="checkbox" value={this.state.liability} onChange={this.changeLiability} />
+            <input
+              type="checkbox"
+              value={this.state.fields['liability'].value}
+              onChange={this.fieldChange.bind(this, 'liability', 'checkboxChecks')}
+            />
           </div>
           <div className="col-md-11">
-            <label>Pacific Northwest Search and Rescue does not provide medical, liability or disability insurance for any members or visitors at group functions. I acknowledge that I am responsible for my own safety and any personal insurance I deem necessary.</label>
+            <label name="liability">Pacific Northwest Search and Rescue does not provide medical, liability or disability insurance for any members or visitors at group functions. I acknowledge that I am responsible for my own safety and any personal insurance I deem necessary.</label>
           </div>
         </div>
         <div className="row form-group">
           <div className="col-md-1">
-            <input name="acknowledge" type="checkbox" value={this.state.acknowledge} onChange={this.changeAcknowledge} />
+            <input
+              type="checkbox"
+              value={this.state.fields['acknowledge'].value}
+              onChange={this.fieldChange.bind(this, 'acknowledge', 'checkboxChecks')}
+              />
           </div>
           <div className="col-md-11">
-            <label>By submitting this application I certify that the information set forth in this application is true and complete to the best of my knowledge.</label>
+            <label name="acknowledge">By submitting this application I certify that the information set forth in this application is true and complete to the best of my knowledge.</label>
           </div>
         </div>
         <input className="btn btn-primary" value="Submit Application" type="button" onClick={this.startSubmit} />

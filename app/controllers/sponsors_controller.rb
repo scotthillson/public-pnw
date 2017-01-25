@@ -14,7 +14,7 @@ class SponsorsController < ApplicationController
   
   def create
     @sponsor = Sponsor.new(sponsor_params)
-    @sponsor.created_at = user_session
+    @sponsor.created_at = current_user
     @sponsor.image = "logos/#{@sponsor.image}"
     if @sponsor.save
       redirect_to sponsors_url

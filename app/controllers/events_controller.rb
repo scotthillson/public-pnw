@@ -16,7 +16,7 @@ class EventsController < ApplicationController
   
   def create
     @event = Event.new(event_params)
-    @event.created_by = user_session
+    @event.created_by = current_user
     if @event.save
       redirect_to @event
     else
@@ -25,7 +25,7 @@ class EventsController < ApplicationController
   end
   
   def join
-    if @event.join(user_session)
+    if @event.join(current_user)
       redirect_to @event, notice: 'Nice work'
     else
       redirect_to @event, notice: 'something went wrong -_-'
@@ -37,7 +37,7 @@ class EventsController < ApplicationController
   
   def update
     if @event.update(event_params)
-      @event.updated_by = user_session
+      @event.updated_by = current_user
       redirect_to @event
     else
       render :edit

@@ -16,7 +16,7 @@ class RentalsController < ApplicationController
   
   def create
     @rental = Rental.new(rental_params)
-    @rental.created_by = user_session
+    @rental.created_by = current_user
     if @rental.save
       redirect_to rentals_path
     else
@@ -25,7 +25,7 @@ class RentalsController < ApplicationController
   end
   
   def reserve
-    if @rental.reserve(user_session)
+    if @rental.reserve(current_user)
       redirect_to rentals_path, notice: 'You successfully claimed this item, congrats!'
     else
       redirect_to rentals_path, notice: 'No dice muchacho'
@@ -44,7 +44,7 @@ class RentalsController < ApplicationController
   end
   
   def destroy
-    if @rental.created_by = user_session
+    if @rental.created_by = current_user
       @rental.destroy
     end
     redirect_to rentals_url

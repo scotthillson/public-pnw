@@ -74,4 +74,13 @@ class Member < ActiveRecord::Base
     member.save
   end
   
+  def self.sync_with_users
+    Member.where(statud_is: 1).each do |member|
+      unless User.where(email: member.email)
+        user = User.new(email: member.email.downcase, name: member.name)
+        user.save
+      end
+    end
+  end
+  
 end

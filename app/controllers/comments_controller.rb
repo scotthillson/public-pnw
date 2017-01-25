@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
   
   def create
     @comment = Comment.new(comment_parmas)
-    @comment.created_by = user_session
+    @comment.created_by = current_user
     if @comment.save
       redirect_to @comment.discussion
     else
@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
   
   def destroy
     discussion = @comment.discussion
-    if @comment.created_by = user_session
+    if @comment.created_by = current_user
       @comment.destroy
     end
     redirect_to discussion
