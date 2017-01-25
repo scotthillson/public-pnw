@@ -101,11 +101,9 @@ window.ProspectApplication = React.createClass
       @showErrors(field)
   
   checkboxChecks: (field) ->
-    console.log field
-    console.log @state.fields[field]
-    unless @state.fields[field].value is 'true'
-      return @showErrors(field)
-    @fixErrors(field)
+    #unless @state.fields[field].value is 'true'
+      #return @showErrors(field)
+    #@fixErrors(field)
   
   mixChecks: (field) ->
     if /^[a-zA-z\s\d-]+$/.test(@state.fields[field].value) and @state.fields[field].value?
