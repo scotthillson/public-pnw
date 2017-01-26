@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :applications
+    get 'new_prospect_application', to: 'applications#prospect_application'
+    post 'submit_new_member_application', to: 'applications#submit_application'
+  
   resources :carpools, constraints: {format: :html}
       get 'carpools/:id/reserve', to: 'carpools#reserve', as: :reserve_seat
   
@@ -22,8 +26,6 @@ Rails.application.routes.draw do
   
   resources :forms, constraints: {format: :html}
     get 'dup_form_check', to: 'forms#dup_form_check'
-    get 'new_prospect_application', to: 'forms#prospect_application'
-    post 'submit_new_member_application', to: 'forms#submit_application'
   
   resources :images, constraints: {format: :html}
   

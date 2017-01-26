@@ -25,28 +25,25 @@ class Application < ActiveRecord::Base
   validates_presence_of :reference_state_one
   validates_presence_of :reference_zip_one
   validates_presence_of :reference_two
-  validates_presence_of :reference_phtwo_two
+  validates_presence_of :reference_phone_two
   validates_presence_of :reference_address_two
   validates_presence_of :reference_city_two
   validates_presence_of :reference_state_two
   validates_presence_of :reference_zip_two
   validates_presence_of :reference_three
-  validates_presence_of :reference_phthree_three
+  validates_presence_of :reference_phone_three
   validates_presence_of :reference_address_three
   validates_presence_of :reference_city_three
   validates_presence_of :reference_state_three
   validates_presence_of :reference_zip_three
-  validates_presence_of :phyiscal_shape
+  validates_presence_of :physical_shape
   validates_presence_of :explain_physical
   validates_presence_of :first_aid
-  validates_presence_of :first_aid_issued
-  validates_presence_of :certifications
-  validates_presence_of :special_skills
   validates_presence_of :license
   validates_presence_of :felony
   validates_presence_of :felony_conviction
   validates_presence_of :primary_reason
   validates_presence_of :liability
   validates_presence_of :acknowledge
-    
+  
 end

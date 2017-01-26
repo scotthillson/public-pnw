@@ -138,11 +138,20 @@ window.ProspectApplication = React.createClass
     $.ajax
       type: 'post'
       url: "/submit_new_member_application"
-      data: @state.fields
+      data: @paramsForRuby()
       success: (data) ->
-        console.log data
+        if data.errors
+          for key, error of data.errors
+            console.log "#{key} #{error}"
       error: (jqXHR, textStatus, errorThrown) ->
-        console.log jqXHR
+        true
+  
+  paramsForRuby: ->
+    result = {}
+    for key, field of @state.fields
+      if field.value?
+        result[key.snake_case()] = field.value
+    result
   
   render: ->
     `<div className="form-container regular-form">
