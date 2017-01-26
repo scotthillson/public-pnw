@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170125234745) do
+ActiveRecord::Schema.define(version: 20170126064828) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 20170125234745) do
     t.string   "work_phone"
     t.string   "address"
     t.string   "city"
-    t.string   "state"
-    t.string   "zip"
+    t.string   "address_state"
+    t.string   "postal"
     t.string   "employer"
     t.string   "job"
     t.string   "emergency_one"
@@ -52,19 +52,19 @@ ActiveRecord::Schema.define(version: 20170125234745) do
     t.string   "reference_address_one"
     t.string   "reference_city_one"
     t.string   "reference_state_one"
-    t.string   "reference_zip_one"
+    t.string   "reference_postal_one"
     t.string   "reference_two"
     t.string   "reference_phone_two"
     t.string   "reference_address_two"
     t.string   "reference_city_two"
     t.string   "reference_state_two"
-    t.string   "reference_zip_two"
+    t.string   "reference_postal_two"
     t.string   "reference_three"
     t.string   "reference_phone_three"
     t.string   "reference_address_three"
     t.string   "reference_city_three"
     t.string   "reference_state_three"
-    t.string   "reference_zip_three"
+    t.string   "reference_postal_three"
     t.boolean  "physical_shape"
     t.text     "explain_physical"
     t.boolean  "first_aid"

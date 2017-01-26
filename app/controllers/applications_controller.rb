@@ -1,6 +1,7 @@
 class ApplicationsController < ApplicationController
   
   def index
+    @applications = Application.all
   end
   
   def prospect_application
@@ -31,8 +32,8 @@ class ApplicationsController < ApplicationController
       :work_phone,
       :address,
       :city,
-      :state,
-      :zip,
+      :address_state,
+      :postal,
       :employer,
       :job,
       :emergency_one,
@@ -46,19 +47,19 @@ class ApplicationsController < ApplicationController
       :reference_address_one,
       :reference_city_one,
       :reference_state_one,
-      :reference_zip_one,
+      :reference_postal_one,
       :reference_two,
-      :reference_phtwo_two,
+      :reference_phone_two,
       :reference_address_two,
       :reference_city_two,
       :reference_state_two,
-      :reference_zip_two,
+      :reference_postal_two,
       :reference_three,
-      :reference_phthree_three,
+      :reference_phone_three,
       :reference_address_three,
       :reference_city_three,
       :reference_state_three,
-      :reference_zip_three,
+      :reference_postal_three,
       :physical_shape,
       :explain_physical,
       :first_aid,

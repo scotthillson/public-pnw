@@ -150,6 +150,10 @@ window.ProspectApplication = React.createClass
     result = {}
     for key, field of @state.fields
       if field.value?
+        if field.value is "true"
+          field.value = true
+        if field.value is "false"
+          field.value = false
         result[key.snake_case()] = field.value
     result
   

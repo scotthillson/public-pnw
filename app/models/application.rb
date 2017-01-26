@@ -8,8 +8,8 @@ class Application < ActiveRecord::Base
   validates_presence_of :work_phone
   validates_presence_of :address
   validates_presence_of :city
-  validates_presence_of :state
-  validates_presence_of :zip
+  validates_presence_of :address_state
+  validates_presence_of :postal
   validates_presence_of :employer
   validates_presence_of :job
   validates_presence_of :emergency_one
@@ -23,27 +23,19 @@ class Application < ActiveRecord::Base
   validates_presence_of :reference_address_one
   validates_presence_of :reference_city_one
   validates_presence_of :reference_state_one
-  validates_presence_of :reference_zip_one
+  validates_presence_of :reference_postal_one
   validates_presence_of :reference_two
   validates_presence_of :reference_phone_two
   validates_presence_of :reference_address_two
   validates_presence_of :reference_city_two
   validates_presence_of :reference_state_two
-  validates_presence_of :reference_zip_two
+  validates_presence_of :reference_postal_two
   validates_presence_of :reference_three
   validates_presence_of :reference_phone_three
   validates_presence_of :reference_address_three
   validates_presence_of :reference_city_three
   validates_presence_of :reference_state_three
-  validates_presence_of :reference_zip_three
-  validates_presence_of :physical_shape
-  validates_presence_of :explain_physical
-  validates_presence_of :first_aid
-  validates_presence_of :license
-  validates_presence_of :felony
-  validates_presence_of :felony_conviction
+  validates_presence_of :reference_postal_three
   validates_presence_of :primary_reason
-  validates_presence_of :liability
-  validates_presence_of :acknowledge
   
 end
