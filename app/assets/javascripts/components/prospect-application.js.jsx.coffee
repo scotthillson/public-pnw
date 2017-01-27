@@ -40,10 +40,10 @@ window.ProspectApplication = React.createClass
         referenceStateThree: {check: 'stateChecks', value: null}
         referencePostalThree: {check: 'numberChecks', value: null}
         physicalShape: {check: 'skipChecks', value: 'false'}
-        explainPhysical: {check: 'wordChecks', value: null, blank: true}
+        explainPhysical: {check: 'skipChecks', value: null, blank: true}
         firstAid: {check: 'skipChecks', value: 'false'}
-        firstAidIssued: {check: 'wordChecks', value: null, blank: true}
-        certifications: {check: 'wordChecks', value: null, blank: true}
+        firstAidIssued: {check: 'skipChecks', value: null, blank: true}
+        certifications: {check: 'skipChecks', value: null, blank: true}
         license: {check: 'skipChecks', value: 'false'}
         felony: {check: 'skipChecks', value: 'true'}
         felonyConviction: {check: 'skipChecks', value: 'true'}
@@ -56,6 +56,7 @@ window.ProspectApplication = React.createClass
     }
   
   fieldChange: (field, type, e) ->
+    return @checkboxes(field) if type is 'checkboxChecks'
     newState = {}
     newState.fields = _.cloneDeep(@state.fields)
     newState.fields[field].value = e.target.value
@@ -100,10 +101,23 @@ window.ProspectApplication = React.createClass
     else
       @showErrors(field)
   
+  checkboxes: (field) ->
+    if @state.fields[field].value is "true"
+      newValue = "false"
+    else
+      newValue = "true"
+    newState = {}
+    newState.fields = _.cloneDeep(@state.fields)
+    newState.fields[field].value = newValue
+    newState.checkField = field
+    newState.checkType = 'checkboxChecks'
+    @setState(newState, @sanityChecks)
+  
   checkboxChecks: (field) ->
-    #unless @state.fields[field].value is 'true'
-      #return @showErrors(field)
-    #@fixErrors(field)
+    console.log @state.fields[field].value
+    unless @state.fields[field].value is 'true'
+      return @showErrors(field)
+    @fixErrors(field)
   
   mixChecks: (field) ->
     if /^[a-zA-z\s\d-]+$/.test(@state.fields[field].value) and @state.fields[field].value?
@@ -129,22 +143,13 @@ window.ProspectApplication = React.createClass
     errors = 0
     for key, field of @state.fields
       errors += this[field.check](key)
-    if errors > 0
-      window.scrollTo(0,0)
-    else
+    if true
       @finishSubmit()
+    else
+      window.scrollTo(0,0)
   
   finishSubmit: ->
-    $.ajax
-      type: 'post'
-      url: "/submit_new_member_application"
-      data: @paramsForRuby()
-      success: (data) ->
-        if data.errors
-          for key, error of data.errors
-            console.log "#{key} #{error}"
-      error: (jqXHR, textStatus, errorThrown) ->
-        true
+    @props.submitApplication(@paramsForRuby())
   
   paramsForRuby: ->
     result = {}
@@ -340,7 +345,8 @@ window.ProspectApplication = React.createClass
               className="form-control"
               type="text"
               value={this.state.fields['emergencyPhoneOne'].value}
-              onChange={this.fieldChange.bind(this, 'emergencyPhoneOne', 'numberChecks')} />
+              onChange={this.fieldChange.bind(this, 'emergencyPhoneOne', 'numberChecks')}
+            />
           </div>
           <div className="col-md-4">
             <label>Relationship</label>
@@ -605,7 +611,8 @@ window.ProspectApplication = React.createClass
                 className="form-control"
                 type="text"
                 value={this.state.fields['referencePostalThree'].value}
-                onChange={this.fieldChange.bind(this, 'referencePostalThree', 'numberChecks')} />
+                onChange={this.fieldChange.bind(this, 'referencePostalThree', 'numberChecks')}
+              />
             </div>
           </div>
         </div>
@@ -613,7 +620,8 @@ window.ProspectApplication = React.createClass
           <div className="col-md-2">
             <SharedBoolean
               currentValue={this.state.fields['physicalShape'].value}
-              setValue={this.fieldChange.bind(this, 'physicalShape', 'skipChecks')}
+              readOnly="false"
+              onChange={this.fieldChange.bind(this, 'physicalShape', 'skipChecks')}
             />
           </div>
           <div className="col-md-10 height-control">
@@ -641,7 +649,8 @@ window.ProspectApplication = React.createClass
           <div className="col-md-2">
             <SharedBoolean
               currentValue={this.state.fields['firstAid'].value}
-              setValue={this.fieldChange.bind(this, 'firstAid', 'skipChecks')}
+              readOnly="false"
+              onChange={this.fieldChange.bind(this, 'firstAid', 'skipChecks')}
             />
           </div>
           <div className="col-md-5 height-control">
@@ -676,7 +685,8 @@ window.ProspectApplication = React.createClass
           <div className="col-md-2">
             <SharedBoolean
               currentValue={this.state.fields['license'].value}
-              setValue={this.fieldChange.bind(this, 'license', 'skipChecks')}
+              readOnly="false"
+              onChange={this.fieldChange.bind(this, 'license', 'skipChecks')}
             />
           </div>
           <div className="col-md-10 height-control">
@@ -687,7 +697,8 @@ window.ProspectApplication = React.createClass
           <div className="col-md-2">
             <SharedBoolean
               currentValue={this.state.fields['felony'].value}
-              setValue={this.fieldChange.bind(this, 'felony', 'skipChecks')}
+              readOnly="false"
+              onChange={this.fieldChange.bind(this, 'felony', 'skipChecks')}
             />
           </div>
           <div className="col-md-10 height-control">
@@ -698,7 +709,8 @@ window.ProspectApplication = React.createClass
           <div className="col-md-2">
             <SharedBoolean
               currentValue={this.state.fields['felonyConviction'].value}
-              setValue={this.fieldChange.bind(this, 'felonyConviction', 'skipChecks')}
+              readOnly="false"
+              onChange={this.fieldChange.bind(this, 'felonyConviction', 'skipChecks')}
             />
           </div>
           <div className="col-md-10 height-control">

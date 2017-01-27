@@ -4,6 +4,12 @@
       <th class="text-center">Name</th>
       <th class="text-center">Email</th>
       <th class="text-center">Created</th>
+      <th class="text-center">Status</th>
+      <th class="text-center">Approved</th>
+      <th class="text-center">Waiver Signed</th>
+      <th class="text-center">Dues Paid</th>
+      <th class="text-center">Photo Taken</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -12,6 +18,12 @@
         <td><%= a.name %></td>
         <td><%= a.email %></td>
         <td><%= a.created_at %></td>
+        <td><%= a.status %></td>
+        <td><%= a.approved_at %></td>
+        <td><%= a.waiver_signed_at %></td>
+        <td><%= a.dues_paid_at %></td>
+        <td><%= a.photo_taken_at %></td>
+        <td><%= link_to 'review', a, class: 'btn btn-xs btn-success' %></td>
       </tr>
     <% end %>
   </tbody>

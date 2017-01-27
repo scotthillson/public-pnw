@@ -1,19 +1,24 @@
 class ApplicationsController < ApplicationController
   
   def index
-    @applications = Application.all
+    @applications = Application.where("status is not 'archived'")
+  end
+  
+  def show
+    application = Application.find params[:id]
+    fields = Hash[application.attributes.map{|k,v| [k.camelize(:lower), v]}]
+    render component: 'ReviewProspectApplication', props: { fields: fields}
   end
   
   def prospect_application
-    settings = []
-    render component: 'ProspectApplication', props: { settings: settings }
+    render component: 'ApplicationLanding'
   end
   
   def submit_application
     respond_to do |format|
       application = Application.new(application_params)
       if application.save
-        format.json { render json: application, status: :ok }
+        format.json { render json: {success: true}, status: :ok }
       else
         format.json { render json: {errors: application.errors}, status: :ok }
       end

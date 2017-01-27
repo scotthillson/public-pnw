@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170126064828) do
+ActiveRecord::Schema.define(version: 20170126191129) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -84,6 +84,8 @@ ActiveRecord::Schema.define(version: 20170126064828) do
     t.datetime "d4h"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
+    t.integer  "approved_by"
   end
 
   create_table "carpools", force: :cascade do |t|
