@@ -35,7 +35,5 @@ gem 'react-rails'
 gem 'httparty'
 # because lint
 gem 'coffeelint'
-# because everyone wants es6
-gem 'eslint-rails'
 # capistrano
 gem 'capistrano'

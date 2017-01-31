@@ -63,13 +63,8 @@ GEM
       coffee-script
       execjs
       json
-    colorize (0.8.1)
     connection_pool (2.2.0)
     erubis (2.7.0)
-    eslint-rails (1.2.1)
-      colorize
-      execjs
-      railties (>= 3.2)
     execjs (2.6.0)
     font-awesome-sass (4.5.0)
       sass (>= 3.2)
@@ -189,7 +184,6 @@ DEPENDENCIES
   capistrano
   coffee-rails (~> 4.0.0)
   coffeelint
-  eslint-rails
   font-awesome-sass
   httparty
   jbuilder (~> 2.0)
