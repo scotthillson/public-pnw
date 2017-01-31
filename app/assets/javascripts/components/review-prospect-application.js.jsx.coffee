@@ -593,18 +593,33 @@ window.ReviewProspectApplication = React.createClass
       <div className="col-md-12">
         <button
           onClick={this.approveApplication}
-          className="btn btn-sm btn-success btn-space">Approve</button>
+          className="btn btn-sm btn-success btn-space">
+          Approve
+        </button>
         <button
           onClick={this.waiverSigned}
-          className="btn btn-sm btn-default btn-space">Waiver Signed</button>
+          className="btn btn-sm btn-default btn-space">
+          Waiver Signed
+        </button>
         <button
           onClick={this.duesPaid}
-          className="btn btn-sm btn-success btn-space">Dues Paid</button>
+          className="btn btn-sm btn-success btn-space">
+          Dues Paid
+        </button>
         <button
           onClick={this.photoTaken}
-          className="btn btn-sm btn-default btn-space">Photo Taken</button>
+          className="btn btn-sm btn-default btn-space">
+          Photo Taken
+        </button>
         <button
           onClick={this.d4hCreated}
-          className="btn btn-sm btn-success btn-space">D4H created</button>
+          className="btn btn-sm btn-success btn-space">
+          D4H created
+        </button>
+        <button
+          onClick={this.destroy}
+          className="btn btn-sm btn-danger btn-space">
+          Delete
+        </button>
       </div>
     </div>`
