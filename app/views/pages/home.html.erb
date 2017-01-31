@@ -23,7 +23,7 @@
         <p><%= @paragraphs[i].body.html_safe if @paragraphs[i] %></p>
       <% elsif i%2 == 0 %>
         <div class="col-md-8">
-          <img src="<%= @images[i-1].filename %>">
+          <img src="<%= @images[i-1].filename if @images[i-1] %>">
         </div>
         <div class="col-md-4">
           <div class="pnw-wrap">
