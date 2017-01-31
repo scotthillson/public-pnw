@@ -35,3 +35,5 @@ gem 'react-rails'
 gem 'httparty'
 # because lint
 gem 'coffeelint'
+# capistrano
+gem 'capistrano'

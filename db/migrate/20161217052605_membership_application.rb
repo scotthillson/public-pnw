@@ -116,7 +116,6 @@ class MembershipApplication < ActiveRecord::Migration
     add_column :members, :emergency_two, :string
     add_column :members, :emergency_phone_two, :string
     add_column :members, :emergency_relationship_two, :string
-    add_column :members, :updated_at, :datetime
     
   end
 end
