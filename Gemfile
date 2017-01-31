@@ -36,4 +36,6 @@ gem 'httparty'
 # because lint
 gem 'coffeelint'
 # because everyone wants es6
-gem 'eslint'
+gem 'eslint-rails'
+# capistrano
+gem 'capistrano'
