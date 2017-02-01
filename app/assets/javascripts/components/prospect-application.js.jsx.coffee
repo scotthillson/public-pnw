@@ -84,7 +84,7 @@ window.ProspectApplication = React.createClass
   wordChecks: (field) ->
     if !@state.fields[field].blank and !@state.fields[field].value?
       @showErrors(field)
-    else if /^[a-zA-z\s]+$/.test(@state.fields[field].value)
+    else if /^[a-zA-z\s._-]+$/.test(@state.fields[field].value)
       @fixErrors(field)
     else
       @showErrors(field)
@@ -100,6 +100,26 @@ window.ProspectApplication = React.createClass
       @fixErrors(field)
     else
       @showErrors(field)
+  
+  mixChecks: (field) ->
+    if /^[a-zA-z\s\d._-]+$/.test(@state.fields[field].value) and @state.fields[field].value?
+      @fixErrors(field)
+    else
+      @showErrors(field)
+  
+  stateChecks: (field) ->
+    if /^[A-z]+$/.test(@state.fields[field].value) and @state.fields[field].value?
+      @fixErrors(field)
+    else
+      @showErrors(field)
+  
+  lengthChecks: (field) ->
+    unless @state.fields[field].value?
+      return @showErrors(field)
+    @fixErrors(field)
+  
+  skipChecks: ->
+    0
   
   checkboxes: (field) ->
     if @state.fields[field].value is "true"
@@ -118,26 +138,6 @@ window.ProspectApplication = React.createClass
     unless @state.fields[field].value is 'true'
       return @showErrors(field)
     @fixErrors(field)
-  
-  mixChecks: (field) ->
-    if /^[a-zA-z\s\d-]+$/.test(@state.fields[field].value) and @state.fields[field].value?
-      @fixErrors(field)
-    else
-      @showErrors(field)
-  
-  stateChecks: (field) ->
-    if /^[A-z]+$/.test(@state.fields[field].value) and @state.fields[field].value?
-      @fixErrors(field)
-    else
-      @showErrors(field)
-  
-  lengthChecks: (field) ->
-    unless @state.fields[field].value?
-      return @showErrors(field)
-    @fixErrors(field)
-  
-  skipChecks: ->
-    0
   
   startSubmit: ->
     errors = 0
