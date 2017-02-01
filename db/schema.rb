@@ -202,8 +202,8 @@ ActiveRecord::Schema.define(version: 20170126191129) do
     t.string   "title",                      limit: 255
     t.string   "image",                      limit: 255
     t.string   "image_big",                  limit: 255
-    t.integer  "created_by"
     t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "application_id"
     t.integer  "status_id"
     t.boolean  "on_call"
@@ -223,7 +223,6 @@ ActiveRecord::Schema.define(version: 20170126191129) do
     t.string   "emergency_two"
     t.string   "emergency_phone_two"
     t.string   "emergency_relationship_two"
-    t.datetime "updated_at"
     t.string   "email"
   end
 
@@ -231,7 +230,7 @@ ActiveRecord::Schema.define(version: 20170126191129) do
     t.string   "name",       limit: 255
     t.string   "body",       limit: 255
     t.integer  "active"
-    t.integer  "created_by"
+    t.string   "created_by", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -240,10 +239,9 @@ ActiveRecord::Schema.define(version: 20170126191129) do
     t.string   "title",      limit: 255
     t.string   "author",     limit: 255
     t.string   "body",       limit: 255
-    t.boolean  "active"
-    t.integer  "created_by"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active"
   end
 
   create_table "rentals", force: :cascade do |t|
@@ -261,11 +259,10 @@ ActiveRecord::Schema.define(version: 20170126191129) do
     t.string   "title",       limit: 255
     t.string   "author",      limit: 255
     t.string   "body",        limit: 255
-    t.string   "search_date", limit: 255
-    t.boolean  "active"
-    t.integer  "creatd_by"
+    t.date     "search_date", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active"
     t.integer  "incident_id"
     t.string   "reference"
   end

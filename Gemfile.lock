@@ -195,6 +195,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.3)
   seed_dump
   simple_calendar
+  sprockets-rails
   sqlite3
   turbolinks
   twilio-ruby

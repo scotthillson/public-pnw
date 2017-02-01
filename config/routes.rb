@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
   
   resources :applications
-    get 'new_prospect_application', to: 'applications#prospect_application'
+    get 'prospect_application', to: 'applications#prospect_application'
     post 'submit_new_member_application', to: 'applications#submit_application'
   
   resources :carpools, constraints: {format: :html}

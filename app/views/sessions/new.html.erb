@@ -1,15 +1,15 @@
 <h2 class="text-center">Sign In</h2>
 <%= form_tag sessions_path, style: 'width:300px;margin:auto', class: 'text-center' do %>
-  <p>
-    <%= label_tag :email %>
+  <div>
+    <label>Email</label>
     <br>
     <%= text_field_tag :email, params[:email], class: 'form-control' %>
-  </p>
-  <p>
-    <%= label_tag :password %>
+  </div>
+  <div>
+    <label>Password</label>
     <br>
     <%= password_field_tag :password, nil, class: 'form-control' %>
-  </p>
+  </div>
   <input name="commit" type="submit" value="Log In" class="btn btn-sm btn-primary">
   <%= link_to 'Forgot Password?', forgot_password_path, class: 'btn btn-default ' %>
 <% end %>

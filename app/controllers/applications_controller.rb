@@ -1,5 +1,7 @@
 class ApplicationsController < ApplicationController
   
+  before_action :advanced_only
+  
   def index
     @applications = Application.where("status is not 'archived'")
   end
@@ -11,7 +13,7 @@ class ApplicationsController < ApplicationController
   end
   
   def prospect_application
-    render component: 'ApplicationLanding'
+    render component: "ApplicationLanding"
   end
   
   def submit_application

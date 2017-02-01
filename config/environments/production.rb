@@ -1,14 +1,13 @@
 Rails.application.configure do
   
+  config.react.variant = :production
+  
   # Settings specified here will take precedence over those in config/application.rb.
   
   # Code is not reloaded between requests.
   config.cache_classes = true
   
-  # Eager load code on boot. This eager loads most of Rails and
-  # your application in memory, allowing both threaded web servers
-  # and those relying on copy on write to perform better.
-  # Rake tasks automatically ignore this option for performance.
+  # eager load on boot, make go faster.
   config.eager_load = true
   
   # Full error reports are disabled and caching is turned on.
@@ -20,15 +19,15 @@ Rails.application.configure do
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
   # config.action_dispatch.rack_cache = true
   
-  # Disable Rails's static asset server (Apache or nginx will already do this).
+  # set to true to disable Rails's static asset server (Apache or nginx will already do this).
   config.serve_static_files = true
   
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
-  # config.assets.css_compressor = :sass
+  # config.assets.js_compressor = :uglifier
+  config.assets.css_compressor = :sass
   
-  # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  # fallback to assets pipeline if a precompiled asset is missed.
+  config.assets.compile = true
   
   # Generate digests for assets URLs.
   config.assets.digest = true
