@@ -39,3 +39,5 @@ gem 'coffeelint'
 gem 'capistrano'
 # wtf are sprockets
 gem 'sprockets-rails', :require => 'sprockets/railtie'
+# throttle that shit!
+gem 'rack-attack'
