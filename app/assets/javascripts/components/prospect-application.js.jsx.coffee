@@ -134,8 +134,7 @@ window.ProspectApplication = React.createClass
     @setState(newState, @sanityChecks)
   
   checkboxChecks: (field) ->
-    console.log @state.fields[field].value
-    unless @state.fields[field].value is 'true'
+    unless @state.fields[field].value.toString() is 'true'
       return @showErrors(field)
     @fixErrors(field)
   
@@ -731,26 +730,26 @@ window.ProspectApplication = React.createClass
           </div>
         </div>
         <div className="row form-group">
-          <div className="col-md-1">
-            <input
-              type="checkbox"
-              value={this.state.fields['liability'].value}
-              onChange={this.fieldChange.bind(this, 'liability', 'checkboxChecks')}
+          <div className="col-md-4">
+            <SharedCheckbox
+              checked={this.state.fields['liability'].value}
+              field="liability"
+              clickHandler={this.checkboxes}
             />
           </div>
-          <div className="col-md-11">
+          <div className="col-md-8">
             <label name="liability">Pacific Northwest Search and Rescue does not provide medical, liability or disability insurance for any members or visitors at group functions. I acknowledge that I am responsible for my own safety and any personal insurance I deem necessary.</label>
           </div>
         </div>
         <div className="row form-group">
-          <div className="col-md-1">
-            <input
-              type="checkbox"
-              value={this.state.fields['acknowledge'].value}
-              onChange={this.fieldChange.bind(this, 'acknowledge', 'checkboxChecks')}
-              />
+          <div className="col-md-4">
+            <SharedCheckbox
+              checked={this.state.fields['acknowledge'].value}
+              field="acknowledge"
+              clickHandler={this.checkboxes}
+            />
           </div>
-          <div className="col-md-11">
+          <div className="col-md-8">
             <label name="acknowledge">By submitting this application I certify that the information set forth in this application is true and complete to the best of my knowledge.</label>
           </div>
         </div>

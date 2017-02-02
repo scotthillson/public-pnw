@@ -10,11 +10,7 @@ window.ApplicationLanding = React.createClass
       data: data
       context: this
       success: (data) ->
-        console.log data
-        if data.errors
-          for key, error of data.errors
-            console.log("#{key} #{error}")
-        else if data.success == true
+        if data.success == true
           @setState(successfulSubmit: true)
       error: (jqXHR, textStatus, errorThrown) ->
         console.log(jqXHR)
