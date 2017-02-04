@@ -729,28 +729,28 @@ window.ProspectApplication = React.createClass
             </div>
           </div>
         </div>
-        <div className="row form-group">
-          <div className="col-md-4">
+        <div className="row">
+          <div className="col-md-2">
             <SharedCheckbox
               checked={this.state.fields['liability'].value}
               field="liability"
               clickHandler={this.checkboxes}
             />
           </div>
-          <div className="col-md-8">
-            <label name="liability">Pacific Northwest Search and Rescue does not provide medical, liability or disability insurance for any members or visitors at group functions. I acknowledge that I am responsible for my own safety and any personal insurance I deem necessary.</label>
+          <div className="col-md-10">
+            <label name="liability" style={{padding: '5px'}}>Pacific Northwest Search and Rescue does not provide medical, liability or disability insurance for any members or visitors at group functions. I acknowledge that I am responsible for my own safety and any personal insurance I deem necessary.</label>
           </div>
         </div>
-        <div className="row form-group">
-          <div className="col-md-4">
+        <div className="row">
+          <div className="col-md-2">
             <SharedCheckbox
               checked={this.state.fields['acknowledge'].value}
               field="acknowledge"
               clickHandler={this.checkboxes}
             />
           </div>
-          <div className="col-md-8">
-            <label name="acknowledge">By submitting this application I certify that the information set forth in this application is true and complete to the best of my knowledge.</label>
+          <div className="col-md-10">
+            <label name="acknowledge" style={{padding: '5px'}}>By submitting this application I certify that the information set forth in this application is true and complete to the best of my knowledge.</label>
           </div>
         </div>
         <input className="btn btn-primary" value="Submit Application" type="button" onClick={this.startSubmit} />
