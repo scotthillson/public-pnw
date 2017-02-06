@@ -8,7 +8,7 @@ gem 'jquery-turbolinks'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -30,7 +30,7 @@ gem 'rails', '4.2.0'
 # twilio
 gem 'twilio-ruby'
 # reactify
-gem 'react-rails'
+gem 'react-rails', '1.6.2'
 # party with http
 gem 'httparty'
 # because lint
@@ -38,6 +38,10 @@ gem 'coffeelint'
 # capistrano
 gem 'capistrano'
 # wtf are sprockets
-gem 'sprockets-rails'
+gem 'sprockets'
 # throttle that shit!
 gem 'rack-attack'
+
+gem 'sprockets-es6'
+
+gem 'sprockets-rails'

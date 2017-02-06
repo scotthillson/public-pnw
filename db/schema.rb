@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170126191129) do
+ActiveRecord::Schema.define(version: 20170204015113) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -226,6 +226,29 @@ ActiveRecord::Schema.define(version: 20170126191129) do
     t.string   "email"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.string   "sid"
+    t.datetime "date_created"
+    t.datetime "date_updated"
+    t.datetime "date_sent"
+    t.string   "account"
+    t.string   "messaging_service_sid"
+    t.string   "from"
+    t.string   "to"
+    t.string   "body"
+    t.string   "num_media"
+    t.string   "num_segments"
+    t.string   "status"
+    t.string   "error_code"
+    t.string   "error_message"
+    t.string   "direction"
+    t.string   "price"
+    t.string   "price_unit"
+    t.string   "api_version"
+    t.string   "uri"
+    t.string   "subresource_uri"
+  end
+
   create_table "pages", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "body",       limit: 255
@@ -298,16 +321,6 @@ ActiveRecord::Schema.define(version: 20170126191129) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "activated",                   default: false
-  end
-
-  create_table "vacations", force: :cascade do |t|
-    t.string   "repeats"
-    t.string   "notes"
-    t.integer  "member_id"
-    t.datetime "starts_at"
-    t.datetime "ends_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
 end
