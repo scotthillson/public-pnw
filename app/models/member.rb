@@ -21,7 +21,7 @@ class Member < ActiveRecord::Base
       return if data.length < 1
       data.each do |member|
         if !processed_rows.include? member["id"]
-          public_send(update_type,member)
+          public_send(update_type,member) #public send is the dynamic method caller
           processed_rows.push member["id"]
         end
       end

@@ -1,7 +1,10 @@
 window.Messages = React.createClass
 
   getInitialState: ->
-    {messages: []}
+    {
+      body: ''
+      messages: []
+    }
   
   componentDidMount: ->
     $.ajax {
@@ -15,5 +18,15 @@ window.Messages = React.createClass
         console.log jqXHR
       }
   
+  bodyChange: ->
+    true
+  
   render: ->
-    `<h3>Loading!</h3>`
+    `<div>
+      <textarea
+        name="body"
+        className="form-control"
+        value={this.state.body}
+        onChange={this.bodyChange}
+      />
+    </div>`

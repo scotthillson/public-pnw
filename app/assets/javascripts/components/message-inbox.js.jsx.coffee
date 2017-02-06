@@ -23,6 +23,9 @@ window.MessageInbox = React.createClass
       <td>{message.body}</td>
       <td>{message.status}</td>
       <td>{message.direction}</td>
+      <td>{message.sid}</td>
+      <td>{message.account}</td>
+      <td>{message.messaging_service_sid}</td>
     </tr>`
   
   render: ->
@@ -39,6 +42,9 @@ window.MessageInbox = React.createClass
             <th>body</th>
             <th>Status</th>
             <th>Direction</th>
+            <th>SID</th>
+            <th>Account</th>
+            <th>Service</th>
           </tr>
         </thead>
         <tbody>
