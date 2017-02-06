@@ -1,4 +1,4 @@
-class Members extends React.Component {
+class Members extends ViewComponent {
 
   constructor() {
     super();

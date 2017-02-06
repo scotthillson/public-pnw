@@ -1,22 +1,28 @@
-window.MessageInbox = React.createClass
-
-  getInitialState: ->
-    {messages: []}
+class MessageInbox extends ViewComponent {
   
-  componentDidMount: ->
-    $.ajax {
+  constructor() {
+    super();
+    this.state = {
+      mssages: []
+    };
+  }
+  
+  componentDidMount() {
+    $.ajax({
       method: 'GET'
       url: '/messages'
       dataType: 'json'
       context: this
-      success: (data) ->
-        @setState(messages: data)
-      error: (jqXHR, ajaxSettings, thrownError)->
-        console.log jqXHR
+      success: (data) {
+        this.setState(messages: data);
       }
+      error: (jqXHR, ajaxSettings, thrownError) {
+        console.log(jqXHR);
+      }})
+  }
   
-  messageFor: (message) ->
-    `<tr key={message.sid}>
+  messageFor (message) {
+    return (<tr key={message.sid}>
       <td>{message.date_created}</td>
       <td>{message.from}</td>
       <td>{message.date_sent}</td>
@@ -26,14 +32,14 @@ window.MessageInbox = React.createClass
       <td>{message.sid}</td>
       <td>{message.account}</td>
       <td>{message.messaging_service_sid}</td>
-    </tr>`
-  
-  render: ->
-    if @state.messages.length > 0
-      messages = []
+    </tr>)
+  }
+  render(){
+    if (this.state.messages.length > 0){
+      let messages = [];
       for message in @state.messages
         messages.push @messageFor(message)
-      `<table className="table">
+      return(<table className="table">
         <thead>
           <tr>
             <th>Created</th>
@@ -50,6 +56,12 @@ window.MessageInbox = React.createClass
         <tbody>
           {messages}
         </tbody>
-      </table>`
-    else
-      `<h3>Loading!</h3>`
+      </table>);
+    }
+    else{
+      return (<h3>Loading!</h3>);
+    }
+  }
+}
+
+window.MessageInbox = MessageInbox;
