@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
-# Image magick stuff!
+# Image magick stuff for good
 gem 'mini_magick'
-# Use seed dump to make our seed file out of development data
-gem 'seed_dump'
 # We need jquery and turbolinks to play nice
 gem 'jquery-turbolinks'
 # Use sqlite3 as the database for Active Record
@@ -17,8 +15,6 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt'
 # sassy css for font awesome
@@ -39,9 +35,11 @@ gem 'coffeelint'
 gem 'capistrano'
 # wtf are sprockets
 gem 'sprockets'
-# throttle that shit!
+# throttle that shady shit!
 gem 'rack-attack'
 
 gem 'sprockets-es6'
 
 gem 'sprockets-rails'
+# rspec for tests
+gem 'rspec-rails'

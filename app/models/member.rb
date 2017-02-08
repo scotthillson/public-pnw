@@ -1,3 +1,5 @@
+# A member is a local copy of D4H team memmbers
+
 class Member < ActiveRecord::Base
   
   validates_presence_of :name
@@ -7,60 +9,21 @@ class Member < ActiveRecord::Base
     MobileAuthorization.new_authorization(self)
   end
   
-  def ingest_authoriation_code
+  def ingest_authorization_code
+    # what was I doing here?
   end
   
-  def self.get_members(update_type)
-    offset = 0
-    status_code = 200
-    processed_rows = []
-    while status_code == 200
-      result = D4h.get_members(offset)
-      status_code = result["statusCode"]
-      data = result["data"]
-      return if data.length < 1
-      data.each do |member|
-        if !processed_rows.include? member["id"]
-          public_send(update_type,member) #public send is the dynamic method caller
-          processed_rows.push member["id"]
-        end
-      end
-      offset += 20
+  def self.get_members
+    if DateTime.now.to_i - D4h.first.last_member_sync.to_i > 999
+      D4h.offsetter('members', method(:update_member))
+      D4h.first.last_member_sync = DateTime.now
+      D4h.first.save
     end
   end
   
-  def self.fast_update(remote_member)
+  def self.update_member(remote_member)
     member = Member.find_by_d4h_id(remote_member["id"])
-    if member
-      member.update(on_call: remote_member["on_call"], status_id: remote_member["status"]["id"])
-    else
-      create_member(remote_member)
-    end
-  end
-  
-  def self.big_update(results)
-    results.each do |remote_member|
-      member = Member.find_by_d4h_id(remote_member["id"])
-      if member
-        member.name = remote_member["name"]
-        member.address = remote_member["address"]
-        member.d4h_id = remote_member["id"]
-        member.email = remote_member["email"]
-        member.home_phone = remote_member["homephone"]
-        member.mobile_phone = remote_member["mobilephone"]
-        member.on_call = remote_member["on_call"]
-        member.reference = remote_member["ref"]
-        member.status_id = remote_member["status"]["id"]
-        member.work_phone = remote_member["workphone"]
-        member.save
-      else
-        create_member(remote_member)
-      end
-    end
-  end
-  
-  def self.create_member(remote_member)
-    member = new
+    member ||= new
     member.name = remote_member["name"]
     member.address = remote_member["address"]
     member.d4h_id = remote_member["id"]

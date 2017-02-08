@@ -9,7 +9,7 @@ class MembersController < ApplicationController
         render component: 'Members'
       end
       format.json do
-        Member.get_members('fast_update')
+        Member.get_members
         render json: Member.where('d4h_id is not null').order(:name)
       end
     end

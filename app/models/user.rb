@@ -1,3 +1,5 @@
+# A user is the pnwsar.org account for each member.
+
 class User < ActiveRecord::Base
   
   has_secure_password validations: false

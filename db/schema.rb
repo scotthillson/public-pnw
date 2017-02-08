@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170204015113) do
+ActiveRecord::Schema.define(version: 20170208022513) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -109,6 +109,16 @@ ActiveRecord::Schema.define(version: 20170204015113) do
     t.datetime "created_at"
   end
 
+  create_table "d4hs", force: :cascade do |t|
+    t.datetime "last_activity_sync"
+    t.datetime "last_group_sync"
+    t.datetime "last_member_sync"
+    t.datetime "last_incident_sync"
+    t.datetime "last_search_sync"
+    t.datetime "updated_at"
+    t.datetime "created_at"
+  end
+
   create_table "discussions", force: :cascade do |t|
     t.text     "body"
     t.string   "subject",    limit: 255
@@ -145,6 +155,7 @@ ActiveRecord::Schema.define(version: 20170204015113) do
     t.integer  "created_by"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "d4h_id"
   end
 
   create_table "forms", force: :cascade do |t|
