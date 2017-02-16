@@ -1,5 +1,5 @@
-class PPPProspectApplication extends ViewComponent {
-  
+class DraftProspectApplication extends ViewComponent {
+
   constructor() {
     super();
     this.bindThisToComponent(
@@ -814,3 +814,5 @@ class PPPProspectApplication extends ViewComponent {
     )
   }
 }
+
+// window.ProspectApplication = ProspectApplication;

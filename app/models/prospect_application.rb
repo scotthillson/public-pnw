@@ -1,4 +1,4 @@
-class Application < ActiveRecord::Base
+class ProspectApplication < ActiveRecord::Base
   
   validates_presence_of :name
   validates_presence_of :email

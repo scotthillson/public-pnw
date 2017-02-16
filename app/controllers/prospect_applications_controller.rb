@@ -1,13 +1,20 @@
-class ApplicationsController < ApplicationController
+class ProspectApplicationsController < ApplicationController
   
   before_action :advanced_only
   
   def index
-    @applications = Application.where("status is not 'archived'")
+    respond_to do |format|
+      format.html do
+        render component: 'ProspectApplications'
+      end
+      format.json do
+        render json: ProspectApplication.all
+      end
+    end
   end
   
   def show
-    application = Application.find params[:id]
+    application = ProspectApplication.find params[:id]
     fields = Hash[application.attributes.map{|k,v| [k.camelize(:lower), v]}]
     render component: 'ReviewProspectApplication', props: { fields: fields}
   end
@@ -18,7 +25,7 @@ class ApplicationsController < ApplicationController
   
   def submit_application
     respond_to do |format|
-      application = Application.new(application_params)
+      application = ProspectApplication.new(application_params)
       if application.save
         format.json { render json: {success: true}, status: :ok }
       else

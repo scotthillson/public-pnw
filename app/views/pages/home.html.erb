@@ -16,6 +16,14 @@
     <i class="fa fa-chevron-right fa-6"></i>
   </div>
 </div>
+<div class="row text-center">
+  <a class="btn btn-info paypal-button">Donate to PNWSAR via Paypal</a>
+  <a href="/donate_vehicle" class="btn btn-info" target="_blank">Donate Your Car to PNWSAR</a>
+  <%= form_tag 'https://www.paypal.com/cgi-bin/webscr', method: 'post', id: 'paypal-form', target: '_blank' do %>
+    <input name="cmd" type="hidden" value="_s-xclick">
+    <input name="hosted_button_id" type="hidden" value="9JXFT9UC9NUFC">
+  <% end %>
+</div>
 <div class="container-fluid">
   <% @paragraphs.each_with_index do |p,i| %>
     <div class="row pnw-wrap">
@@ -58,10 +66,4 @@
       <% end %>
     </div>
   </div>
-  <div class="btn btn-block btn-primary paypal-button">Donate to PNWSAR via Paypal</div>
-  <%= form_tag 'https://www.paypal.com/cgi-bin/webscr', method: 'post', id: 'paypal-form', target: '_blank' do %>
-    <input name="cmd" type="hidden" value="_s-xclick">
-    <input name="hosted_button_id" type="hidden" value="9JXFT9UC9NUFC">
-  <% end %>
-  <%= link_to 'Donate Your Car', '/donate_vehicle', target: '_blank', class: 'btn btn-info btn-block' %>
 </div>

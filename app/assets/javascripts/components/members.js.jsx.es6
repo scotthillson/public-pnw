@@ -1,22 +1,23 @@
 class Members extends ViewComponent {
-  
+
   constructor() {
     super();
     this.state = {
       members: []
     };
   }
-  
+
   componentDidMount() {
     $.ajax({
-      method: "GET",
-      url: "/members",
-      dataType: "json",
-      success: (data)=>{
-        this.setState({members: data});
+      method: 'get',
+      url: '/members',
+      dataType: 'json',
+      success: (data) => {
+        this.setState({ members: data });
       },
-      error: (jqXHR, ajaxSettings, thrownError)=>{
-        console.log(jqXHR);}
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
     });
   }
   

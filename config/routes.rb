@@ -10,9 +10,9 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :applications
-    get 'prospect_application', to: 'applications#prospect_application'
-    post 'submit_new_member_application', to: 'applications#submit_application'
+  resources :prospect_applications
+    get 'prospect_application', to: 'prospect_applications#prospect_application'
+    post 'submit_new_member_application', to: 'prospect_applications#submit_application'
   
   resources :carpools, constraints: {format: :html}
       get 'carpools/:id/reserve', to: 'carpools#reserve', as: :reserve_seat

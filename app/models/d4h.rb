@@ -1,6 +1,6 @@
 class D4h < ActiveRecord::Base
   
-  def self.offsetter(resource, callback)
+  def self.offsetter(resource, callback, finish=null)
     offset = 0
     status_code = 200
     processed_rows = []
@@ -18,6 +18,7 @@ class D4h < ActiveRecord::Base
       end
       offset += 20
     end
+    finish.call(processed_rows) if finish
   end
   
   def self.get_resources(resource, offset)

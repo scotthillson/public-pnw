@@ -18,9 +18,9 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.created_by = current_user
     if @event.save
-      redirect_to @event
+      render json: @event
     else
-      render :new
+      render json: @event
     end
   end
   
@@ -38,15 +38,18 @@ class EventsController < ApplicationController
   def update
     if @event.update(event_params)
       @event.updated_by = current_user
-      redirect_to @event
+      render json: @event
     else
-      render :edit
+      render json: @event
     end
   end
   
   def destroy
-    @event.destroy
-    redirect_to events_url
+    if @event.destroy
+      render json: {success: true}
+    else
+      render json: {success: false}
+    end
   end
   
   private
@@ -56,7 +59,21 @@ class EventsController < ApplicationController
   end
   
   def event_params
-    params.require(:event).permit(:name,:category,:start_hour,:start_time,:start_date,:end_date,:address,:notes,:weather,:hours,:link,:miles)
+    params.permit(
+      :name,
+      :category,
+      :start_hour,
+      :start_time,
+      :start_date,
+      :end_date,
+      :address,
+      :notes,
+      :weather,
+      :hours,
+      :link,
+      :miles,
+      :d4h_id
+    )
   end
   
 end

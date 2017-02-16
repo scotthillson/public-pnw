@@ -2,6 +2,8 @@
 
 class Activity < ActiveRecord::Base
   
+  has_one :event
+  
   def self.get_activities
     if DateTime.now - D4h.first.last_activity_sync > 2000
       D4h.offsetter('activities', method(:update_activity))

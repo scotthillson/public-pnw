@@ -9,7 +9,7 @@ class ActivitiesController < ApplicationController
       end
       format.json do
         #Activity.get_activities
-        year = Date.today.year - 1
+        year = Date.today.year
         render json: Activity.where("start_on > ?","#{year}-01-01").order(:start_on)
       end
     end

@@ -1,12 +1,12 @@
 class MessageInbox extends ViewComponent {
-  
+
   constructor() {
     super();
     this.state = {
       mssages: []
     };
   }
-  
+
   componentDidMount() {
     $.ajax({
       method: 'GET',
@@ -20,7 +20,7 @@ class MessageInbox extends ViewComponent {
         console.log(jqXHR);
       }})
   }
-  
+
   message(message) {
     return (<tr key={message.sid}>
       <td>{message.date_created}</td>
@@ -34,7 +34,7 @@ class MessageInbox extends ViewComponent {
       <td>{message.messaging_service_sid}</td>
     </tr>)
   }
-  
+
   render(){
     return (<h3>Loading!</h3>);
   }

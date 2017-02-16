@@ -15,14 +15,14 @@ class Member < ActiveRecord::Base
   
   def self.get_members
     if DateTime.now.to_i - D4h.first.last_member_sync.to_i > 999
-      D4h.offsetter('members', method(:update_member))
+      D4h.offsetter('members', method(:update_member), method(:sync_members))
       D4h.first.last_member_sync = DateTime.now
       D4h.first.save
     end
   end
   
   def self.update_member(remote_member)
-    member = Member.find_by_d4h_id(remote_member["id"])
+    member = find_by_d4h_id(remote_member["id"])
     member ||= new
     member.name = remote_member["name"]
     member.address = remote_member["address"]
@@ -37,8 +37,12 @@ class Member < ActiveRecord::Base
     member.save
   end
   
+  def self.sync_members(ids)
+    find_by_d4h_id((all.pluck(:d4h_id) - ids)).update_all(d4h_id: null)
+  end
+  
   def self.sync_with_users
-    Member.where(statud_is: 1).each do |member|
+    where(statud_is: 1).each do |member|
       unless User.where(email: member.email)
         user = User.new(email: member.email.downcase, name: member.name)
         user.save
