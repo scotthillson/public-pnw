@@ -1,4 +1,4 @@
-class DraftProspectApplication extends ViewComponent {
+class ProspectApplication extends ViewComponent {
 
   constructor() {
     super();
@@ -177,8 +177,8 @@ class DraftProspectApplication extends ViewComponent {
   
   startSubmit() {
     let errors = 0;
-    for (var field of Array.from(this.state.fields)){
-      errors += this[field.check](field.key);
+    for (var key of Object.keys(this.state.fields)){
+      errors += this[this.state.fields[key].check](key);
     }
     if (errors < 1){
       this.finishSubmit();
@@ -189,7 +189,6 @@ class DraftProspectApplication extends ViewComponent {
   }
   
   finishSubmit() {
-    console.log('helloooooo');
     this.props.submitApplication(this.paramsForRuby())
   }
   
@@ -815,4 +814,4 @@ class DraftProspectApplication extends ViewComponent {
   }
 }
 
-// window.ProspectApplication = ProspectApplication;
+window.ProspectApplication = ProspectApplication;

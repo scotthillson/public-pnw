@@ -1,5 +1,12 @@
 class SharedCheckbox extends ViewComponent {
 
+  constructor() {
+    super();
+    this.bindThisToComponent(
+      'clickHandler',
+    );
+  }
+
   clickHandler() {
     this.props.clickHandler(this.props.field);
   }
