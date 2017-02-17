@@ -16,8 +16,9 @@ class Member < ActiveRecord::Base
   def self.get_members
     if DateTime.now.to_i - D4h.first.last_member_sync.to_i > 999
       D4h.offsetter('members', method(:update_member), method(:sync_members))
-      D4h.first.last_member_sync = DateTime.now
-      D4h.first.save
+      track = D4h.first
+      track.last_member_sync = DateTime.now
+      track.save
     end
   end
   

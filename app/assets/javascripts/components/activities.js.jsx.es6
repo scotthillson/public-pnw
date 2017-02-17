@@ -3,11 +3,13 @@ class Activities extends ViewComponent {
   constructor() {
     super();
     this.bindThisToComponent(
-      'cancel'
+      'cancel',
+      'saveActivity'
     );
     this.state = {
       activities: [],
-      activity: null
+      activity: null,
+      loading: true
     };
   }
 
@@ -15,7 +17,35 @@ class Activities extends ViewComponent {
     this.loadActivities();
   }
 
-  activityButton(activity) { 
+  loadActivities() {
+    $.ajax({
+      method: 'GET',
+      url: '/activities',
+      dataType: 'json',
+      success: (data) => {
+        this.setState({ activities: data }, this.updateActivities);
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
+  updateActivities(){
+    $.ajax({
+      method: 'GET',
+      url: '/update_activities',
+      dataType: 'json',
+      success: (data) => {
+        this.setState({ activities: data, loading: false });
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
+  activityButton(activity) {
     if (activity.event) {
       return (
         <div className="btn btn-xs btn-warning">edit</div>
@@ -29,7 +59,7 @@ class Activities extends ViewComponent {
       </div>
     );
   }
-  
+
   activity(activity) {
     return (
       <tr key={activity.d4h_id}>
@@ -40,27 +70,6 @@ class Activities extends ViewComponent {
     );
   }
 
-  updateActivities(data) {
-    let activities = _.clone(this.state.activities);
-    let activity = _.find(activities, {d4h_id: data.d4h_id})
-    activity = data;
-    this.setState({ activities: activities, activity: null });
-  }
-
-  loadActivities() {
-    $.ajax({
-      method: 'GET',
-      url: '/activities',
-      dataType: 'json',
-      success: (data) => {
-        this.setState({ activities: data });
-      },
-      error: (jqXHR) => {
-        console.log(jqXHR);
-      }
-    });
-  }
-
   createActivity(activity) {
     this.setState({ activity: activity });
   }
@@ -69,14 +78,16 @@ class Activities extends ViewComponent {
     this.setState({ activity: null });
   }
 
-  saveActivity(data) {
+  saveActivity() {
+    let data = this.state.activity;
+    data.activity_id = data.id;
     $.ajax({
       method: 'POST',
       url: '/events',
       dataType: 'json',
-      data: this.state.activity,
-      success: (data) => {
-        this.updateActivities(data);
+      data: data,
+      success: () => {
+        this.setState({ activity: null }, this.updateActivities());
       },
       error: (jqXHR) => {
         console.log(jqXHR);
@@ -91,38 +102,30 @@ class Activities extends ViewComponent {
   activityForm(){
     return(
       <div>
-        <form className="col-md-10 form-horizontal text-center" role="form">
-          <div className="row">
-            <div className="col-md-6">
-              <label>Title</label>
-              <div>
-                <input
-                  className="form-control"
-                  type="text"
-                  value={this.state.activity.reference}
-                  onChange={this.fieldChange.bind(this, 'reference')}
-                />
-              </div>
-            </div>
+        <form className="text-center">
+          <div className="form-group">
+            <label>Title</label>
+            <input
+              className="form-control"
+              type="text"
+              value={this.state.activity.reference}
+              onChange={this.fieldChange.bind(this, 'reference')}
+            />
           </div>
-          <div className="row">
-            <div className="col-md-6">
-              <label>Description</label>
-              <div>
-                <input
-                  className="form-control"
-                  type="text"
-                  value={this.state.activity.description}
-                  onChange={this.fieldChange.bind(this, 'description')}
-                />
-              </div>
-            </div>
+          <div className="form-group">
+            <label>Description</label>
+            <input
+              className="form-control"
+              type="text"
+              value={this.state.activity.description}
+              onChange={this.fieldChange.bind(this, 'description')}
+            />
           </div>
           <input
             className="btn btn-primary"
             value="Save"
             type="button"
-            onClick={this.startSubmit}
+            onClick={this.saveActivity}
           />
           <input
             className="btn btn-warning"
@@ -135,32 +138,35 @@ class Activities extends ViewComponent {
     );
   }
 
+  loading() {
+    if (this.state.loading) {
+      return (
+        <img src="loading.gif" alt="loading" />
+      ); 
+    }
+  }
+
   render() {
     if (this.state.activity) {
       return this.activityForm();
     }
-    else if (this.state.activities.length > 0) {
-      let activities = [];
-      for (var activity of this.state.activities) {
-        activities.push(this.activity(activity));
-      }
-      return (
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Reference</th>
-              <th>Date</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {activities}
-          </tbody>
-        </table>
-      );
+    let activities = [];
+    for (var activity of this.state.activities) {
+      activities.push(this.activity(activity));
     }
-    return(
-      <h3>Loading!</h3>
+    return (
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Reference</th>
+            <th>Date</th>
+            <th>{this.loading()}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {activities}
+        </tbody>
+      </table>
     );
   }
 }

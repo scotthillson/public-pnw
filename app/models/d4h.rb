@@ -1,6 +1,6 @@
 class D4h < ActiveRecord::Base
   
-  def self.offsetter(resource, callback, finish=null)
+  def self.offsetter(resource, callback, finish=nil)
     offset = 0
     status_code = 200
     processed_rows = []
@@ -11,7 +11,6 @@ class D4h < ActiveRecord::Base
       return if data.length < 1
       data.each do |row|
         if !processed_rows.include? row["id"]
-          puts "--#{row}--"
           callback.call(row)
           processed_rows.push row["id"]
         end

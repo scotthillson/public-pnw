@@ -3,24 +3,43 @@ class Members extends ViewComponent {
   constructor() {
     super();
     this.state = {
-      members: []
+      members: [],
+      loading: true
     };
   }
 
   componentDidMount() {
+    this.loadMembers();
+  }
+
+  loadMembers() {
     $.ajax({
       method: 'get',
       url: '/members',
       dataType: 'json',
       success: (data) => {
-        this.setState({ members: data });
+        this.setState({ members: data }, this.updateMembers);
       },
       error: (jqXHR) => {
         console.log(jqXHR);
       }
     });
   }
-  
+
+  updateMembers() {
+    $.ajax({
+      method: 'get',
+      url: '/update_members',
+      dataType: 'json',
+      success: (data) => {
+        this.setState({ members: data, loading: false });
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
   memberRow(member) {
     let onCall = '';
     if (member.on_call && member.status_id == 1){
@@ -34,32 +53,40 @@ class Members extends ViewComponent {
       <td className="text-center">{onCall}</td>
       </tr>);
   }
-  
+
+  loading() {
+    if (this.state.loading) {
+      return (
+        <img src="loading.gif" alt="loading" />
+      ); 
+    }
+    return (
+      'Operational On Call'
+    )
+  }
+
   render() {
-    if (this.state.members.length > 0){
-      let members = [];
-      let onCall = _.filter(this.state.members, {on_call: true, status_id: 1}).length;
-      for (var member of this.state.members){
-        members.push(this.memberRow(member));
-      }
-      return (<table className="table">
+    let members = [];
+    //let onCall = _.filter(this.state.members, {on_call: true, status_id: 1}).length;
+    for (var member of this.state.members){
+      members.push(this.memberRow(member));
+    }
+    return (
+      <table className="table">
         <thead>
           <tr>
             <th>Name</th>
             <th>Mobile</th>
             <th>Email</th>
             <th>Position</th>
-            <th className="text-center">Operational On Call</th>
+            <th className="text-center">{this.loading()}</th>
           </tr>
         </thead>
         <tbody>
           {members}
         </tbody>
-      </table>);
-    }
-    else {
-      return(<h3>Loading!</h3>);
-    }
+      </table>
+    );
   }
 }
 

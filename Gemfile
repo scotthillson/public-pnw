@@ -31,7 +31,7 @@ gem 'react-rails', '1.6.2'
 # party with http
 gem 'httparty'
 # because lint
-gem 'coffeelint'
+gem 'eslint-rails'
 # capistrano
 gem 'capistrano'
 # throttle that shady shit!

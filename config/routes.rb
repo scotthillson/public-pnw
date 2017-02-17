@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   
   resources :activities
+    get 'update_activities', to: 'activities#update_activities'
   
   namespace :api do
     namespace :v1 do
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
   resources :incidents, constraints: {format: :html}
   
   resources :members
+    get 'update_members', to: 'members#update_members'
   
   resources :posts, constraints: {format: :html}
     get 'posts/:id/activate', to: 'posts#activate', as: 'activate_post'

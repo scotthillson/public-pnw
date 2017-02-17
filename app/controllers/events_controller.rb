@@ -64,15 +64,20 @@ class EventsController < ApplicationController
       :category,
       :start_hour,
       :start_time,
-      :start_date,
-      :end_date,
       :address,
       :notes,
       :weather,
       :hours,
       :link,
       :miles,
-      :d4h_id
+      :d4h_id,
+      :reference,
+      :description,
+      :lat,
+      :lng,
+      :start_on,
+      :end_on,
+      :activity_id
     )
   end
   
