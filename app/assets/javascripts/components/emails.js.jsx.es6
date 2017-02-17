@@ -38,27 +38,29 @@ class Emails extends ViewComponent {
       </tr>
     );
   }
-  
+
   render() {
     if (this.state.messages.length > 0) {
       let messages = [];
       for (var message of this.state.messages)
-        messages.push @messageFor(message)
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Created</th>
-            <th>From</th>
-            <th>Sent</th>
-            <th>body</th>
-            <th>Status</th>
-            <th>Direction</th>
-          </tr>
-        </thead>
-        <tbody>
-          {messages}
-        </tbody>
-      </table>
+        messages.push(this.messageFor(message));
+      return (
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Created</th>
+              <th>From</th>
+              <th>Sent</th>
+              <th>body</th>
+              <th>Status</th>
+              <th>Direction</th>
+            </tr>
+          </thead>
+          <tbody>
+            {messages}
+          </tbody>
+        </table>
+      );
     }
     return (
       <h3>Loading!</h3>

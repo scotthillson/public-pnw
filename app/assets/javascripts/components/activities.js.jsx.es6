@@ -2,11 +2,12 @@ class Activities extends ViewComponent {
 
   constructor() {
     super();
+    this.bindThisToComponent(
+      'cancel'
+    );
     this.state = {
       activities: [],
-      d4h_id: null,
-      new_name: null,
-      new_date: null
+      activity: null
     };
   }
 
@@ -23,7 +24,7 @@ class Activities extends ViewComponent {
     return (
       <div
         className="btn btn-xs btn-success"
-        onClick={this.saveActivity.bind(this,activity)}>
+        onClick={this.createActivity.bind(this,activity)}>
         add
       </div>
     );
@@ -43,7 +44,7 @@ class Activities extends ViewComponent {
     let activities = _.clone(this.state.activities);
     let activity = _.find(activities, {d4h_id: data.d4h_id})
     activity = data;
-    this.setState({ activities: activities });
+    this.setState({ activities: activities, activity: null });
   }
 
   loadActivities() {
@@ -59,13 +60,21 @@ class Activities extends ViewComponent {
       }
     });
   }
-  
+
+  createActivity(activity) {
+    this.setState({ activity: activity });
+  }
+
+  cancel() {
+    this.setState({ activity: null });
+  }
+
   saveActivity(data) {
     $.ajax({
       method: 'POST',
       url: '/events',
       dataType: 'json',
-      data: data,
+      data: this.state.activity,
       success: (data) => {
         this.updateActivities(data);
       },
@@ -74,9 +83,63 @@ class Activities extends ViewComponent {
       }
     });
   }
-  
+
+  fieldChange(data){
+    return true;
+  }
+
+  activityForm(){
+    return(
+      <div>
+        <form className="col-md-10 form-horizontal text-center" role="form">
+          <div className="row">
+            <div className="col-md-6">
+              <label>Title</label>
+              <div>
+                <input
+                  className="form-control"
+                  type="text"
+                  value={this.state.activity.reference}
+                  onChange={this.fieldChange.bind(this, 'reference')}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-6">
+              <label>Description</label>
+              <div>
+                <input
+                  className="form-control"
+                  type="text"
+                  value={this.state.activity.description}
+                  onChange={this.fieldChange.bind(this, 'description')}
+                />
+              </div>
+            </div>
+          </div>
+          <input
+            className="btn btn-primary"
+            value="Save"
+            type="button"
+            onClick={this.startSubmit}
+          />
+          <input
+            className="btn btn-warning"
+            value="Cancel"
+            type="button"
+            onClick={this.cancel}
+          />
+        </form>
+      </div>
+    );
+  }
+
   render() {
-    if (this.state.activities.length > 0) {
+    if (this.state.activity) {
+      return this.activityForm();
+    }
+    else if (this.state.activities.length > 0) {
       let activities = [];
       for (var activity of this.state.activities) {
         activities.push(this.activity(activity));

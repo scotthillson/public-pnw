@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+
 # Image magick stuff for good
 gem 'mini_magick'
 # We need jquery and turbolinks to play nice
@@ -33,13 +34,13 @@ gem 'httparty'
 gem 'coffeelint'
 # capistrano
 gem 'capistrano'
-# wtf are sprockets
-gem 'sprockets'
 # throttle that shady shit!
 gem 'rack-attack'
-
+# sprocks
 gem 'sprockets-es6'
-
+# you get the idea
 gem 'sprockets-rails'
 # rspec for tests
 gem 'rspec-rails'
+# lodash
+gem 'lodash-rails'
