@@ -2,7 +2,6 @@
   <%= link_to "Previous", url_for(params.merge(start_date: date_range.first - 1.day)), class: 'btn btn-xs btn-success' %>
   <div class="btn btn-xs btn-primary"><%= I18n.t("date.month_names")[start_date.month] %> <%= start_date.year %></div>
   <%= link_to "Next", url_for(params.merge(start_date: date_range.last + 1.day)), class: 'btn btn-xs btn-success' %>
-  <%= link_to "New Event", new_event_path, class: 'btn btn-xs btn-primary pull-right' %>
   <table class="table table-striped">
     <thead>
       <tr>

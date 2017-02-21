@@ -14,12 +14,22 @@ class Activity < ActiveRecord::Base
   end
   
   def self.update_activity(remote_activity)
-    activity = Activity.find_by_d4h_id remote_activity["id"]
+    activity = Activity.find_by_d4h_id remote_activity['id']
     activity ||= new
-    activity.d4h_id = remote_activity["id"]
-    activity.reference = remote_activity["ref"]
-    activity.description = remote_activity["description"]
-    activity.start_on = remote_activity["date"]
+    activity.d4h_id = remote_activity['id']
+    activity.lat = remote_activity['lat']
+    activity.lng = remote_activity['lng']
+    activity.gridref = remote_activity['gridref']
+    activity.address = remote_activity['streetaddress']
+    activity.city = remote_activity['townaddress']
+    activity.state = remote_activity['regionaddress']
+    activity.zip = remote_activity['postcodeaddress']
+    activity.country = remote_activity['countryaddress']
+    activity.type = remote_activity['activity']
+    activity.reference = remote_activity['ref']
+    activity.description = remote_activity['description']
+    activity.start_on = remote_activity['date']
+    activity.end_on = remote_activity['enddate']
     activity.save
   end
   

@@ -42,16 +42,23 @@ class Members extends ViewComponent {
 
   memberRow(member) {
     let onCall = '';
-    if (member.on_call && member.status_id == 1){
+    let operational = '';
+    if (member.status_id == 1){
+      operational = <i className="fa fa-check" aria-hidden="true"></i>;
+    }
+    if (member.on_call && operational){
       onCall = <i className="fa fa-check" aria-hidden="true"></i>;
     }
-    return (<tr key={member.d4h_id}>
-      <td>{member.name}</td>
-      <td>{member.mobile_phone}</td>
-      <td>{member.email}</td>
-      <td>{member.reference}</td>
-      <td className="text-center">{onCall}</td>
-      </tr>);
+    return (
+      <tr key={member.d4h_id}>
+        <td><a href={`https://pnwsar.d4h.org/team/members/view/${member.d4h_id}`} target="_blank">{member.name}</a></td>
+        <td>{member.mobile_phone}</td>
+        <td>{member.email}</td>
+        <td>{member.reference}</td>
+        <td className="text-center">{operational}</td>
+        <td className="text-center">{onCall}</td>
+      </tr>
+    );
   }
 
   loading() {
@@ -61,7 +68,7 @@ class Members extends ViewComponent {
       ); 
     }
     return (
-      'Operational On Call'
+      'On Call'
     )
   }
 
@@ -79,6 +86,7 @@ class Members extends ViewComponent {
             <th>Mobile</th>
             <th>Email</th>
             <th>Position</th>
+            <th className="text-center">Operational</th>
             <th className="text-center">{this.loading()}</th>
           </tr>
         </thead>

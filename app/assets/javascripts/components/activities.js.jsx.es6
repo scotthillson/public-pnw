@@ -80,7 +80,9 @@ class Activities extends ViewComponent {
 
   saveActivity() {
     let data = this.state.activity;
+    console.log(data);
     data.activity_id = data.id;
+    data.start_time = data.start_on;
     $.ajax({
       method: 'POST',
       url: '/events',
@@ -95,8 +97,10 @@ class Activities extends ViewComponent {
     });
   }
 
-  fieldChange(data){
-    return true;
+  fieldChange(field, e){
+    let activity = _.clone(this.state.activity);
+    activity[field] = e.target.value;
+    this.setState({activity: activity});
   }
 
   activityForm(){
@@ -114,9 +118,8 @@ class Activities extends ViewComponent {
           </div>
           <div className="form-group">
             <label>Description</label>
-            <input
+            <textarea
               className="form-control"
-              type="text"
               value={this.state.activity.description}
               onChange={this.fieldChange.bind(this, 'description')}
             />

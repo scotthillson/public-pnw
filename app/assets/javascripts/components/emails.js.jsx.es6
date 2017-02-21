@@ -62,9 +62,6 @@ class Emails extends ViewComponent {
         </table>
       );
     }
-    return (
-      <h3>Loading!</h3>
-    );
   }
 }
 

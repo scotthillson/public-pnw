@@ -3,8 +3,9 @@ class Messages extends ViewComponent {
   constructor() {
     super();
     this.state = {
+      mode: 'inbox',
       messages: [],
-      body: ''
+      body: null
     };
   }
 
@@ -19,7 +20,7 @@ class Messages extends ViewComponent {
       dataType: 'json',
       context: this,
       success: (data) => {
-        this.setState({messages: data});
+        this.setState({ messages: data }, this.updateMessages);
       },
       error: (jqXHR) => {
         console.log(jqXHR);
@@ -27,20 +28,50 @@ class Messages extends ViewComponent {
     });
   }
 
-  bodyChange() {
-    return true;
+  updateMessages(){
+    $.ajax({
+      method: 'GET',
+      url: '/update_messages',
+      dataType: 'json',
+      context: this,
+      success: (data) => {
+        this.setState({ messages: data });
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
+  message(message) {
+    return (
+      <tr>
+        <td>{message.time}</td>
+        <td>{message.from}</td>
+        <td>{message.body}</td>
+      </tr>
+    );
+  }
+
+  messages(){
+    let messages = [];
+    return messages;
   }
 
   render() {
     return (
-      <div>
-        <textarea
-          name="body"
-          className="form-control"
-          value={this.state.body}
-          onChange={this.bodyChange}
-        />
-      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>time</th>
+            <th>from</th>
+            <th>body</th>
+          </tr>
+        </thead>
+        <tbody>
+          {messages}
+        </tbody>
+      </table>
     );
   }
 
