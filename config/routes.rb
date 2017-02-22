@@ -25,9 +25,6 @@ Rails.application.routes.draw do
   resources :events
     get 'calendar', to: 'events#index'
   
-  resources :forms, constraints: {format: :html}
-    get 'dup_form_check', to: 'forms#dup_form_check'
-  
   resources :images, constraints: {format: :html}
   
   resources :incidents, constraints: {format: :html}

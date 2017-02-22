@@ -3,10 +3,14 @@ class ReviewProspectApplication extends ViewComponent {
   constructor() {
     super();
     this.state = {
-      fields: this.props.fields
+      fields: {}
     }
   }
-  
+
+  componentDidMount() {
+    this.setState({ fields: this.props.fields });
+  }
+
   render(){
     return (
       <div className="form-container regular-form">

@@ -12,9 +12,8 @@ class ProspectApplicationsController < ApplicationController
   end
   
   def show
-    application = ProspectApplication.find params[:id]
-    fields = Hash[application.attributes.map{|k,v| [k.camelize(:lower), v]}]
-    render component: 'ReviewProspectApplication', props: { fields: fields}
+    application = ProspectApplication.find(params[:id])
+    @fields = Hash[application.attributes.map{|k,v| [k.camelize(:lower), v]}]
   end
   
   def prospect_application
