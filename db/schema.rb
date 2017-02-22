@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170222020728) do
+ActiveRecord::Schema.define(version: 20170222022116) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20170222020728) do
     t.string   "state"
     t.string   "zip"
     t.string   "country"
-    t.string   "type"
+    t.string   "activity_type"
   end
 
   create_table "carpools", force: :cascade do |t|
@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 20170222020728) do
     t.string   "state"
     t.string   "zip"
     t.string   "country"
-    t.string   "type"
+    t.string   "event_type"
   end
 
   create_table "forms", force: :cascade do |t|

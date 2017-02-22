@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   
   resources :equipment, constraints: {format: :html}
   
-  resources :events, contraints: {format: :html}
+  resources :events
     get 'calendar', to: 'events#index'
   
   resources :forms, constraints: {format: :html}

@@ -25,7 +25,7 @@ class Activity < ActiveRecord::Base
     activity.state = remote_activity['regionaddress']
     activity.zip = remote_activity['postcodeaddress']
     activity.country = remote_activity['countryaddress']
-    activity.type = remote_activity['activity']
+    activity.activity_type = remote_activity['activity']
     activity.reference = remote_activity['ref']
     activity.description = remote_activity['description']
     activity.start_on = remote_activity['date']

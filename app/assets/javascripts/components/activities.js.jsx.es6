@@ -48,13 +48,17 @@ class Activities extends ViewComponent {
   activityButton(activity) {
     if (activity.event) {
       return (
-        <div className="btn btn-xs btn-warning">edit</div>
+        <div
+          className="btn btn-xs btn-warning"
+          onClick={this.editActivity.bind(this, activity)}>
+          edit
+        </div>
       );
     }
     return (
       <div
         className="btn btn-xs btn-success"
-        onClick={this.createActivity.bind(this,activity)}>
+        onClick={this.editActivity.bind(this, activity)}>
         add
       </div>
     );
@@ -70,7 +74,11 @@ class Activities extends ViewComponent {
     );
   }
 
-  createActivity(activity) {
+  editActivity(activity) {
+    if (activity.event) {
+      activity.reference = activity.event.reference;
+      activity.description = activity.event.description;
+    }
     this.setState({ activity: activity });
   }
 
@@ -78,14 +86,35 @@ class Activities extends ViewComponent {
     this.setState({ activity: null });
   }
 
+  destroy() {
+    let data = this.state.activity;
+    $.ajax({
+      method: 'DELETE',
+      url: `events/${data.event.id}`,
+      dataType: 'json',
+      success: () => {
+        this.setState({ activity: null }, this.updateActivities());
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
   saveActivity() {
     let data = this.state.activity;
     console.log(data);
     data.activity_id = data.id;
     data.start_time = data.start_on;
+    let method = 'POST';
+    let url = '/events';
+    if (data.event) {
+      method = 'PATCH';
+      url = `events/${data.event.id}`;
+    }
     $.ajax({
-      method: 'POST',
-      url: '/events',
+      method: method,
+      url: url,
       dataType: 'json',
       data: data,
       success: () => {
@@ -101,6 +130,19 @@ class Activities extends ViewComponent {
     let activity = _.clone(this.state.activity);
     activity[field] = e.target.value;
     this.setState({activity: activity});
+  }
+
+  destroyButton() {
+    if (this.state.activity.event) {
+      return (
+        <input
+        className="btn btn-danger"
+        value="Delete"
+        type="button"
+        onClick={this.destroy}
+        />
+      );
+    }
   }
 
   activityForm(){
@@ -124,18 +166,21 @@ class Activities extends ViewComponent {
               onChange={this.fieldChange.bind(this, 'description')}
             />
           </div>
-          <input
-            className="btn btn-primary"
-            value="Save"
-            type="button"
-            onClick={this.saveActivity}
-          />
-          <input
-            className="btn btn-warning"
-            value="Cancel"
-            type="button"
-            onClick={this.cancel}
-          />
+          <div className="btn-toolbar">
+            <input
+              className="btn btn-primary"
+              value="Save"
+              type="button"
+              onClick={this.saveActivity}
+            />
+            <input
+              className="btn btn-warning"
+              value="Cancel"
+              type="button"
+              onClick={this.cancel}
+            />
+            {this.destroyButton()}
+          </div>
         </form>
       </div>
     );
