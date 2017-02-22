@@ -4,9 +4,7 @@ class ProspectApplicationsController < ApplicationController
   
   def index
     respond_to do |format|
-      format.html do
-        render component: 'ProspectApplications'
-      end
+      format.html
       format.json do
         render json: ProspectApplication.all
       end

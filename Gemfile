@@ -36,13 +36,11 @@ gem 'eslint-rails'
 gem 'capistrano'
 # throttle that shady shit!
 gem 'rack-attack'
-# sprocks
+#
 gem 'sprockets-es6'
-# you get the idea
-gem 'sprockets-rails'
 # rspec for tests
 gem 'rspec-rails'
 # lodash
 gem 'lodash-rails'
-# because puma is better
+# because puma is better?
 gem 'puma'

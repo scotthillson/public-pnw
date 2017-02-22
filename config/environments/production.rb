@@ -2,8 +2,6 @@ Rails.application.configure do
   
   config.react.variant = :production
   
-  config.assets.precompile += %w( components.js )
-  
   # Settings specified here will take precedence over those in config/application.rb.
   
   # Code is not reloaded between requests.

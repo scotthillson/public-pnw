@@ -14,9 +14,7 @@ class MembersController < ApplicationController
   
   def index
     respond_to do |format|
-      format.html do
-        render component: 'Members'
-      end
+      format.html
       format.json do
         render json: Member.where('d4h_id is not null').order(:name), status: :ok
       end

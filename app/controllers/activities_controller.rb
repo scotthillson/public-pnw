@@ -11,9 +11,7 @@ class ActivitiesController < ApplicationController
   
   def index
     respond_to do |format|
-      format.html do
-        render component: 'Activities'
-      end
+      format.html
       format.json do
         year = Date.today.year
         activities = Activity.where("start_on > ?","#{year}-01-01").order(:start_on)
