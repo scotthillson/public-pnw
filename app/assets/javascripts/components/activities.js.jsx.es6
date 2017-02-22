@@ -4,6 +4,7 @@ class Activities extends ViewComponent {
     super();
     this.bindThisToComponent(
       'cancel',
+      'destroy',
       'saveActivity'
     );
     this.state = {
@@ -189,7 +190,7 @@ class Activities extends ViewComponent {
   loading() {
     if (this.state.loading) {
       return (
-        <img src="loading.gif" alt="loading" />
+        <i className="fa fa-spinner fa-pulse fa-fw" title="checking for updates"></i>
       ); 
     }
   }
