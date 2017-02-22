@@ -1,0 +1,8 @@
+.simple-calendar table {
+  min-height: 600px;
+}
+
+.day div {
+  background-color: #D4E2FC;
+  margin-top: 4px;
+}

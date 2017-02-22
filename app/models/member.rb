@@ -19,6 +19,8 @@ class Member < ActiveRecord::Base
       track = D4h.first
       track.last_member_sync = DateTime.now
       track.save
+    else
+      true
     end
   end
   
@@ -28,12 +30,17 @@ class Member < ActiveRecord::Base
     member.name = remote_member["name"]
     member.address = remote_member["address"]
     member.d4h_id = remote_member["id"]
+    member.duty_end = remote_member["duty_end"]
+    member.duty_start = remote_member["duty_start"]
+    member.duty_type = remote_member["duty_type"]
     member.email = remote_member["email"]
     member.home_phone = remote_member["homephone"]
     member.mobile_phone = remote_member["mobilephone"]
     member.on_call = remote_member["on_call"]
+    member.position = remote_member["position"]
     member.reference = remote_member["ref"]
     member.status_id = remote_member["status"]["id"]
+    member_team_id = remote_member["team_id"]
     member.work_phone = remote_member["workphone"]
     member.save
   end

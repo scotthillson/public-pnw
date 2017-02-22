@@ -45,16 +45,25 @@ class Messages extends ViewComponent {
 
   message(message) {
     return (
-      <tr>
-        <td>{message.time}</td>
-        <td>{message.from}</td>
-        <td>{message.body}</td>
+      <tr key={ message.sid }>
+        <td>{ message.date_created }</td>
+        <td>{ message.from }</td>
+        <td>{ message.date_sent }</td>
+        <td>{ message.body }</td>
+        <td>{ message.status }</td>
+        <td>{ message.direction }</td>
+        <td>{ message.sid }</td>
+        <td>{ message.account }</td>
+        <td>{ message.messaging_service_sid }</td>
       </tr>
-    );
+    )
   }
 
   messages(){
     let messages = [];
+    for (var message of this.state.messages) {
+      messages.push(this.message(message));
+    }
     return messages;
   }
 
@@ -69,7 +78,7 @@ class Messages extends ViewComponent {
           </tr>
         </thead>
         <tbody>
-          {messages}
+          { this.messages() }
         </tbody>
       </table>
     );

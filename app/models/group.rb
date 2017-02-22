@@ -7,6 +7,8 @@ class Group < ActiveRecord::Base
       D4h.offsetter('groups', method(:update_group))
       D4h.first.last_goup_sync = DateTime.now
       D4h.first.save
+    else
+      true
     end
   end
   

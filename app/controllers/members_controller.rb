@@ -4,8 +4,12 @@ class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
   
   def update_members
-    Member.get_members
-    render json: Member.where('d4h_id is not null').order(:name)
+    if Member.get_members
+      status = :ok
+    else
+      status = :unprocessable_entity
+    end
+    render json: Member.where('d4h_id is not null').order(:name), status: status
   end
   
   def index
@@ -14,7 +18,7 @@ class MembersController < ApplicationController
         render component: 'Members'
       end
       format.json do
-        render json: Member.where('d4h_id is not null').order(:name)
+        render json: Member.where('d4h_id is not null').order(:name), status: :ok
       end
     end
   end
