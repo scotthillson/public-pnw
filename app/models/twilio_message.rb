@@ -1,4 +1,4 @@
-class Twilio
+class TwilioMessage
   
   Twilio.configure do |config|
     config.account_sid = "AC7b8306695da1683c275e2189b2f3074c"

@@ -44,3 +44,5 @@ gem 'sprockets-rails'
 gem 'rspec-rails'
 # lodash
 gem 'lodash-rails'
+# because puma is better
+gem 'puma'

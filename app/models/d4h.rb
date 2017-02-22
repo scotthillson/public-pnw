@@ -1,4 +1,4 @@
-class D4h < ActiveRecord::Base
+class D4h
   
   def self.offsetter(resource, callback, finish=nil)
     offset = 0
