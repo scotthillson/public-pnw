@@ -23,6 +23,7 @@ class Activities extends ViewComponent {
       method: 'GET',
       url: '/activities',
       dataType: 'json',
+      data: this.addParam('year'),
       success: (data) => {
         this.setState({ activities: data }, this.updateActivities);
       },
@@ -32,11 +33,26 @@ class Activities extends ViewComponent {
     });
   }
 
+  addParam(param) {
+      let url = location.href;
+      param = param.replace(/[\[\]]/g, "\\$&");
+      let regex = new RegExp("[?&]" + param + "(=([^&#]*)|&|#|$)");
+      let results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return null;
+      let result = decodeURIComponent(results[2].replace(/\+/g, " "));
+      if (result) {
+        return { year: result };
+      }
+      return {};
+  }
+
   updateActivities(){
     $.ajax({
       method: 'GET',
       url: '/update_activities',
       dataType: 'json',
+      data: this.addParam('year'),
       success: (data) => {
         this.setState({ activities: data, loading: false });
       },
@@ -73,7 +89,7 @@ class Activities extends ViewComponent {
       type = 'btn btn-xs btn-warning';
     }
     return (
-      <tr key={activity.d4h_id}>
+      <tr key={activity.id}>
         <td>{activity.reference}</td>
         <td><div className={type}>{moment(activity.start_on).format('MMMM Do YYYY, Hmm')}</div></td>
         <td>{this.activityButton(activity)}</td>
