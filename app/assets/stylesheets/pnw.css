@@ -17,37 +17,9 @@ tr th, tr td {
   padding: 20px 10px;
   white-space: normal;
 }
-html {
-  font-family: 'Lato', sans-serif;
-  -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-}
-body {
-  font-family: 'Lato', sans-serif;
-  font-size: 17px;
-  line-height: 1.428571429;
-  color: #222;
-  margin: 0;
-}
 .container {
   padding: 10px;
   margin-right: auto;
   margin-left: auto;
   background-color: #fff;
-}
-.navbar {
-  position: relative;
-  min-height: 50px;
-  margin: 10px 7px;
-  background-color: #D4E2FC;
-  color: black;
-  border: 1px solid transparent;
-}
-.carousel-control > i {
-  position: absolute;
-  top: 50%;
-}
-p {
-  margin: 5px 2px;
-  text-indent: 1em;
 }
