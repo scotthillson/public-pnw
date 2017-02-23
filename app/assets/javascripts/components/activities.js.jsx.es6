@@ -66,10 +66,16 @@ class Activities extends ViewComponent {
   }
 
   activity(activity) {
+    let type = 'btn btn-xs btn-success';
+    if (activity.activity_type == 'incident') {
+      type = 'btn btn-xs btn-primary';
+    } else if (activity.activity_type == 'exercise') {
+      type = 'btn btn-xs btn-warning';
+    }
     return (
       <tr key={activity.d4h_id}>
         <td>{activity.reference}</td>
-        <td>{activity.start_on}</td>
+        <td><div className={type}>{moment(activity.start_on).format('MMMM Do YYYY, Hmm')}</div></td>
         <td>{this.activityButton(activity)}</td>
       </tr>
     );
@@ -104,9 +110,9 @@ class Activities extends ViewComponent {
 
   saveActivity() {
     let data = this.state.activity;
-    console.log(data);
     data.activity_id = data.id;
     data.start_time = data.start_on;
+    data.event_type = data.activity_type;
     let method = 'POST';
     let url = '/events';
     if (data.event) {
@@ -162,6 +168,7 @@ class Activities extends ViewComponent {
           <div className="form-group">
             <label>Description</label>
             <textarea
+              rows={10}
               className="form-control"
               value={this.state.activity.description}
               onChange={this.fieldChange.bind(this, 'description')}

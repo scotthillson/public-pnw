@@ -1,17 +1,12 @@
-<%= link_to 'New Search', new_search_path, class: 'btn btn-primary' if admin? %>
 <% @searches.each do |search| %>
   <div class="panel panel-info">
     <div class="panel-heading">
-      <%= search.title %>
-      <%= link_to 'Edit', edit_search_path(search), class: 'btn btn-danger pull-right' if admin? %>
-      <br>
-      Submitted by <%= search.author %>
-      <br>
-      <%= search.search_date %>
+      <%= search.start_on.in_time_zone("Pacific Time (US & Canada)").strftime('%m/%d/%Y') %>
+      <%= search.reference %>
     </div>
     <div class="row">
       <div class="col-md-12">
-        <p><%= search.body.gsub(/\n/, '</p><p>').html_safe %></p>
+        <p><%= search.description.gsub(/\n/, '</p><p>').html_safe %></p>
       </div>
     </div>
   </div>

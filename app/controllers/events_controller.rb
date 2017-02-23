@@ -77,7 +77,11 @@ class EventsController < ApplicationController
       :lng,
       :start_on,
       :end_on,
-      :activity_id
+      :activity_id,
+      :event_type,
+      :gridref,
+      :city,
+      :state
     )
   end
   

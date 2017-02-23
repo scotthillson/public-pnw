@@ -4,7 +4,7 @@ class ActivitiesController < ApplicationController
   
   def update_activities
     Activity.get_activities
-    year = Date.today.year
+    year = Date.today.year - 1
     activities = Activity.where("start_on > ?","#{year}-01-01").order(:start_on)
     render json: activities, include: :event
   end
