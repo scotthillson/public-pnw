@@ -91,7 +91,15 @@ class Activities extends ViewComponent {
     return (
       <tr key={activity.id}>
         <td>{activity.reference}</td>
-        <td><div className={type}>{moment(activity.start_on).format('MMMM Do YYYY, Hmm')}</div></td>
+        <td>
+          <a
+            href={`https://pnwsar.d4h.org/team/${activity.activity_type}s/view/${activity.d4h_id}`}
+            className={type}
+            target="_blank"
+          >
+            {moment(activity.start_on).format('MMMM Do YYYY, Hmm')}
+          </a>
+          </td>
         <td>{this.activityButton(activity)}</td>
       </tr>
     );
