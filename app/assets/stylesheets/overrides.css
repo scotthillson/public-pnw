@@ -1,8 +1,7 @@
-.panel-info {
-  border: none;
-}
-p {
-  text-indent: 1em;
+html {
+  font-family: 'Lato', sans-serif;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
 }
 body {
   font-family: 'Lato', sans-serif;
@@ -11,20 +10,150 @@ body {
   color: #222;
   margin: 0;
 }
+img {
+  max-width: 100% !important;
+}
+select {
+  background: #fff !important;
+}
+h1,
+.h1 {
+  font-size: 52px;
+}
+.panel-info {
+  border: none;
+}
+a {
+  color: black;
+}
+a:hover,
+a:focus {
+  color: #337ab7;
+}
+a:focus {
+  outline: thin dotted;
+}
+.navbar-default .navbar-nav > li > a {
+  color: black;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #3276b1;
+}
+.h6 {
+  font-family: 'Lato', sans-serif;
+}
+p {
+  text-indent: 1em;
+  margin: 0;
+}
+.page-header {
+  padding-bottom: 9px;
+  margin: 5px 30px;
+  border-bottom: 0;
+}
+.container {
+  padding: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #fff;
+}
+@media (min-width: 992px) {
+  .container {
+    width: 1070px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1270px;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+    position: relative;
+    float: left;
+  }
+}
+input[type="checkbox"]:focus {
+  outline: thin dotted;
+}
+.btn.active.focus {
+  outline: thin dotted;
+}
+fieldset[disabled] .btn {
+  pointer-events: none;
+}
+.btn-primary {
+  background-color: #6C84AF;
+}
 .navbar {
-  position: relative;
-  min-height: 50px;
   margin: 10px 7px;
   background-color: #D4E2FC;
   color: black;
-  border: 1px solid transparent;
 }
 .carousel-control > i {
   position: absolute;
   top: 50%;
 }
-html {
-  font-family: 'Lato', sans-serif;
-  -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
+.carousel-control .icon-next {
+  margin-top: -10px;
+}
+@media screen and (min-width: 768px) {
+  .carousel-control .glyphicon-chevron-left,
+  .carousel-control .icon-prev {
+    margin-left: -20px;
+    margin-top: -15px;
+  }
+  .carousel-control .glyphicon-chevron-right,
+  .carousel-control .icon-next {
+    margin-right: -20px;
+    margin-top: -15px;
+  }
+}
+.carousel {
+  max-width: 1000px;
+  margin: 10px auto;
+}
+.panel-info > .panel-heading {
+  color: #222;
+  background-color: #d4e2fc;
+  border: none;
+}
+.tooltip-inner {
+  text-decoration: none;
+}
+.modal-header {
+  min-height: 16.42857143px;
+}
+.btn-primary .badge {
+  color: #428bca;
+}
+.btn-info {
+  color: #222;
+  background-color: #C5D8FC;
+  border-color: #C5D8FC;
+}
+.btn-info:hover,
+.btn-info:focus,
+.btn-info.focus,
+.btn-info:active,
+.btn-info.active,
+.open > .dropdown-toggle.btn-info {
+  color: #fff;
+  background-color: #31b0d5;
+  border-color: #31b0d5;
+}
+.btn-default:hover,
+.btn-default.focus,
+.open > .dropdown-toggle.btn-default {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.badge {
+  vertical-align: baseline;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #3276b1;
 }

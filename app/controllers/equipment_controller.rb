@@ -1,45 +1,34 @@
 class EquipmentController < ApplicationController
   
   before_action :turn_back
-  before_action :set_equipment, only: [:show, :edit, :update, :destroy]
+  before_action :set_equipment, only: [:update, :destroy]
   
   def index
-    @equipment = Equipment.all
-  end
-  
-  def show
-  end
-  
-  def new
-    @equipment = Equipment.new
-  end
-  
-  def create
-    @equipment = Equipment.new(equipment_params)
-    @equipment.created_by = current_user
-    if @equipment.save
-      redirect_to @equipment
-    else
-      render :new
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: { equipment: Equipment.all, categories: EquipmentCategory.all }, status: :ok
+      end
     end
   end
   
-  def edit
+  def create
+    equipment = Equipment.new(equipment_params)
+    equipment.created_by = current_user
+    if equipment.save
+      render json: { success: true }, status: :ok
+    end
   end
   
   def update
     if @equipment.update(equipment_params)
-      redirect_to @equipment
-    else
-      render :edit
+      render json: { success: true }, status: :ok
     end
   end
   
   def destroy
-    if @equipment.created_by = current_user
-      @equipment.destroy
-    end
-    redirect_to equipment_url
+    @equipment.destroy
+    render json: { success: true }, status: :ok
   end
   
   private
@@ -49,7 +38,17 @@ class EquipmentController < ApplicationController
   end
   
   def equipment_params
-    params.require(:equipment).permit(:description,:category)
+    params.permit(
+      :description,
+      :equipment_category_id,
+      :expiration,
+      :importance,
+      :name,
+      :notes,
+      :quantity,
+      :status,
+      :team_gear
+    )
   end
   
 end

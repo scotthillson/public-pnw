@@ -5,12 +5,6 @@ Rails.application.routes.draw do
   resources :activities
     get 'update_activities', to: 'activities#update_activities'
   
-  namespace :api do
-    namespace :v1 do
-      resources :messages
-    end
-  end
-  
   resources :prospect_applications
     get 'prospect_application', to: 'prospect_applications#prospect_application'
     post 'submit_new_member_application', to: 'prospect_applications#submit_application'
@@ -20,14 +14,18 @@ Rails.application.routes.draw do
   
   resources :discussions, contraints: {format: :html}
   
-  resources :equipment, constraints: {format: :html}
+  resources :equipment
+  
+  resources :equipment_categories
   
   resources :events
     get 'calendar', to: 'events#index'
   
+  resources :groups
+  
   resources :images, constraints: {format: :html}
   
-  resources :incidents, constraints: {format: :html}
+  resources :incidents
   
   resources :members
     get 'update_members', to: 'members#update_members'

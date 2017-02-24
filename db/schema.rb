@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223012735) do
+ActiveRecord::Schema.define(version: 20170223210237) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -75,16 +75,28 @@ ActiveRecord::Schema.define(version: 20170223012735) do
   end
 
   create_table "equipment", force: :cascade do |t|
-    t.string   "category",    limit: 255
-    t.string   "description", limit: 255
-    t.string   "expiration",  limit: 255
-    t.string   "importance",  limit: 255
-    t.string   "notes",       limit: 255
-    t.string   "status",      limit: 255
+    t.string   "description",           limit: 255
+    t.string   "expiration",            limit: 255
+    t.string   "importance",            limit: 255
+    t.string   "notes",                 limit: 255
+    t.string   "status",                limit: 255
     t.integer  "quantity"
     t.integer  "created_by"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.string   "examples"
+    t.integer  "equipment_category_id"
+    t.integer  "team_gear"
+  end
+
+  create_table "equipment_categories", force: :cascade do |t|
+    t.string   "category_name"
+    t.string   "display_name"
+    t.string   "team_id"
+    t.integer  "created_by"
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   create_table "events", force: :cascade do |t|
@@ -343,6 +355,14 @@ ActiveRecord::Schema.define(version: 20170223012735) do
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "discussion_id"
+    t.datetime "updated_at"
+    t.datetime "created_at"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string   "team_name"
+    t.integer  "group_id"
+    t.integer  "created_by"
     t.datetime "updated_at"
     t.datetime "created_at"
   end

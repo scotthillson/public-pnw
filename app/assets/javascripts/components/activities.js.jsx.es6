@@ -5,7 +5,7 @@ class Activities extends ViewComponent {
     this.bindThisToComponent(
       'cancel',
       'destroy',
-      'saveActivity'
+      'save'
     );
     this.state = {
       activities: [],
@@ -82,11 +82,11 @@ class Activities extends ViewComponent {
   }
 
   activity(activity) {
-    let type = 'btn btn-xs btn-success';
+    let type = 'btn btn-xs btn-info';
     if (activity.activity_type == 'incident') {
       type = 'btn btn-xs btn-primary';
     } else if (activity.activity_type == 'exercise') {
-      type = 'btn btn-xs btn-warning';
+      type = 'btn btn-xs btn-pnw';
     }
     return (
       <tr key={activity.id}>
@@ -132,7 +132,7 @@ class Activities extends ViewComponent {
     });
   }
 
-  saveActivity() {
+  save() {
     let data = this.state.activity;
     data.activity_id = data.id;
     data.start_time = data.start_on;
@@ -160,7 +160,7 @@ class Activities extends ViewComponent {
   fieldChange(field, e){
     let activity = _.clone(this.state.activity);
     activity[field] = e.target.value;
-    this.setState({activity: activity});
+    this.setState({ activity: activity });
   }
 
   destroyButton() {
@@ -170,52 +170,10 @@ class Activities extends ViewComponent {
         className="btn btn-danger"
         value="Delete"
         type="button"
-        onClick={this.destroy}
+        onClick={ this.destroy }
         />
       );
     }
-  }
-
-  activityForm(){
-    return(
-      <div>
-        <form className="text-center">
-          <div className="form-group">
-            <label>Title</label>
-            <input
-              className="form-control"
-              type="text"
-              value={this.state.activity.reference}
-              onChange={this.fieldChange.bind(this, 'reference')}
-            />
-          </div>
-          <div className="form-group">
-            <label>Description</label>
-            <textarea
-              rows={10}
-              className="form-control"
-              value={this.state.activity.description}
-              onChange={this.fieldChange.bind(this, 'description')}
-            />
-          </div>
-          <div className="btn-toolbar">
-            <input
-              className="btn btn-primary"
-              value="Save"
-              type="button"
-              onClick={this.saveActivity}
-            />
-            <input
-              className="btn btn-warning"
-              value="Cancel"
-              type="button"
-              onClick={this.cancel}
-            />
-            {this.destroyButton()}
-          </div>
-        </form>
-      </div>
-    );
   }
 
   loading() {
@@ -228,7 +186,15 @@ class Activities extends ViewComponent {
 
   render() {
     if (this.state.activity) {
-      return this.activityForm();
+      return( 
+        <ActivityForm
+          activity={this.state.activity}
+          cancel={this.cancel}
+          destroyButton={this.destroyButton}
+          fieldChange={this.fieldChange}
+          save={this.save}
+        />
+      );
     }
     let activities = [];
     for (var activity of this.state.activities) {
