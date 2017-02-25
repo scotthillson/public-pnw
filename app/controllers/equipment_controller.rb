@@ -40,6 +40,7 @@ class EquipmentController < ApplicationController
   def equipment_params
     params.permit(
       :description,
+      :examples,
       :equipment_category_id,
       :expiration,
       :importance,

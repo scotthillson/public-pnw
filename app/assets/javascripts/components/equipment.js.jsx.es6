@@ -5,13 +5,17 @@ class Equipment extends ViewComponent {
     this.bindThisToComponent(
       'cancelCategory',
       'cancelEquipment',
-      'destroy',
-      'fieldChange',
+      'destroyCategory',
+      'destroyEquipment',
+      'categoryChange',
+      'equipmentChange',
       'newCategory',
       'newEquipment',
-      'save',
+      'saveCategory',
+      'saveEquipment',
       'showCategories',
       'showEquipment',
+      'table'
     );
     this.state = {
       categories: [],
@@ -20,7 +24,8 @@ class Equipment extends ViewComponent {
       equipment: null,
       list: [],
       showEquipment: true,
-      showCategories: false
+      showCategories: false,
+      team: 46
     };
   }
 
@@ -34,7 +39,7 @@ class Equipment extends ViewComponent {
       url: '/equipment',
       dataType: 'json',
       success: (data) => {
-        this.setState({ list: data.equipment, categories: data.catagories });
+        this.setState({ list: data.equipment, categories: data.categories });
       },
       error: (jqXHR) => {
         console.log(jqXHR);
@@ -42,18 +47,21 @@ class Equipment extends ViewComponent {
     });
   }
 
-  save() {
+  saveEquipment() {
+    console.log(this.state.equipment);
     let method = 'post';
+    let url = '/equipment';
     if (this.state.equipment.id) {
       method = 'patch';
+      url = `/equipment/${this.state.equipment.id}`;
     }
     $.ajax({
       method: method,
-      url: '/equipment',
+      url: url,
       dataType: 'json',
       data: this.state.equipment,
       success: (data) => {
-        this.setState({ list: data.equipment, categories: data.catagories });
+        this.setState({ equipment: null }, this.loadEquipment);
       },
       error: (jqXHR) => {
         console.log(jqXHR);
@@ -61,14 +69,65 @@ class Equipment extends ViewComponent {
     });
   }
 
-  destroy() {
-    return true;
+  destroyEquipment() {
+    $.ajax({
+      method: 'delete',
+      url: `/equipment/${this.state.equipment.id}`,
+      dataType: 'json',
+      success: (data) => {
+        this.setState({ equipment: null }, this.loadEquipment);
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
   }
 
-  fieldChange(field, e){
+  saveCategory() {
+    let method = 'post';
+    let url = '/equipment_categories';
+    if (this.state.category.id) {
+      method = 'patch';
+      url = `/equipment_categories/${this.state.category.id}`
+    }
+    $.ajax({
+      method: method,
+      url: url,
+      dataType: 'json',
+      data: this.state.category,
+      success: (data) => {
+        this.setState({ category: null }, this.loadEquipment);
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
+  destroyCategory() {
+    $.ajax({
+      method: 'delete',
+      url: `/equipment_categories/${this.state.category.id}`,
+      dataType: 'json',
+      success: (data) => {
+        this.setState({ category: null }, this.loadEquipment);
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
+  categoryChange(field, e) {
+    let category = _.clone(this.state.category);
+    category[field] = e.target.value;
+    this.setState({ category: category });
+  }
+
+  equipmentChange(field, e){
     let equipment = _.clone(this.state.equipment);
     equipment[field] = e.target.value;
-    this.setState({ equiment: equipment });
+    this.setState({ equipment: equipment });
   }
 
   categories() {
@@ -84,7 +143,7 @@ class Equipment extends ViewComponent {
   }
 
   newEquipment() {
-    this.setState({ equipment: {} });
+    this.setState({ equipment: { quantity: 1, equipment_category_id: this.state.categories[0].id }, category: null });
   }
 
   cancelEquipment() {
@@ -96,23 +155,102 @@ class Equipment extends ViewComponent {
   }
 
   newCategory() {
-    this.setState({ category: {} });
+    this.setState({ category: {}, equipment: null });
   }
 
   cancelCategory() {
     this.setState({ category: null })
   }
 
-  render() {
+  editEquipment(e) {
+    this.setState({ equipment: e });
+  }
+
+  setTeam(t) {
+    this.setState({ team: t });
+  }
+
+  checkEquipment(e) {
+    let checked = _.clone(this.state.checked);
+    if (checked.includes(e.id)) {
+      _.pull(checked, e.id);
+    } else {
+      checked.push(e.id);
+    }
+    this.setState({ checked: checked });
+  }
+
+  checkedButton(e) {
+    if (this.state.checked.includes(e.id)) {
+      return (
+        <div className="btn btn-xs btn-success" onClick={this.checkEquipment.bind(this, e)}>
+        <i className="fa fa-check-circle-o" aria-hidden="true"></i>
+      </div>
+      );
+    }
+    return (
+      <div className="btn btn-xs btn-primary" onClick={this.checkEquipment.bind(this, e)}>
+        <i className="fa fa-circle-o" aria-hidden="true"></i>
+      </div>
+    );
+  }
+
+  equipment() {
+    let list = [];
+    for (var c of this.state.categories){
+      if (c.team_id == this.state.team) {
+        list.push (
+          <tr key={`cat-${c.id}`}>
+            <td>{c.display_name}</td>
+            <td></td>
+            <td></td>
+          </tr>
+        );
+        for (var e of this.state.list) {
+          if (e.equipment_category_id == c.id) {
+            list.push (
+              <tr key={`eq-${e.id}`}>
+                <td>
+                  {this.checkedButton(e)}
+                </td>
+                <td>{e.name}</td>
+                <td>
+                  <div
+                    className="btn btn-xs btn-warning"
+                    onClick={this.editEquipment.bind(this, e)}>edit
+                  </div>
+                </td>
+              </tr>
+            );
+          }
+        }
+      }
+    }
+    return list;
+  }
+
+  table() {
     if (this.state.equipment) {
       return( 
         <EquipmentForm
           equipment={this.state.equipment}
           cancel={this.cancelEquipment}
           categories={this.state.categories}
-          destroy={this.destroy}
-          fieldChange={this.fieldChange}
-          save={this.save}
+          destroy={this.destroyEquipment}
+          fieldChange={this.equipmentChange}
+          save={this.saveEquipment}
+        />
+      );
+    }
+    if (this.state.category) {
+      return( 
+        <CategoryForm
+          category={this.state.category}
+          cancel={this.cancelCategory}
+          categories={this.state.categories}
+          destroy={this.destroyCategory}
+          fieldChange={this.categoryChange}
+          save={this.saveCategory}
         />
       );
     }
@@ -122,6 +260,23 @@ class Equipment extends ViewComponent {
       );
     }
     return (
+      <table className="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.equipment()}
+        </tbody>
+      </table>
+    );
+  }
+
+  render() {
+    return (
       <div>
         <div className="row btn-toolbar">
           <div className="btn btn-xs btn-primary" onClick={this.showEquipment}>equipment</div>
@@ -129,8 +284,13 @@ class Equipment extends ViewComponent {
           <div className="btn btn-xs btn-primary" onClick={this.showCategories}>categories</div>
           <div className="btn btn-xs btn-success" onClick={this.newCategory}>new category</div>
         </div>
-        <table>
-        </table>
+        <div className="row btn-toolbar pull-right">
+          <div className="btn btn-xs btn-default" onClick={this.setTeam.bind(this, 46)}>trt</div>
+          <div className="btn btn-xs btn-default" onClick={this.setTeam.bind(this, 36)}>general</div>
+          <div className="btn btn-xs btn-default" onClick={this.setTeam.bind(this, 41)}>rst</div>
+          <div className="btn btn-xs btn-default" onClick={this.setTeam.bind(this, 35)}>mtb</div>
+        </div>
+        {this.table()}
       </div>
     );
   }

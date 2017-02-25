@@ -3,9 +3,9 @@
 class Group < ActiveRecord::Base
   
   def self.get_groups
-    if DateTime.now - D4h.first.last_group_sync > 6000
+    if DateTime.now.to_i - D4h.first.last_group_sync.to_i > 6
       D4h.offsetter('groups', method(:update_group))
-      D4h.first.last_goup_sync = DateTime.now
+      D4h.first.last_group_sync = DateTime.now
       D4h.first.save
     else
       true
@@ -13,18 +13,11 @@ class Group < ActiveRecord::Base
   end
   
   def self.update_group(remote_group)
+    puts remote_group
     group = Group.find_by_d4h_id(remote_group["id"])
     group ||= new
-    group.name = remote_group["name"]
-    group.address = remote_group["address"]
+    group.name = remote_group["title"]
     group.d4h_id = remote_group["id"]
-    group.email = remote_group["email"]
-    group.home_phone = remote_group["homephone"]
-    group.mobile_phone = remote_group["mobilephone"]
-    group.on_call = remote_group["on_call"]
-    group.reference = remote_group["ref"]
-    group.status_id = remote_group["status"]["id"]
-    group.work_phone = remote_group["workphone"]
     group.save
   end
   

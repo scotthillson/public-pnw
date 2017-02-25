@@ -1,9 +1,38 @@
 class CategoryForm extends ViewComponent {
 
+  constructor() {
+    super();
+    this.bindThisToComponent(
+      'teamOptions'
+    );
+    this.state = {
+      teams: []
+    };
+  }
+
+  componentDidMount() {
+    this.loadTeams();
+  }
+
+  loadTeams(){
+    $.ajax({
+      method: 'GET',
+      url: '/groups',
+      dataType: 'json',
+      success: (data) => {
+        console.log(data);
+        this.setState({ teams: data });
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
   teamOptions() {
     let options = [];
-    for (var team in this.props.teams) {
-      options.push(<option value={team.id}>{team.name}</option>)
+    for (var team of this.state.teams) {
+      options.push(<option key={team.id} value={team.id}>{team.name}</option>)
     }
     return options;
   }

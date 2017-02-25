@@ -1,9 +1,12 @@
 class EquipmentForm extends ViewComponent {
 
   categoryOptions() {
+    if (!this.props.categories) {
+      return;
+    }
     let options = [];
-    for (var category in this.props.categories) {
-      options.push(<option value={category.id}>{category.category_name}</option>)
+    for (var category of this.props.categories) {
+      options.push(<option key={category.id} value={category.id}>{category.category_name}</option>)
     }
     return options;
   }
@@ -20,6 +23,20 @@ class EquipmentForm extends ViewComponent {
               onChange={this.props.fieldChange.bind(this, 'equipment_category_id')}
             >
               {this.categoryOptions()}
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Quantity</label>
+            <select
+              className="form-control"
+              value={this.props.equipment.quantity}
+              onChange={this.props.fieldChange.bind(this, 'quantity')}>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
             </select>
           </div>
           <div className="form-group">
