@@ -20,3 +20,23 @@ tr th, tr td {
 .btn-event {
   background-color: rgba(240,173,78,0.7);
 }
+.Required {
+  background-color: rgba(240,173,78,0.7);
+  border-radius: 5px;
+}
+.Recommended {
+  background-color: rgba(240,236,78,0.7);
+  border-radius: 5px;
+}
+.Optional {
+  background-color: rgba(161,240,78,0.5);
+  border-radius: 5px;
+}
+.col-md-6.Required, .col-md-6.Recommended, .col-md-6.Optional {
+  margin: 2px;
+  width: 48%;
+}
+.col-md-12.Required, .col-md-12.Recommended, .col-md-12.Optional {
+  width: 48%;
+  margin: 5px 25%;
+}

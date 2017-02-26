@@ -44,3 +44,5 @@ gem 'rspec-rails'
 gem 'lodash-rails'
 # because puma is better?
 gem 'puma'
+# seeds sometimes are goood
+gem 'seed_dump'

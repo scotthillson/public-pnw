@@ -5,17 +5,18 @@ class Equipment extends ViewComponent {
     this.bindThisToComponent(
       'cancelCategory',
       'cancelEquipment',
+      'checkEquipment',
       'destroyCategory',
       'destroyEquipment',
+      'editEquipment',
       'categoryChange',
       'equipmentChange',
       'newCategory',
       'newEquipment',
       'saveCategory',
       'saveEquipment',
-      'showCategories',
-      'showEquipment',
-      'table'
+      'table',
+      'print'
     );
     this.state = {
       categories: [],
@@ -23,8 +24,7 @@ class Equipment extends ViewComponent {
       checked: [],
       equipment: null,
       list: [],
-      showEquipment: true,
-      showCategories: false,
+      print: true,
       team: 46
     };
   }
@@ -39,6 +39,11 @@ class Equipment extends ViewComponent {
       url: '/equipment',
       dataType: 'json',
       success: (data) => {
+        for (var e of data.equipment) {
+          if (e.quantity > 1) {
+            e.name = `${e.quantity} x ${e.name}`
+          }
+        }
         this.setState({ list: data.equipment, categories: data.categories });
       },
       error: (jqXHR) => {
@@ -138,20 +143,20 @@ class Equipment extends ViewComponent {
     return categories;
   }
 
-  showEquipment() {
-    this.setState({ showCategories: false, showEquipment: true });
-  }
-
   newEquipment() {
-    this.setState({ equipment: { quantity: 1, equipment_category_id: this.state.categories[0].id }, category: null });
+    this.setState(
+      { equipment: {
+        quantity: 1,
+        equipment_category_id: this.state.categories[0].id,
+        importance: 'Required'
+        },
+        category: null
+      }
+    );
   }
 
   cancelEquipment() {
     this.setState({ equipment: null });
-  }
-
-  showCategories() {
-    this.setState({ showCategories: true, showEquipment: false });
   }
 
   newCategory() {
@@ -163,6 +168,7 @@ class Equipment extends ViewComponent {
   }
 
   editEquipment(e) {
+    console.log(e);
     this.setState({ equipment: e });
   }
 
@@ -180,58 +186,17 @@ class Equipment extends ViewComponent {
     this.setState({ checked: checked });
   }
 
-  checkedButton(e) {
-    if (this.state.checked.includes(e.id)) {
-      return (
-        <div className="btn btn-xs btn-success" onClick={this.checkEquipment.bind(this, e)}>
-        <i className="fa fa-check-circle-o" aria-hidden="true"></i>
-      </div>
-      );
+  print() {
+    if (this.state.print) {
+      this.setState({ print: false });
+    } else {
+      this.setState({ print: true });
     }
-    return (
-      <div className="btn btn-xs btn-primary" onClick={this.checkEquipment.bind(this, e)}>
-        <i className="fa fa-circle-o" aria-hidden="true"></i>
-      </div>
-    );
-  }
-
-  equipment() {
-    let list = [];
-    for (var c of this.state.categories){
-      if (c.team_id == this.state.team) {
-        list.push (
-          <tr key={`cat-${c.id}`}>
-            <td>{c.display_name}</td>
-            <td></td>
-            <td></td>
-          </tr>
-        );
-        for (var e of this.state.list) {
-          if (e.equipment_category_id == c.id) {
-            list.push (
-              <tr key={`eq-${e.id}`}>
-                <td>
-                  {this.checkedButton(e)}
-                </td>
-                <td>{e.name}</td>
-                <td>
-                  <div
-                    className="btn btn-xs btn-warning"
-                    onClick={this.editEquipment.bind(this, e)}>edit
-                  </div>
-                </td>
-              </tr>
-            );
-          }
-        }
-      }
-    }
-    return list;
   }
 
   table() {
     if (this.state.equipment) {
-      return( 
+      return(
         <EquipmentForm
           equipment={this.state.equipment}
           cancel={this.cancelEquipment}
@@ -243,7 +208,7 @@ class Equipment extends ViewComponent {
       );
     }
     if (this.state.category) {
-      return( 
+      return(
         <CategoryForm
           category={this.state.category}
           cancel={this.cancelCategory}
@@ -254,41 +219,41 @@ class Equipment extends ViewComponent {
         />
       );
     }
-    if (this.state.showCategories) {
+    return (
+      <EquipmentList
+        advanced={this.props.advanced}
+        categories={this.state.categories}
+        checked={this.state.checked}
+        checkEquipment={this.checkEquipment}
+        editEquipment={this.editEquipment}
+        list={this.state.list}
+        print={this.state.print}
+        team={this.state.team}
+      />
+    );
+  }
+
+  adminToolbar(){
+    if (this.props.advanced) {
       return (
-        <Categories/>
+        <div className="row btn-toolbar">
+          <div className="btn btn-xs btn-success" onClick={this.newEquipment}>new item</div>
+          <div className="btn btn-xs btn-success" onClick={this.newCategory}>new category</div>
+        </div>
       );
     }
-    return (
-      <table className="table">
-        <thead>
-          <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.equipment()}
-        </tbody>
-      </table>
-    );
   }
 
   render() {
     return (
       <div>
-        <div className="row btn-toolbar">
-          <div className="btn btn-xs btn-primary" onClick={this.showEquipment}>equipment</div>
-          <div className="btn btn-xs btn-success" onClick={this.newEquipment}>new item</div>
-          <div className="btn btn-xs btn-primary" onClick={this.showCategories}>categories</div>
-          <div className="btn btn-xs btn-success" onClick={this.newCategory}>new category</div>
-        </div>
+        {this.adminToolbar()}
         <div className="row btn-toolbar pull-right">
           <div className="btn btn-xs btn-default" onClick={this.setTeam.bind(this, 46)}>trt</div>
           <div className="btn btn-xs btn-default" onClick={this.setTeam.bind(this, 36)}>general</div>
           <div className="btn btn-xs btn-default" onClick={this.setTeam.bind(this, 41)}>rst</div>
           <div className="btn btn-xs btn-default" onClick={this.setTeam.bind(this, 35)}>mtb</div>
+          <div className="btn btn-xs btn-default" onClick={this.print}>print</div>
         </div>
         {this.table()}
       </div>

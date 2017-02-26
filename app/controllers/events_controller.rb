@@ -1,19 +1,16 @@
 class EventsController < ApplicationController
-  
+
   before_action :turn_back, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy, :join]
-  
+
   def index
     @events = Event.all
   end
-  
-  def show
-  end
-  
+
   def new
     @event = Event.new
   end
-  
+
   def create
     @event = Event.new(event_params)
     @event.created_by = current_user
@@ -23,7 +20,7 @@ class EventsController < ApplicationController
       render json: @event
     end
   end
-  
+
   def join
     if @event.join(current_user)
       redirect_to @event, notice: 'Nice work'
@@ -31,10 +28,10 @@ class EventsController < ApplicationController
       redirect_to @event, notice: 'something went wrong -_-'
     end
   end
-  
+
   def edit
   end
-  
+
   def update
     if @event.update(event_params)
       @event.updated_by = current_user
@@ -43,7 +40,7 @@ class EventsController < ApplicationController
       render json: @event
     end
   end
-  
+
   def destroy
     if @event.destroy
       render json: {success: true}
@@ -51,13 +48,13 @@ class EventsController < ApplicationController
       render json: {success: false}
     end
   end
-  
+
   private
-  
+
   def set_event
     @event = Event.find params[:id]
   end
-  
+
   def event_params
     params.permit(
       :name,
@@ -84,5 +81,5 @@ class EventsController < ApplicationController
       :state
     )
   end
-  
+
 end
