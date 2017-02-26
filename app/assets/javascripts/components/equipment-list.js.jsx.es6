@@ -69,7 +69,7 @@ class EquipmentList extends ViewComponent {
       if (c.team_id == this.props.team || c.display_name == 'First Aid Kit') {
         list.push (
           <div className="row text-center equipment-row" key={`cat-${c.id}`}>
-              <div className="col-md-12">
+              <div className="equipment-12">
                 {c.display_name}
               </div>
           </div>
@@ -84,10 +84,10 @@ class EquipmentList extends ViewComponent {
           if (items[e+1]) {
             list.push(
               <div className="row text-center equipment-row" key={`eq-${items[e].id}`}>
-                <div className={`col-md-6 ${items[e].importance}`}>
+                <div className={`equipment-6 ${items[e].importance}`}>
                   {items[e].name}
                 </div>
-                <div className={`col-md-6 ${items[e+1].importance}`}>
+                <div className={`equipment-6 ${items[e+1].importance}`}>
                   {items[e+1].name}
                 </div>
               </div>
@@ -95,7 +95,7 @@ class EquipmentList extends ViewComponent {
           } else {
             list.push(
               <div className="row text-center equipment-row" key={`eq-${items[e].id}`}>
-                <div className={`col-md-12 ${items[e].importance}`}>
+                <div className={`equipment-12 ${items[e].importance}`}>
                     {items[e].name}
                 </div>
               </div>
@@ -109,9 +109,9 @@ class EquipmentList extends ViewComponent {
 
   key(){
     return (
-      <div>
+      <div className="equipment-space">
         <div className="row">
-          <div className="col-md-1 btn btn-xs Required">
+          <div className="col-md-1 btn btn-xs Required equipment-key">
             required:
           </div>
           <div className="col-md-10">
@@ -119,7 +119,7 @@ class EquipmentList extends ViewComponent {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-1 btn btn-xs Recommended">
+          <div className="col-md-1 btn btn-xs Recommended equipment-key">
             recommended:
           </div>
           <div className="col-md-10">
@@ -127,7 +127,7 @@ class EquipmentList extends ViewComponent {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-1 btn btn-xs Optional">
+          <div className="col-md-1 btn btn-xs Optional equipment-key">
             optional:
           </div>
           <div className="col-md-10">
@@ -141,14 +141,14 @@ class EquipmentList extends ViewComponent {
   render() {
     if (this.props.print){
       return (
-        <div>
+        <div className="equipment-space">
           {this.print()}
           {this.key()}
         </div>
       );
     }
     return (
-      <div>
+      <div className="equipment-space">
         {this.equipment()}
         {this.key()}
       </div>

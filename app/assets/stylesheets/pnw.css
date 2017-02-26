@@ -21,22 +21,36 @@ tr th, tr td {
   background-color: rgba(240,173,78,0.7);
 }
 .Required {
-  background-color: rgba(240,173,78,0.7);
-  border-radius: 5px;
+  background-color: rgba(240,173,78,0.7) !important;
+  -webkit-print-color-adjust: exact;
 }
 .Recommended {
-  background-color: rgba(240,236,78,0.7);
-  border-radius: 5px;
+  background-color: rgba(240,236,78,0.7) !important;
+  -webkit-print-color-adjust: exact;
 }
 .Optional {
-  background-color: rgba(161,240,78,0.5);
-  border-radius: 5px;
+  background-color: rgba(161,240,78,0.5) !important;
+  -webkit-print-color-adjust: exact;
 }
-.col-md-6.Required, .col-md-6.Recommended, .col-md-6.Optional {
+.equipment-6 {
   margin: 2px;
   width: 48%;
+  float: left;
+  border-radius: 5px;
 }
-.col-md-12.Required, .col-md-12.Recommended, .col-md-12.Optional {
+.equipment-12 {
   width: 48%;
-  margin: 5px 25%;
+  margin: 2px 24.5%;
+  border-radius: 5px;
+}
+.equipment-key {
+  float: left;
+}
+.equipment-space {
+  margin-top: 20px;
+}
+@media print {
+  .btn-toolbar {
+    display: none;
+  }
 }
