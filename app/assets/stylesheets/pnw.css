@@ -33,14 +33,14 @@ tr th, tr td {
   -webkit-print-color-adjust: exact;
 }
 .equipment-6 {
-  margin: 2px;
+  margin: 1px;
   width: 48%;
   float: left;
   border-radius: 5px;
 }
 .equipment-12 {
   width: 48%;
-  margin: 2px 24.5%;
+  margin: 1px 24.5%;
   border-radius: 5px;
 }
 .equipment-key {
@@ -49,8 +49,24 @@ tr th, tr td {
 .equipment-space {
   margin-top: 20px;
 }
+.bottom-margin {
+  margin-bottom: 20px;
+}
 @media print {
   .btn-toolbar {
     display: none;
   }
+}
+.panel {
+    -webkit-box-shadow: none;
+    box-shadow: none
+}
+.panel-heading {
+  border-radius: 5px;
+}
+.panel > .row {
+  margin: 5px -15px;
+}
+.carousel {
+  max-width: 1100px;
 }

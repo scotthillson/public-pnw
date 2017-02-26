@@ -25,9 +25,9 @@ class Equipment extends ViewComponent {
       checked: [],
       equipment: null,
       list: [],
-      print: true,
+      print: false,
       teams: [],
-      team: 46
+      team: 36
     };
   }
 
