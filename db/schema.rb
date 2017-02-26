@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170224213602) do
+ActiveRecord::Schema.define(version: 20170226055807) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -88,6 +88,8 @@ ActiveRecord::Schema.define(version: 20170224213602) do
     t.string   "examples"
     t.integer  "equipment_category_id"
     t.integer  "team_gear"
+    t.integer  "weight"
+    t.integer  "sort"
   end
 
   create_table "equipment_categories", force: :cascade do |t|
@@ -97,6 +99,7 @@ ActiveRecord::Schema.define(version: 20170224213602) do
     t.integer  "created_by"
     t.datetime "updated_at"
     t.datetime "created_at"
+    t.integer  "sort"
   end
 
   create_table "events", force: :cascade do |t|

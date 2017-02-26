@@ -16,6 +16,7 @@ class Equipment extends ViewComponent {
       'saveCategory',
       'saveEquipment',
       'table',
+      'teams',
       'print'
     );
     this.state = {
@@ -25,6 +26,7 @@ class Equipment extends ViewComponent {
       equipment: null,
       list: [],
       print: true,
+      teams: [],
       team: 46
     };
   }
@@ -39,12 +41,13 @@ class Equipment extends ViewComponent {
       url: '/equipment',
       dataType: 'json',
       success: (data) => {
+        console.log(data.categories);
         for (var e of data.equipment) {
           if (e.quantity > 1) {
             e.name = `${e.quantity} x ${e.name}`
           }
         }
-        this.setState({ list: data.equipment, categories: data.categories });
+        this.setState({ list: data.equipment, categories: data.categories, teams: data.teams });
       },
       error: (jqXHR) => {
         console.log(jqXHR);
@@ -216,6 +219,7 @@ class Equipment extends ViewComponent {
           destroy={this.destroyCategory}
           fieldChange={this.categoryChange}
           save={this.saveCategory}
+          teams={this.state.teams}
         />
       );
     }
@@ -233,12 +237,34 @@ class Equipment extends ViewComponent {
     );
   }
 
+  teams(){
+    let buts = [];
+    for (var team of this.state.teams) {
+      if (_.map(this.state.categories, 'team_id').includes(String(team.id))) {
+        let thisClass = 'btn-default';
+        if (this.state.team == team.id) {
+          thisClass = 'btn-primary';
+        }
+        buts.push(<div key={`team-${team.id}`} className={`btn btn-xs ${thisClass}`} onClick={this.setTeam.bind(this, team.id)}>{team.name}</div>);
+      }
+    }
+    let thisClass = 'btn-default';
+    if (this.state.print) {
+      thisClass = 'btn-primary';
+    }
+    buts.push(<div key="team-print" className={`btn btn-xs ${thisClass}`} onClick={this.print}>print</div>);
+    return buts;
+  }
+
   adminToolbar(){
     if (this.props.advanced) {
       return (
         <div className="row btn-toolbar">
           <div className="btn btn-xs btn-success" onClick={this.newEquipment}>new item</div>
           <div className="btn btn-xs btn-success" onClick={this.newCategory}>new category</div>
+          <div className="btn-toolbar pull-right">
+            {this.teams()}
+          </div>
         </div>
       );
     }
@@ -248,13 +274,6 @@ class Equipment extends ViewComponent {
     return (
       <div>
         {this.adminToolbar()}
-        <div className="row btn-toolbar pull-right">
-          <div className="btn btn-xs btn-default" onClick={this.setTeam.bind(this, 46)}>trt</div>
-          <div className="btn btn-xs btn-default" onClick={this.setTeam.bind(this, 36)}>general</div>
-          <div className="btn btn-xs btn-default" onClick={this.setTeam.bind(this, 41)}>rst</div>
-          <div className="btn btn-xs btn-default" onClick={this.setTeam.bind(this, 35)}>mtb</div>
-          <div className="btn btn-xs btn-default" onClick={this.print}>print</div>
-        </div>
         {this.table()}
       </div>
     );

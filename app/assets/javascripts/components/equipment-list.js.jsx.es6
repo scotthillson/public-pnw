@@ -30,6 +30,8 @@ class EquipmentList extends ViewComponent {
   equipment() {
     let list = [];
     for (var c of this.props.categories){
+      console.log(c);
+      console.log(this.props.team);
       if (c.team_id == this.props.team || c.display_name == 'First Aid Kit') {
         list.push (
           <div className="row" key={`cat-${c.id}`}>

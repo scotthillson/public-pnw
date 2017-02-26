@@ -181,20 +181,20 @@ class SeedThoseEqs < ActiveRecord::Migration
     ])
     EquipmentCategory.destroy_all
     EquipmentCategory.create!([
-      {category_name: "trt clothing", display_name: "Clothing", team_id: "46", created_by: 1},
-      {category_name: "trt general", display_name: "General", team_id: "46", created_by: 1},
-      {category_name: "trt team", display_name: "Team", team_id: "46", created_by: 1},
-      {category_name: "team clothing", display_name: "Clothing", team_id: "36", created_by: 1},
-      {category_name: "team navigation", display_name: "Navigation", team_id: "36", created_by: 1},
-      {category_name: "team general", display_name: "General", team_id: "36", created_by: 1},
-      {category_name: "team first aid", display_name: "First Aid Kit", team_id: "36", created_by: 1},
-      {category_name: "team vehicle", display_name: "In Your Vehicle", team_id: "36", created_by: 1},
-      {category_name: "team winter", display_name: "Winter Gear", team_id: "36", created_by: 1},
-      {category_name: "rst personal", display_name: "Personal Equipment", team_id: "41", created_by: 1},
-      {category_name: "mbt personal", display_name: "Personal Equipment", team_id: "35", created_by: 1},
-      {category_name: "mtb tools", display_name: "Repair Equipment", team_id: "35", created_by: 1},
-      {category_name: "mtb clothing", display_name: "Clothing", team_id: "35", created_by: 1},
-      {category_name: "mtb general", display_name: "General", team_id: "35", created_by: 1}
+      {category_name: "trt clothing", display_name: "Clothing", team_id: "46", created_by: 1, id: 2},
+      {category_name: "trt general", display_name: "General", team_id: "46", created_by: 1, id: 3},
+      {category_name: "trt team", display_name: "Team", team_id: "46", created_by: 1, id: 4},
+      {category_name: "team clothing", display_name: "Clothing", team_id: "36", created_by: 1, id: 5},
+      {category_name: "team navigation", display_name: "Navigation", team_id: "36", created_by: 1, id: 6},
+      {category_name: "team general", display_name: "General", team_id: "36", created_by: 1, id: 7},
+      {category_name: "team first aid", display_name: "First Aid Kit", team_id: "36", created_by: 1, id: 8},
+      {category_name: "team vehicle", display_name: "In Your Vehicle", team_id: "36", created_by: 1, id: 9},
+      {category_name: "team winter", display_name: "Winter Gear", team_id: "36", created_by: 1, id: 10},
+      {category_name: "rst personal", display_name: "Personal Equipment", team_id: "41", created_by: 1, id: 11},
+      {category_name: "mbt personal", display_name: "Personal Equipment", team_id: "35", created_by: 1, id: 12},
+      {category_name: "mtb tools", display_name: "Repair Equipment", team_id: "35", created_by: 1, id: 13},
+      {category_name: "mtb clothing", display_name: "Clothing", team_id: "35", created_by: 1, id: 14},
+      {category_name: "mtb general", display_name: "General", team_id: "35", created_by: 1, id: 15}
     ])
     Group.destroy_all
     Group.create!([
@@ -209,18 +209,18 @@ class SeedThoseEqs < ActiveRecord::Migration
       {name: "EMS EMT-P", d4h_id: 4622},
       {name: "ITCs", d4h_id: 3707},
       {name: "Logistics", d4h_id: 3768},
-      {name: "MBT (Mtn. Bike Team)", d4h_id: 894, id: 35},
-      {name: "Members", d4h_id: 1421, id: 36},
+      {name: "mbt", d4h_id: 894, id: 35},
+      {name: "general", d4h_id: 1421, id: 36},
       {name: "PNW PICs", d4h_id: 987},
       {name: "PR Committee", d4h_id: 893},
       {name: "Prospects", d4h_id: 896},
       {name: "RN", d4h_id: 4246},
-      {name: "RST (Rope Support Team)", d4h_id: 895, id: 41},
+      {name: "rst", d4h_id: 895, id: 41},
       {name: "RST Committee", d4h_id: 6518},
-      {name: "Tracking Team", d4h_id: 4698},
-      {name: "Trainees", d4h_id: 904},
+      {name: "tracking", d4h_id: 4698},
+      {name: "trainees", d4h_id: 904},
       {name: "Training Committee", d4h_id: 891},
-      {name: "TRT (Trail Running Team)", d4h_id: 4595, id: 46}
+      {name: "trt", d4h_id: 4595, id: 46}
     ])
   end
 end

@@ -10,7 +10,7 @@ class EquipmentController < ApplicationController
     respond_to do |format|
       format.html { @advanced = advanced? }
       format.json do
-        render json: { equipment: Equipment.all, categories: EquipmentCategory.all }, status: :ok
+        render json: { equipment: Equipment.all, categories: EquipmentCategory.all, teams: Group.all }, status: :ok
       end
     end
   end
