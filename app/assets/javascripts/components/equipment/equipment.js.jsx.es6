@@ -41,7 +41,6 @@ class Equipment extends ViewComponent {
       url: '/equipment',
       dataType: 'json',
       success: (data) => {
-        console.log(data.categories);
         for (var e of data.equipment) {
           if (e.quantity > 1) {
             e.name = `${e.quantity} x ${e.name}`
@@ -56,7 +55,6 @@ class Equipment extends ViewComponent {
   }
 
   saveEquipment() {
-    console.log(this.state.equipment);
     let method = 'post';
     let url = '/equipment';
     if (this.state.equipment.id) {
@@ -171,7 +169,6 @@ class Equipment extends ViewComponent {
   }
 
   editEquipment(e) {
-    console.log(e);
     this.setState({ equipment: e });
   }
 
@@ -261,7 +258,7 @@ class Equipment extends ViewComponent {
   adminButtons() {
     if (this.props.advanced) {
       return (
-        <div>
+        <div className="btn-toolbar pull-left">
           <div className="btn btn-xs btn-success" onClick={this.newEquipment}>new item</div>
           <div className="btn btn-xs btn-success" onClick={this.newCategory}>new category</div>
         </div>
@@ -271,7 +268,7 @@ class Equipment extends ViewComponent {
 
   toolbar(){
     return (
-      <div className="row btn-toolbar">
+      <div className="row">
         {this.adminButtons()}
         <div className="btn-toolbar pull-right">
           {this.teams()}

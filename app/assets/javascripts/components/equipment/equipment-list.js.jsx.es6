@@ -50,9 +50,13 @@ class EquipmentList extends ViewComponent {
                 <div className="col-md-2">
                   {this.checkedButton(e)}
                 </div>
-                <div className={`col-md-8 btn btn-xs ${e.importance}`}>
-                  {e.name}
-                </div>
+                <a
+                  className={`col-md-8 btn btn-xs ${e.importance}`}
+                  title={`${e.notes} - click for examples`}
+                  href={e.examples}
+                  target="_blank"
+                >{e.name}
+                </a>
                 <div className="col-md-2">
                   {this.editButton(e)}
                 </div>
@@ -87,20 +91,32 @@ class EquipmentList extends ViewComponent {
           if (items[e+1]) {
             list.push(
               <div className="row text-center equipment-row" key={`eq-${items[e].id}`}>
-                <div className={`equipment-6 ${items[e].importance}`}>
-                  {items[e].name}
-                </div>
-                <div className={`equipment-6 ${items[e+1].importance}`}>
-                  {items[e+1].name}
-                </div>
+                <a
+                  className={`equipment-6 ${items[e].importance}`}
+                  title={`${items[e].notes} - click for examples`}
+                  href={items[e].examples}
+                  target="_blank"
+                >{items[e].name}
+                </a>
+                <a
+                  className={`equipment-6 ${items[e+1].importance}`}
+                  title={`${items[e+1].notes} - click for examples`}
+                  href={items[e+1].examples}
+                  target="_blank"
+                >{items[e+1].name}
+                </a>
               </div>
             );
           } else {
             list.push(
               <div className="row text-center equipment-row" key={`eq-${items[e].id}`}>
-                <div className={`equipment-12 ${items[e].importance}`}>
-                    {items[e].name}
-                </div>
+                <a
+                  className={`equipment-12 ${items[e].importance}`}
+                  title={`${items[e].notes} - click for examples`}
+                  href={items[e].examples}
+                  target="_blank"
+                >{items[e].name}
+                </a>
               </div>
             );
           }

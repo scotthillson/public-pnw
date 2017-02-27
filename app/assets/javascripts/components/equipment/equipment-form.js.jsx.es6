@@ -70,7 +70,7 @@ class EquipmentForm extends ViewComponent {
             </select>
           </div>
           <div className="form-group">
-            <label>Example Links</label>
+            <label>Example Link</label>
             <input
               className="form-control"
               type="text"
