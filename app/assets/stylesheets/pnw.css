@@ -32,10 +32,9 @@ tr th, tr td {
   background-color: rgba(161,240,78,0.5) !important;
   -webkit-print-color-adjust: exact;
 }
-.equipment-6 {
+.equipment-6, .equpment-8 {
   margin: 1px;
   width: 48%;
-  float: left;
   border-radius: 5px;
 }
 .equipment-12 {
