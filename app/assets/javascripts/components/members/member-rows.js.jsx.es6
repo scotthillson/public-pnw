@@ -38,7 +38,7 @@ class MemberRows extends ViewComponent {
         return null;
       }
     }
-    let onCall = '';
+    let onCall = member.duty_end;
     let operational = '';
     if (member.operational) {
       operational = <i className="fa fa-check" aria-hidden="true"></i>;
@@ -78,12 +78,12 @@ class MemberRows extends ViewComponent {
     if (this.props.error) {
       return (
         <i className="fa fa-exclamation-triangle" aria-hidden="true" title="problems updating"></i>
-      ); 
+      );
     }
     else if (this.props.loading) {
       return (
         <i className="fa fa-spinner fa-pulse fa-fw" title="checking for updates"></i>
-      ); 
+      );
     }
     return (
       'On Call'

@@ -1,8 +1,11 @@
 class MembersController < ApplicationController
-  
+
   before_action :advanced_only
   before_action :set_member, only: [:show, :edit, :update, :destroy]
-  
+
+  def callout
+  end
+
   def update_members
     if Member.get_members
       status = :ok
@@ -11,7 +14,7 @@ class MembersController < ApplicationController
     end
     render json: Member.where('d4h_id is not null').order(:name), status: status
   end
-  
+
   def index
     respond_to do |format|
       format.html
@@ -20,15 +23,15 @@ class MembersController < ApplicationController
       end
     end
   end
-  
+
   private
-  
+
   def set_member
     @member = Member.find(params[:id])
   end
-  
+
   def member_params
     params.require(:member).permit(:name)
   end
-  
+
 end

@@ -3,6 +3,7 @@ class Members extends ViewComponent {
   constructor() {
     super();
     this.state = {
+      groups: [],
       members: [],
       loading: true,
       error: false
@@ -33,7 +34,7 @@ class Members extends ViewComponent {
       url: '/update_members',
       dataType: 'json',
       success: (data) => {
-        this.setState({ members: data, loading: false });
+        this.setState({ members: data, loading: false }, this.loadGroups);
       },
       error: (jqXHR) => {
         this.setState({ error: true });
@@ -42,7 +43,29 @@ class Members extends ViewComponent {
     });
   }
 
+  loadGroups() {
+    $.ajax({
+      method: 'get',
+      url: '/groups',
+      dataType: 'json',
+      success: (data) => {
+        this.setState({ groups: data });
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
   render() {
+    if (location.pathname == '/callout') {
+      return (
+        <Callout
+          groups={this.state.groups}
+          members={this.state.members}
+        />
+      );
+    }
     return (
       <MemberRows
         error={this.state.error}

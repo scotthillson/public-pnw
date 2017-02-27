@@ -1,6 +1,6 @@
 class CategoryForm extends ViewComponent {
 
-  teamOptions() {
+  teams() {
     let options = [];
     for (var team of this.props.teams) {
       options.push(<option key={team.id} value={team.id}>{team.name}</option>)
@@ -19,7 +19,7 @@ class CategoryForm extends ViewComponent {
               value={this.props.category.team_id}
               onChange={this.props.fieldChange.bind(this, 'team_id')}
             >
-              {this.teamOptions()}
+              {this.teams()}
             </select>
           </div>
           <div className="form-group">

@@ -112,7 +112,7 @@ class EquipmentList extends ViewComponent {
 
   key(){
     return (
-      <div className="equipment-space">
+      <div className="top-margin">
         <div className="row">
           <div className="col-md-1 btn btn-xs Required equipment-key">
             required:
@@ -145,14 +145,14 @@ class EquipmentList extends ViewComponent {
     return (
       <div className="row bottom-margin">
         <p>Cotton clothing may not be worn in the field from October through May. In the Pacific Northwest, hypothermia is a year-round threat. Thus, cotton is not recommended at any time of year, as it does not wick moisture from the skin, but rather, it holds moisture quite well. Do not wear it next to your skin. Good choices are synthetics (polyester) and wool or silk. These pull moisture from the skin so you stay drier and warmer.</p>
-        <p>All clothing items in your pack should be weather appropriate. This should go without saying</p>
+        <p>All clothing items in your pack should be weather appropriate. This goes without saying.</p>
       </div>
     );
   }
 
   render() {
     return (
-      <div className="equipment-space">
+      <div className="top-margin">
         {this.head()}
         {this.equipment()}
         {this.key()}

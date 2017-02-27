@@ -1,18 +1,18 @@
 # A member is a local copy of D4H team memmbers
 
 class Member < ActiveRecord::Base
-  
+
   validates_presence_of :name
   validates_presence_of :mobile_phone
-  
+
   def create_authorization_code
     MobileAuthorization.new_authorization(self)
   end
-  
+
   def ingest_authorization_code
     # what was I doing here?
   end
-  
+
   def self.get_members
     if DateTime.now.to_i - D4h.first.last_member_sync.to_i > 999
       D4h.offsetter('members', method(:update_member), method(:sync_members))
@@ -23,7 +23,7 @@ class Member < ActiveRecord::Base
       true
     end
   end
-  
+
   def self.update_member(remote_member)
     member = find_by_d4h_id(remote_member["id"])
     member ||= new
@@ -44,11 +44,11 @@ class Member < ActiveRecord::Base
     member.work_phone = remote_member["workphone"]
     member.save
   end
-  
+
   def self.sync_members(ids)
-    find_by_d4h_id((all.pluck(:d4h_id) - ids)).update_all(d4h_id: null)
+    where(d4h_id: (all.pluck(:d4h_id) - ids)).update_all(d4h_id: null)
   end
-  
+
   def self.sync_with_users
     where(statud_is: 1).each do |member|
       unless User.where(email: member.email)
@@ -57,5 +57,5 @@ class Member < ActiveRecord::Base
       end
     end
   end
-  
+
 end

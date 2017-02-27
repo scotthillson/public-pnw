@@ -46,7 +46,7 @@ tr th, tr td {
 .equipment-key {
   float: left;
 }
-.equipment-space {
+.top-margin {
   margin-top: 20px;
 }
 .bottom-margin {
@@ -69,4 +69,9 @@ tr th, tr td {
 }
 .carousel {
   max-width: 1100px;
+}
+.recipient {
+  margin: 2px;
+  border-radius: 4px;
+  background-color: rgba(125,180,94,0.7);
 }

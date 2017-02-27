@@ -241,11 +241,13 @@ class Equipment extends ViewComponent {
     let buts = [];
     for (var team of this.state.teams) {
       if (_.map(this.state.categories, 'team_id').includes(String(team.id))) {
-        let thisClass = 'btn-default';
-        if (this.state.team == team.id) {
-          thisClass = 'btn-primary';
+        if (this.props.advanced) {
+          let thisClass = 'btn-default';
+          if (this.state.team == team.id) {
+            thisClass = 'btn-primary';
+          }
+          buts.push(<div key={`team-${team.id}`} className={`btn btn-xs ${thisClass}`} onClick={this.setTeam.bind(this, team.id)}>{team.name}</div>);
         }
-        buts.push(<div key={`team-${team.id}`} className={`btn btn-xs ${thisClass}`} onClick={this.setTeam.bind(this, team.id)}>{team.name}</div>);
       }
     }
     let thisClass = 'btn-default';
@@ -256,24 +258,32 @@ class Equipment extends ViewComponent {
     return buts;
   }
 
-  adminToolbar(){
+  adminButtons() {
     if (this.props.advanced) {
       return (
-        <div className="row btn-toolbar">
+        <div>
           <div className="btn btn-xs btn-success" onClick={this.newEquipment}>new item</div>
           <div className="btn btn-xs btn-success" onClick={this.newCategory}>new category</div>
-          <div className="btn-toolbar pull-right">
-            {this.teams()}
-          </div>
         </div>
       );
     }
   }
 
+  toolbar(){
+    return (
+      <div className="row btn-toolbar">
+        {this.adminButtons()}
+        <div className="btn-toolbar pull-right">
+          {this.teams()}
+        </div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
-        {this.adminToolbar()}
+        {this.toolbar()}
         {this.table()}
       </div>
     );
