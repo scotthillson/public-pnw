@@ -111,7 +111,7 @@ fieldset[disabled] .btn {
   }
 }
 .carousel {
-  max-width: 1000px;
+  width: 1000px;
   margin: 10px auto;
 }
 .panel-info > .panel-heading {

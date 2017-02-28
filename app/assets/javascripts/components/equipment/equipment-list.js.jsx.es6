@@ -56,8 +56,8 @@ class EquipmentList extends ViewComponent {
     for (var c of this.props.categories){
       if (c.team_id == this.props.team || c.display_name == 'First Aid Kit') {
         list.push (
-          <div className="row" key={`cat-${c.id}`}>
-            <div className="col-md-12 text-center">
+          <div className="row equipment-row" key={`cat-${c.id}`}>
+            <div className="col-md-12">
               {c.display_name}
             </div>
           </div>
@@ -65,12 +65,12 @@ class EquipmentList extends ViewComponent {
         for (var e of this.props.list) {
           if (e.equipment_category_id == c.id) {
             list.push (
-              <div className="row" key={`eq-${e.id}`}>
-                <div className="equipment-2">
+              <div className="row equipment-row" key={`eq-${e.id}`}>
+                <div className="equipment-2 pull-left">
                   {this.checkedButton(e)}
                 </div>
-                {this.equipmentItem(e, 'equipment-6')}
-                <div className="equipment-2">
+                {this.equipmentItem(e, 'equipment-12 pull-left')}
+                <div className="equipment-2 pull-left">
                   {this.editButton(e)}
                 </div>
               </div>
@@ -103,15 +103,15 @@ class EquipmentList extends ViewComponent {
         for (var e = 0; e < items.length; e += 2) {
           if (items[e+1]) {
             list.push(
-              <div className="row text-center equipment-row" key={`eq-${items[e].id}`}>
-                {this.equipmentItem(items[e], 'equipment-6')}
-                {this.equipmentItem(items[e+1], 'equipment-6')}
+              <div className="row text-center" key={`eq-${items[e].id}`}>
+                {this.equipmentItem(items[e], 'equipment-6 pull-left')}
+                {this.equipmentItem(items[e+1], 'equipment-6 pull-left')}
               </div>
             );
           } else {
             list.push(
               <div className="row text-center equipment-row" key={`eq-${items[e].id}`}>
-                {this.equipmentItem(items[e], 'equipment-12')}
+                {this.equipmentItem(items[e], 'equipment-12 pull-left')}
               </div>
             );
           }
@@ -125,7 +125,7 @@ class EquipmentList extends ViewComponent {
     return (
       <div className="top-margin">
         <div className="row">
-          <div className="col-md-1 btn btn-xs Required equipment-key">
+          <div className="col-md-1 btn btn-xs Required pull-left">
             required:
           </div>
           <div className="col-md-10">
@@ -133,7 +133,7 @@ class EquipmentList extends ViewComponent {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-1 btn btn-xs Recommended equipment-key">
+          <div className="col-md-1 btn btn-xs Recommended pull-left">
             recommended:
           </div>
           <div className="col-md-10">
@@ -141,7 +141,7 @@ class EquipmentList extends ViewComponent {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-1 btn btn-xs Optional equipment-key">
+          <div className="col-md-1 btn btn-xs Optional pull-left">
             optional:
           </div>
           <div className="col-md-10">

@@ -23,38 +23,39 @@ tr th, tr td {
 .Required {
   background-color: rgba(240,173,78,0.7) !important;
   -webkit-print-color-adjust: exact;
+  overflow: hidden;
 }
 .Recommended {
   background-color: rgba(240,236,78,0.7) !important;
   -webkit-print-color-adjust: exact;
+  overflow: hidden;
 }
 .Optional {
   background-color: rgba(161,240,78,0.5) !important;
   -webkit-print-color-adjust: exact;
+  overflow: hidden;
 }
 .equipment-2 {
-  width: 5%;
-  float: left;
-  margin-left: 5px;
+  width: 4%;
   border-radius: 5px;
 }
-.equipment-6, .equpment-8 {
-  float: left;
+.equipment-6 {
   margin: 1px;
   width: 48%;
   border-radius: 5px;
 }
 .equipment-12 {
-  width: 48%;
-  margin: 1px 24.5%;
+  width: 88%;
+  margin: 1px 0 0 7px;
   border-radius: 5px;
 }
-.equipment-key {
-  float: left;
+.equipment-row {
+  width: 50%;
+  margin: auto;
 }
 .equipment-btn {
   margin-top: -3px;
-  margin-left: 5px;
+  margin-left: 2px;
   height: 22px;
 }
 .top-margin {
@@ -65,16 +66,13 @@ tr th, tr td {
 }
 .panel {
     -webkit-box-shadow: none;
-    box-shadow: none
+    box-shadow: none;
 }
 .panel-heading {
   border-radius: 5px;
 }
 .panel > .row {
   margin: 5px -15px;
-}
-.carousel {
-  max-width: 1100px;
 }
 .recipient {
   margin: 2px;
