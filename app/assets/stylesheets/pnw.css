@@ -36,7 +36,7 @@ tr th, tr td {
   overflow: hidden;
 }
 .equipment-2 {
-  width: 4%;
+  width: 6%;
   border-radius: 5px;
 }
 .equipment-6 {
@@ -46,7 +46,7 @@ tr th, tr td {
 }
 .equipment-12 {
   width: 88%;
-  margin: 1px 0 0 7px;
+  margin: auto;
   border-radius: 5px;
 }
 .equipment-row {
