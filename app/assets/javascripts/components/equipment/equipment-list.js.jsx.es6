@@ -3,13 +3,13 @@ class EquipmentList extends ViewComponent {
   checkedButton(e) {
     if (this.props.checked.includes(e.id)) {
       return (
-        <div className="btn btn-xs btn-success" onClick={this.props.checkEquipment.bind(this, e)}>
+        <div className="btn btn-xs btn-success equipment-btn" onClick={this.props.checkEquipment.bind(this, e)}>
         <i className="fa fa-check-circle-o" aria-hidden="true"></i>
       </div>
       );
     }
     return (
-      <div className="btn btn-xs btn-primary" onClick={this.props.checkEquipment.bind(this, e)}>
+      <div className="btn btn-xs btn-primary equipment-btn" onClick={this.props.checkEquipment.bind(this, e)}>
         <i className="fa fa-circle-o" aria-hidden="true"></i>
       </div>
     );
@@ -19,9 +19,9 @@ class EquipmentList extends ViewComponent {
     if (this.props.advanced) {
       return (
         <div
-          className="btn btn-xs btn-warning"
-          onClick={this.props.editEquipment.bind(this, e)}>
-          edit
+          className="btn btn-xs equipment-btn btn-warning"
+          onClick={this.props.editEquipment.bind(this, e)}
+          >edit
         </div>
       );
     }
@@ -66,11 +66,11 @@ class EquipmentList extends ViewComponent {
           if (e.equipment_category_id == c.id) {
             list.push (
               <div className="row" key={`eq-${e.id}`}>
-                <div className="col-md-2">
+                <div className="equipment-2">
                   {this.checkedButton(e)}
                 </div>
-                {this.equipmentItem(e, 'col-md-8')}
-                <div className="col-md-2">
+                {this.equipmentItem(e, 'equipment-6')}
+                <div className="equipment-2">
                   {this.editButton(e)}
                 </div>
               </div>

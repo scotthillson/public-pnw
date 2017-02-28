@@ -32,7 +32,14 @@ tr th, tr td {
   background-color: rgba(161,240,78,0.5) !important;
   -webkit-print-color-adjust: exact;
 }
+.equipment-2 {
+  width: 5%;
+  float: left;
+  margin-left: 5px;
+  border-radius: 5px;
+}
 .equipment-6, .equpment-8 {
+  float: left;
   margin: 1px;
   width: 48%;
   border-radius: 5px;
@@ -45,16 +52,16 @@ tr th, tr td {
 .equipment-key {
   float: left;
 }
+.equipment-btn {
+  margin-top: -3px;
+  margin-left: 5px;
+  height: 22px;
+}
 .top-margin {
   margin-top: 20px;
 }
 .bottom-margin {
   margin-bottom: 20px;
-}
-@media print {
-  .btn-toolbar {
-    display: none;
-  }
 }
 .panel {
     -webkit-box-shadow: none;
@@ -73,4 +80,14 @@ tr th, tr td {
   margin: 2px;
   border-radius: 4px;
   background-color: rgba(125,180,94,0.7);
+}
+@media print {
+  .btn-toolbar {
+    display: none;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 992px;
+  }
 }
