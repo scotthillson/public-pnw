@@ -34,6 +34,23 @@ class EquipmentList extends ViewComponent {
     return('btn');
   }
 
+  equipmentDisplay(e) {
+    if (this.props.detail == 'long description') {
+      if (!e.description) {
+        e.description = e.name;
+      }
+      if (!e.notes) {
+        e.notes = '';
+      }
+      return (
+        `${e.description} ${e.notes}`
+      );
+    }
+    return (
+      e.name
+    );
+  }
+
   equipmentItem(e, c) {
     if (e.examples) {
       return (
@@ -42,7 +59,7 @@ class EquipmentList extends ViewComponent {
           title={`${e.notes}, click for examples`}
           href={e.examples}
           target="_blank">
-          {e.name}
+          {this.equipmentDisplay(e)}
         </a>
       );
     }
@@ -50,7 +67,7 @@ class EquipmentList extends ViewComponent {
       <a
         className={`${c} ${this.buttonClass()} btn-xs ${e.importance}`}
         title={e.notes}>
-        {e.name}
+        {this.equipmentDisplay(e)}
       </a>
     );
   }
