@@ -16,13 +16,15 @@ class Equipment extends ViewComponent {
       'saveCategory',
       'saveEquipment',
       'table',
-      'teams',
-      'print'
+      'setDetail',
+      'setPrint',
+      'setTeam'
     );
     this.state = {
       categories: [],
       category: null,
       checked: [],
+      detail: 'short description',
       equipment: null,
       list: [],
       print: false,
@@ -136,14 +138,6 @@ class Equipment extends ViewComponent {
     this.setState({ equipment: equipment });
   }
 
-  categories() {
-    let categories = [];
-    for (var category of this.state.categories) {
-      categories.push(category);
-    }
-    return categories;
-  }
-
   newEquipment() {
     this.setState(
       { equipment: {
@@ -172,10 +166,6 @@ class Equipment extends ViewComponent {
     this.setState({ equipment: e });
   }
 
-  setTeam(t) {
-    this.setState({ team: t });
-  }
-
   checkEquipment(e) {
     let checked = _.clone(this.state.checked);
     if (checked.includes(e.id)) {
@@ -186,11 +176,23 @@ class Equipment extends ViewComponent {
     this.setState({ checked: checked });
   }
 
-  print() {
+  setTeam(t) {
+    this.setState({ team: t });
+  }
+
+  setPrint() {
     if (this.state.print) {
       this.setState({ print: false });
     } else {
       this.setState({ print: true });
+    }
+  }
+
+  setDetail() {
+    if (this.state.detail == 'short description') {
+      this.setState({ detail: 'long description' });
+    } else {
+      this.setState({ detail: 'short description' });
     }
   }
 
@@ -226,6 +228,7 @@ class Equipment extends ViewComponent {
         categories={this.state.categories}
         checked={this.state.checked}
         checkEquipment={this.checkEquipment}
+        detail={this.state.detail}
         editEquipment={this.editEquipment}
         list={this.state.list}
         print={this.state.print}
@@ -234,46 +237,21 @@ class Equipment extends ViewComponent {
     );
   }
 
-  teams(){
-    let buts = [];
-    for (var team of this.state.teams) {
-      if (_.map(this.state.categories, 'team_id').includes(String(team.id))) {
-        if (this.props.advanced) {
-          let thisClass = 'btn-default';
-          if (this.state.team == team.id) {
-            thisClass = 'btn-primary';
-          }
-          buts.push(<div key={`team-${team.id}`} className={`btn btn-xs ${thisClass}`} onClick={this.setTeam.bind(this, team.id)}>{team.name}</div>);
-        }
-      }
-    }
-    let thisClass = 'btn-default';
-    if (this.state.print) {
-      thisClass = 'btn-primary';
-    }
-    buts.push(<div key="team-print" className={`btn btn-xs ${thisClass}`} onClick={this.print}>print</div>);
-    return buts;
-  }
-
-  adminButtons() {
-    if (this.props.advanced) {
-      return (
-        <div className="btn-toolbar pull-left">
-          <div className="btn btn-xs btn-success" onClick={this.newEquipment}>new item</div>
-          <div className="btn btn-xs btn-success" onClick={this.newCategory}>new category</div>
-        </div>
-      );
-    }
-  }
-
   toolbar(){
     return (
-      <div className="row">
-        {this.adminButtons()}
-        <div className="btn-toolbar pull-right">
-          {this.teams()}
-        </div>
-      </div>
+      <EquipmentBar
+        advanced={this.props.advanced}
+        categories={this.state.categories}
+        detail={this.state.detail}
+        newCategory={this.newCategory}
+        newEquipment={this.newEquipment}
+        print={this.state.print}
+        setDetail={this.setDetail}
+        setPrint={this.setPrint}
+        setTeam={this.setTeam}
+        teams={this.state.teams}
+        team={this.state.team}
+      />
     );
   }
 
