@@ -89,6 +89,15 @@ tr th, tr td {
     width: 992px;
   }
 }
+@media (max-width: 1240px) {
+  .nav > li > a {
+    padding: 15px 4px;
+    font-size: 15px;
+  }
+}
+.social {
+  padding: 10px 4px;
+}
 .btn-wrap {
   padding-bottom: 1px;
   margin-bottom: 0;

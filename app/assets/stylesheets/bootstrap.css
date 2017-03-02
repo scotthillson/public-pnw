@@ -2443,7 +2443,7 @@ table th[class*="col-"] {
   min-height: .01%;
   overflow-x: auto;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 896px) {
   .table-responsive {
     width: 100%;
     margin-bottom: 15px;
@@ -4255,7 +4255,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding-bottom: 10px;
   line-height: 20px;
 }
-@media (max-width: 767px) {
+@media (max-width: 896px) {
   .navbar-nav .open .dropdown-menu {
     position: static;
     float: none;
@@ -4360,7 +4360,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     margin-bottom: 0;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 896px) {
   .navbar-form {
     width: auto;
     padding-top: 0;
