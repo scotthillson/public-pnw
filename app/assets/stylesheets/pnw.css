@@ -51,7 +51,7 @@ tr th, tr td {
 }
 .equipment-row {
   width: 50%;
-  margin: auto;
+  margin: 1px auto;
 }
 .equipment-btn {
   margin-top: -3px;
