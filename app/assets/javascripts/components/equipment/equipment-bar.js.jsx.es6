@@ -23,18 +23,16 @@ class EquipmentBar extends ViewComponent {
 
   teams(){
     let buts = [];
-    if (this.props.advanced) {
-      for (var team of this.props.teams) {
-        if (_.map(this.props.categories, 'team_id').includes(String(team.id))) {
-          buts.push(
-            <div
-              key={`team-${team.id}`}
-              className={`btn btn-xs ${this.teamButtonClass(team)}`}
-              onClick={this.props.setTeam.bind(this, team.id)}>
-              {team.name}
-            </div>
-          );
-        }
+    for (var team of this.props.teams) {
+      if (_.map(this.props.categories, 'team_id').includes(String(team.id))) {
+        buts.push(
+          <div
+            key={`team-${team.id}`}
+            className={`btn btn-xs ${this.teamButtonClass(team)}`}
+            onClick={this.props.setTeam.bind(this, team.id)}>
+            {team.name}
+          </div>
+        );
       }
     }
     buts.push(
