@@ -112,8 +112,8 @@ class EquipmentList extends ViewComponent {
     for (var c of this.props.categories){
       if (c.team_id == this.props.team || c.display_name == 'First Aid Kit') {
         list.push (
-          <div className="row text-center equipment-row" key={`cat-${c.id}`}>
-              <div className="equipment-12 text-center">
+          <div className="row text-center" key={`cat-${c.id}`}>
+              <div className="equipment-head">
                 {c.display_name}
               </div>
           </div>

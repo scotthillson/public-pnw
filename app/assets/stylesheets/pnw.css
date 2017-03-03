@@ -58,6 +58,9 @@ tr th, tr td {
   margin-left: 2px;
   height: 22px;
 }
+.equipment-head {
+  margin-right: 4%;
+}
 .top-margin {
   margin-top: 20px;
 }

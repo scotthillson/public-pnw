@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170226055807) do
+ActiveRecord::Schema.define(version: 20170303062637) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20170226055807) do
     t.integer  "team_gear"
     t.integer  "weight"
     t.integer  "sort"
+    t.integer  "updated_by"
   end
 
   create_table "equipment_categories", force: :cascade do |t|
@@ -154,6 +155,8 @@ ActiveRecord::Schema.define(version: 20170226055807) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "d4h_id"
+    t.string   "local_name"
+    t.boolean  "custom"
   end
 
   create_table "images", force: :cascade do |t|
@@ -188,8 +191,8 @@ ActiveRecord::Schema.define(version: 20170226055807) do
     t.string   "title",                      limit: 255
     t.string   "image",                      limit: 255
     t.string   "image_big",                  limit: 255
+    t.integer  "created_by"
     t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "application_id"
     t.integer  "status_id"
     t.boolean  "on_call"
@@ -209,6 +212,7 @@ ActiveRecord::Schema.define(version: 20170226055807) do
     t.string   "emergency_two"
     t.string   "emergency_phone_two"
     t.string   "emergency_relationship_two"
+    t.datetime "updated_at"
     t.string   "email"
     t.string   "position"
     t.datetime "duty_start"
@@ -244,7 +248,7 @@ ActiveRecord::Schema.define(version: 20170226055807) do
     t.string   "name",       limit: 255
     t.string   "body",       limit: 255
     t.integer  "active"
-    t.string   "created_by", limit: 255
+    t.integer  "created_by"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -253,9 +257,10 @@ ActiveRecord::Schema.define(version: 20170226055807) do
     t.string   "title",      limit: 255
     t.string   "author",     limit: 255
     t.string   "body",       limit: 255
+    t.boolean  "active"
+    t.integer  "created_by"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active"
   end
 
   create_table "prospect_applications", force: :cascade do |t|
@@ -333,10 +338,11 @@ ActiveRecord::Schema.define(version: 20170226055807) do
     t.string   "title",       limit: 255
     t.string   "author",      limit: 255
     t.string   "body",        limit: 255
-    t.date     "search_date", limit: 255
+    t.string   "search_date", limit: 255
+    t.boolean  "active"
+    t.integer  "creatd_by"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active"
     t.integer  "incident_id"
     t.string   "reference"
   end
