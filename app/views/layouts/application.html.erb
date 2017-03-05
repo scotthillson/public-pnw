@@ -86,7 +86,16 @@
     </div><!-- /.container-fluid -->
   </nav>
   <div class="page-header" style="margin:5px 30px">
-    <% unless current_page?('/equipment') %>
+    <% if current_page?('/') ||
+      current_page?('/join') ||
+      current_page?('/donate') ||
+      current_page?('/about') ||
+      current_page?('/contact') ||
+      current_page?('/searches') ||
+      current_page?('/faqs') ||
+      current_page?('/meetings') ||
+      current_page?('/calendar')
+    %>
       <div class="row">
         <div class="col-md-2">
           <img src="/small-logo.png" class="logo">

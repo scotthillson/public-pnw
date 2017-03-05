@@ -3,9 +3,6 @@ class MembersController < ApplicationController
   before_action :advanced_only
   before_action :set_member, only: [:show, :edit, :update, :destroy]
 
-  def callout
-  end
-
   def update_members
     if Member.get_members
       status = :ok

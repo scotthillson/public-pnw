@@ -6,13 +6,14 @@ class GroupForm extends ViewComponent {
         <form className="text-center">
           <h4>{this.props.group.name}</h4>
           <div className="form-group">
-            <label>Name</label>
+            <label>Local Name</label>
             <input
               className="form-control"
               type="text"
               value={this.props.group.local_name}
               onChange={this.props.fieldChange.bind(this, 'local_name')}
             />
+          </div>
           <div className="btn-toolbar">
             <input
               className="btn btn-primary"

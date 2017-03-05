@@ -246,18 +246,19 @@ ActiveRecord::Schema.define(version: 20170304220136) do
     t.string   "name",       limit: 255
     t.string   "body",       limit: 255
     t.integer  "active"
-    t.string   "created_by", limit: 255
+    t.integer  "created_by", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "updated_by"
   end
 
   create_table "posts", force: :cascade do |t|
     t.string   "title",      limit: 255
-    t.string   "author",     limit: 255
     t.string   "body",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active"
+    t.integer  "created_by"
   end
 
   create_table "prospect_applications", force: :cascade do |t|
@@ -329,18 +330,6 @@ ActiveRecord::Schema.define(version: 20170304220136) do
     t.integer  "created_by"
     t.datetime "updated_at"
     t.datetime "created_at"
-  end
-
-  create_table "searches", force: :cascade do |t|
-    t.string   "title",       limit: 255
-    t.string   "author",      limit: 255
-    t.string   "body",        limit: 255
-    t.date     "search_date", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "active"
-    t.integer  "incident_id"
-    t.string   "reference"
   end
 
   create_table "seats", force: :cascade do |t|

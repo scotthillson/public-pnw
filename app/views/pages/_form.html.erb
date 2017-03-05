@@ -1,9 +1,5 @@
 <%= form_for(@page) do |f| %>
   <div class="field">
-    <%= f.label :created_by %><br>
-    <%= f.text_field :created_by, class: 'form-control' %>
-  </div>
-  <div class="field">
     <%= f.label :name %><br>
     <%= f.select :name,options_for_select(['Paragraph One','Paragraph Two','Paragraph Three','Paragraph Four','faqs','Meetings','Join','About','Donate','Donate_Vehicle','Contact']),{},{class:'form-control'} %>
   </div>

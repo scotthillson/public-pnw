@@ -26,10 +26,10 @@ Rails.application.routes.draw do
   resources :images, constraints: {format: :html}
 
   resources :incidents
+    get 'callout', to: 'incidents#callout'
 
   resources :members
     get 'update_members', to: 'members#update_members'
-    get 'callout', to: 'members#callout'
 
   resources :messages
 

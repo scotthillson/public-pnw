@@ -3,7 +3,7 @@ class CategoryForm extends ViewComponent {
   teams() {
     let options = [];
     for (var team of this.props.teams) {
-      options.push(<option key={team.id} value={team.id}>{team.name}</option>)
+      options.push(<option key={team.id} value={team.id}>{team.local_name} {team.name}</option>)
     }
     return options;
   }

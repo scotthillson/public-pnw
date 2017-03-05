@@ -62,6 +62,7 @@ class EquipmentBar extends ViewComponent {
         <div className="btn-toolbar pull-left">
           <div className="btn btn-xs btn-success" onClick={this.props.newEquipment}>new item</div>
           <div className="btn btn-xs btn-success" onClick={this.props.newCategory}>new category</div>
+          <a className="btn btn-xs btn-success" href="/groups">new group</a>
         </div>
       );
     }
