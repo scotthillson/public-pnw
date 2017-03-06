@@ -137,8 +137,8 @@ class Callout extends ViewComponent {
   render() {
     return (
       <div>
-      <div className="row off-recipient">
-        new incident period
+      <div>
+        <div className="btn btn-xs btn-primary">new incident period</div>
       </div>
         {this.operationalButton()}
         <div className="row bottom-margin">
@@ -163,6 +163,7 @@ class Callout extends ViewComponent {
         </div>
         <div className="row bottom-margin">
           <p>{150-this.state.message.length} characters remaining</p>
+          <p>{this.state.recipients.length} recipients</p>
         </div>
           {this.recipients()}
       </div>
