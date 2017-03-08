@@ -36,7 +36,7 @@ gem 'eslint-rails'
 gem 'capistrano'
 # throttle that shady shit!
 gem 'rack-attack'
-#
+# sprocks
 gem 'sprockets-es6'
 # rspec for tests
 gem 'rspec-rails'
@@ -46,3 +46,5 @@ gem 'lodash-rails'
 gem 'puma'
 # seeds sometimes are goood
 gem 'seed_dump'
+# find errors before your users do
+gem 'rollbar'

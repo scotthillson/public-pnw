@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :events
     get 'calendar', to: 'events#index'
+    get 'searches', to: 'events#searches'
 
   resources :groups
 
@@ -41,8 +42,6 @@ Rails.application.routes.draw do
 
   resources :rentals, constraints: {format: :html}
     get 'rentals/:id/reserve', to: 'rentals#reserve', as: :reserve_rental
-
-  resources :searches, constraints: {format: :html}
 
   resources :sessions, constraints: {format: :html}
     get 'signout', to: 'sessions#destroy'

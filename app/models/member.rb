@@ -5,6 +5,8 @@ class Member < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :mobile_phone
 
+  has_many :messages
+
   def create_authorization_code
     MobileAuthorization.new_authorization(self)
   end

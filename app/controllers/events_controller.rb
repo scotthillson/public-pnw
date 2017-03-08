@@ -3,6 +3,10 @@ class EventsController < ApplicationController
   before_action :turn_back, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy, :join]
 
+  def searches
+    @searches = Event.incidents.order(:start_on).reverse
+  end
+
   def index
     @events = Event.all
   end
