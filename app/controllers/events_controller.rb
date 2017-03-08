@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
 
   before_action :turn_back, except: [:index, :show]
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :join]
+  before_action :set_event, only: [:show, :update, :destroy, :join]
 
   def searches
     @searches = Event.incidents.order(:start_on).reverse
@@ -11,17 +11,13 @@ class EventsController < ApplicationController
     @events = Event.all
   end
 
-  def new
-    @event = Event.new
-  end
-
   def create
-    @event = Event.new(event_params)
-    @event.created_by = current_user
-    if @event.save
-      render json: @event
+    event = Event.new(event_params)
+    event.created_by = current_user
+    if event.save
+      render json: event
     else
-      render json: @event
+      render json: event
     end
   end
 
@@ -31,9 +27,6 @@ class EventsController < ApplicationController
     else
       redirect_to @event, notice: 'something went wrong -_-'
     end
-  end
-
-  def edit
   end
 
   def update

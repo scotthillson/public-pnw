@@ -12,7 +12,6 @@ class MessagesAndIncidentsAndStuff < ActiveRecord::Migration
       t.datetime :updated_at
     end
 
-    add_column :messages, :incident_id, :integer
     remove_column :incidents, :attendance, :integer
     remove_column :incidents, :attendance_percent, :integer
     remove_column :incidents, :distance, :integer
@@ -25,6 +24,12 @@ class MessagesAndIncidentsAndStuff < ActiveRecord::Migration
     add_column :incidents, :return_to_base, :datetime
     add_column :incidents, :leave_base, :datetime
     add_column :incidents, :home_at, :datetime
+    add_column :messages, :incident_id, :integer
+    add_column :messages, :local_status, :string
+    add_column :messages, :translation, :string
+    add_column :messages, :created_at, :datetime
+    add_column :messages, :updated_at, :datetime
+    add_column :messages, :token, :string
 
   end
 end
