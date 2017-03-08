@@ -28,6 +28,9 @@ Rails.application.routes.draw do
 
   resources :incidents
     get 'callout', to: 'incidents#callout'
+    get 'incidents/:id/add_members', to: 'incidents#add_members'
+    get 'incidents/:id/remove_member/:member_id', to: 'incidents#remove_member'
+    get 'incidents/:id/update_member/:member_id', to: 'incidents#update_member'
 
   resources :members
     get 'update_members', to: 'members#update_members'
@@ -56,8 +59,8 @@ Rails.application.routes.draw do
     get :forgot_password, to: 'users#forgot_password'
     post :password_email, to: 'users#password_email'
 
-    resources :pages, constraints: {format: :html} #Not in alphabetical order because it breaks.
-      get 'last_version', to: 'pages#last_version'
-      get '/:page', to: 'pages#page'
+  resources :pages, constraints: {format: :html} #Not in alphabetical order, pages is always last!
+    get 'last_version', to: 'pages#last_version'
+    get '/:page', to: 'pages#page'
 
 end

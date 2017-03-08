@@ -4,6 +4,7 @@ class MessagesAndIncidentsAndStuff < ActiveRecord::Migration
     drop_table :forms
 
     create_table :incident_members, force: true do |t|
+      t.string   :role
       t.string   :status
       t.integer  :incident_id
       t.integer  :member_id

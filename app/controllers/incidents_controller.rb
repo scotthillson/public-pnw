@@ -9,6 +9,34 @@ class IncidentsController < ApplicationController
   def callout
   end
 
+  def show
+    incident = Incident.find params[:id]
+    render json: incident, include: :members, status: :ok
+  end
+
+  def update_member
+    IncidentMember.update_member(params[:id], params[:member_id])
+    render json: incident, include: :members, status: :ok
+  end
+
+  def add_members
+    incident = Incident.find params[:id]
+    if incident.add_members(params[:member_ids])
+      render json: incident, include: :members, status: :ok
+    else
+      render json: incident, status: :unprocessable_entity
+    end
+  end
+
+  def remove_member
+    incident = Incident.find params[:id]
+    if incident.remove_member(params[:member_id])
+      render json: incident, include: :members, status: :ok
+    else
+      render json: incident, status: :unprocessable_entity
+    end
+  end
+
   def create
     incident = Incident.new(incident_params)
     if incident.save
@@ -36,10 +64,11 @@ class IncidentsController < ApplicationController
       :description,
       :lat,
       :lng,
-      :attendance,
-      :distance,
+      :utm,
       :end_on,
-      :start_on
+      :start_on,
+      :alerted,
+      :home
     )
   end
 
