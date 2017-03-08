@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     get 'update_members', to: 'members#update_members'
 
   resources :messages
+    get 'update_messages', to: 'messages#update_messages'
 
   resources :posts, constraints: {format: :html}
     get 'posts/:id/activate', to: 'posts#activate', as: 'activate_post'

@@ -8,10 +8,48 @@ class Callout extends ViewComponent {
     this.state = {
       incidents: [],
       message: '',
+      messages: [],
       operational: true,
       operationalOnCall: true,
       recipients: [],
     };
+  }
+
+  componentDidMount() {
+    this.loadMessages();
+    this.interval = setInterval(() => {
+      this.updateMessages();
+      this.loadMessages();
+    }, 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  updateMessages() {
+    $.ajax({
+      method: 'get',
+      url: '/update_messages',
+      dataType: 'json',
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
+  loadMessages() {
+    $.ajax({
+      method: 'get',
+      url: '/messages',
+      dataType: 'json',
+      success: (data) => {
+        this.setState({ messages: data });
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
   }
 
   loadIncidents() {
@@ -94,6 +132,27 @@ class Callout extends ViewComponent {
     return options;
   }
 
+  message(m) {
+    let mClass = 'message';
+    if (m.translation == 'available') {
+      mClass = 'message available';
+    }
+    return (
+      <div className="row" key={m.id}>
+        <div className="col-md-6">{m.member.name}</div>
+        <div className="col-md-6">{m.body}</div>
+      </div>
+    );
+  }
+
+  messages() {
+    let messages = [];
+    for (var m of this.state.messages) {
+      messages.push(this.message(m));
+    }
+    return messages;
+  }
+
   recipient(r) {
     let rClass = 'recipient';
     if (r.status_id != 1) {
@@ -166,6 +225,7 @@ class Callout extends ViewComponent {
           <p>{this.state.recipients.length} recipients</p>
         </div>
           {this.recipients()}
+          {this.messages()}
       </div>
     );
   }

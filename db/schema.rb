@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170304220136) do
+ActiveRecord::Schema.define(version: 20170307215756) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -133,16 +133,6 @@ ActiveRecord::Schema.define(version: 20170304220136) do
     t.string   "event_type"
   end
 
-  create_table "forms", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "filename",   limit: 255
-    t.string   "path",       limit: 255
-    t.string   "page",       limit: 255
-    t.integer  "created_by"
-    t.datetime "updated_at"
-    t.datetime "created_at"
-  end
-
   create_table "group_members", force: :cascade do |t|
     t.integer  "group_id"
     t.integer  "member_id"
@@ -170,19 +160,34 @@ ActiveRecord::Schema.define(version: 20170304220136) do
     t.datetime "created_at"
   end
 
+  create_table "incident_members", force: :cascade do |t|
+    t.string   "role"
+    t.string   "status"
+    t.integer  "incident_id"
+    t.integer  "member_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "incidents", force: :cascade do |t|
     t.integer  "d4h_id"
     t.string   "reference"
     t.text     "description"
     t.string   "lat"
     t.string   "lng"
-    t.integer  "attendance_percent"
-    t.integer  "attendance"
-    t.integer  "distance"
     t.datetime "end_on"
     t.datetime "start_on"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.string   "utm"
+    t.datetime "alerted"
+    t.datetime "mobile"
+    t.datetime "at_base"
+    t.datetime "return_to_base"
+    t.datetime "leave_base"
+    t.datetime "home_at"
   end
 
   create_table "members", force: :cascade do |t|
@@ -240,6 +245,12 @@ ActiveRecord::Schema.define(version: 20170304220136) do
     t.string   "api_version"
     t.string   "uri"
     t.string   "subresource_uri"
+    t.integer  "incident_id"
+    t.string   "local_status"
+    t.string   "translation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "token"
   end
 
   create_table "pages", force: :cascade do |t|

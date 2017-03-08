@@ -1,10 +1,12 @@
 class Message < ActiveRecord::Base
   require 'twilio-ruby'
 
-  scope :recent, -> { where(created_at: (Time.now - 24.hours)..Time.now) }
+  scope :recent,   -> { where(created_at: (Time.now - 24.hours)..Time.now) }
+  scope :outbound, -> { where('direction LIKE ?', '%outbound%').last(9999) }
+  scope :inbound,  -> { where('direction LIKE ?', '%inbound%').last(9999) }
 
   belongs_to :incident
-  belongs_to :member
+  belongs_to :member, foreign_key: :from, primary_key: :mobile_phone
 
   AVAILABLE = [
     "available",
@@ -52,7 +54,7 @@ class Message < ActiveRecord::Base
       date_updated: m.date_updated,
       date_sent: m.date_sent,
       messaging_service_sid: m.messaging_service_sid,
-      from: m.from,
+      from: m.from.tr('^0-9',''),
       to: m.to,
       body: m.body,
       num_media: m.num_media,
