@@ -80,7 +80,9 @@ class Callout extends ViewComponent {
   }
 
   firstIncident() {
-    this.setState({ incident: this.state.incidents[0] });
+    if (this.state.incidents.length > 0) {
+      this.setState({ incident: this.state.incidents[0] });
+    }
   }
 
   fieldChange(e) {
@@ -88,6 +90,7 @@ class Callout extends ViewComponent {
   }
 
   render() {
+    console.log(this.state.incident);
     return (
       <div>
         <Incident

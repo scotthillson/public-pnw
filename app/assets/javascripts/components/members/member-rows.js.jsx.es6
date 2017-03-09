@@ -77,12 +77,22 @@ class MemberRows extends ViewComponent {
   loading() {
     if (this.props.error) {
       return (
-        <i className="fa fa-exclamation-triangle" aria-hidden="true" title="problems updating"></i>
+        <span>
+          <span>
+            <i className="fa fa-exclamation-triangle" aria-hidden="true" title="problems updating"></i>
+          </span>
+          <span>error</span>
+        </span>
       );
     }
     else if (this.props.loading) {
       return (
-        <i className="fa fa-spinner fa-pulse fa-fw" title="checking for updates"></i>
+        <span>
+          <span>
+            <i className="fa fa-spinner fa-pulse fa-fw" title="checking for updates"></i>
+          </span>
+          <span>loading</span>
+        </span>
       );
     }
     return (

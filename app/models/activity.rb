@@ -1,9 +1,9 @@
 # An activity is a local copy of D4H activity/incident/events
 
 class Activity < ActiveRecord::Base
-  
+
   has_one :event
-  
+
   def self.get_activities
     if DateTime.now.to_i - D4h.first.last_activity_sync.to_i > 2000
       D4h.offsetter('activities', method(:update_activity))
@@ -12,7 +12,7 @@ class Activity < ActiveRecord::Base
       track.save
     end
   end
-  
+
   def self.update_activity(remote_activity)
     activity = Activity.find_by_d4h_id remote_activity['id']
     activity ||= new
@@ -32,5 +32,5 @@ class Activity < ActiveRecord::Base
     activity.end_on = remote_activity['enddate']
     activity.save
   end
-  
+
 end

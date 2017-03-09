@@ -52,7 +52,7 @@ class Message < ActiveRecord::Base
     client = Twilio::REST::Client.new @sid, @token
     client.account.messages.list.each do |message|
       unless find_by(sid: message.sid)
-        store_message(message)
+        store_message(message, 0)
       end
     end
   end
@@ -92,11 +92,11 @@ class Message < ActiveRecord::Base
 
   def translate
     if UNAVAILABLE.include? body.downcase
-      translation = 'unavailable'
+      self.translation = 'unavailable'
     elsif AVAILABLE.include? body.downcase
-      translation = 'available'
+      self.translation = 'available'
     else
-      translation = 'exception'
+      self.translation = 'exception'
     end
   end
 

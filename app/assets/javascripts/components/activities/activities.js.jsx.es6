@@ -179,14 +179,19 @@ class Activities extends ViewComponent {
   loading() {
     if (this.state.loading) {
       return (
-        <i className="fa fa-spinner fa-pulse fa-fw" title="checking for updates"></i>
-      ); 
+        <span>
+          <span>
+            <i className="fa fa-spinner fa-pulse fa-fw" title="checking for updates"></i>
+          </span>
+          <span>loading</span>
+        </span>
+      );
     }
   }
 
   render() {
     if (this.state.activity) {
-      return( 
+      return(
         <ActivityForm
           activity={this.state.activity}
           cancel={this.cancel}

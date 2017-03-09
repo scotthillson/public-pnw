@@ -26,6 +26,9 @@ tr th, tr td {
 .unknown {
   background-color: rgba(240,173,78,0.7);
 }
+.unavailable {
+  background-color: rgba(200,70,70,0.4);
+}
 .Required {
   background-color: rgba(240,173,78,0.7) !important;
   -webkit-print-color-adjust: exact;
@@ -87,11 +90,6 @@ tr th, tr td {
   margin: 2px;
   border-radius: 4px;
   background-color: rgba(125,180,94,0.4);
-}
-.off-recipient {
-  margin: 2px;
-  border-radius: 4px;
-  background-color: rgba(200,70,70,0.4);
 }
 @media print {
   .btn-toolbar {

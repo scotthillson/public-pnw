@@ -97,25 +97,6 @@ class Recipients extends ViewComponent {
     });
   }
 
-  message(m) {
-    return (
-      <div className="row" key={m.id}>
-        <div className="col-md-6">{m.member.name}</div>
-        <div className="col-md-6">{m.body}</div>
-      </div>
-    );
-  }
-
-  messages() {
-    let messages = [];
-    for (var m of this.state.messages) {
-      if(!_.find(this.props.incident.members, {id: m.member.id})) {
-        messages.push(this.message(m));
-      }
-    }
-    return messages;
-  }
-
   recipient(r) {
     let avail = 'unknown btn-xs btn';
     let note = '';
@@ -179,7 +160,10 @@ class Recipients extends ViewComponent {
     return (
       <div>
         {this.recipients()}
-        {this.messages()}
+        <Messages
+          incident={this.props.incident}
+          messages={this.state.messages}
+        />
       </div>
     );
   }

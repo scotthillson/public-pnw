@@ -66,7 +66,11 @@ class Incident extends ViewComponent {
     }
     return (
       <div className="row btn-toolbar bottom-margin">
-        <div className={`btn btn-xs ${btnClass}`} onClick={this.operational}>operational only</div>
+        <div
+          className={`btn btn-xs ${btnClass}`}
+          onClick={this.operational}>
+          operational only
+        </div>
       </div>
     );
   }
@@ -91,11 +95,54 @@ class Incident extends ViewComponent {
     this.addRecipients(recipients);
   }
 
+  loading() {
+    if (this.props.error) {
+      return (
+        <span>
+          <span>
+            <i
+              className="fa fa-exclamation-triangle"
+              aria-hidden="true"
+              title="problems updating">
+            </i>
+          </span>
+          <span>error</span>
+        </span>
+      );
+    }
+    else if (this.props.loading) {
+      return (
+        <span>
+          <span>
+            <i
+              className="fa fa-spinner fa-pulse fa-fw"
+              title="checking for updates">
+            </i>
+          </span>
+          <span>loading</span>
+        </span>
+      );
+    }
+    return (
+      'Groups'
+    );
+  }
+
   teams() {
     let options = [];
-    options.push(<option key="0" value="0">Groups</option>);
+    options.push(
+      <option key="0"
+        value="0">
+        {this.loading()}
+      </option>
+    );
     for (var team of this.state.groups) {
-      options.push(<option key={team.id} value={team.id}>{team.name}</option>);
+      options.push(
+        <option key={team.id}
+          value={team.id}>
+          {team.name}
+        </option>
+      );
     }
     return options;
   }
@@ -107,10 +154,14 @@ class Incident extends ViewComponent {
       if (!recipient) {
         if (this.state.operational) {
           if (member.status_id == 1) {
-            options.push(<option key={member.id} value={member.name} />)
+            options.push(
+              <option key={member.id} value={member.name} />
+            );
           }
         } else {
-          options.push(<option key={member.id} value={member.name} />)
+          options.push(
+            <option key={member.id} value={member.name} />
+          );
         }
       }
     }
@@ -143,7 +194,11 @@ class Incident extends ViewComponent {
   render() {
     return (
       <div>
-        <div className="btn btn-xs btn-primary" onClick={this.props.newIncident}>new incident period</div>
+        <div
+          className="btn btn-xs btn-primary"
+          onClick={this.props.newIncident}>
+          new incident period
+        </div>
         {this.operationalButton()}
         <div className="col-md-6">
           <input
