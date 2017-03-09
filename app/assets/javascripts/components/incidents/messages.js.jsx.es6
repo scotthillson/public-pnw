@@ -34,8 +34,10 @@ class Messages extends ViewComponent {
     }
     return (
       <div className="row" key={m.id}>
-        <div className={`col-md-3 ${avail}`}>{m.member.name}</div>
-        <div className={`col-md-3 ${avail}`}>{m.body}</div>
+        <div className={`col-md-6 ${avail}`}>
+          <span>{m.member.name}</span>
+          <span>{m.body}</span>
+        </div>
       </div>
     );
   }

@@ -65,13 +65,11 @@ class Incident extends ViewComponent {
       btnClass = 'btn-primary';
     }
     return (
-      <div className="row btn-toolbar bottom-margin">
-        <div
+        <span
           className={`btn btn-xs ${btnClass}`}
           onClick={this.operational}>
           operational only
-        </div>
-      </div>
+        </span>
     );
   }
 
@@ -110,7 +108,7 @@ class Incident extends ViewComponent {
         </span>
       );
     }
-    else if (this.props.loading) {
+    else if (this.state.groups.length < 1) {
       return (
         <span>
           <span>
@@ -123,9 +121,6 @@ class Incident extends ViewComponent {
         </span>
       );
     }
-    return (
-      'Groups'
-    );
   }
 
   teams() {
@@ -133,7 +128,7 @@ class Incident extends ViewComponent {
     options.push(
       <option key="0"
         value="0">
-        {this.loading()}
+        Groups
       </option>
     );
     for (var team of this.state.groups) {
@@ -194,12 +189,14 @@ class Incident extends ViewComponent {
   render() {
     return (
       <div>
-        <div
-          className="btn btn-xs btn-primary"
-          onClick={this.props.newIncident}>
-          new incident period
+        <div className="margin-bottom">
+          <span
+            className="btn btn-xs btn-primary"
+            onClick={this.props.newIncident}>
+            new incident period
+          </span>
+          {this.operationalButton()}
         </div>
-        {this.operationalButton()}
         <div className="col-md-6">
           <input
             className="form-control"
