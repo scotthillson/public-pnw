@@ -12,15 +12,18 @@ class MessagesController < ApplicationController
 
   def update_messages
     if Message.get_messages
-      render json: { success: true }, status: :ok
+      render json: Message.inbound, include: :member, status: :ok
     else
       render json: { success: false }, status: :unprocessable_entity
     end
   end
 
-  def create
-    message = Message.new(message_params)
-    if message.save
+  def send_message
+    if params[:to] &&
+      params[:from] &&
+      params[:body] &&
+      params[:incident_id]
+      message = Message.send_message(params[:to], params[:from], params[:body], params[:incident_id])
       render json: message, status: :ok
     else
       render json: message, status: :unprocessable_entity

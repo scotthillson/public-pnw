@@ -20,6 +20,12 @@ tr th, tr td {
 .btn-event {
   background-color: rgba(240,173,78,0.7);
 }
+.available {
+  background-color: rgba(161,240,78,0.5);
+}
+.unknown {
+  background-color: rgba(240,173,78,0.7);
+}
 .Required {
   background-color: rgba(240,173,78,0.7) !important;
   -webkit-print-color-adjust: exact;
@@ -53,8 +59,8 @@ tr th, tr td {
   width: 50%;
   margin: 1px auto;
 }
-.equipment-btn {
-  margin-top: -3px;
+.pnw-btn {
+  margin-top: -5px;
   margin-left: 2px;
   height: 22px;
 }

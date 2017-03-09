@@ -1,9 +1,14 @@
 class Message < ActiveRecord::Base
   require 'twilio-ruby'
 
+  @sid = "ACfef32e24e1778fa357f75dbab305850a"
+  @token = "3160c85db0b69eefdd3f77e2004feb31"
+
   scope :recent,   -> { where(created_at: (Time.now - 24.hours)..Time.now) }
   scope :outbound, -> { where('direction LIKE ?', '%outbound%').last(9999) }
   scope :inbound,  -> { where('direction LIKE ?', '%inbound%').last(9999) }
+
+  before_save :translate
 
   belongs_to :incident
   belongs_to :member, foreign_key: :from, primary_key: :mobile_phone
@@ -27,19 +32,24 @@ class Message < ActiveRecord::Base
     Message.send('5039290055','5038500198','hello world!')
   end
 
+  def self.send_message(to, from, body, incident_id)
+    client = Twilio::REST::Client.new @sid, @token
+    message = client.account.messages.create({
+      from: from,
+      to: '15039290055',
+      body: body})
+    store_message(message, incident_id)
+  end
+
   def self.get_message(message)
-    sid = "ACfef32e24e1778fa357f75dbab305850a"
-    token = "3160c85db0b69eefdd3f77e2004feb31"
-    client = Twilio::REST::Client.new sid, token
+    client = Twilio::REST::Client.new @sid, @token
     message = client.account.messages.get(message)
     puts message.body
     puts message.direction
   end
 
   def self.get_messages
-    sid = "ACfef32e24e1778fa357f75dbab305850a"
-    token = "3160c85db0b69eefdd3f77e2004feb31"
-    client = Twilio::REST::Client.new sid, token
+    client = Twilio::REST::Client.new @sid, @token
     client.account.messages.list.each do |message|
       unless find_by(sid: message.sid)
         store_message(message)
@@ -47,8 +57,9 @@ class Message < ActiveRecord::Base
     end
   end
 
-  def self.store_message(m)
+  def self.store_message(m, incident_id)
     Message.create(
+      incident_id: incident_id,
       sid: m.sid,
       date_created: m.date_created,
       date_updated: m.date_updated,

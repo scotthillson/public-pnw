@@ -1,23 +1,22 @@
 class IncidentMember < ActiveRecord::Base
 
-  has_many :incidents
-  has_many :members
+  belongs_to :member
 
-  def self.update_member(incident_id, member_id, role=null, status=null)
-    if incident_id && member_id
-      incident_member = find_by(incident_id: incident_id, member_id: member_id)
+  def self.update_member(params)
+    if params[:incident_id] && params[:member_id]
+      incident_member = find_by(incident_id: params[:incident_id], member_id: parmas[:member_id])
       if incident_member
-        incident_member.update_member(role, status)
+        incident_member.update_member(params)
       end
     end
   end
 
-  def update_member(new_role=null, new_status=null)
-    if new_role
-      role = new_role
+  def update_member(params)
+    if params[:role]
+      role = params[:role]
     end
-    if new_status
-      status = new_status
+    if params[:status]
+      status = params[:status]
     end
     save
   end

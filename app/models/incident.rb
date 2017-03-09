@@ -2,7 +2,18 @@
 
 class Incident < ActiveRecord::Base
 
+  scope :active,  -> { where('start_on is not null and end_on is null') }
+
+  before_create :defaults
+
+  has_many :messages
+  has_many :incident_members
   has_many :members, through: :incident_members
+
+  def defaults
+    self.start_on = DateTime.now
+    self.alerted = DateTime.now
+  end
 
   def add_member(member_id)
     if id
@@ -12,9 +23,9 @@ class Incident < ActiveRecord::Base
     end
   end
 
-  def add_members(members)
-    members.each do |member|
-      add_member(member.id)
+  def add_members(member_ids)
+    member_ids.each do |id|
+      add_member(id)
     end
   end
 

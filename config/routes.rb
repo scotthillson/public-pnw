@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     post 'submit_new_member_application', to: 'prospect_applications#submit_application'
 
   resources :carpools, constraints: {format: :html}
-      get 'carpools/:id/reserve', to: 'carpools#reserve', as: :reserve_seat
+    get 'carpools/:id/reserve', to: 'carpools#reserve', as: :reserve_seat
 
   resources :discussions, contraints: {format: :html}
 
@@ -26,16 +26,20 @@ Rails.application.routes.draw do
 
   resources :images, constraints: {format: :html}
 
+  get 'callout', to: 'incidents#callout'
+  get 'incidents/active', to: 'incidents#active'
+  post 'incidents/create', to: 'incidents#create'
+  patch 'update_incident_member', to: 'incident_members#update_member'
+
   resources :incidents
-    get 'callout', to: 'incidents#callout'
-    get 'incidents/:id/add_members', to: 'incidents#add_members'
-    get 'incidents/:id/remove_member/:member_id', to: 'incidents#remove_member'
-    get 'incidents/:id/update_member/:member_id', to: 'incidents#update_member'
+    post 'incidents/:id/add_members', to: 'incidents#add_members'
+    delete 'incidents/:id/remove_member', to: 'incidents#remove_member'
 
   resources :members
     get 'update_members', to: 'members#update_members'
 
   resources :messages
+    get 'sent_messages', to: 'messages#sent_messages'
     get 'update_messages', to: 'messages#update_messages'
 
   resources :posts, constraints: {format: :html}

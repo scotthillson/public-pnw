@@ -3,48 +3,30 @@ class Callout extends ViewComponent {
   constructor() {
     super();
     this.bindThisToComponent(
-      'operational'
+      'getIncident',
+      'newIncident'
     );
     this.state = {
+      incident: { members: [] },
       incidents: [],
+      members: [],
       message: '',
-      messages: [],
-      operational: true,
-      operationalOnCall: true,
-      recipients: [],
+      operational: false,
     };
   }
 
   componentDidMount() {
-    this.loadMessages();
-    this.interval = setInterval(() => {
-      this.updateMessages();
-      this.loadMessages();
-    }, 5000);
+    this.loadMembers();
+    this.loadIncidents();
   }
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  updateMessages() {
+  loadMembers() {
     $.ajax({
       method: 'get',
-      url: '/update_messages',
-      dataType: 'json',
-      error: (jqXHR) => {
-        console.log(jqXHR);
-      }
-    });
-  }
-
-  loadMessages() {
-    $.ajax({
-      method: 'get',
-      url: '/messages',
+      url: '/members',
       dataType: 'json',
       success: (data) => {
-        this.setState({ messages: data });
+        this.setState({ members: data });
       },
       error: (jqXHR) => {
         console.log(jqXHR);
@@ -55,10 +37,10 @@ class Callout extends ViewComponent {
   loadIncidents() {
     $.ajax({
       method: 'get',
-      url: '/incidents',
+      url: 'incidents/active',
       dataType: 'json',
       success: (data) => {
-        this.setState({ incidents: data });
+        this.setState({ incidents: data }, this.firstIncident);
       },
       error: (jqXHR) => {
         console.log(jqXHR);
@@ -66,151 +48,54 @@ class Callout extends ViewComponent {
     });
   }
 
-  operational() {
-    let operational = true;
-    if (this.state.operational) {
-      operational = false;
-    }
-    this.setState({ operational: operational });
+  newIncident() {
+    $.ajax({
+      method: 'post',
+      url: 'incidents/create',
+      dataType: 'json',
+      success: (data) => {
+        this.setState({ incident: data });
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
   }
 
-  operationalButton() {
-    let btnClass = 'btn-default';
-    if (this.state.operational) {
-      btnClass = 'btn-primary';
+  getIncident() {
+    if (!this.state.incident.id) {
+      return;
     }
-    return (
-      <div className="row btn-toolbar bottom-margin">
-        <div className={`btn btn-xs ${btnClass}`} onClick={this.operational}>operational only</div>
-      </div>
-    );
+    $.ajax({
+      method: 'get',
+      url: `incidents/${this.state.incident.id}`,
+      dataType: 'json',
+      success: (data) => {
+        this.setState({ incident: data });
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
+  firstIncident() {
+    this.setState({ incident: this.state.incidents[0] });
   }
 
   fieldChange(e) {
     this.setState({ message: e.target.value })
   }
 
-  findTeam(team, id) {
-    return team.id == id;
-  }
-
-  addTeam(e) {
-    let group = this.props.groups.find(team => team.id == e.target.value);
-    if (!group) {
-      return;
-    }
-    let recipients = _.clone(this.state.recipients);
-    for (var member of group.members) {
-      if (!recipients.includes(member.id)) {
-        if (this.state.operational) {
-          if (member.status_id == 1) {
-            recipients.push(member.id);
-          }
-        } else {
-          recipients.push(member.id);
-        }
-      }
-    }
-    this.setState({ recipients: recipients });
-  }
-
-  dropRecipient(r) {
-    let recipients = _.clone(this.state.recipients).filter(item => item !== r.id);
-    this.setState({ recipients: recipients });
-  }
-
-  addRecipient() {
-    this.setState({ recipients: [] });
-  }
-
-  teams() {
-    let options = [];
-    options.push(<option key="0" value=""></option>);
-    for (var team of this.props.groups) {
-      options.push(<option key={team.id} value={team.id}>{team.name}</option>);
-    }
-    return options;
-  }
-
-  message(m) {
-    let mClass = 'message';
-    if (m.translation == 'available') {
-      mClass = 'message available';
-    }
-    return (
-      <div className="row" key={m.id}>
-        <div className="col-md-6">{m.member.name}</div>
-        <div className="col-md-6">{m.body}</div>
-      </div>
-    );
-  }
-
-  messages() {
-    let messages = [];
-    for (var m of this.state.messages) {
-      messages.push(this.message(m));
-    }
-    return messages;
-  }
-
-  recipient(r) {
-    let rClass = 'recipient';
-    if (r.status_id != 1) {
-      rClass = 'off-recipient';
-    }
-    return (
-      <div className="row" key={r.id}>
-        <div className={`col-md-4 ${rClass}`}>{r.name}</div>
-        <div className="btn btn-xs btn-danger" onClick={this.dropRecipient.bind(this, r)}>
-          <i className="fa fa-ban" aria-hidden="true"></i>
-        </div>
-      </div>
-    );
-  }
-
-  recipients() {
-    let names = [];
-    let recipients = [];
-    for (var r of this.state.recipients) {
-      let recipient = this.props.members.find(member => member.id == r);
-      names.push(recipient);
-    }
-    names.sort((a, b) => {
-      let nameA = a.name.toUpperCase();
-      let nameB = b.name.toUpperCase();
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-    });
-    for (var r of names) {
-      recipients.push(
-        this.recipient(r)
-      );
-    }
-    return recipients;
-  }
-
   render() {
     return (
       <div>
-      <div>
-        <div className="btn btn-xs btn-primary">new incident period</div>
-      </div>
-        {this.operationalButton()}
+        <Incident
+          getIncident={this.getIncident}
+          incident={this.state.incident}
+          members={this.state.members}
+        />
         <div className="row bottom-margin">
-          <div className="col-md-6">
-            <input className="form-control" type="text" value={this.state.memberAdd} />
-          </div>
-          <div className="col-md-6">
-            <select
-              className="form-control"
-              onChange={this.addTeam.bind(this)}
-            >{this.teams()}
-            </select>
-          </div>
           <div className="col-md-12">
             <textarea
               rows={3}
@@ -222,10 +107,12 @@ class Callout extends ViewComponent {
         </div>
         <div className="row bottom-margin">
           <p>{150-this.state.message.length} characters remaining</p>
-          <p>{this.state.recipients.length} recipients</p>
+          <p>{this.state.incident.members.length} recipients</p>
         </div>
-          {this.recipients()}
-          {this.messages()}
+          <Recipients
+            getIncident={this.getIncident}
+            incident={this.state.incident}
+          />
       </div>
     );
   }

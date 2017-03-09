@@ -6,23 +6,22 @@ class IncidentsController < ApplicationController
     render json: Incident.all, status: :ok
   end
 
+  def active
+    render json: Incident.active, include: [:members, :messages], status: :ok
+  end
+
   def callout
   end
 
   def show
     incident = Incident.find params[:id]
-    render json: incident, include: :members, status: :ok
-  end
-
-  def update_member
-    IncidentMember.update_member(params[:id], params[:member_id])
-    render json: incident, include: :members, status: :ok
+    render json: incident, include: [:members, :messages], status: :ok
   end
 
   def add_members
     incident = Incident.find params[:id]
     if incident.add_members(params[:member_ids])
-      render json: incident, include: :members, status: :ok
+      render json: incident, include: [:members, :messages], status: :ok
     else
       render json: incident, status: :unprocessable_entity
     end
@@ -31,7 +30,7 @@ class IncidentsController < ApplicationController
   def remove_member
     incident = Incident.find params[:id]
     if incident.remove_member(params[:member_id])
-      render json: incident, include: :members, status: :ok
+      render json: incident, include: [:members, :messages], status: :ok
     else
       render json: incident, status: :unprocessable_entity
     end
@@ -49,7 +48,7 @@ class IncidentsController < ApplicationController
   def update
     incident = Incident.find(params[:id])
     if incident.update(incident_params)
-      render json: incident, status: :ok
+      render json: incident, include: [:members, :messages], status: :ok
     else
       render json: incident, status: :unprocessable_entity
     end
