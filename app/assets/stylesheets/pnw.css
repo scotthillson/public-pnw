@@ -126,3 +126,7 @@ tr th, tr td {
   border: 1px solid transparent;
   border-radius: 4px;
 }
+.callout {
+  font-size: 14px;
+  line-height: 1;
+}

@@ -147,16 +147,31 @@ class Recipients extends ViewComponent {
     if (r.status_id != 1) {
       note = 'non-op';
     }
+    let messages = [];
+    for (var m of this.state.messages) {
+      if (m.member.id == r.id) {
+        messages.push(
+          <div>
+            {m.body}
+          </div>
+        );
+      }
+    }
     return (
       <span className="col-md-4" key={r.id}>
-        <span>
-          {r.name}
-          {note}
-        </span>
-        {this.dropButton(r)}
-        {this.availableButton(r)}
-        {this.unknownButton(r)}
-        {this.unavailableButton(r)}
+        <div>
+          <span>
+            {r.name}
+            {note}
+          </span>
+          {this.dropButton(r)}
+          {this.availableButton(r)}
+          {this.unknownButton(r)}
+          {this.unavailableButton(r)}
+          </div>
+            {messages}
+          <div>
+          </div>
       </span>
     );
   }
@@ -229,6 +244,11 @@ class Recipients extends ViewComponent {
   }
 
   render() {
+    if (this.state.messages.length < 1){
+      return (
+        <div>Loading!</div>
+      );
+    }
     return (
       <div>
         {this.recipients()}

@@ -54,6 +54,9 @@ class Callout extends ViewComponent {
       url: 'incidents/create',
       dataType: 'json',
       success: (data) => {
+        if (!data.incident_members){
+          data.incident_members = [];
+        }
         this.setState({ incident: data });
       },
       error: (jqXHR) => {
@@ -90,12 +93,14 @@ class Callout extends ViewComponent {
   }
 
   render() {
+    console.log(this.state.incident)
     return (
-      <div>
+      <div className="callout">
         <Incident
           getIncident={this.getIncident}
           incident={this.state.incident}
           members={this.state.members}
+          newIncident={this.newIncident}
         />
         <div className="row bottom-margin">
           <div className="col-md-12">

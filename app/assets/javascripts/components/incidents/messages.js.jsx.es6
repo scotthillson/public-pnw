@@ -45,7 +45,7 @@ class Messages extends ViewComponent {
   messages() {
     let messages = [];
     for (var m of this.props.messages) {
-      if(!_.find(this.props.incident.members, {id: m.member.id})) {
+      if(!_.find(this.props.incident.incident_members, {member_id: m.member.id})) {
         messages.push(this.message(m));
       }
     }

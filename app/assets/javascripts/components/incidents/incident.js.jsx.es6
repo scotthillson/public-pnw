@@ -189,7 +189,7 @@ class Incident extends ViewComponent {
   render() {
     return (
       <div>
-        <div className="margin-bottom">
+        <div className="bottom-margin">
           <span
             className="btn btn-xs btn-primary"
             onClick={this.props.newIncident}>
