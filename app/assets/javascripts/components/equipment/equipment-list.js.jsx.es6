@@ -3,13 +3,13 @@ class EquipmentList extends ViewComponent {
   checkedButton(e) {
     if (this.props.checked.includes(e.id)) {
       return (
-        <div className="btn btn-xs btn-success pnw-btn" onClick={this.props.checkEquipment.bind(this, e)}>
+        <div className="btn btn-xs btn-success" onClick={this.props.checkEquipment.bind(this, e)}>
         <i className="fa fa-check-circle-o" aria-hidden="true"></i>
       </div>
       );
     }
     return (
-      <div className="btn btn-xs btn-primary pnw-btn" onClick={this.props.checkEquipment.bind(this, e)}>
+      <div className="btn btn-xs btn-primary" onClick={this.props.checkEquipment.bind(this, e)}>
         <i className="fa fa-circle-o" aria-hidden="true"></i>
       </div>
     );
@@ -19,7 +19,7 @@ class EquipmentList extends ViewComponent {
     if (this.props.advanced) {
       return (
         <div
-          className="btn btn-xs pnw-btn btn-warning"
+          className="btn btn-xs btn-warning"
           onClick={this.props.editEquipment.bind(this, e)}
           >edit
         </div>

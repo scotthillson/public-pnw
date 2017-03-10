@@ -7,7 +7,7 @@ class Callout extends ViewComponent {
       'newIncident'
     );
     this.state = {
-      incident: { members: [] },
+      incident: { incident_members: [] },
       incidents: [],
       members: [],
       message: '',
@@ -90,7 +90,6 @@ class Callout extends ViewComponent {
   }
 
   render() {
-    console.log(this.state.incident);
     return (
       <div>
         <Incident
@@ -110,11 +109,12 @@ class Callout extends ViewComponent {
         </div>
         <div className="row bottom-margin">
           <p>{150-this.state.message.length} characters remaining</p>
-          <p>{this.state.incident.members.length} recipients</p>
+          <p>{this.state.incident.incident_members.length} recipients</p>
         </div>
           <Recipients
             getIncident={this.getIncident}
             incident={this.state.incident}
+            members={this.state.members}
           />
       </div>
     );

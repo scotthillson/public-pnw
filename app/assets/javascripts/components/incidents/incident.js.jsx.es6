@@ -80,7 +80,7 @@ class Incident extends ViewComponent {
     }
     let recipients = [];
     for (var member of group.members) {
-      if (!this.props.incident.members.includes(member.id)) {
+      if (!this.props.incident.incident_members.includes(member.id)) {
         if (this.state.operational) {
           if (member.status_id == 1) {
             recipients.push(member.id);
@@ -145,7 +145,7 @@ class Incident extends ViewComponent {
   members() {
     let options = [];
     for (var member of this.props.members) {
-      let recipient = _.find(this.props.incident.members, {id: member.id});
+      let recipient = _.find(this.props.incident.incident_members, {id: member.id});
       if (!recipient) {
         if (this.state.operational) {
           if (member.status_id == 1) {

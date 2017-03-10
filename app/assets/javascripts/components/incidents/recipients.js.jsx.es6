@@ -79,13 +79,13 @@ class Recipients extends ViewComponent {
     });
   }
 
-  recipientAvailable(status) {
+  recipientAvailable(r, status) {
     if (!this.props.incident.id) {
       return;
     }
     $.ajax({
       method: 'patch',
-      data: {status: status},
+      data: {status: status, member_id: r.id, incident_id: this.props.incident.id},
       url: `update_incident_member`,
       dataType: 'json',
       success: (data) => {
@@ -97,38 +97,88 @@ class Recipients extends ViewComponent {
     });
   }
 
+  availableButton(r) {
+    if (r.status != 'available') {
+      return(
+        <span
+          className="btn btn-xs btn-success pull-right"
+          onClick={this.recipientAvailable.bind(this, r, 'available')}>
+          avail
+        </span>
+      );
+    }
+  }
+
+  unavailableButton(r) {
+    if (r.status != 'unavailable') {
+      return (
+        <span
+          className="btn btn-xs btn-danger pull-right"
+          onClick={this.recipientAvailable.bind(this, r, 'unavailable')}>
+          unavail
+        </span>
+      );
+    }
+  }
+
+  unknownButton(r) {
+    if (r.status != 'unknown') {
+      return (
+        <span
+          className="btn btn-xs btn-warning pull-right"
+          onClick={this.recipientAvailable.bind(this, r, 'unknown')}>
+          unknown
+        </span>
+      );
+    }
+  }
+
+  dropButton(r){
+    return (
+      <span className="btn btn-xs btn-danger pull-right"
+      onClick={this.dropRecipient.bind(this, r)}>
+        <i className="fa fa-ban" aria-hidden="true"></i>
+      </span>
+    );
+  }
+
   recipient(r) {
-    let avail = 'unknown btn-xs btn';
     let note = '';
     if (r.status_id != 1) {
       note = 'non-op';
     }
     return (
-      <div className="row" key={r.id}>
-        <div className={`col-md-3 ${avail}`}>
-          <p className="pull-left">{r.name}</p>
-          <p className="pull-right">{note}</p>
-        </div>
-        <div className="btn btn-xs btn-danger pnw-btn" onClick={this.dropRecipient.bind(this, r)}>
-          <i className="fa fa-ban" aria-hidden="true"></i>
-        </div>
-        <div
-          className="btn btn-xs btn-success pnw-btn"
-          onClick={this.recipientAvailable.bind(this, r, 'available')}
-          >avail
-        </div>
-        <div
-          className="btn btn-xs btn-danger pnw-btn"
-          onClick={this.recipientAvailable.bind(this, r, 'unavailable')}
-          >unavail
-        </div>
-      </div>
+      <span className="col-md-4" key={r.id}>
+        <span>
+          {r.name}
+          {note}
+        </span>
+        {this.dropButton(r)}
+        {this.availableButton(r)}
+        {this.unknownButton(r)}
+        {this.unavailableButton(r)}
+      </span>
     );
   }
 
-  sortedNames(names) {
+  incidentMembers() {
+    if (!this.props.members) {
+      return [];
+    }
+    let recipients = [];
+    for (var i of this.props.incident.incident_members) {
+      let recipient = _.find(this.props.members, { id: i.member_id });
+      if (recipient) {
+        recipient.status = i.status;
+        recipients.push(recipient);
+      }
+    }
+    return recipients;
+  }
+
+  sortedNames() {
     return(
-      names.sort((a, b) => {
+      this.incidentMembers().sort((a, b) => {
         let nameA = a.name.toUpperCase();
         let nameB = b.name.toUpperCase();
         if (nameA < nameB) {
@@ -142,15 +192,37 @@ class Recipients extends ViewComponent {
   }
 
   recipients() {
-    let names = [];
     let recipients = [];
-    for (var r of this.props.incident.members) {
-      names.push(r);
-    }
-    names = this.sortedNames(names)
-    for (var r of names) {
-      recipients.push(
-        this.recipient(r)
+    let names = this.sortedNames();
+    let unknown = _.find(names, {status: 'unknown'})
+    while (names.length > 0) {
+      let avail = _.find(names, {status: 'available'})
+      if (avail) {
+        _.remove(names, { id: avail.id });
+        avail = this.recipient(avail);
+      } else {
+        avail = <span className="col-md-4"></span>
+      }
+      let unknown = _.find(names, {status: 'unknown'})
+      if (unknown) {
+        _.remove(names, { id: unknown.id });
+        unknown = this.recipient(unknown);
+      } else {
+        unknown = <span className="col-md-4"></span>
+      }
+      let unavail = _.find(names, {status: 'unavailable'})
+      if (unavail) {
+        _.remove(names, { id: unavail.id });
+        unavail = this.recipient(unavail);
+      } else {
+        unavail = <span className="col-md-4"></span>
+      }
+      recipients.push (
+        <div className="row">
+          {avail}
+          {unknown}
+          {unavail}
+        </div>
       );
     }
     return recipients;
@@ -160,10 +232,6 @@ class Recipients extends ViewComponent {
     return (
       <div>
         {this.recipients()}
-        <Messages
-          incident={this.props.incident}
-          messages={this.state.messages}
-        />
       </div>
     );
   }
