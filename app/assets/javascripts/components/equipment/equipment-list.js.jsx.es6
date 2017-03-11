@@ -9,7 +9,7 @@ class EquipmentList extends ViewComponent {
       );
     }
     return (
-      <div className="btn btn-xs btn-primary" onClick={this.props.checkEquipment.bind(this, e)}>
+      <div className="btn btn-xs btn-primary btn-pnw" onClick={this.props.checkEquipment.bind(this, e)}>
         <i className="fa fa-circle-o" aria-hidden="true"></i>
       </div>
     );
@@ -19,7 +19,7 @@ class EquipmentList extends ViewComponent {
     if (this.props.advanced) {
       return (
         <div
-          className="btn btn-xs btn-warning"
+          className="btn btn-xs btn-warning btn-pnw"
           onClick={this.props.editEquipment.bind(this, e)}
           >edit
         </div>

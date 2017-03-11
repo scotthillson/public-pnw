@@ -3,16 +3,12 @@ class MessagesController < ApplicationController
   before_action :advanced_only
 
   def index
-    render json: Message.inbound, include: :member, status: :ok
-  end
-
-  def sent_messages
-    render json: Message.outbound, include: :member, status: :ok
+    render json: Message.all, include: :member, status: :ok
   end
 
   def update_messages
     if Message.get_messages
-      render json: Message.inbound, include: :member, status: :ok
+      render json: Message.all, include: :member, status: :ok
     else
       render json: { success: false }, status: :unprocessable_entity
     end

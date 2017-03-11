@@ -1,6 +1,7 @@
 class IncidentMember < ActiveRecord::Base
 
   belongs_to :member
+  belongs_to :incident
 
   def self.update_member(params)
     if params[:incident_id] && params[:member_id]

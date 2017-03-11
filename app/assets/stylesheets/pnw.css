@@ -14,23 +14,12 @@ tr th, tr td {
   padding: 20px 10px;
   white-space: normal;
 }
-.btn-pnw {
+.training {
   background-color: rgba(240,173,78,0.7);
+}
+.btn-pnw {
   margin-top: -5px;
   margin-left: 2px;
-  height: 22px;
-}
-.btn-event {
-  background-color: rgba(240,173,78,0.7);
-}
-.available {
-  background-color: rgba(161,240,78,0.5);
-}
-.unknown {
-  background-color: rgba(240,173,78,0.7);
-}
-.unavailable {
-  background-color: rgba(200,70,70,0.4);
 }
 .Required {
   background-color: rgba(240,173,78,0.7) !important;
@@ -127,6 +116,23 @@ tr th, tr td {
   border-radius: 4px;
 }
 .callout {
+  min-width: 1200px;
   font-size: 14px;
   line-height: 1;
+  margin: 30px;
+}
+.recipient-column {
+  width: 32%;
+  margin: 2px 5px;
+  float: left;
+  padding: 2.5px 0 2.5px 5px;
+}
+.available {
+  background-color: rgba(200,250,145,0.5);
+}
+.unknown {
+  background-color: rgba(240,173,78,0.4);
+}
+.unavailable {
+  background-color: rgba(200,70,70,0.4);
 }

@@ -5,6 +5,7 @@ class Activities extends ViewComponent {
     this.bindThisToComponent(
       'cancel',
       'destroy',
+      'destroyButton',
       'save'
     );
     this.state = {
@@ -86,7 +87,7 @@ class Activities extends ViewComponent {
     if (activity.activity_type == 'incident') {
       type = 'btn btn-xs btn-primary';
     } else if (activity.activity_type == 'exercise') {
-      type = 'btn btn-xs btn-pnw';
+      type = 'btn btn-xs training';
     }
     return (
       <tr key={activity.id}>

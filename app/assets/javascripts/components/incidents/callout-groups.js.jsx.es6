@@ -1,4 +1,4 @@
-class Incident extends ViewComponent {
+class CalloutGroups extends ViewComponent {
 
   constructor() {
     super();
@@ -26,24 +26,6 @@ class Incident extends ViewComponent {
       dataType: 'json',
       success: (data) => {
         this.setState({ groups: data });
-      },
-      error: (jqXHR) => {
-        console.log(jqXHR);
-      }
-    });
-  }
-
-  addRecipients(member_ids) {
-    if (!this.props.incident.id) {
-      return;
-    }
-    $.ajax({
-      method: 'post',
-      data: {member_ids: member_ids},
-      url: `incidents/${this.props.incident.id}/add_members`,
-      dataType: 'json',
-      success: (data) => {
-        this.setState({ incident: data }, this.props.getIncident);
       },
       error: (jqXHR) => {
         console.log(jqXHR);
@@ -80,17 +62,17 @@ class Incident extends ViewComponent {
     }
     let recipients = [];
     for (var member of group.members) {
-      if (!this.props.incident.incident_members.includes(member.id)) {
+      if (!this.props.recipients.includes(member.id)) {
         if (this.state.operational) {
           if (member.status_id == 1) {
-            recipients.push(member.id);
+            recipients.push(member);
           }
         } else {
-          recipients.push(member.id);
+          recipients.push(member);
         }
       }
     }
-    this.addRecipients(recipients);
+    this.props.addRecipients(recipients);
   }
 
   loading() {
@@ -145,7 +127,7 @@ class Incident extends ViewComponent {
   members() {
     let options = [];
     for (var member of this.props.members) {
-      let recipient = _.find(this.props.incident.incident_members, {id: member.id});
+      let recipient = _.find(this.props.recipients, {id: member.id});
       if (!recipient) {
         if (this.state.operational) {
           if (member.status_id == 1) {
@@ -171,7 +153,7 @@ class Incident extends ViewComponent {
     let name = this.state.name;
     let member = _.find(this.props.members, { name: name })
     if (member) {
-      this.addRecipients([member.id]);
+      this.addMembers([member.id]);
       this.setState({ name: '' });
     }
   }
@@ -222,4 +204,4 @@ class Incident extends ViewComponent {
   }
 }
 
-window.Incident = Incident;
+window.CalloutGroups = CalloutGroups;

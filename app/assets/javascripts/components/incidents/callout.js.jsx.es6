@@ -3,6 +3,8 @@ class Callout extends ViewComponent {
   constructor() {
     super();
     this.bindThisToComponent(
+      'addRecipients',
+      'dropRecipient',
       'getIncident',
       'newIncident'
     );
@@ -11,6 +13,7 @@ class Callout extends ViewComponent {
       incidents: [],
       members: [],
       message: '',
+      recipients: [],
       operational: false,
     };
   }
@@ -88,39 +91,63 @@ class Callout extends ViewComponent {
     }
   }
 
+  addIncidentMembers(member_ids) {
+    if (!this.state.incident.id) {
+      return;
+    }
+    $.ajax({
+      method: 'post',
+      data: {member_ids: member_ids},
+      url: `incidents/${this.props.incident.id}/add_members`,
+      dataType: 'json',
+      success: (data) => {
+        this.setState({ incident: data }, this.props.getIncident);
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
+  dropRecipient(r) {
+    let newRecipients = _.clone(this.state.recipients);
+    _.remove(newRecipients, {id: r.id});
+    this.setState({ recipients: newRecipients });
+  }
+
+  addRecipients(recipients) {
+    let newRecipients = _.clone(this.state.recipients);
+    newRecipients.push.apply(newRecipients, recipients);
+    this.setState({ recipients: newRecipients });
+  }
+
   fieldChange(e) {
     this.setState({ message: e.target.value })
   }
 
   render() {
-    console.log(this.state.incident)
     return (
       <div className="callout">
-        <Incident
+        <CalloutGroups
+          addRecipients={this.addRecipients}
           getIncident={this.getIncident}
           incident={this.state.incident}
           members={this.state.members}
           newIncident={this.newIncident}
+          recipients={this.state.recipients}
         />
-        <div className="row bottom-margin">
-          <div className="col-md-12">
-            <textarea
-              rows={3}
-              className="form-control top-margin"
-              value={this.state.message}
-              onChange={this.fieldChange.bind(this)}
-            />
-          </div>
-        </div>
-        <div className="row bottom-margin">
-          <p>{150-this.state.message.length} characters remaining</p>
-          <p>{this.state.incident.incident_members.length} recipients</p>
-        </div>
-          <Recipients
-            getIncident={this.getIncident}
-            incident={this.state.incident}
-            members={this.state.members}
-          />
+        <NewMessage
+        />
+        <Recipients
+          dropRecipient={this.dropRecipient}
+          recipients={this.state.recipients}
+        />
+        <IncidentMembers
+          getIncident={this.getIncident}
+          incident={this.state.incident}
+          members={this.state.members}
+          recipients={this.state.recipients}
+        />
       </div>
     );
   }

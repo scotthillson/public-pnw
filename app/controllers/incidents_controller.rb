@@ -11,6 +11,7 @@ class IncidentsController < ApplicationController
   end
 
   def callout
+    render layout: "callout"
   end
 
   def show

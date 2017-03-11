@@ -4,14 +4,7 @@ class Message < ActiveRecord::Base
   @sid = "ACfef32e24e1778fa357f75dbab305850a"
   @token = "3160c85db0b69eefdd3f77e2004feb31"
 
-  scope :recent,   -> { where(created_at: (Time.now - 24.hours)..Time.now) }
-  scope :outbound, -> { where('direction LIKE ?', '%outbound%').last(9999) }
-  scope :inbound,  -> { where('direction LIKE ?', '%inbound%').last(9999) }
-
   before_save :translate
-
-  belongs_to :incident
-  belongs_to :member, foreign_key: :from, primary_key: :mobile_phone
 
   AVAILABLE = [
     "available",
@@ -27,6 +20,14 @@ class Message < ActiveRecord::Base
     "can't",
     "cant"
   ]
+
+  def member
+    Member.where('mobile_phone = ? or mobile_phone = ?', from, to).first
+  end
+
+  def incident_members
+    member.incident_members
+  end
 
   def self.test
     Message.send('5039290055','5038500198','hello world!')
@@ -66,7 +67,7 @@ class Message < ActiveRecord::Base
       date_sent: m.date_sent,
       messaging_service_sid: m.messaging_service_sid,
       from: m.from.tr('^0-9',''),
-      to: m.to,
+      to: m.to.tr('^0-9',''),
       body: m.body,
       num_media: m.num_media,
       num_segments: m.num_segments,
