@@ -9,7 +9,7 @@ class SponsorsController < ApplicationController
 
   def new
     @sponsor = Sponsor.new
-    @images = Dir.entries('/logos').find_all { |img| img.length > 2 }
+    @images = Dir.entries('/home/rails/production/public/logos/').find_all { |img| img.length > 2 }
   end
 
   def create
@@ -24,7 +24,7 @@ class SponsorsController < ApplicationController
   end
 
   def edit
-    @images = Dir.entries('/public/logos') - ['.'] - ['..']
+    @images = Dir.entries('/home/rails/production/public/logos/').find_all { |img| img.length > 2 }
   end
 
   def update
