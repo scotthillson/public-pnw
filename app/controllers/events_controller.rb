@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  before_action :turn_back, except: [:index, :show]
+  before_action :turn_back, except: [:index, :show, :searches]
   before_action :set_event, only: [:show, :update, :destroy, :join]
 
   def searches

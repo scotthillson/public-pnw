@@ -6,7 +6,6 @@ class Incident < ActiveRecord::Base
 
   before_create :defaults
 
-  has_many :messages
   has_many :incident_members
   has_many :members, through: :incident_members
 

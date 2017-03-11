@@ -10,8 +10,7 @@ tr th, tr td {
   -khtml-border-radius: 10px;
 }
 .pnw-wrap{
-  margin: 0 10px;
-  padding: 20px 10px;
+  margin: 15px 0;
   white-space: normal;
 }
 .training {
@@ -135,4 +134,7 @@ tr th, tr td {
 }
 .unavailable {
   background-color: rgba(200,70,70,0.4);
+}
+.equipment-links {
+  position: relative;
 }
