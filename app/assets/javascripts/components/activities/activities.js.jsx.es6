@@ -6,6 +6,7 @@ class Activities extends ViewComponent {
       'cancel',
       'destroy',
       'destroyButton',
+      'fieldChange',
       'save'
     );
     this.state = {

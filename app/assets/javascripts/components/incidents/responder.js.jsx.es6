@@ -147,7 +147,7 @@ class Responder extends ViewComponent {
     );
   }
 
-  recipients() {
+  responders() {
     let recipients = [];
     let names = this.sortedNames();
     let unknown = _.find(names, {status: 'unknown'})
@@ -187,7 +187,7 @@ class Responder extends ViewComponent {
   render() {
     return (
       <div>
-        {this.recipients()}
+        {this.responders()}
       </div>
     );
   }

@@ -14,6 +14,14 @@ class GroupForm extends ViewComponent {
               onChange={this.props.fieldChange.bind(this, 'local_name')}
             />
           </div>
+          <div className="form-group">
+            <label>Equipment Note</label>
+            <textarea
+              className="form-control"
+              value={this.props.group.equipment_note}
+              onChange={this.props.fieldChange.bind(this, 'equipment_note')}
+            />
+          </div>
           <div className="btn-toolbar">
             <input
               className="btn btn-primary"
