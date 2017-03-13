@@ -62,7 +62,7 @@ class CalloutGroups extends ViewComponent {
     }
     let recipients = [];
     for (var member of group.members) {
-      if (!this.props.recipients.includes(member.id)) {
+      if (!_.find(this.props.recipients, { id: member.id })) {
         if (this.state.operational) {
           if (member.status_id == 1) {
             recipients.push(member);

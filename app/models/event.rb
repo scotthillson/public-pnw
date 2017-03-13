@@ -7,4 +7,8 @@ class Event < ActiveRecord::Base
 
   scope :incidents, -> { where(event_type: 'incident') }
 
+  def start_time
+    start_on.in_time_zone('Pacific Time (US & Canada)')
+  end
+
 end

@@ -12,7 +12,8 @@ class Activities extends ViewComponent {
     this.state = {
       activities: [],
       activity: null,
-      loading: true
+      loading: true,
+      saving: false
     };
   }
 
@@ -134,10 +135,9 @@ class Activities extends ViewComponent {
     });
   }
 
-  save() {
+  saveActivity() {
     let data = this.state.activity;
     data.activity_id = data.id;
-    data.start_time = data.start_on;
     data.event_type = data.activity_type;
     let method = 'POST';
     let url = '/events';
@@ -151,12 +151,16 @@ class Activities extends ViewComponent {
       dataType: 'json',
       data: data,
       success: () => {
-        this.setState({ activity: null }, this.updateActivities());
+        this.setState({ activity: null, saving: false }, this.updateActivities());
       },
       error: (jqXHR) => {
         console.log(jqXHR);
       }
     });
+  }
+
+  save() {
+    this.setState({ saving: true }, this.saveActivity)
   }
 
   fieldChange(field, e){
@@ -200,6 +204,7 @@ class Activities extends ViewComponent {
           destroyButton={this.destroyButton}
           fieldChange={this.fieldChange}
           save={this.save}
+          saving={this.state.saving}
         />
       );
     }

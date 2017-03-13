@@ -3,7 +3,7 @@ class EquipmentList extends ViewComponent {
   checkedButton(e) {
     if (this.props.checked.includes(e.id)) {
       return (
-        <div className="btn btn-xs btn-success" onClick={this.props.checkEquipment.bind(this, e)}>
+        <div className="btn btn-xs btn-success btn-pnw" onClick={this.props.checkEquipment.bind(this, e)}>
         <i className="fa fa-check-circle-o" aria-hidden="true"></i>
       </div>
       );
@@ -27,11 +27,23 @@ class EquipmentList extends ViewComponent {
     }
   }
 
-  buttonClass() {
-    if (this.props.detail == 'long description') {
-      return('btn-wrap');
+  addButton(e) {
+    return (
+      <div
+        className="btn btn-xs btn-success btn-pnw"
+        onClick={this.props.addEquipment.bind(this, e)}>
+        add
+      </div>
+    );
+  }
+
+  equipmentLinks() {
+    if (false) {
+      return (
+        <div className="equipment-links">
+        </div>
+      );
     }
-    return('btn');
   }
 
   equipmentDisplay(e) {
@@ -55,7 +67,7 @@ class EquipmentList extends ViewComponent {
     if (e.examples) {
       return (
         <a
-          className={`${c} ${this.buttonClass()} btn-xs ${e.importance}`}
+          className={`${c} btn-wrap btn-xs ${e.importance}`}
           title={`${e.notes}, click for examples`}
           href={e.examples}
           target="_blank">
@@ -65,7 +77,7 @@ class EquipmentList extends ViewComponent {
     }
     return (
       <a
-        className={`${c} ${this.buttonClass()} btn-xs ${e.importance}`}
+        className={`${c} btn-wrap btn-xs ${e.importance}`}
         title={e.notes}>
         {this.equipmentDisplay(e)}
       </a>

@@ -77,6 +77,21 @@ class Equipment extends ViewComponent {
     });
   }
 
+  addEquipment(e) {
+    $.ajax({
+      method: 'patch',
+      url: 'session_equipment',
+      dataType: 'json',
+      data: { equipment: e },
+      success: (data) => {
+        console.log(data);
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
   destroyEquipment() {
     $.ajax({
       method: 'delete',
@@ -224,6 +239,7 @@ class Equipment extends ViewComponent {
     }
     return (
       <EquipmentList
+        addEquipment={this.addEquipment}
         advanced={this.props.advanced}
         categories={this.state.categories}
         checked={this.state.checked}

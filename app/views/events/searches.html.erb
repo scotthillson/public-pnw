@@ -1,7 +1,7 @@
 <% @searches.each do |search| %>
   <div class="panel panel-info">
     <div class="panel-heading">
-      <%= search.start_on.strftime('%m/%d/%Y') %>
+      <%= search.start_on.in_time_zone('Pacific Time (US & Canada)').strftime('%m/%d/%Y') %>
       <%= search.reference %>
       <div class="pull-right">
         <%= "Submitted by #{search.user.name}" if search.user %>

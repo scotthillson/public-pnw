@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :discussions, contraints: {format: :html}
 
   resources :equipment
+    patch 'session_equipment', to: 'equipment#session_equipment'
 
   resources :equipment_categories
 

@@ -1,5 +1,24 @@
 class ActivityForm extends ViewComponent {
 
+  save() {
+    if (this.props.saving){
+      return (
+        <span className="pull-left">
+          <i className="fa fa-spinner fa-pulse fa-fw" title="checking for updates"></i>
+          <span>Saving</span>
+        </span>
+      );
+    }
+    return (
+      <input
+        className="btn btn-primary"
+        value="Save"
+        type="button"
+        onClick={this.props.save}
+      />
+    );
+  }
+
   render() {
     return(
       <div>
@@ -23,12 +42,7 @@ class ActivityForm extends ViewComponent {
             />
           </div>
           <div className="btn-toolbar">
-            <input
-              className="btn btn-primary"
-              value="Save"
-              type="button"
-              onClick={this.props.save}
-            />
+            {this.save()}
             <input
               className="btn btn-warning"
               value="Cancel"

@@ -10,9 +10,19 @@ class EquipmentController < ApplicationController
     respond_to do |format|
       format.html { @advanced = advanced? }
       format.json do
-        render json: { equipment: Equipment.all, categories: EquipmentCategory.all, teams: Group.all }, status: :ok
+        render json: {
+          equipment: Equipment.all,
+          categories: EquipmentCategory.all,
+          teams: Group.all,
+          session: session[:equipment]
+        }, status: :ok
       end
     end
+  end
+
+  def session_equipment
+    session[:equipment] = params[:equipment]
+    render json: session[:equipment], status: :ok
   end
 
   def create

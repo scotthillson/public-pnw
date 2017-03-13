@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170311020548) do
+ActiveRecord::Schema.define(version: 20170313043024) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -112,7 +112,6 @@ ActiveRecord::Schema.define(version: 20170311020548) do
     t.string   "miles",       limit: 255
     t.string   "name",        limit: 255
     t.string   "link",        limit: 255
-    t.datetime "start_time"
     t.datetime "end_time"
     t.integer  "updated_by"
     t.integer  "created_by"

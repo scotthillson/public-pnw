@@ -5,7 +5,7 @@ class Activity < ActiveRecord::Base
   has_one :event
 
   def self.get_activities
-    if DateTime.now.to_i - D4h.first.last_activity_sync.to_i > 2000
+    if DateTime.now.to_i - D4h.first.last_activity_sync.to_i > 3600
       D4h.offsetter('activities', method(:update_activity))
       track = D4h.first
       track.last_activity_sync = DateTime.now

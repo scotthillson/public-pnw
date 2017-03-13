@@ -57,7 +57,6 @@ class EventsController < ApplicationController
       :name,
       :category,
       :start_hour,
-      :start_time,
       :address,
       :notes,
       :weather,
