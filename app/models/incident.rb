@@ -10,6 +10,7 @@ class Incident < ActiveRecord::Base
   has_many :members, through: :incident_members
 
   def defaults
+    self.reference = Date.today.to_s
     self.start_on = DateTime.now
     self.alerted = DateTime.now
   end

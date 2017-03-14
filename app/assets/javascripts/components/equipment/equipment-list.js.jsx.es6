@@ -86,8 +86,12 @@ class EquipmentList extends ViewComponent {
 
   equipment() {
     if (this.props.print){
-      return (this.print());
+      return this.print();
     }
+    return this.list();
+  }
+
+  list() {
     let list = [];
     for (var c of this.props.categories){
       if (c.team_id == this.props.team || c.display_name == 'First Aid Kit') {
@@ -102,12 +106,15 @@ class EquipmentList extends ViewComponent {
           if (e.equipment_category_id == c.id) {
             list.push (
               <div className="row equipment-row" key={`eq-${e.id}`}>
-                <div className="equipment-2 pull-left">
+                <div className="equipment-check pull-left">
                   {this.checkedButton(e)}
                 </div>
                 {this.equipmentItem(e, 'equipment-12 pull-left')}
                 <div className="equipment-2 pull-left">
                   {this.editButton(e)}
+                </div>
+                <div className="equipment-2 pull-left">
+                  {this.addButton(e)}
                 </div>
               </div>
             );

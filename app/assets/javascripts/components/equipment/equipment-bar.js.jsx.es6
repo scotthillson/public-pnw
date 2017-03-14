@@ -22,7 +22,14 @@ class EquipmentBar extends ViewComponent {
   }
 
   teams(){
-    let buts = [];
+    let buts = [
+      <div
+        key="custom"
+        className="btn btn-xs btn-default"
+        onClick={this.props.setCustom}>
+        custom
+      </div>
+    ];
     for (var team of this.props.teams) {
       if (_.map(this.props.categories, 'team_id').includes(String(team.id))) {
         let name = team.name;
@@ -43,14 +50,16 @@ class EquipmentBar extends ViewComponent {
       <div
         key="team-print"
         className={`btn btn-xs ${this.printButtonClass()}`}
-        onClick={this.props.setPrint}>print
+        onClick={this.props.setPrint}>
+        print
       </div>
     );
     buts.push(
       <div
         key="detail"
         className={`btn btn-xs ${this.detailButtonClass()}`}
-        onClick={this.props.setDetail}>long description
+        onClick={this.props.setDetail}>
+        long description
       </div>
     );
     return buts;
@@ -60,9 +69,21 @@ class EquipmentBar extends ViewComponent {
     if (this.props.advanced) {
       return (
         <div className="btn-toolbar pull-left">
-          <div className="btn btn-xs btn-success" onClick={this.props.newEquipment}>new item</div>
-          <div className="btn btn-xs btn-success" onClick={this.props.newCategory}>new category</div>
-          <a className="btn btn-xs btn-success" href="/groups">new group</a>
+          <div
+            className="btn btn-xs btn-success"
+            onClick={this.props.newEquipment}>
+            new item
+          </div>
+          <div
+            className="btn btn-xs btn-success"
+            onClick={this.props.newCategory}>
+            new category
+          </div>
+          <a
+            className="btn btn-xs btn-success"
+            href="/groups">
+            new group
+          </a>
         </div>
       );
     }

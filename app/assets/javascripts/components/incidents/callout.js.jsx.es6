@@ -91,6 +91,10 @@ class Callout extends ViewComponent {
     }
   }
 
+  selectIncident(incident) {
+    this.setState({ incident: incident });
+  }
+
   addIncidentMembers(member_ids) {
     if (!this.state.incident.id) {
       return;
@@ -128,13 +132,15 @@ class Callout extends ViewComponent {
   render() {
     return (
       <div className="callout">
-        <CalloutGroups
+        <Incidents
           addRecipients={this.addRecipients}
           getIncident={this.getIncident}
           incident={this.state.incident}
+          incidents={this.state.incidents}
           members={this.state.members}
           newIncident={this.newIncident}
           recipients={this.state.recipients}
+          selectIncident={this.selectIncident}
         />
         <NewMessage
         />

@@ -33,13 +33,13 @@ class Message < ActiveRecord::Base
     Message.send('5039290055','5038500198','hello world!')
   end
 
-  def self.send_message(to, from, body, incident_id)
+  def self.send_message(to, from, body)
     client = Twilio::REST::Client.new @sid, @token
     message = client.account.messages.create({
       from: from,
       to: '15039290055',
       body: body})
-    store_message(message, incident_id)
+    store_message(message)
   end
 
   def self.get_message(message)
@@ -58,9 +58,8 @@ class Message < ActiveRecord::Base
     end
   end
 
-  def self.store_message(m, incident_id)
+  def self.store_message(m)
     Message.create(
-      incident_id: incident_id,
       sid: m.sid,
       date_created: m.date_created,
       date_updated: m.date_updated,

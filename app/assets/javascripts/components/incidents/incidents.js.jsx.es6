@@ -1,4 +1,4 @@
-class CalloutGroups extends ViewComponent {
+class Incidents extends ViewComponent {
 
   constructor() {
     super();
@@ -168,6 +168,27 @@ class CalloutGroups extends ViewComponent {
     this.setState({ name: e.target.value });
   }
 
+  incidents() {
+    if (this.props.incidents.length < 1) {
+      return;
+    }
+    let incidents = [];
+    for (var i of this.props.incidents) {
+      incidents.push(
+        <option key={i.id} value={i.reference} />
+      );
+    }
+    return (
+      <span className="col-md-4 pull-right">
+        <select
+          className="form-control"
+          onChange={this.props.selectIncident.bind(this)}>
+          {incidents}
+        </select>
+      </span>
+    );
+  }
+
   render() {
     return (
       <div>
@@ -178,6 +199,7 @@ class CalloutGroups extends ViewComponent {
             new incident period
           </span>
           {this.operationalButton()}
+          {this.incidents()}
         </div>
         <div className="col-md-6">
           <input
@@ -204,4 +226,4 @@ class CalloutGroups extends ViewComponent {
   }
 }
 
-window.CalloutGroups = CalloutGroups;
+window.Incidents = Incidents;

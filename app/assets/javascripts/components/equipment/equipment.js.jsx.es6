@@ -16,6 +16,7 @@ class Equipment extends ViewComponent {
       'saveCategory',
       'saveEquipment',
       'table',
+      'setCustom',
       'setDetail',
       'setPrint',
       'setTeam'
@@ -24,6 +25,7 @@ class Equipment extends ViewComponent {
       categories: [],
       category: null,
       checked: [],
+      custom: false,
       detail: 'short description',
       equipment: null,
       list: [],
@@ -195,6 +197,14 @@ class Equipment extends ViewComponent {
     this.setState({ team: t });
   }
 
+  setCustom() {
+    if (this.state.custom) {
+      this.setState({ custom: false });
+    } else {
+      this.setState({ custom: true });
+    }
+  }
+
   setPrint() {
     if (this.state.print) {
       this.setState({ print: false });
@@ -262,6 +272,7 @@ class Equipment extends ViewComponent {
         newCategory={this.newCategory}
         newEquipment={this.newEquipment}
         print={this.state.print}
+        setCustom={this.setCustom}
         setDetail={this.setDetail}
         setPrint={this.setPrint}
         setTeam={this.setTeam}
