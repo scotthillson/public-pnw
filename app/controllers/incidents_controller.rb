@@ -10,6 +10,7 @@ class IncidentsController < ApplicationController
       format.json do
         render json: Incident.all
       end
+    end
   end
 
   def active

@@ -6,13 +6,18 @@ class IncidentDashboard extends ViewComponent {
       'addRecipients',
       'dropRecipient',
       'getIncident',
-      'newIncident'
+      'newIncident',
+      'setGroups',
+      'setIncidents',
+      'setMembers',
+      'setMessages'
     );
     this.state = {
       error: false,
       groups: [],
       incident: { incident_members: [] },
       incidents: [],
+      loading: true,
       members: [],
       messages: [],
       recipients: []
@@ -32,7 +37,15 @@ class IncidentDashboard extends ViewComponent {
   }
 
   sendMessageResult(data) {
-    console.log(data);
+    console.log('BIG TODO BRO');
+  }
+
+  setMessages(messages) {
+    this.setState({ messages: messages, loading: false });
+  }
+
+  error() {
+    this.setState({ error: true });
   }
 
   newIncident() {
@@ -67,14 +80,6 @@ class IncidentDashboard extends ViewComponent {
         console.log(jqXHR);
       }
     });
-  }
-
-  setMessages(messages) {
-    this.setState({ messages: data, loading: false });
-  }
-
-  error() {
-    this.setState({ error: true });
   }
 
   firstIncident() {
@@ -123,6 +128,7 @@ class IncidentDashboard extends ViewComponent {
           addRecipients={this.addRecipients}
           error={this.error}
           getIncident={this.getIncident}
+          groups={this.state.groups}
           incident={this.state.incident}
           incidents={this.state.incidents}
           members={this.state.members}
@@ -130,13 +136,11 @@ class IncidentDashboard extends ViewComponent {
           selectIncident={this.selectIncident}
           setGroups={this.setGroups}
           setIncidents={this.setIncidents}
-        />
-        <IncidentMembers
-          error={this.error}
           setMembers={this.setMembers}
         />
         <NewMessage
           error={this.error}
+          recipients={this.state.recipients}
           sendMessageResult={this.sendMessageResult}
         />
         <Messages

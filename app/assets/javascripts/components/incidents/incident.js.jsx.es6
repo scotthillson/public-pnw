@@ -160,9 +160,11 @@ class Incident extends ViewComponent {
     return (
       <div>
         <IncidentMembers
-          incident={this.props.incident}
+          error={this.props.error}
           members={this.props.members}
-          messages={this.props.messages}
+          operational={this.operational}
+          recipients={this.props.recipients}
+          setMembers={this.props.setMembers}
         />
       </div>
     );

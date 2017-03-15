@@ -4,7 +4,8 @@ class IncidentMembers extends ViewComponent {
     super();
     this.bindThisToComponent(
       'addMemberByName',
-      'keyUp'
+      'keyUp',
+      'members'
     );
     this.state = {
       name: '',
@@ -29,16 +30,15 @@ class IncidentMembers extends ViewComponent {
       }
     });
   }
-}
 
-addMemberByName() {
-  let name = this.state.name;
-  let member = _.find(this.props.members, { name: name })
-  if (member) {
-    this.addMembers([member.id]);
-    this.setState({ name: '' });
+  addMemberByName() {
+    let name = this.state.name;
+    let member = _.find(this.props.members, { name: name })
+    if (member) {
+      this.addMembers([member.id]);
+      this.setState({ name: '' });
+    }
   }
-}
 
   keyUp(e) {
     if (e.key === 'Enter') {
@@ -51,6 +51,9 @@ addMemberByName() {
   }
 
   members() {
+    if (!this.props.members) {
+      return;
+    }
     let options = [];
     for (var member of this.props.members) {
       let recipient = _.find(this.props.recipients, {id: member.id});
@@ -87,9 +90,11 @@ addMemberByName() {
           type="text"
           value={this.state.name}
         />
+        {this.members()}
       </div>
-      {this.members()}
     );
   }
+
+}
 
 window.IncidentMembers = IncidentMembers;

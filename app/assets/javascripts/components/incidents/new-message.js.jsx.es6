@@ -48,7 +48,7 @@ class NewMessage extends ViewComponent {
             className="btn btn-primary btn-xs pull-right btn-pnw"
             onClick={this.sendMessage}>Send
           </span>
-          <span className="pull-right">{this.state.recipients.length} recipients</span>
+          <span className="pull-right">{this.props.recipients.length} recipients</span>
         </div>
       </div>
     );

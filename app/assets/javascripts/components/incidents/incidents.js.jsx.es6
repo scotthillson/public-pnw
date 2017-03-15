@@ -154,10 +154,12 @@ class Incidents extends ViewComponent {
           {this.operationalButton()}
           {this.incidents()}
         </div>
-        <IncidentMembers
+        <Incident
+          error={this.props.error}
           members={this.props.members}
           operational={this.operational}
           recipients={this.props.recipients}
+          setMembers={this.props.setMembers}
         />
         <div className="col-md-6">
           <select
