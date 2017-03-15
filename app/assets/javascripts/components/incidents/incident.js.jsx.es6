@@ -162,6 +162,7 @@ class Incident extends ViewComponent {
         <IncidentMembers
           error={this.props.error}
           members={this.props.members}
+          messages={this.props.messages}
           operational={this.operational}
           recipients={this.props.recipients}
           setMembers={this.props.setMembers}

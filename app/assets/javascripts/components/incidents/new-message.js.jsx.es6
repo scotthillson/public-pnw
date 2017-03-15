@@ -2,6 +2,9 @@ class NewMessage extends ViewComponent {
 
   constructor() {
     super();
+    this.bindThisToComponent(
+      'sendMessage'
+    );
     this.state = {
       message: ''
     };

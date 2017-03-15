@@ -149,7 +149,7 @@ class Incidents extends ViewComponent {
           <span
             className="btn btn-xs btn-primary"
             onClick={this.props.newIncident}>
-            new incident period
+            new incident period?
           </span>
           {this.operationalButton()}
           {this.incidents()}
@@ -157,6 +157,7 @@ class Incidents extends ViewComponent {
         <Incident
           error={this.props.error}
           members={this.props.members}
+          messages={this.props.messages}
           operational={this.operational}
           recipients={this.props.recipients}
           setMembers={this.props.setMembers}

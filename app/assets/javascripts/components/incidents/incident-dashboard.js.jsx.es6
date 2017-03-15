@@ -5,6 +5,7 @@ class IncidentDashboard extends ViewComponent {
     this.bindThisToComponent(
       'addRecipients',
       'dropRecipient',
+      'error',
       'getIncident',
       'newIncident',
       'setGroups',
@@ -132,6 +133,7 @@ class IncidentDashboard extends ViewComponent {
           incident={this.state.incident}
           incidents={this.state.incidents}
           members={this.state.members}
+          messages={this.state.messages}
           newIncident={this.newIncident}
           selectIncident={this.selectIncident}
           setGroups={this.setGroups}
