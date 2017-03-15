@@ -1,44 +1,4 @@
-class Messages extends ViewComponent {
-
-  componentDidMount() {
-    this.loadMessages();
-    this.interval = setInterval(() => {
-      this.updateMessages();
-    }, 5000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  loadMessages() {
-    $.ajax({
-      method: 'get',
-      url: '/messages',
-      dataType: 'json',
-      success: (data) => {
-        this.props.setMessages(data);
-      },
-      error: (jqXHR) => {
-        this.prps.error();
-        console.log(jqXHR);
-      }
-    });
-  }
-
-  updateMessages() {
-    $.ajax({
-      method: 'get',
-      url: '/update_messages',
-      dataType: 'json',
-      success: (data) => {
-        this.setState({ messages: data });
-      },
-      error: (jqXHR) => {
-        console.log(jqXHR);
-      }
-    });
-  }
+class MessageDetails extends ViewComponent {
 
   detailedMessage(message) {
     return (
@@ -102,4 +62,4 @@ class Messages extends ViewComponent {
 
 }
 
-window.Messages = Messages;
+window.MessageDetails = MessageDetails;

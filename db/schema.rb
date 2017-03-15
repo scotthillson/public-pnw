@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313043024) do
+ActiveRecord::Schema.define(version: 20170314234735) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(version: 20170313043024) do
     t.integer  "d4h_id"
     t.string   "local_name"
     t.string   "equipment_note"
+    t.boolean  "first_aid_kit"
   end
 
   create_table "images", force: :cascade do |t|

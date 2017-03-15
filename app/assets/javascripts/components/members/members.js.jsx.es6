@@ -23,6 +23,7 @@ class Members extends ViewComponent {
         this.setState({ members: data }, this.updateMembers);
       },
       error: (jqXHR) => {
+        this.setState({ error: true });
         console.log(jqXHR);
       }
     });

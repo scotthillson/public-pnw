@@ -1,4 +1,4 @@
-class Callout extends ViewComponent {
+class IncidentDashboard extends ViewComponent {
 
   constructor() {
     super();
@@ -9,46 +9,30 @@ class Callout extends ViewComponent {
       'newIncident'
     );
     this.state = {
+      error: false,
+      groups: [],
       incident: { incident_members: [] },
       incidents: [],
       members: [],
-      message: '',
-      recipients: [],
-      operational: false,
+      messages: [],
+      recipients: []
     };
   }
 
-  componentDidMount() {
-    this.loadMembers();
-    this.loadIncidents();
+  setMembers(members) {
+    this.setState({ members: members });
   }
 
-  loadMembers() {
-    $.ajax({
-      method: 'get',
-      url: '/members',
-      dataType: 'json',
-      success: (data) => {
-        this.setState({ members: data });
-      },
-      error: (jqXHR) => {
-        console.log(jqXHR);
-      }
-    });
+  setIncidents(incidents) {
+    this.setState({ incidents: incidents });
   }
 
-  loadIncidents() {
-    $.ajax({
-      method: 'get',
-      url: 'incidents/active',
-      dataType: 'json',
-      success: (data) => {
-        this.setState({ incidents: data }, this.firstIncident);
-      },
-      error: (jqXHR) => {
-        console.log(jqXHR);
-      }
-    });
+  setGroups(groups) {
+    this.setState({ groups: groups });
+  }
+
+  sendMessageResult(data) {
+    console.log(data);
   }
 
   newIncident() {
@@ -85,6 +69,14 @@ class Callout extends ViewComponent {
     });
   }
 
+  setMessages(messages) {
+    this.setState({ messages: data, loading: false });
+  }
+
+  error() {
+    this.setState({ error: true });
+  }
+
   firstIncident() {
     if (this.state.incidents.length > 0) {
       this.setState({ incident: this.state.incidents[0] });
@@ -96,21 +88,20 @@ class Callout extends ViewComponent {
   }
 
   addIncidentMembers(member_ids) {
-    if (!this.state.incident.id) {
-      return;
+    if (this.state.incident.id) {
+      $.ajax({
+        method: 'post',
+        data: {member_ids: member_ids},
+        url: `incidents/${this.props.incident.id}/add_members`,
+        dataType: 'json',
+        success: (data) => {
+          this.setState({ incident: data }, this.props.getIncident);
+        },
+        error: (jqXHR) => {
+          console.log(jqXHR);
+        }
+      });
     }
-    $.ajax({
-      method: 'post',
-      data: {member_ids: member_ids},
-      url: `incidents/${this.props.incident.id}/add_members`,
-      dataType: 'json',
-      success: (data) => {
-        this.setState({ incident: data }, this.props.getIncident);
-      },
-      error: (jqXHR) => {
-        console.log(jqXHR);
-      }
-    });
   }
 
   dropRecipient(r) {
@@ -125,33 +116,35 @@ class Callout extends ViewComponent {
     this.setState({ recipients: newRecipients });
   }
 
-  fieldChange(e) {
-    this.setState({ message: e.target.value })
-  }
-
   render() {
     return (
       <div className="callout">
         <Incidents
           addRecipients={this.addRecipients}
+          error={this.error}
           getIncident={this.getIncident}
           incident={this.state.incident}
           incidents={this.state.incidents}
           members={this.state.members}
           newIncident={this.newIncident}
-          recipients={this.state.recipients}
           selectIncident={this.selectIncident}
+          setGroups={this.setGroups}
+          setIncidents={this.setIncidents}
+        />
+        <IncidentMembers
+          error={this.error}
+          setMembers={this.setMembers}
         />
         <NewMessage
+          error={this.error}
+          sendMessageResult={this.sendMessageResult}
+        />
+        <Messages
+          error={this.error}
+          setMessages={this.setMessages}
         />
         <Recipients
           dropRecipient={this.dropRecipient}
-          recipients={this.state.recipients}
-        />
-        <IncidentMembers
-          getIncident={this.getIncident}
-          incident={this.state.incident}
-          members={this.state.members}
           recipients={this.state.recipients}
         />
       </div>
@@ -159,4 +152,4 @@ class Callout extends ViewComponent {
   }
 }
 
-window.Callout = Callout;
+window.IncidentDashboard = IncidentDashboard;

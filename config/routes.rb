@@ -27,7 +27,6 @@ Rails.application.routes.draw do
 
   resources :images, constraints: {format: :html}
 
-  get 'callout', to: 'incidents#callout'
   get 'incidents/active', to: 'incidents#active'
   post 'incidents/create', to: 'incidents#create'
   patch 'update_incident_member', to: 'incident_members#update_member'

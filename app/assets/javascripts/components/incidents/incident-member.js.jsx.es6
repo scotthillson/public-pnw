@@ -1,4 +1,4 @@
-class Responder extends ViewComponent {
+class IncidentMember extends ViewComponent {
 
   recipientAvailable(r, status) {
     if (!this.props.incident.id) {
@@ -185,6 +185,11 @@ class Responder extends ViewComponent {
   }
 
   render() {
+    if (this.props.loading){
+      return (
+        <div>Loading!</div>
+      );
+    }
     return (
       <div>
         {this.responders()}
@@ -193,4 +198,4 @@ class Responder extends ViewComponent {
   }
 }
 
-window.Responder = Responder;
+window.IncidentMember = IncidentMember;

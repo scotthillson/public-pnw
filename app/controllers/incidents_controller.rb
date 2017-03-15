@@ -3,15 +3,17 @@ class IncidentsController < ApplicationController
   before_action :advanced_only
 
   def index
-    render json: Incident.all, status: :ok
+    respond_to do |format|
+      format.html do
+        render layout: "incidents"
+      end
+      format.json do
+        render json: Incident.all
+      end
   end
 
   def active
     render json: Incident.active, include: :incident_members, status: :ok
-  end
-
-  def callout
-    render layout: "callout"
   end
 
   def show

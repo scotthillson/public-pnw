@@ -1,34 +1,4 @@
-class Incidents extends ViewComponent {
-
-  constructor() {
-    super();
-    this.bindThisToComponent(
-      'operational',
-      'operationalButton'
-    );
-    this.state = {
-      operational: true
-    };
-  }
-
-  componentDidMount() {
-    this.loadIncidents();
-  }
-
-  loadIncidents() {
-    $.ajax({
-      method: 'get',
-      url: 'incidents/active',
-      dataType: 'json',
-      success: (data) => {
-        this.props.setIncidents(data);
-      },
-      error: (jqXHR) => {
-        this.props.error();
-        console.log(jqXHR);
-      }
-    });
-  }
+class Incident extends ViewComponent {
 
   operational() {
     let operational = true;
@@ -53,7 +23,7 @@ class Incidents extends ViewComponent {
   }
 
   addTeam(e) {
-    let group = this.props.groups.find(team => team.id == e.target.value);
+    let group = this.state.groups.find(team => team.id == e.target.value);
     if (!group) {
       return;
     }
@@ -87,7 +57,7 @@ class Incidents extends ViewComponent {
         </span>
       );
     }
-    else if (this.props.groups.length < 1) {
+    else if (this.state.groups.length < 1) {
       return (
         <span>
           <span>
@@ -110,7 +80,7 @@ class Incidents extends ViewComponent {
         Groups
       </option>
     );
-    for (var team of this.props.groups) {
+    for (var team of this.state.groups) {
       options.push(
         <option key={team.id}
           value={team.id}>
@@ -119,6 +89,50 @@ class Incidents extends ViewComponent {
       );
     }
     return options;
+  }
+
+  members() {
+    let options = [];
+    for (var member of this.props.members) {
+      let recipient = _.find(this.props.recipients, {id: member.id});
+      if (!recipient) {
+        if (this.state.operational) {
+          if (member.status_id == 1) {
+            options.push(
+              <option key={member.id} value={member.name} />
+            );
+          }
+        } else {
+          options.push(
+            <option key={member.id} value={member.name} />
+          );
+        }
+      }
+    }
+    return (
+      <datalist id="members">
+        {options}
+      </datalist>
+    );
+  }
+
+  addMemberByName() {
+    let name = this.state.name;
+    let member = _.find(this.props.members, { name: name })
+    if (member) {
+      this.addMembers([member.id]);
+      this.setState({ name: '' });
+    }
+  }
+
+  keyUp(e) {
+    if (e.key === 'Enter') {
+      this.addMemberByName();
+    }
+  }
+
+  nameChange(e) {
+    this.setState({ name: e.target.value });
   }
 
   incidents() {
@@ -145,31 +159,14 @@ class Incidents extends ViewComponent {
   render() {
     return (
       <div>
-        <div className="bottom-margin">
-          <span
-            className="btn btn-xs btn-primary"
-            onClick={this.props.newIncident}>
-            new incident period
-          </span>
-          {this.operationalButton()}
-          {this.incidents()}
-        </div>
         <IncidentMembers
+          incident={this.props.incident}
           members={this.props.members}
-          operational={this.operational}
-          recipients={this.props.recipients}
+          messages={this.props.messages}
         />
-        <div className="col-md-6">
-          <select
-            className="form-control"
-            onChange={this.addTeam.bind(this)}
-            value={0}>
-            {this.teams()}
-          </select>
-        </div>
       </div>
     );
   }
 }
 
-window.Incidents = Incidents;
+window.Incident = Incident;

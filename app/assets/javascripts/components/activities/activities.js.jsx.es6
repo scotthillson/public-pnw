@@ -12,6 +12,7 @@ class Activities extends ViewComponent {
     this.state = {
       activities: [],
       activity: null,
+      error: false,
       loading: true,
       saving: false
     };
@@ -31,6 +32,23 @@ class Activities extends ViewComponent {
         this.setState({ activities: data }, this.updateActivities);
       },
       error: (jqXHR) => {
+        this.setState({ error: true });
+        console.log(jqXHR);
+      }
+    });
+  }
+
+  updateActivities(){
+    $.ajax({
+      method: 'GET',
+      url: '/update_activities',
+      dataType: 'json',
+      data: this.addParam('year'),
+      success: (data) => {
+        this.setState({ activities: data, loading: false });
+      },
+      error: (jqXHR) => {
+        this.setState({ error: true });
         console.log(jqXHR);
       }
     });
@@ -48,21 +66,6 @@ class Activities extends ViewComponent {
         return { year: result };
       }
       return {};
-  }
-
-  updateActivities(){
-    $.ajax({
-      method: 'GET',
-      url: '/update_activities',
-      dataType: 'json',
-      data: this.addParam('year'),
-      success: (data) => {
-        this.setState({ activities: data, loading: false });
-      },
-      error: (jqXHR) => {
-        console.log(jqXHR);
-      }
-    });
   }
 
   activityButton(activity) {
@@ -183,7 +186,17 @@ class Activities extends ViewComponent {
   }
 
   loading() {
-    if (this.state.loading) {
+    if (this.state.error) {
+      return (
+        <span>
+          <span>
+            <i className="fa fa-exclamation-triangle" aria-hidden="true" title="problems updating"></i>
+          </span>
+          <span>error</span>
+        </span>
+      );
+    }
+    else if (this.state.loading) {
       return (
         <span>
           <span>

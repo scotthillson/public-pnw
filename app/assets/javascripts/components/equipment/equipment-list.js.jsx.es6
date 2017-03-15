@@ -94,7 +94,7 @@ class EquipmentList extends ViewComponent {
   list() {
     let list = [];
     for (var c of this.props.categories){
-      if (c.team_id == this.props.team || c.display_name == 'First Aid Kit') {
+      if (c.team_id == this.props.team) {
         list.push (
           <div className="row equipment-row" key={`cat-${c.id}`}>
             <div className="equipment-12 text-center">
@@ -112,9 +112,6 @@ class EquipmentList extends ViewComponent {
                 {this.equipmentItem(e, 'equipment-12 pull-left')}
                 <div className="equipment-2 pull-left">
                   {this.editButton(e)}
-                </div>
-                <div className="equipment-2 pull-left">
-                  {this.addButton(e)}
                 </div>
               </div>
             );

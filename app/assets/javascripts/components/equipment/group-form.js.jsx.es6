@@ -1,5 +1,20 @@
 class GroupForm extends ViewComponent {
 
+  firstAidButton() {
+    if (this.props.firstAid) {
+      return (
+        <div className="btn">
+          <i className="fa fa-check"></i>
+        </div>
+      );
+    }
+    return (
+      <div className="btn">
+        <i className="fa fa-check"></i>
+      </div>
+    );
+  }
+
   render() {
     return(
       <div>

@@ -2,32 +2,13 @@ class NewMessage extends ViewComponent {
 
   constructor() {
     super();
-    this.bindThisToComponent(
-      'sendMessage'
-    );
     this.state = {
-      message: '',
-      recipients: [],
-      operational: false,
+      message: ''
     };
   }
 
-  loadMembers() {
-    $.ajax({
-      method: 'get',
-      url: '/members',
-      dataType: 'json',
-      success: (data) => {
-        this.setState({ members: data });
-      },
-      error: (jqXHR) => {
-        console.log(jqXHR);
-      }
-    });
-  }
-
   sendMessage() {
-    let recipients = this.state.recipients;
+    let recipients = this.props.recipients;
     let message = this.state.message;
     $.ajax({
       method: 'post',
@@ -35,9 +16,10 @@ class NewMessage extends ViewComponent {
       data: {message: message, recipients: recipients},
       dataType: 'json',
       success: (data) => {
-        this.setState({ members: data });
+        this.props.sendMessageResult(data);
       },
       error: (jqXHR) => {
+        this.props.error();
         console.log(jqXHR);
       }
     });
