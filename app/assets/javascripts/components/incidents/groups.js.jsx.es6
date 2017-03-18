@@ -1,4 +1,4 @@
-class Groups extends ViewComponent {
+class IncidentGroups extends ViewComponent {
 
   componentDidMount() {
     this.loadGroups();
@@ -19,6 +19,58 @@ class Groups extends ViewComponent {
     });
   }
 
+  addTeam(e) {
+    let group = this.props.groups.find(team => team.id == e.target.value);
+    if (!group) {
+      return;
+    }
+    let recipients = [];
+    for (var member of group.members) {
+      if (!_.find(this.props.recipients, { id: member.id })) {
+        if (this.props.operational) {
+          if (member.status_id == 1) {
+            recipients.push(member);
+          }
+        } else {
+          recipients.push(member);
+        }
+      }
+    }
+    this.props.addRecipients(recipients);
+  }
+
+  groups() {
+    let options = [];
+    options.push(
+      <option key="0"
+        value="0">
+        Groups
+      </option>
+    );
+    for (var team of this.props.groups) {
+      options.push(
+        <option key={team.id}
+          value={team.id}>
+          {team.name}
+        </option>
+      );
+    }
+    return options;
+  }
+
+  render() {
+    return (
+      <div className="col-md-6">
+        <select
+          className="form-control"
+          onChange={this.addTeam.bind(this)}
+          value={0}>
+          {this.groups()}
+        </select>
+      </div>
+    );
+  }
+
 }
 
-window.Groups = Groups;
+window.IncidentGroups = IncidentGroups;

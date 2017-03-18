@@ -248,7 +248,7 @@ class Equipment extends ViewComponent {
       );
     }
     return (
-      <EquipmentList
+      <EquipmentLayout
         addEquipment={this.addEquipment}
         advanced={this.props.advanced}
         categories={this.state.categories}

@@ -47,9 +47,9 @@ class Recipients extends ViewComponent {
     let names = this.sortedNames();
     for (var r of names) {
       recipients.push (
-        <div className="row">
+        <div className="row" key={r.id}>
           <span className="recipient-column"></span>
-          {this.recipient(r)}
+            {this.recipient(r)}
           <span className="recipient-column"></span>
         </div>
       );

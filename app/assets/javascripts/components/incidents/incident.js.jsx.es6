@@ -1,47 +1,5 @@
 class Incident extends ViewComponent {
 
-  operational() {
-    let operational = true;
-    if (this.state.operational) {
-      operational = false;
-    }
-    this.setState({ operational: operational });
-  }
-
-  operationalButton() {
-    let btnClass = 'btn-default';
-    if (this.state.operational) {
-      btnClass = 'btn-primary';
-    }
-    return (
-        <span
-          className={`btn btn-xs ${btnClass}`}
-          onClick={this.operational}>
-          operational only
-        </span>
-    );
-  }
-
-  addTeam(e) {
-    let group = this.state.groups.find(team => team.id == e.target.value);
-    if (!group) {
-      return;
-    }
-    let recipients = [];
-    for (var member of group.members) {
-      if (!_.find(this.props.recipients, { id: member.id })) {
-        if (this.state.operational) {
-          if (member.status_id == 1) {
-            recipients.push(member);
-          }
-        } else {
-          recipients.push(member);
-        }
-      }
-    }
-    this.props.addRecipients(recipients);
-  }
-
   loading() {
     if (this.props.error) {
       return (
@@ -159,7 +117,7 @@ class Incident extends ViewComponent {
   render() {
     return (
       <div>
-        <IncidentMembers
+        <Responders
           error={this.props.error}
           members={this.props.members}
           messages={this.props.messages}

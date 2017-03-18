@@ -2,10 +2,6 @@ class Incidents extends ViewComponent {
 
   constructor() {
     super();
-    this.bindThisToComponent(
-      'operational',
-      'operationalButton'
-    );
     this.state = {
       operational: true
     };
@@ -30,26 +26,27 @@ class Incidents extends ViewComponent {
     });
   }
 
-  operational() {
-    let operational = true;
-    if (this.state.operational) {
-      operational = false;
-    }
-    this.setState({ operational: operational });
+  newIncident() {
+    $.ajax({
+      method: 'post',
+      url: 'incidents/create',
+      dataType: 'json',
+      success: (data) => {
+        if (!data.incident_members){
+          data.incident_members = [];
+        }
+        this.props.setIncident(data);
+      },
+      error: (jqXHR) => {
+        this.props.error();
+        console.log(jqXHR);
+      }
+    });
   }
 
-  operationalButton() {
-    let btnClass = 'btn-default';
-    if (this.state.operational) {
-      btnClass = 'btn-primary';
-    }
-    return (
-        <span
-          className={`btn btn-xs ${btnClass}`}
-          onClick={this.operational}>
-          operational only
-        </span>
-    );
+  selectIncident(e) {
+    return;
+    this.props.setIncident(e);
   }
 
   addTeam(e) {
@@ -102,25 +99,6 @@ class Incidents extends ViewComponent {
     }
   }
 
-  teams() {
-    let options = [];
-    options.push(
-      <option key="0"
-        value="0">
-        Groups
-      </option>
-    );
-    for (var team of this.props.groups) {
-      options.push(
-        <option key={team.id}
-          value={team.id}>
-          {team.name}
-        </option>
-      );
-    }
-    return options;
-  }
-
   incidents() {
     if (this.props.incidents.length < 1) {
       return;
@@ -145,31 +123,25 @@ class Incidents extends ViewComponent {
   render() {
     return (
       <div>
-        <div className="bottom-margin">
-          <span
-            className="btn btn-xs btn-primary"
-            onClick={this.props.newIncident}>
-            new incident period?
-          </span>
-          {this.operationalButton()}
-          {this.incidents()}
-        </div>
-        <Incident
+        <IncidentSelect
+          incidents={this.props.incidents}
+          newIncident={this.newIncident}
+          selectIncident={this.selectIncident}
+        />
+        <IncidentMembers
           error={this.props.error}
           members={this.props.members}
-          messages={this.props.messages}
-          operational={this.operational}
           recipients={this.props.recipients}
+          operational={this.state.operational}
           setMembers={this.props.setMembers}
         />
-        <div className="col-md-6">
-          <select
-            className="form-control"
-            onChange={this.addTeam.bind(this)}
-            value={0}>
-            {this.teams()}
-          </select>
-        </div>
+        <IncidentGroups
+          addRecipients={this.props.addRecipients}
+          groups={this.props.groups}
+          operational={this.props.operational}
+          recipients={this.props.recipients}
+          setGroups={this.props.setGroups}
+        />
       </div>
     );
   }

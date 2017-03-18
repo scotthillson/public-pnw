@@ -1,4 +1,11 @@
-class EquipmentList extends ViewComponent {
+class EquipmentLayout extends ViewComponent {
+
+  constructor() {
+    super();
+    this.bindThisToComponent(
+      'equipmentItem'
+    );
+  }
 
   checkedButton(e) {
     if (this.props.checked.includes(e.id)) {
@@ -84,83 +91,6 @@ class EquipmentList extends ViewComponent {
     );
   }
 
-  equipment() {
-    if (this.props.print){
-      return this.print();
-    }
-    return this.list();
-  }
-
-  list() {
-    let list = [];
-    for (var c of this.props.categories){
-      if (c.team_id == this.props.team) {
-        list.push (
-          <div className="row equipment-row" key={`cat-${c.id}`}>
-            <div className="equipment-12 text-center">
-              {c.display_name}
-            </div>
-          </div>
-        );
-        for (var e of this.props.list) {
-          if (e.equipment_category_id == c.id) {
-            list.push (
-              <div className="row equipment-row" key={`eq-${e.id}`}>
-                <div className="equipment-check pull-left">
-                  {this.checkedButton(e)}
-                </div>
-                {this.equipmentItem(e, 'equipment-12 pull-left')}
-                <div className="equipment-2 pull-left">
-                  {this.editButton(e)}
-                </div>
-              </div>
-            );
-          }
-        }
-      }
-    }
-    return list;
-  }
-
-  print() {
-    let list = [];
-    let items = [];
-    for (var c of this.props.categories){
-      if (c.team_id == this.props.team || c.display_name == 'First Aid Kit') {
-        list.push (
-          <div className="row text-center" key={`cat-${c.id}`}>
-              <div className="equipment-head">
-                {c.display_name}
-              </div>
-          </div>
-        );
-        items = [];
-        for (var e of this.props.list) {
-          if (e.equipment_category_id == c.id) {
-            items.push(e);
-          }
-        }
-        for (var e = 0; e < items.length; e += 2) {
-          if (items[e+1]) {
-            list.push(
-              <div className="row text-center" key={`eq-${items[e].id}`}>
-                {this.equipmentItem(items[e], 'equipment-6 pull-left')}
-                {this.equipmentItem(items[e+1], 'equipment-6 pull-left')}
-              </div>
-            );
-          } else {
-            list.push(
-              <div className="row text-center equipment-row" key={`eq-${items[e].id}`}>
-                {this.equipmentItem(items[e], 'equipment-12 pull-left')}
-              </div>
-            );
-          }
-        }
-      }
-    }
-    return list;
-  }
-
   key(){
     return (
       <div className="top-margin">
@@ -201,6 +131,33 @@ class EquipmentList extends ViewComponent {
     );
   }
 
+  equipment() {
+    if (this.props.print){
+      return (
+        <PrintEquipment
+          categories={this.props.categories}
+          detail={this.props.detail}
+          equipmentItem={this.equipmentItem}
+          list={this.props.list}
+          team={this.props.team}
+        />
+      );
+    }
+    return (
+      <EquipmentList
+        advanced={this.props.advanced}
+        addEquipment={this.props.addEquipment}
+        categories={this.props.categories}
+        checked={this.props.checked}
+        checkEquipment={this.props.checkEquipment}
+        editEquipment={this.props.editEquipment}
+        equipmentItem={this.equipmentItem}
+        list={this.props.list}
+        team={this.props.team}
+      />
+    );
+  }
+
   render() {
     return (
       <div className="top-margin">
@@ -213,4 +170,4 @@ class EquipmentList extends ViewComponent {
 
 }
 
-window.EquipmentList = EquipmentList;
+window.EquipmentLayout = EquipmentLayout;

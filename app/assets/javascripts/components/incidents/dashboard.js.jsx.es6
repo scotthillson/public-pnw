@@ -7,7 +7,6 @@ class IncidentDashboard extends ViewComponent {
       'dropRecipient',
       'error',
       'getIncident',
-      'newIncident',
       'setGroups',
       'setIncidents',
       'setMembers',
@@ -33,6 +32,10 @@ class IncidentDashboard extends ViewComponent {
     this.setState({ incidents: incidents });
   }
 
+  setIncident(incident) {
+    this.setState({ incident: incident });
+  }
+
   setGroups(groups) {
     this.setState({ groups: groups });
   }
@@ -47,23 +50,6 @@ class IncidentDashboard extends ViewComponent {
 
   error() {
     this.setState({ error: true });
-  }
-
-  newIncident() {
-    $.ajax({
-      method: 'post',
-      url: 'incidents/create',
-      dataType: 'json',
-      success: (data) => {
-        if (!data.incident_members){
-          data.incident_members = [];
-        }
-        this.setState({ incident: data });
-      },
-      error: (jqXHR) => {
-        console.log(jqXHR);
-      }
-    });
   }
 
   getIncident() {
@@ -101,7 +87,7 @@ class IncidentDashboard extends ViewComponent {
         url: `incidents/${this.props.incident.id}/add_members`,
         dataType: 'json',
         success: (data) => {
-          this.setState({ incident: data }, this.props.getIncident);
+          this.setState({ incident: data }, this.getIncident);
         },
         error: (jqXHR) => {
           console.log(jqXHR);
@@ -124,9 +110,10 @@ class IncidentDashboard extends ViewComponent {
 
   render() {
     return (
-      <div className="callout">
-        <Incidents
+      <div>
+        <IncidentsLayout
           addRecipients={this.addRecipients}
+          dropRecipient={this.dropRecipient}
           error={this.error}
           getIncident={this.getIncident}
           groups={this.state.groups}
@@ -134,24 +121,14 @@ class IncidentDashboard extends ViewComponent {
           incidents={this.state.incidents}
           members={this.state.members}
           messages={this.state.messages}
-          newIncident={this.newIncident}
+          recipients={this.state.recipients}
           selectIncident={this.selectIncident}
+          sendMessageResult={this.sendMessageResult}
           setGroups={this.setGroups}
+          setIncident={this.setIncident}
           setIncidents={this.setIncidents}
           setMembers={this.setMembers}
-        />
-        <NewMessage
-          error={this.error}
-          recipients={this.state.recipients}
-          sendMessageResult={this.sendMessageResult}
-        />
-        <Messages
-          error={this.error}
           setMessages={this.setMessages}
-        />
-        <Recipients
-          dropRecipient={this.dropRecipient}
-          recipients={this.state.recipients}
         />
       </div>
     );
