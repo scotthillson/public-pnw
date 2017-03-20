@@ -1,4 +1,4 @@
-class IncidentDashboard extends ViewComponent {
+class IncidentMaster extends ViewComponent {
 
   constructor() {
     super();
@@ -8,6 +8,7 @@ class IncidentDashboard extends ViewComponent {
       'error',
       'getIncident',
       'setGroups',
+      'setIncident',
       'setIncidents',
       'setMembers',
       'setMessages'
@@ -17,7 +18,6 @@ class IncidentDashboard extends ViewComponent {
       groups: [],
       incident: { incident_members: [] },
       incidents: [],
-      loading: true,
       members: [],
       messages: [],
       recipients: []
@@ -32,7 +32,8 @@ class IncidentDashboard extends ViewComponent {
     this.setState({ incidents: incidents });
   }
 
-  setIncident(incident) {
+  setIncident(id) {
+    let incident = _.find(this.state.incidents, { id: parseInt(id) });
     this.setState({ incident: incident });
   }
 
@@ -45,7 +46,7 @@ class IncidentDashboard extends ViewComponent {
   }
 
   setMessages(messages) {
-    this.setState({ messages: messages, loading: false });
+    this.setState({ messages: messages });
   }
 
   error() {
@@ -73,10 +74,6 @@ class IncidentDashboard extends ViewComponent {
     if (this.state.incidents.length > 0) {
       this.setState({ incident: this.state.incidents[0] });
     }
-  }
-
-  selectIncident(incident) {
-    this.setState({ incident: incident });
   }
 
   addIncidentMembers(member_ids) {
@@ -108,6 +105,14 @@ class IncidentDashboard extends ViewComponent {
     this.setState({ recipients: newRecipients });
   }
 
+  loading() {
+    if (this.state.members.length < 1) {
+      if (this.state.groups.length < 1) {
+        return true;
+      }
+    }
+  }
+
   render() {
     return (
       <div>
@@ -119,10 +124,10 @@ class IncidentDashboard extends ViewComponent {
           groups={this.state.groups}
           incident={this.state.incident}
           incidents={this.state.incidents}
+          loading={this.loading()}
           members={this.state.members}
           messages={this.state.messages}
           recipients={this.state.recipients}
-          selectIncident={this.selectIncident}
           sendMessageResult={this.sendMessageResult}
           setGroups={this.setGroups}
           setIncident={this.setIncident}
@@ -135,4 +140,4 @@ class IncidentDashboard extends ViewComponent {
   }
 }
 
-window.IncidentDashboard = IncidentDashboard;
+window.IncidentMaster = IncidentMaster;

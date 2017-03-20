@@ -40,7 +40,7 @@ class EquipmentBar extends ViewComponent {
           <div
             key={`team-${team.id}`}
             className={`btn btn-xs ${this.teamButtonClass(team)}`}
-            onClick={this.props.setTeam.bind(this, team.id)}>
+            onClick={this.props.setTeam.bind(this, team)}>
             {name}
           </div>
         );

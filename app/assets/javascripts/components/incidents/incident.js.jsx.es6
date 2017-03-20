@@ -93,36 +93,23 @@ class Incident extends ViewComponent {
     this.setState({ name: e.target.value });
   }
 
-  incidents() {
-    if (this.props.incidents.length < 1) {
-      return;
-    }
-    let incidents = [];
-    for (var i of this.props.incidents) {
-      incidents.push(
-        <option key={i.id} value={i.reference} />
+  render() {
+    if (this.props.laoding) {
+      return (
+        <div>
+          Loading!
+        </div>
       );
     }
-    return (
-      <span className="col-md-4 pull-right">
-        <select
-          className="form-control"
-          onChange={this.props.selectIncident.bind(this)}>
-          {incidents}
-        </select>
-      </span>
-    );
-  }
-
-  render() {
     return (
       <div>
         <Responders
           error={this.props.error}
+          getIncident={this.props.getIncident}
+          incident={this.props.incident}
           members={this.props.members}
           messages={this.props.messages}
           operational={this.operational}
-          recipients={this.props.recipients}
           setMembers={this.props.setMembers}
         />
       </div>

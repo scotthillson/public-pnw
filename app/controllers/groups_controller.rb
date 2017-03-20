@@ -40,9 +40,10 @@ class GroupsController < ApplicationController
 
   def group_params
     params.permit(
-      :id,
       :name,
       :local_name,
+      :first_aid_kit,
+      :id,
       :d4h_id
     )
   end

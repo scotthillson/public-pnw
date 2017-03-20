@@ -1,10 +1,17 @@
 class PrintEquipment extends ViewComponent {
 
+  firstAid(c) {
+    if (c.display_name == 'First Aid Kit') {
+      if (this.props.team.first_aid_kit)
+       return true;
+    }
+  }
+
   print() {
     let list = [];
     let items = [];
     for (var c of this.props.categories){
-      if (c.team_id == this.props.team || c.display_name == 'First Aid Kit') {
+      if (c.team_id == this.props.team.id || this.firstAid(c)) {
         list.push (
           <div className="row text-center" key={`cat-${c.id}`}>
               <div className="equipment-head">

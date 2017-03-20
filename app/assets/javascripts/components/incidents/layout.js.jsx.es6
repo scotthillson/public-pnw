@@ -12,8 +12,8 @@ class IncidentsLayout extends ViewComponent {
           incidents={this.props.incidents}
           members={this.props.members}
           messages={this.props.messages}
-          setIncident={this.props.setIncident}
           setGroups={this.props.setGroups}
+          setIncident={this.props.setIncident}
           setIncidents={this.props.setIncidents}
           setMembers={this.props.setMembers}
         />
@@ -32,6 +32,9 @@ class IncidentsLayout extends ViewComponent {
         />
         <Incident
           error={this.props.error}
+          getIncident={this.props.getIncident}
+          incident={this.props.incident}
+          loading={this.props.loading}
           members={this.props.members}
           messages={this.props.messages}
           operational={this.props.operational}

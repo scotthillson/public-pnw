@@ -37,10 +37,18 @@ class EquipmentList extends ViewComponent {
     );
   }
 
+  firstAid(c) {
+    console.log(this.props);
+    if (c.display_name == 'First Aid Kit') {
+      if (this.props.team.first_aid_kit)
+       return true;
+    }
+  }
+
   equipment() {
     let list = [];
     for (var c of this.props.categories){
-      if (c.team_id == this.props.team) {
+      if (c.team_id == this.props.team.id || this.firstAid(c)) {
         list.push (
           <div className="row equipment-row" key={`cat-${c.id}`}>
             <div className="equipment-12 text-center">

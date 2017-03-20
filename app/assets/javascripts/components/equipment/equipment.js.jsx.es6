@@ -31,7 +31,7 @@ class Equipment extends ViewComponent {
       list: [],
       print: false,
       teams: [],
-      team: 36
+      team: { id: 36 }
     };
   }
 
@@ -193,8 +193,8 @@ class Equipment extends ViewComponent {
     this.setState({ checked: checked });
   }
 
-  setTeam(t) {
-    this.setState({ team: t });
+  setTeam(team) {
+    this.setState({ team: team });
   }
 
   setCustom() {

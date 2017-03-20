@@ -1,16 +1,34 @@
 class GroupForm extends ViewComponent {
 
+  constructor() {
+    super();
+    this.bindThisToComponent(
+      'firstAid'
+    );
+  }
+
+  firstAid() {
+    console.log(this.props.group);
+    if (this.props.group.first_aid_kit) {
+      this.props.fieldChange('first_aid_kit', { target: { value: false } });
+    } else {
+      this.props.fieldChange('first_aid_kit', { target: { value: true } });
+    }
+  }
+
   firstAidButton() {
-    if (this.props.firstAid) {
-      return (
-        <div className="btn">
-          <i className="fa fa-check"></i>
-        </div>
-      );
+    let check = <i className="fa fa-check"></i>;
+    let btnClass = 'btn-danger';
+    let text = "Don't include Team First Aid Kit"
+    if (this.props.group.first_aid_kit) {
+      text = "Include Team First Aid Kit"
+      check = <i className="fa fa-check"></i>;
+      btnClass = 'btn-success';
     }
     return (
-      <div className="btn">
-        <i className="fa fa-check"></i>
+      <div className={`btn ${btnClass}`} onClick={this.firstAid}>
+        {check}
+        {text}
       </div>
     );
   }
@@ -38,6 +56,7 @@ class GroupForm extends ViewComponent {
             />
           </div>
           <div className="btn-toolbar">
+            {this.firstAidButton()}
             <input
               className="btn btn-primary"
               value="Save"

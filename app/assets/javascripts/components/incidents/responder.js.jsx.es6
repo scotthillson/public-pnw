@@ -96,7 +96,7 @@ class Responder extends ViewComponent {
     );
   }
 
-  recipient(r) {
+  responder(r) {
     let note = '';
     if (r.status_id != 1) {
       note = 'non-op';
@@ -117,84 +117,8 @@ class Responder extends ViewComponent {
     );
   }
 
-  incidentMembers() {
-    if (!this.props.members) {
-      return [];
-    }
-    let recipients = [];
-    for (var i of this.props.incident.incident_members) {
-      let recipient = _.find(this.props.members, { id: i.member_id });
-      if (recipient) {
-        recipient.status = i.status;
-        recipients.push(recipient);
-      }
-    }
-    return recipients;
-  }
-
-  sortedNames() {
-    return(
-      this.incidentMembers().sort((a, b) => {
-        let nameA = a.name.toUpperCase();
-        let nameB = b.name.toUpperCase();
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-      })
-    );
-  }
-
-  responders() {
-    let recipients = [];
-    let names = this.sortedNames();
-    let unknown = _.find(names, {status: 'unknown'})
-    while (names.length > 0) {
-      let avail = _.find(names, {status: 'available'})
-      if (avail) {
-        _.remove(names, { id: avail.id });
-        avail = this.recipient(avail);
-      } else {
-        avail = <span className="recipient-column"></span>
-      }
-      let unknown = _.find(names, {status: 'unknown'})
-      if (unknown) {
-        _.remove(names, { id: unknown.id });
-        unknown = this.recipient(unknown);
-      } else {
-        unknown = <span className="recipient-column"></span>
-      }
-      let unavail = _.find(names, {status: 'unavailable'})
-      if (unavail) {
-        _.remove(names, { id: unavail.id });
-        unavail = this.recipient(unavail);
-      } else {
-        unavail = <span className="recipient-column"></span>
-      }
-      recipients.push (
-        <div className="row">
-          {avail}
-          {unknown}
-          {unavail}
-        </div>
-      );
-    }
-    return recipients;
-  }
-
   render() {
-    if (this.props.loading){
-      return (
-        <div>Loading!</div>
-      );
-    }
-    return (
-      <div>
-        {this.responders()}
-      </div>
-    );
+    return this.responder(this.props.responder);
   }
 }
 

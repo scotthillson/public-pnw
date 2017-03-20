@@ -2,6 +2,9 @@ class Incidents extends ViewComponent {
 
   constructor() {
     super();
+    this.bindThisToComponent(
+      'selectIncident'
+    )
     this.state = {
       operational: true
     };
@@ -35,7 +38,7 @@ class Incidents extends ViewComponent {
         if (!data.incident_members){
           data.incident_members = [];
         }
-        this.props.setIncident(data);
+        this.props.setIncident(data.id);
       },
       error: (jqXHR) => {
         this.props.error();
@@ -45,8 +48,7 @@ class Incidents extends ViewComponent {
   }
 
   selectIncident(e) {
-    return;
-    this.props.setIncident(e);
+    this.props.setIncident(e.target.value);
   }
 
   addTeam(e) {
@@ -99,27 +101,6 @@ class Incidents extends ViewComponent {
     }
   }
 
-  incidents() {
-    if (this.props.incidents.length < 1) {
-      return;
-    }
-    let incidents = [];
-    for (var i of this.props.incidents) {
-      incidents.push(
-        <option key={i.id} value={i.reference} />
-      );
-    }
-    return (
-      <span className="col-md-4 pull-right">
-        <select
-          className="form-control"
-          onChange={this.props.selectIncident.bind(this)}>
-          {incidents}
-        </select>
-      </span>
-    );
-  }
-
   render() {
     return (
       <div>
@@ -129,6 +110,7 @@ class Incidents extends ViewComponent {
           selectIncident={this.selectIncident}
         />
         <IncidentMembers
+          addRecipients={this.props.addRecipients}
           error={this.props.error}
           members={this.props.members}
           recipients={this.props.recipients}

@@ -163,3 +163,8 @@ fieldset[disabled] .btn {
 .btn-xs {
   padding: 0 3px;
 }
+.thumbnail {
+  padding: 20px;
+  margin: 10px 0;
+  background-color: #ececec;
+}

@@ -29,7 +29,7 @@ class IncidentSelect extends ViewComponent {
     let incidents = [];
     for (var i of this.props.incidents) {
       incidents.push(
-        <option key={i.id} value={i.reference}>{i.reference}</option>
+        <option key={i.id} value={i.id}>{i.reference}</option>
       );
     }
     return (

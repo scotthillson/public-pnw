@@ -1,122 +1,5 @@
 class Responders extends ViewComponent {
 
-  recipientAvailable(r, status) {
-    if (!this.props.incident.id) {
-      return;
-    }
-    $.ajax({
-      method: 'patch',
-      data: {status: status, member_id: r.id, incident_id: this.props.incident.id},
-      url: `update_incident_member`,
-      dataType: 'json',
-      success: (data) => {
-        this.props.getIncident();
-      },
-      error: (jqXHR) => {
-        console.log(jqXHR);
-      }
-    });
-  }
-
-  availableButton(r) {
-    if (r.status != 'available') {
-      return(
-        <span
-          className="btn btn-xs btn-success pull-right"
-          onClick={this.recipientAvailable.bind(this, r, 'available')}>
-          avail
-        </span>
-      );
-    }
-  }
-
-  unavailableButton(r) {
-    if (r.status != 'unavailable') {
-      return (
-        <span
-          className="btn btn-xs btn-warning pull-right"
-          onClick={this.recipientAvailable.bind(this, r, 'unavailable')}>
-          unav
-        </span>
-      );
-    }
-  }
-
-  unknownButton(r) {
-    if (r.status != 'unknown') {
-      return (
-        <span
-          className="btn btn-xs btn-default pull-right"
-          onClick={this.recipientAvailable.bind(this, r, 'unknown')}>
-          unkn
-        </span>
-      );
-    }
-  }
-
-  messagesToMember(r) {
-    return (
-      _.filter(this.props.messages, (m) => {
-        if (m.member) {
-          if (m.member.id == r.id) {
-            if (m.to == r.mobile_phone) {
-              return true;
-            }
-          }
-        }
-      })
-    );
-  }
-
-  memberMessages(r) {
-    return (
-      _.filter(this.props.messages, (m) => {
-        if (m.member) {
-          if (m.member.id == r.id) {
-            return true;
-          }
-        }
-      })
-    );
-  }
-
-  messages(r) {
-    let messages = [];
-    for (var m of this.memberMessages(r)) {
-      messages.push(
-        <div>
-          {m.body}
-        </div>
-      );
-    }
-    return (
-      <div>
-        {messages}
-      </div>
-    );
-  }
-
-  recipient(r) {
-    let note = '';
-    if (r.status_id != 1) {
-      note = 'non-op';
-    }
-    return (
-      <span className={`recipient-column ${r.status}`} key={r.id}>
-        <div>
-          <span>
-            {r.name}
-            {note}
-          </span>
-          {this.availableButton(r)}
-          {this.unknownButton(r)}
-          {this.unavailableButton(r)}
-          {this.messages(r)}
-        </div>
-      </span>
-    );
-  }
-
   incidentMembers() {
     if (!this.props.members || !this.props.incident) {
       return [];
@@ -147,34 +30,47 @@ class Responders extends ViewComponent {
     );
   }
 
+  responder(r) {
+    return (
+      <Responder
+        getIncident={this.props.getIncident}
+        incident={this.props.incident}
+        messages={this.props.messages}
+        responder={r}
+      />
+    );
+  }
+
   responders() {
+    let i = 0;
     let recipients = [];
-    let names = this.sortedNames();
-    let unknown = _.find(names, {status: 'unknown'})
-    while (names.length > 0) {
-      let avail = _.find(names, {status: 'available'})
+    let incident_members = this.sortedNames();
+    let unknown = _.find(incident_members, {status: 'unknown'})
+    while (incident_members.length > 0) {
+      let avail = _.find(incident_members, {status: 'available'})
       if (avail) {
-        _.remove(names, { id: avail.id });
-        avail = this.recipient(avail);
+        _.remove(incident_members, { id: avail.id });
+        avail = this.responder(avail);
       } else {
         avail = <span className="recipient-column"></span>
       }
-      let unknown = _.find(names, {status: 'unknown'})
+      let unknown = _.find(incident_members, {status: 'unknown'})
       if (unknown) {
-        _.remove(names, { id: unknown.id });
-        unknown = this.recipient(unknown);
+        _.remove(incident_members, { id: unknown.id });
+        unknown = this.responder(unknown);
       } else {
         unknown = <span className="recipient-column"></span>
       }
-      let unavail = _.find(names, {status: 'unavailable'})
+      let unavail = _.find(incident_members, {status: 'unavailable'})
       if (unavail) {
-        _.remove(names, { id: unavail.id });
-        unavail = this.recipient(unavail);
+        _.remove(incident_members, { id: unavail.id });
+        unavail = this.responder(unavail);
       } else {
         unavail = <span className="recipient-column"></span>
       }
+      i += 1;
       recipients.push (
-        <div className="row">
+        <div key={i} className="row">
           {avail}
           {unknown}
           {unavail}
