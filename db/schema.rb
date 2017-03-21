@@ -197,7 +197,6 @@ ActiveRecord::Schema.define(version: 20170314234735) do
     t.string   "image",                      limit: 255
     t.string   "image_big",                  limit: 255
     t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "application_id"
     t.integer  "status_id"
     t.boolean  "on_call"
@@ -217,6 +216,7 @@ ActiveRecord::Schema.define(version: 20170314234735) do
     t.string   "emergency_two"
     t.string   "emergency_phone_two"
     t.string   "emergency_relationship_two"
+    t.datetime "updated_at"
     t.string   "email"
     t.string   "position"
     t.datetime "duty_start"
@@ -257,7 +257,7 @@ ActiveRecord::Schema.define(version: 20170314234735) do
     t.string   "name",       limit: 255
     t.string   "body",       limit: 255
     t.integer  "active"
-    t.integer  "created_by", limit: 255
+    t.integer  "created_by"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "updated_by"
@@ -266,10 +266,10 @@ ActiveRecord::Schema.define(version: 20170314234735) do
   create_table "posts", force: :cascade do |t|
     t.string   "title",      limit: 255
     t.string   "body",       limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.boolean  "active"
     t.integer  "created_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "prospect_applications", force: :cascade do |t|
