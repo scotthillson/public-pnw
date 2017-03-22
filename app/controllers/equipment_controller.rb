@@ -8,7 +8,7 @@ class EquipmentController < ApplicationController
 
   def index
     respond_to do |format|
-      format.html { @advanced = advanced? }
+      format.html { @role = session[:role] }
       format.json do
         render json: {
           equipment: Equipment.all,

@@ -23,7 +23,7 @@ class EquipmentLayout extends ViewComponent {
   }
 
   editButton(e) {
-    if (this.props.advanced) {
+    if (this.props.role == 'admin') {
       return (
         <div
           className="btn btn-xs btn-warning btn-pnw"
@@ -143,16 +143,30 @@ class EquipmentLayout extends ViewComponent {
         />
       );
     }
+    if (this.props.team.id == 0) {
+      return (
+        <CustomEquipment
+          checked={this.props.checked}
+          checkEquipment={this.props.checkEquipment}
+          detail={this.props.detail}
+          editEquipment={this.props.editEquipment}
+          equipment={this.props.equipment}
+          equipmentItem={this.equipmentItem}
+          setEquipment={this.props.setEquipment}
+        />
+      );
+    }
     return (
       <EquipmentList
-        advanced={this.props.advanced}
-        addEquipment={this.props.addEquipment}
+        role={this.props.role}
         categories={this.props.categories}
         checked={this.props.checked}
         checkEquipment={this.props.checkEquipment}
         editEquipment={this.props.editEquipment}
+        equipment={this.props.equipment}
         equipmentItem={this.equipmentItem}
         list={this.props.list}
+        setEquipment={this.props.setEquipment}
         team={this.props.team}
       />
     );

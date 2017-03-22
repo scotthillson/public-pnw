@@ -1,5 +1,32 @@
 class EquipmentList extends ViewComponent {
 
+  constructor() {
+    super();
+    this.bindThisToComponent(
+      'addEquipment'
+    )
+  }
+
+  addEquipment(e) {
+    console.log(e);
+    e.team_id = 0;
+    console.log(this.props.equipment);
+    let equipment = _.clone(this.props.equipment);
+    equipment[e.id] = e;
+    $.ajax({
+      method: 'patch',
+      url: 'session_equipment',
+      dataType: 'json',
+      data: {equipment: equipment},
+      success: (data) => {
+        this.props.setEquipment(data);
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
   checkedButton(e) {
     if (this.props.checked.includes(e.id)) {
       return (
@@ -16,7 +43,7 @@ class EquipmentList extends ViewComponent {
   }
 
   editButton(e) {
-    if (this.props.advanced) {
+    if (this.props.role == 'admin') {
       return (
         <div
           className="btn btn-xs btn-warning btn-pnw"
@@ -28,17 +55,18 @@ class EquipmentList extends ViewComponent {
   }
 
   addButton(e) {
-    return (
-      <div
-        className="btn btn-xs btn-success btn-pnw"
-        onClick={this.props.addEquipment.bind(this, e)}>
-        add
-      </div>
-    );
+    if (!this.props.equipment[e.id]){
+      return (
+        <div
+          className="btn btn-xs btn-success btn-pnw"
+          onClick={this.addEquipment.bind(this, e)}>
+          add
+        </div>
+      );
+    }
   }
 
   firstAid(c) {
-    console.log(this.props);
     if (c.display_name == 'First Aid Kit') {
       if (this.props.team.first_aid_kit)
        return true;
@@ -63,9 +91,12 @@ class EquipmentList extends ViewComponent {
                 <div className="equipment-check pull-left">
                   {this.checkedButton(e)}
                 </div>
-                {this.props.equipmentItem(e, 'equipment-12 pull-left')}
-                <div className="equipment-2 pull-left">
+                {this.props.equipmentItem(e, 'equipment-12')}
+                <div className="equipment-2">
                   {this.editButton(e)}
+                </div>
+                <div className="equipment-2">
+                  {this.addButton(e)}
                 </div>
               </div>
             );

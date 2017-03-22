@@ -1,5 +1,40 @@
 class CategoryForm extends ViewComponent {
 
+  saveCategory() {
+    let method = 'post';
+    let url = '/equipment_categories';
+    if (this.props.category.id) {
+      method = 'patch';
+      url = `/equipment_categories/${this.props.category.id}`
+    }
+    $.ajax({
+      method: method,
+      url: url,
+      dataType: 'json',
+      data: this.props.category,
+      success: (data) => {
+        this.props.loadEquipment();
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
+  destroyCategory() {
+    $.ajax({
+      method: 'delete',
+      url: `/equipment_categories/${this.props.category.id}`,
+      dataType: 'json',
+      success: (data) => {
+        this.props.loadEquipment();
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
   teams() {
     let options = [];
     for (var team of this.props.teams) {
@@ -45,7 +80,7 @@ class CategoryForm extends ViewComponent {
               className="btn btn-primary"
               value="Save"
               type="button"
-              onClick={this.props.save}
+              onClick={this.saveCategory}
             />
             <input
               className="btn btn-warning"
@@ -57,7 +92,7 @@ class CategoryForm extends ViewComponent {
               className="btn btn-danger"
               value="Delete"
               type="button"
-              onClick={ this.props.destroy }
+              onClick={ this.destroyCategory }
               />
           </div>
         </form>

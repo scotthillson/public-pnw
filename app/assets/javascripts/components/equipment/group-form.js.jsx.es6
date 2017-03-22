@@ -8,7 +8,6 @@ class GroupForm extends ViewComponent {
   }
 
   firstAid() {
-    console.log(this.props.group);
     if (this.props.group.first_aid_kit) {
       this.props.fieldChange('first_aid_kit', { target: { value: false } });
     } else {

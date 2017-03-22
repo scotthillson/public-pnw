@@ -6,19 +6,15 @@ class Equipment extends ViewComponent {
       'cancelCategory',
       'cancelEquipment',
       'checkEquipment',
-      'destroyCategory',
-      'destroyEquipment',
       'editEquipment',
       'categoryChange',
       'equipmentChange',
       'newCategory',
       'newCustom',
       'newEquipment',
-      'saveCategory',
-      'saveEquipment',
       'table',
-      'setCustom',
       'setDetail',
+      'setEquipment',
       'setPrint',
       'setTeam'
     );
@@ -26,18 +22,30 @@ class Equipment extends ViewComponent {
       categories: [],
       category: null,
       checked: [],
-      custom: false,
       detail: 'short description',
-      equipment: null,
+      equipment: {},
       list: [],
+      newEquipment: null,
       print: false,
       teams: [],
-      team: { id: 36 }
+      team: {}
     };
   }
 
   componentDidMount() {
     this.loadEquipment();
+  }
+
+  getTeam() {
+    let name = location.hash.split('#')[1]
+    if (name.length < 1) {
+      name = 'general';
+    }
+    let team = _.find(this.state.teams, { local_name: name });
+    if (!team) {
+      team = _.find(this.state.teams, { local_name: 'general' });
+    }
+    this.setState({ team: team });
   }
 
   loadEquipment(){
@@ -46,12 +54,25 @@ class Equipment extends ViewComponent {
       url: '/equipment',
       dataType: 'json',
       success: (data) => {
+        if (!data.session) {
+          data.session = {};
+        }
         for (var e of data.equipment) {
           if (e.quantity > 1) {
             e.name = `${e.quantity} x ${e.name}`
           }
         }
-        this.setState({ list: data.equipment, categories: data.categories, teams: data.teams });
+        this.setState(
+          {
+            list: data.equipment,
+            categories: data.categories,
+            equipment: data.session,
+            teams: data.teams,
+            category: null,
+            newEquipment: null
+          },
+          this.getTeam
+        );
       },
       error: (jqXHR) => {
         console.log(jqXHR);
@@ -59,89 +80,8 @@ class Equipment extends ViewComponent {
     });
   }
 
-  saveEquipment() {
-    let method = 'post';
-    let url = '/equipment';
-    if (this.state.equipment.id) {
-      method = 'patch';
-      url = `/equipment/${this.state.equipment.id}`;
-    }
-    $.ajax({
-      method: method,
-      url: url,
-      dataType: 'json',
-      data: this.state.equipment,
-      success: (data) => {
-        this.setState({ equipment: null }, this.loadEquipment);
-      },
-      error: (jqXHR) => {
-        console.log(jqXHR);
-      }
-    });
-  }
-
-  addEquipment(e) {
-    $.ajax({
-      method: 'patch',
-      url: 'session_equipment',
-      dataType: 'json',
-      data: { equipment: e },
-      success: (data) => {
-        console.log(data);
-      },
-      error: (jqXHR) => {
-        console.log(jqXHR);
-      }
-    });
-  }
-
-  destroyEquipment() {
-    $.ajax({
-      method: 'delete',
-      url: `/equipment/${this.state.equipment.id}`,
-      dataType: 'json',
-      success: (data) => {
-        this.setState({ equipment: null }, this.loadEquipment);
-      },
-      error: (jqXHR) => {
-        console.log(jqXHR);
-      }
-    });
-  }
-
-  saveCategory() {
-    let method = 'post';
-    let url = '/equipment_categories';
-    if (this.state.category.id) {
-      method = 'patch';
-      url = `/equipment_categories/${this.state.category.id}`
-    }
-    $.ajax({
-      method: method,
-      url: url,
-      dataType: 'json',
-      data: this.state.category,
-      success: (data) => {
-        this.setState({ category: null }, this.loadEquipment);
-      },
-      error: (jqXHR) => {
-        console.log(jqXHR);
-      }
-    });
-  }
-
-  destroyCategory() {
-    $.ajax({
-      method: 'delete',
-      url: `/equipment_categories/${this.state.category.id}`,
-      dataType: 'json',
-      success: (data) => {
-        this.setState({ category: null }, this.loadEquipment);
-      },
-      error: (jqXHR) => {
-        console.log(jqXHR);
-      }
-    });
+  setEquipment(equipment) {
+    this.setState({ equipment: equipment })
   }
 
   categoryChange(field, e) {
@@ -159,7 +99,7 @@ class Equipment extends ViewComponent {
   newCustom() {
     this.setState(
       { custom: true,
-        team: {},
+        team: { local_name: 'custom' },
         equipment: {
           quantity: 1,
           equipment_category_id: null,
@@ -172,22 +112,19 @@ class Equipment extends ViewComponent {
 
   newEquipment() {
     this.setState(
-      { equipment: {
-        quantity: 1,
-        equipment_category_id: null,
-        importance: 'Required'
-        },
+      {
+        newEquipment: true,
         category: null
       }
     );
   }
 
   cancelEquipment() {
-    this.setState({ equipment: null });
+    this.setState({ newquipment: false });
   }
 
   newCategory() {
-    this.setState({ category: {}, equipment: null });
+    this.setState({ category: {}, newEquipment: null });
   }
 
   cancelCategory() {
@@ -195,7 +132,7 @@ class Equipment extends ViewComponent {
   }
 
   editEquipment(e) {
-    this.setState({ equipment: e });
+    this.setState({ newEquipment: e });
   }
 
   checkEquipment(e) {
@@ -209,15 +146,8 @@ class Equipment extends ViewComponent {
   }
 
   setTeam(team) {
-    this.setState({ team: team, custom: false });
-  }
-
-  setCustom() {
-    if (this.state.custom) {
-      this.setState({ custom: false });
-    } else {
-      this.setState({ custom: true, team: {} });
-    }
+    location.hash = team.local_name;
+    this.setState({ team: team });
   }
 
   setPrint() {
@@ -237,42 +167,40 @@ class Equipment extends ViewComponent {
   }
 
   table() {
-    if (this.state.equipment) {
+    if (this.state.newEquipment) {
       return(
         <EquipmentForm
-          equipment={this.state.equipment}
           cancel={this.cancelEquipment}
           categories={this.state.categories}
-          destroy={this.destroyEquipment}
           fieldChange={this.equipmentChange}
-          save={this.saveEquipment}
+          loadEquipment={this.loadEquipment}
         />
       );
     }
     if (this.state.category) {
       return(
         <CategoryForm
-          category={this.state.category}
+          newCategory={this.state.newCategory}
           cancel={this.cancelCategory}
           categories={this.state.categories}
-          destroy={this.destroyCategory}
           fieldChange={this.categoryChange}
-          save={this.saveCategory}
+          loadEquipment={this.loadEquipment}
           teams={this.state.teams}
         />
       );
     }
     return (
       <EquipmentLayout
-        addEquipment={this.addEquipment}
-        advanced={this.props.advanced}
+        role={this.props.role}
         categories={this.state.categories}
         checked={this.state.checked}
         checkEquipment={this.checkEquipment}
         detail={this.state.detail}
         editEquipment={this.editEquipment}
+        equipment={this.state.equipment}
         list={this.state.list}
         print={this.state.print}
+        setEquipment={this.setEquipment}
         team={this.state.team}
       />
     );
@@ -281,7 +209,7 @@ class Equipment extends ViewComponent {
   toolbar(){
     return (
       <EquipmentBar
-        advanced={this.props.advanced}
+        role={this.props.role}
         categories={this.state.categories}
         custom={this.state.custom}
         detail={this.state.detail}
@@ -289,7 +217,6 @@ class Equipment extends ViewComponent {
         newCustom={this.newCustom}
         newEquipment={this.newEquipment}
         print={this.state.print}
-        setCustom={this.setCustom}
         setDetail={this.setDetail}
         setPrint={this.setPrint}
         setTeam={this.setTeam}

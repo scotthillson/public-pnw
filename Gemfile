@@ -48,3 +48,5 @@ gem 'puma'
 gem 'seed_dump'
 # find errors before your users do
 gem 'rollbar'
+# store it in the daaat
+gem 'activerecord-session_store'

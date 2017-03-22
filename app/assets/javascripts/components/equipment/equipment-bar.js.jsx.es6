@@ -22,20 +22,22 @@ class EquipmentBar extends ViewComponent {
   }
 
   customButtonClass() {
-    if (this.props.custom) {
+    if (this.props.team.local_name == 'custom') {
       return('btn btn-xs btn-primary');
     }
     return('btn btn-xs btn-default');
   }
 
   customButton() {
-    return (
-      <div
-        className="btn btn-xs btn-primary"
-        onClick={this.props.newCustom}>
-        custom item
-      </div>
-    );
+    if (this.props.role) {
+      return (
+        <div
+          className="btn btn-xs btn-primary"
+          onClick={this.props.newCustom}>
+          custom item
+        </div>
+      );
+    }
   }
 
   teams(){
@@ -43,7 +45,7 @@ class EquipmentBar extends ViewComponent {
       <div
         key="custom"
         className={this.customButtonClass()}
-        onClick={this.props.setCustom}>
+        onClick={this.props.setTeam.bind(this, { id: 0, local_name: 'custom' })}>
         custom
       </div>
     ];
@@ -83,7 +85,7 @@ class EquipmentBar extends ViewComponent {
   }
 
   adminButtons() {
-    if (this.props.advanced) {
+    if (this.props.role == 'admin') {
       return (
         <span>
           <div

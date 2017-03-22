@@ -40,21 +40,24 @@ tr th, tr td {
   border-radius: 5px;
 }
 .equipment-2 {
+  float: left;
   width: 6%;
   border-radius: 5px;
 }
 .equipment-6 {
+  float: left;
   margin: 1px;
   width: 48%;
   border-radius: 5px;
 }
 .equipment-12 {
-  width: 82%;
+  float: left;
+  width: 80%;
   margin: auto;
   border-radius: 5px;
 }
 .equipment-row {
-  width: 50%;
+  width: 80%;
   margin: 1px auto;
 }
 .equipment-head {

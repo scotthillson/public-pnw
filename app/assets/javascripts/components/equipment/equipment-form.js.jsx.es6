@@ -1,5 +1,40 @@
 class EquipmentForm extends ViewComponent {
 
+  saveEquipment() {
+    let method = 'post';
+    let url = '/equipment';
+    if (this.props.newEquipment.id) {
+      method = 'patch';
+      url = `/equipment/${this.props.newEquipment.id}`;
+    }
+    $.ajax({
+      method: method,
+      url: url,
+      dataType: 'json',
+      data: this.prosp.newEquipment,
+      success: (data) => {
+        this.props.loadEquipment();
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
+  destroyEquipment() {
+    $.ajax({
+      method: 'delete',
+      url: `/equipment/${this.props.newEquipment.id}`,
+      dataType: 'json',
+      success: (data) => {
+        this.props.loadEquipment();
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
   categoryOptions() {
     if (!this.props.categories) {
       return;
@@ -93,7 +128,7 @@ class EquipmentForm extends ViewComponent {
               className="btn btn-primary"
               value="Save"
               type="button"
-              onClick={this.props.save}
+              onClick={this.saveEquipment}
             />
             <input
               className="btn btn-warning"
@@ -105,7 +140,7 @@ class EquipmentForm extends ViewComponent {
               className="btn btn-danger"
               value="Delete"
               type="button"
-              onClick={ this.props.destroy }
+              onClick={ this.destroyEquipment }
               />
           </div>
         </form>
