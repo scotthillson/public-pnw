@@ -24,20 +24,26 @@ class Rack::Attack
   # Throttle all requests by IP (60rpm)
   #
   # Key: "rack::attack:#{Time.now.to_i/:period}:req/ip:#{req.ip}"
-  throttle('req/ip', :limit => 600, :period => 5.minutes) do |req|
+  throttle('req/ip', :limit => 500, :period => 5.minutes) do |req|
     req.ip # unless req.path.start_with?('/assets')
   end
 
   self.throttled_response = lambda do |env|
     # Using 503 because it may make attacker think that they have successfully??
     # DOSed the site. Rack::Attack returns 403 for blocklists by default ??
-    [ 503, {}, ['Please try again later']]
+    [ 403, {}, ['Please try again later']]
   end
 
   self.blocklisted_response = lambda do |env|
     # Using 503 because it may make attacker think that they have successfully
     # DOSed the site. Rack::Attack returns 403 for blocklists by default
-    [ 503, {}, ['Please try again later']]
+    [ 403, {}, ['Please try again later']]
+  end
+
+  self.blocklist('block shitheads') do |req|
+    # Requests are blocked if the return value is truthy
+    req.ip == '162.216.152.60' ||
+    req.ip[0..5] == '65.208'
   end
 
 end

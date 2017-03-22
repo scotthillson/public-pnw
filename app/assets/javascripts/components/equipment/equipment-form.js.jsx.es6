@@ -67,6 +67,7 @@ class EquipmentForm extends ViewComponent {
               <option>Required</option>
               <option>Recommended</option>
               <option>Optional</option>
+              <option>Personal</option>
             </select>
           </div>
           <div className="form-group">

@@ -12,6 +12,7 @@ class Equipment extends ViewComponent {
       'categoryChange',
       'equipmentChange',
       'newCategory',
+      'newCustom',
       'newEquipment',
       'saveCategory',
       'saveEquipment',
@@ -155,11 +156,25 @@ class Equipment extends ViewComponent {
     this.setState({ equipment: equipment });
   }
 
+  newCustom() {
+    this.setState(
+      { custom: true,
+        team: {},
+        equipment: {
+          quantity: 1,
+          equipment_category_id: null,
+          importance: 'Personal'
+        },
+        category: null
+      }
+    );
+  }
+
   newEquipment() {
     this.setState(
       { equipment: {
         quantity: 1,
-        equipment_category_id: this.state.categories[0].id,
+        equipment_category_id: null,
         importance: 'Required'
         },
         category: null
@@ -194,14 +209,14 @@ class Equipment extends ViewComponent {
   }
 
   setTeam(team) {
-    this.setState({ team: team });
+    this.setState({ team: team, custom: false });
   }
 
   setCustom() {
     if (this.state.custom) {
       this.setState({ custom: false });
     } else {
-      this.setState({ custom: true });
+      this.setState({ custom: true, team: {} });
     }
   }
 
@@ -268,8 +283,10 @@ class Equipment extends ViewComponent {
       <EquipmentBar
         advanced={this.props.advanced}
         categories={this.state.categories}
+        custom={this.state.custom}
         detail={this.state.detail}
         newCategory={this.newCategory}
+        newCustom={this.newCustom}
         newEquipment={this.newEquipment}
         print={this.state.print}
         setCustom={this.setCustom}

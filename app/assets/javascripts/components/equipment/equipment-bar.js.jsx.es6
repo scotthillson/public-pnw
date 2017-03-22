@@ -1,31 +1,48 @@
 class EquipmentBar extends ViewComponent {
 
   teamButtonClass(team) {
-    if (this.props.team == team.id ) {
-      return('btn-primary');
+    if (this.props.team.id == team.id ) {
+      return('btn btn-xs btn-primary');
     }
-    return('btn-default');
+    return('btn btn-xs btn-default');
   }
 
   printButtonClass() {
     if (this.props.print) {
-      return('btn-primary');
+      return('btn btn-xs btn-primary');
     }
-    return('btn-default');
+    return('btn btn-xs btn-default');
   }
 
   detailButtonClass() {
     if (this.props.detail == 'long description') {
-      return('btn-primary');
+      return('btn btn-xs btn-primary');
     }
-    return('btn-default')
+    return('btn btn-xs btn-default')
+  }
+
+  customButtonClass() {
+    if (this.props.custom) {
+      return('btn btn-xs btn-primary');
+    }
+    return('btn btn-xs btn-default');
+  }
+
+  customButton() {
+    return (
+      <div
+        className="btn btn-xs btn-primary"
+        onClick={this.props.newCustom}>
+        custom item
+      </div>
+    );
   }
 
   teams(){
     let buts = [
       <div
         key="custom"
-        className="btn btn-xs btn-default"
+        className={this.customButtonClass()}
         onClick={this.props.setCustom}>
         custom
       </div>
@@ -39,7 +56,7 @@ class EquipmentBar extends ViewComponent {
         buts.push(
           <div
             key={`team-${team.id}`}
-            className={`btn btn-xs ${this.teamButtonClass(team)}`}
+            className={this.teamButtonClass(team)}
             onClick={this.props.setTeam.bind(this, team)}>
             {name}
           </div>
@@ -49,7 +66,7 @@ class EquipmentBar extends ViewComponent {
     buts.push(
       <div
         key="team-print"
-        className={`btn btn-xs ${this.printButtonClass()}`}
+        className={this.printButtonClass()}
         onClick={this.props.setPrint}>
         print
       </div>
@@ -57,7 +74,7 @@ class EquipmentBar extends ViewComponent {
     buts.push(
       <div
         key="detail"
-        className={`btn btn-xs ${this.detailButtonClass()}`}
+        className={this.detailButtonClass()}
         onClick={this.props.setDetail}>
         long description
       </div>
@@ -68,23 +85,23 @@ class EquipmentBar extends ViewComponent {
   adminButtons() {
     if (this.props.advanced) {
       return (
-        <div className="btn-toolbar pull-left">
+        <span>
           <div
             className="btn btn-xs btn-success"
             onClick={this.props.newEquipment}>
             new item
           </div>
           <div
-            className="btn btn-xs btn-success"
+            className="btn btn-xs btn-primary"
             onClick={this.props.newCategory}>
             new category
           </div>
           <a
-            className="btn btn-xs btn-success"
+            className="btn btn-xs btn-info"
             href="/groups">
-            new group
+            manage groups
           </a>
-        </div>
+        </span>
       );
     }
   }
@@ -92,7 +109,10 @@ class EquipmentBar extends ViewComponent {
   render() {
     return (
       <div className="row">
-        {this.adminButtons()}
+        <div className="btn-toolbar pull-left">
+          {this.customButton()}
+          {this.adminButtons()}
+        </div>
         <div className="btn-toolbar pull-right">
           {this.teams()}
         </div>
