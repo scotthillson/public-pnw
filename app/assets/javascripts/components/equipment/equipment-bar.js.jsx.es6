@@ -32,8 +32,7 @@ class EquipmentBar extends ViewComponent {
     if (this.props.role) {
       return (
         <div
-          className="btn btn-xs btn-primary"
-          onClick={this.props.newCustom}>
+          className="btn btn-xs btn-primary">
           custom item
         </div>
       );

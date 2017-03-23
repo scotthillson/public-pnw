@@ -9,6 +9,7 @@ class Equipment extends ViewComponent {
       'editEquipment',
       'categoryChange',
       'equipmentChange',
+      'loadEquipment',
       'newCategory',
       'newCustom',
       'newEquipment',
@@ -38,7 +39,7 @@ class Equipment extends ViewComponent {
 
   getTeam() {
     let name = location.hash.split('#')[1]
-    if (name.length < 1) {
+    if (!name) {
       name = 'general';
     }
     let team = _.find(this.state.teams, { local_name: name });
@@ -91,9 +92,9 @@ class Equipment extends ViewComponent {
   }
 
   equipmentChange(field, e){
-    let equipment = _.clone(this.state.equipment);
+    let equipment = _.clone(this.state.newEquipment);
     equipment[field] = e.target.value;
-    this.setState({ equipment: equipment });
+    this.setState({ newEquipment: equipment });
   }
 
   newCustom() {
@@ -120,7 +121,7 @@ class Equipment extends ViewComponent {
   }
 
   cancelEquipment() {
-    this.setState({ newquipment: false });
+    this.setState({ newEquipment: false });
   }
 
   newCategory() {
@@ -174,6 +175,7 @@ class Equipment extends ViewComponent {
           categories={this.state.categories}
           fieldChange={this.equipmentChange}
           loadEquipment={this.loadEquipment}
+          newEquipment={this.state.newEquipment}
         />
       );
     }

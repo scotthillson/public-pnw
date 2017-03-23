@@ -8,9 +8,7 @@ class EquipmentList extends ViewComponent {
   }
 
   addEquipment(e) {
-    console.log(e);
     e.team_id = 0;
-    console.log(this.props.equipment);
     let equipment = _.clone(this.props.equipment);
     equipment[e.id] = e;
     $.ajax({

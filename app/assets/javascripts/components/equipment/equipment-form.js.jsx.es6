@@ -1,5 +1,13 @@
 class EquipmentForm extends ViewComponent {
 
+  constructor() {
+    super();
+    this.bindThisToComponent(
+      'destroyEquipment',
+      'saveEquipment'
+    )
+  }
+
   saveEquipment() {
     let method = 'post';
     let url = '/equipment';
@@ -11,7 +19,7 @@ class EquipmentForm extends ViewComponent {
       method: method,
       url: url,
       dataType: 'json',
-      data: this.prosp.newEquipment,
+      data: this.props.newEquipment,
       success: (data) => {
         this.props.loadEquipment();
       },
@@ -54,7 +62,7 @@ class EquipmentForm extends ViewComponent {
             <label>Category</label>
             <select
               className="form-control"
-              value={this.props.equipment.equipment_category_id}
+              value={this.props.newEquipment.equipment_category_id}
               onChange={this.props.fieldChange.bind(this, 'equipment_category_id')}
             >
               {this.categoryOptions()}
@@ -64,7 +72,7 @@ class EquipmentForm extends ViewComponent {
             <label>Quantity</label>
             <select
               className="form-control"
-              value={this.props.equipment.quantity}
+              value={this.props.newEquipment.quantity}
               onChange={this.props.fieldChange.bind(this, 'quantity')}>
               <option>1</option>
               <option>2</option>
@@ -79,7 +87,7 @@ class EquipmentForm extends ViewComponent {
             <input
               className="form-control"
               type="text"
-              value={this.props.equipment.name}
+              value={this.props.newEquipment.name}
               onChange={this.props.fieldChange.bind(this, 'name')}
             />
           </div>
@@ -88,7 +96,7 @@ class EquipmentForm extends ViewComponent {
             <input
               className="form-control"
               type="text"
-              value={this.props.equipment.description}
+              value={this.props.newEquipment.description}
               onChange={this.props.fieldChange.bind(this, 'description')}
             />
           </div>
@@ -96,7 +104,7 @@ class EquipmentForm extends ViewComponent {
             <label>Importance</label>
             <select
               className="form-control"
-              value={this.props.equipment.importance}
+              value={this.props.newEquipment.importance}
               onChange={this.props.fieldChange.bind(this, 'importance')}
             >
               <option>Required</option>
@@ -110,7 +118,7 @@ class EquipmentForm extends ViewComponent {
             <input
               className="form-control"
               type="text"
-              value={this.props.equipment.examples}
+              value={this.props.newEquipment.examples}
               onChange={this.props.fieldChange.bind(this, 'examples')}
             />
           </div>
@@ -119,7 +127,7 @@ class EquipmentForm extends ViewComponent {
             <input
               className="form-control"
               type="text"
-              value={this.props.equipment.notes}
+              value={this.props.newEquipment.notes}
               onChange={this.props.fieldChange.bind(this, 'notes')}
             />
           </div>
