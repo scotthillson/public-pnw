@@ -17,7 +17,7 @@ tr th, tr td {
   background-color: rgba(240,173,78,0.7);
 }
 .btn-pnw {
-  margin-top: -5px;
+  margin-top: -6px;
   margin-left: 2px;
 }
 .Required {
@@ -36,7 +36,7 @@ tr th, tr td {
   overflow: hidden;
 }
 .equipment-check {
-  width: 5%;
+  width: 3%;
   border-radius: 5px;
 }
 .equipment-2 {
@@ -53,15 +53,11 @@ tr th, tr td {
 .equipment-12 {
   float: left;
   width: 80%;
-  margin: auto;
   border-radius: 5px;
 }
 .equipment-row {
   width: 80%;
   margin: 1px auto;
-}
-.equipment-head {
-  margin-right: 4%;
 }
 .top-margin {
   margin-top: 20px;

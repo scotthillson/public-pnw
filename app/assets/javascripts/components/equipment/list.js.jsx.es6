@@ -9,7 +9,7 @@ class EquipmentList extends ViewComponent {
 
   addEquipment(e) {
     e.team_id = 0;
-    let equipment = _.clone(this.props.equipment);
+    let equipment = _.clone(this.props.sessionEquipment);
     equipment[e.id] = e;
     $.ajax({
       method: 'patch',
@@ -17,7 +17,7 @@ class EquipmentList extends ViewComponent {
       dataType: 'json',
       data: {equipment: equipment},
       success: (data) => {
-        this.props.setEquipment(data);
+        this.props.setEquipment(data.equipment);
       },
       error: (jqXHR) => {
         console.log(jqXHR);
@@ -53,7 +53,7 @@ class EquipmentList extends ViewComponent {
   }
 
   addButton(e) {
-    if (!this.props.equipment[e.id]){
+    if (!this.props.sessionEquipment[e.id]){
       return (
         <div
           className="btn btn-xs btn-success btn-pnw"
@@ -77,7 +77,7 @@ class EquipmentList extends ViewComponent {
       if (c.team_id == this.props.team.id || this.firstAid(c)) {
         list.push (
           <div className="row equipment-row" key={`cat-${c.id}`}>
-            <div className="equipment-12 text-center">
+            <div className="equipment-12">
               {c.display_name}
             </div>
           </div>

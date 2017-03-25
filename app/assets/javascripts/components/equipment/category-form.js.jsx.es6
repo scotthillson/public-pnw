@@ -1,5 +1,13 @@
 class CategoryForm extends ViewComponent {
 
+  constructor() {
+    super();
+    this.bindThisToComponent(
+      'destroyCategory',
+      'saveCategory'
+    )
+  }
+
   saveCategory() {
     let method = 'post';
     let url = '/equipment_categories';

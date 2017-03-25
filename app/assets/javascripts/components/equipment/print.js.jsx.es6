@@ -28,14 +28,14 @@ class PrintEquipment extends ViewComponent {
         for (var e = 0; e < items.length; e += 2) {
           if (items[e+1]) {
             list.push(
-              <div className="row text-center" key={`eq-${items[e].id}`}>
+              <div className="row equipment-row" key={`eq-${items[e].id}`}>
                 {this.props.equipmentItem(items[e], 'equipment-6 pull-left')}
                 {this.props.equipmentItem(items[e+1], 'equipment-6 pull-left')}
               </div>
             );
           } else {
             list.push(
-              <div className="row text-center equipment-row" key={`eq-${items[e].id}`}>
+              <div className="row equipment-row" key={`eq-${items[e].id}`}>
                 {this.props.equipmentItem(items[e], 'equipment-12 pull-left')}
               </div>
             );

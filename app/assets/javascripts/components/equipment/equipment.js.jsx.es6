@@ -23,11 +23,12 @@ class Equipment extends ViewComponent {
       categories: [],
       category: null,
       checked: [],
+      custom: false,
       detail: 'short description',
-      equipment: {},
+      equipment: null,
       list: [],
-      newEquipment: null,
       print: false,
+      sessionEquipment: {},
       teams: [],
       team: {}
     };
@@ -67,10 +68,10 @@ class Equipment extends ViewComponent {
           {
             list: data.equipment,
             categories: data.categories,
-            equipment: data.session,
+            sessionEquipment: data.session,
             teams: data.teams,
             category: null,
-            newEquipment: null
+            equipment: null
           },
           this.getTeam
         );
@@ -82,7 +83,7 @@ class Equipment extends ViewComponent {
   }
 
   setEquipment(equipment) {
-    this.setState({ equipment: equipment })
+    this.setState({ sessionEquipment: equipment })
   }
 
   categoryChange(field, e) {
@@ -92,9 +93,9 @@ class Equipment extends ViewComponent {
   }
 
   equipmentChange(field, e){
-    let equipment = _.clone(this.state.newEquipment);
+    let equipment = _.clone(this.state.equipment);
     equipment[field] = e.target.value;
-    this.setState({ newEquipment: equipment });
+    this.setState({ equipment: equipment });
   }
 
   newCustom() {
@@ -102,9 +103,8 @@ class Equipment extends ViewComponent {
       { custom: true,
         team: { local_name: 'custom' },
         equipment: {
-          quantity: 1,
-          equipment_category_id: null,
-          importance: 'Personal'
+          importance: 'Personal',
+          quantity: 1
         },
         category: null
       }
@@ -114,18 +114,22 @@ class Equipment extends ViewComponent {
   newEquipment() {
     this.setState(
       {
-        newEquipment: true,
-        category: null
+        equipment: {
+          importance: "Required",
+          quantity: 1
+        },
+        category: null,
+        custom: false
       }
     );
   }
 
   cancelEquipment() {
-    this.setState({ newEquipment: false });
+    this.setState({ equipment: null });
   }
 
   newCategory() {
-    this.setState({ category: {}, newEquipment: null });
+    this.setState({ category: {}, equipment: null });
   }
 
   cancelCategory() {
@@ -133,7 +137,7 @@ class Equipment extends ViewComponent {
   }
 
   editEquipment(e) {
-    this.setState({ newEquipment: e });
+    this.setState({ equipment: e });
   }
 
   checkEquipment(e) {
@@ -143,6 +147,10 @@ class Equipment extends ViewComponent {
     } else {
       checked.push(e.id);
     }
+    this.setChecked(checked);
+  }
+
+  setChecked(checked) {
     this.setState({ checked: checked });
   }
 
@@ -168,14 +176,15 @@ class Equipment extends ViewComponent {
   }
 
   table() {
-    if (this.state.newEquipment) {
+    if (this.state.equipment) {
       return(
         <EquipmentForm
           cancel={this.cancelEquipment}
           categories={this.state.categories}
+          custom={this.state.custom}
           fieldChange={this.equipmentChange}
           loadEquipment={this.loadEquipment}
-          newEquipment={this.state.newEquipment}
+          equipment={this.state.equipment}
         />
       );
     }
@@ -184,6 +193,7 @@ class Equipment extends ViewComponent {
         <CategoryForm
           newCategory={this.state.newCategory}
           cancel={this.cancelCategory}
+          category={this.state.category}
           categories={this.state.categories}
           fieldChange={this.categoryChange}
           loadEquipment={this.loadEquipment}
@@ -202,6 +212,8 @@ class Equipment extends ViewComponent {
         equipment={this.state.equipment}
         list={this.state.list}
         print={this.state.print}
+        sessionEquipment={this.state.sessionEquipment}
+        setChecked={this.setChecked}
         setEquipment={this.setEquipment}
         team={this.state.team}
       />
@@ -213,7 +225,6 @@ class Equipment extends ViewComponent {
       <EquipmentBar
         role={this.props.role}
         categories={this.state.categories}
-        custom={this.state.custom}
         detail={this.state.detail}
         newCategory={this.newCategory}
         newCustom={this.newCustom}

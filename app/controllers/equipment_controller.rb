@@ -11,7 +11,7 @@ class EquipmentController < ApplicationController
       format.html { @role = session[:role] }
       format.json do
         render json: {
-          equipment: Equipment.all,
+          equipment: Equipment.team,
           categories: EquipmentCategory.all,
           teams: Group.all,
           session: session[:equipment]
@@ -21,13 +21,14 @@ class EquipmentController < ApplicationController
   end
 
   def session_equipment
+    session[:checked] = params[:checked]
     session[:equipment] = params[:equipment]
-    render json: session[:equipment], status: :ok
+    render json: { equipment: session[:equipment], checked: session[:checked] }, status: :ok
   end
 
   def create
     equipment = Equipment.new(equipment_params)
-    equipment.name = equipment.name.downcase
+    equipment.name = equipment.name.downcase if equipment.name
     equipment.created_by = current_user
     if equipment.save
       render json: { success: true }, status: :ok
