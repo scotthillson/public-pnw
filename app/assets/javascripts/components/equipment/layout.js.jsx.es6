@@ -150,8 +150,8 @@ class EquipmentLayout extends ViewComponent {
           checkEquipment={this.props.checkEquipment}
           detail={this.props.detail}
           editEquipment={this.props.editEquipment}
-          equipment={this.props.equipment}
           equipmentItem={this.equipmentItem}
+          sessionEquipment={this.props.sessionEquipment}
           setEquipment={this.props.setEquipment}
         />
       );

@@ -23,7 +23,7 @@ class CustomEquipment extends ViewComponent {
   }
 
   axeEquipment(e) {
-    let equipment = _.clone(this.props.equipment);
+    let equipment = _.clone(this.props.sessionEquipment);
     delete equipment[e.id];
     $.ajax({
       method: 'patch',
@@ -31,7 +31,7 @@ class CustomEquipment extends ViewComponent {
       dataType: 'json',
       data: {equipment: equipment},
       success: (data) => {
-        this.props.setEquipment(data);
+        this.props.setEquipment(data.equipment);
       },
       error: (jqXHR) => {
         console.log(jqXHR);
@@ -46,7 +46,7 @@ class CustomEquipment extends ViewComponent {
   }
 
   checkedButton(e) {
-    if (this.props.checked.includes(e.id)) {
+    if (this.props.checked.includes(parseInt(e.id, 10))) {
       return (
         <div className="btn btn-xs btn-success btn-pnw" onClick={this.props.checkEquipment.bind(this, e)}>
         <i className="fa fa-check-circle-o" aria-hidden="true"></i>
@@ -60,18 +60,6 @@ class CustomEquipment extends ViewComponent {
     );
   }
 
-  editButton(e) {
-    if (this.props.role == 'admin') {
-      return (
-        <div
-          className="btn btn-xs btn-warning btn-pnw"
-          onClick={this.props.editEquipment.bind(this, e)}
-          >edit
-        </div>
-      );
-    }
-  }
-
   axeButton(e) {
     return (
       <span className="btn btn-xs btn-danger pull-right"
@@ -83,15 +71,15 @@ class CustomEquipment extends ViewComponent {
 
   equipment() {
     let list = [];
-    for (var k in this.props.equipment) {
+    for (var k in this.props.sessionEquipment) {
       list.push(
         <div className="row equipment-row" key={`eq-${k}`}>
           <div className="equipment-check pull-left">
-            {this.checkedButton(this.props.equipment[k])}
+            {this.checkedButton(this.props.sessionEquipment[k])}
           </div>
-          {this.props.equipmentItem(this.props.equipment[k], 'equipment-12')}
+          {this.props.equipmentItem(this.props.sessionEquipment[k], 'equipment-12')}
           <div className="equipment-check pull-left">
-            {this.axeButton(this.props.equipment[k])}
+            {this.axeButton(this.props.sessionEquipment[k])}
           </div>
         </div>
       );

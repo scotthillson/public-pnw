@@ -83,7 +83,12 @@ class Equipment extends ViewComponent {
   }
 
   setEquipment(equipment) {
-    this.setState({ sessionEquipment: equipment })
+    if (equipment) {
+      this.setState({ sessionEquipment: equipment });
+    } else {
+      this.setState({ sessionEquipment: {} });
+    }
+
   }
 
   categoryChange(field, e) {
@@ -141,6 +146,7 @@ class Equipment extends ViewComponent {
   }
 
   checkEquipment(e) {
+    e.id = parseInt(e.id, 10);
     let checked = _.clone(this.state.checked);
     if (checked.includes(e.id)) {
       _.pull(checked, e.id);

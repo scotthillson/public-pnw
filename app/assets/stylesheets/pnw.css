@@ -36,13 +36,11 @@ tr th, tr td {
   overflow: hidden;
 }
 .equipment-check {
-  width: 3%;
-  border-radius: 5px;
+  width: 22px;
 }
 .equipment-2 {
   float: left;
-  width: 6%;
-  border-radius: 5px;
+  width: 30px;
 }
 .equipment-6 {
   float: left;
@@ -52,7 +50,7 @@ tr th, tr td {
 }
 .equipment-12 {
   float: left;
-  width: 80%;
+  width: 75%;
   border-radius: 5px;
 }
 .equipment-row {
