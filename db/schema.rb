@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170322233621) do
+ActiveRecord::Schema.define(version: 20170411173610) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -372,6 +372,30 @@ ActiveRecord::Schema.define(version: 20170322233621) do
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "discussion_id"
+    t.datetime "updated_at"
+    t.datetime "created_at"
+  end
+
+  create_table "task_books", force: :cascade do |t|
+    t.string   "name"
+    t.string   "desription"
+    t.date     "date_started"
+    t.date     "date_due"
+    t.date     "date_completed"
+    t.integer  "group_id"
+    t.integer  "updated_by"
+    t.integer  "created_by"
+    t.datetime "updated_at"
+    t.datetime "created_at"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "description"
+    t.string   "display_name"
+    t.integer  "task_book_id"
+    t.integer  "user_id"
+    t.integer  "instructor_id"
+    t.date     "date_completed"
     t.datetime "updated_at"
     t.datetime "created_at"
   end

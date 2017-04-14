@@ -9,16 +9,10 @@ class Member < ActiveRecord::Base
   has_many :incidents, through: :incident_members
   has_many :messages, foreign_key: :from, primary_key: :mobile_phone
 
-  def create_authorization_code
-    MobileAuthorization.new_authorization(self)
-  end
-
-  def ingest_authorization_code
-    # what was I doing here?
-  end
+  scope :members, -> { where('d4h_id is not null').order(:name) }
 
   def self.get_members
-    if DateTime.now.to_i - D4h.first.last_member_sync.to_i > 999
+    if DateTime.now.to_i - D4h.first.last_member_sync.to_i > 9
       D4h.offsetter('members', method(:update_member), method(:sync_members))
       track = D4h.first
       track.last_member_sync = DateTime.now
@@ -50,7 +44,7 @@ class Member < ActiveRecord::Base
   end
 
   def self.sync_members(ids)
-    where(d4h_id: (all.pluck(:d4h_id) - ids)).update_all(d4h_id: null)
+    where(d4h_id: (all.pluck(:d4h_id) - ids)).update_all(d4h_id: nil)
   end
 
   def self.sync_with_users

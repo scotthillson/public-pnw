@@ -16,7 +16,7 @@ class MembersController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        render json: Member.where('d4h_id is not null').order(:name), status: :ok
+        render json: Member.members, status: :ok
       end
     end
   end

@@ -8,7 +8,10 @@ class D4h < ActiveRecord::Base
       result = get_resources(resource, offset)
       status_code = result['statusCode']
       data = result['data']
-      return if data.length < 1
+      if data.length < 1
+        finish.call(processed_rows) if finish
+        return
+      end
       data.each do |row|
         if !processed_rows.include? row['id']
           callback.call(row)
