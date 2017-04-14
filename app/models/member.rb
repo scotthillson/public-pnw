@@ -12,7 +12,7 @@ class Member < ActiveRecord::Base
   scope :members, -> { where('d4h_id is not null').order(:name) }
 
   def self.get_members
-    if DateTime.now.to_i - D4h.first.last_member_sync.to_i > 9
+    if DateTime.now.to_i - D4h.first.last_member_sync.to_i > 999
       D4h.offsetter('members', method(:update_member), method(:sync_members))
       track = D4h.first
       track.last_member_sync = DateTime.now

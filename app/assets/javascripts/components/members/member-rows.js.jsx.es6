@@ -39,6 +39,9 @@ class MemberRows extends ViewComponent {
       }
     }
     let onCall = member.duty_end;
+    if (onCall) {
+      onCall = moment(onCall).format('YYYY-MM-DD-HH-mm');
+    }
     let operational = '';
     if (member.operational) {
       operational = <i className="fa fa-check" aria-hidden="true"></i>;
