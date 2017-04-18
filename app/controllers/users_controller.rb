@@ -64,12 +64,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.refresh
-      if @user.save
-        redirect_to users_url, notice: 'User was successfully created'
-      else
-        render :new
-      end
+    if @user.save
+      @user.refresh
+      redirect_to users_url, notice: 'User was successfully created'
     else
       render :new
     end
