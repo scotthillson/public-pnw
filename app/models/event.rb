@@ -1,4 +1,4 @@
-# An event is an activity that has been added to the calendar.
+# An event is an activity that has been synced to pnwsar.org
 
 class Event < ActiveRecord::Base
 

@@ -42,8 +42,8 @@ Rails.application.routes.draw do
     get 'update_messages', to: 'messages#update_messages'
 
   resources :posts, constraints: {format: :html}
-    get 'posts/:id/activate', to: 'posts#activate', as: 'activate_post'
-    get 'posts/:id/deactivate', to: 'posts#deactivate', as: 'deactivate_post'
+    get 'posts/:id/activate', to: 'posts#activate', as: :activate_post
+    get 'posts/:id/deactivate', to: 'posts#deactivate', as: :deactivate_post
     get 'donation_download', to: 'posts#donation_download'
     get 'equipment_download', to: 'posts#equipment_download'
 
@@ -59,8 +59,9 @@ Rails.application.routes.draw do
 
   resources :users, constriants: {format: :html}
     get :signup, to: 'users#signup'
-    patch :set_password, to: 'users#set_password'
+    get 'users/:id/swap_role', to: 'users#swap_role', as: :swap_role
     get :forgot_password, to: 'users#forgot_password'
+    patch :set_password, to: 'users#set_password'
     post :password_email, to: 'users#password_email'
 
   resources :pages, constraints: {format: :html} #Not in alphabetical order, pages is always last!

@@ -8,6 +8,7 @@
       <th class="text-center">Token</th>
       <th class="text-center">Security</th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -18,7 +19,12 @@
         <td><%= user.token.present? %></td>
         <td><%= user.role %></td>
         <td>
-          <% if user.role != 'admin' && admin? %>
+          <% if admin? && user.role != 'admin' %>
+            <%= link_to "swap role", swap_role_path(user), class: 'btn btn-xs btn-warning' %>
+          <% end %>
+        </td>
+        <td>
+          <% if admin? && user.role != 'admin' %>
             <%= link_to 'destroy', user, method: :delete, data: { confirm: 'Are you sure about that?' }, class: 'btn btn-xs btn-danger' %>
           <% end %>
         </td>

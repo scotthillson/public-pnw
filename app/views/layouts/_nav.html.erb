@@ -1,0 +1,62 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand <%= 'active' if current_page?(root_path) %>" href="/">PNW<u>SAR</u></a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="<%= 'active' if current_page?('join') %>"><a href="/join">Join Us</a></li>
+        <li class="<%= 'active' if current_page?('donate') %>"><a href="/donate">Donate</a></li>
+        <li class="<%= 'active' if current_page?('about') %>"><a href="/about">About Us</a></li>
+        <li class="<%= 'active' if current_page?('contact') %>"><a href="/contact">Contact Us</a></li>
+        <li class="<%= 'active' if current_page?('searches') %>"><a href="/searches">Searches</a></li>
+        <li class="<%= 'active' if current_page?('faqs') %>"><a href="/faqs">FAQS</a></li>
+        <li class="<%= 'active' if current_page?('meetings') %>"><a href="/meetings">Meetings</a></li>
+        <li class="<%= 'active' if current_page?('calendar') %>"><a href="/calendar">Calendar</a></li>
+        <li><a href="https://www.facebook.com/PNWSearchRescue" target="_blank"><img src="/facebook.png" alt="facebook" width="25" height="25"></a></li>
+        <li><a href="http://twitter.com/pnwsar" target="_blank"><img src="/twitter.png" alt="twitter" width="25" height="25"></a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if advanced? %>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to activities_path do %><div>Manage Activities</div><% end %></li>
+            <li><%= link_to posts_path do %><div>Manage Announcements</div><% end %></li>
+            <li><%= link_to searches_path do %><div>Manage Searches</div><% end %></li>
+            <li><%= link_to sponsors_path do %><div>Manage Sponsors</div><% end %></li>
+            <li><%= link_to '/prospect_applications' do %><div>Manage Applications</div><% end %></li>
+            <li><%= link_to '/prospect_application' do %><div>Prospect Application</div><% end %></li>
+            <% if admin? %>
+              <li><%= link_to images_path do %><div>Manage Images</div><% end %></li>
+              <li><%= link_to new_page_path do %><div>Manage Pages</div><% end %></li>
+              <li><%= link_to users_path do %><div>Manage Users</div><% end %></li>
+            <% end %>
+          </ul>
+        </li>
+        <% end %>
+        <% if current_user %>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Team<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to members_path do %><div>Members</div><% end %></li>
+            <li><%= link_to carpools_path do %><div>Carpools</div><% end %></li>
+            <li><%= link_to discussions_path do %><div>Discussion</div><% end %></li>
+            <li><%= link_to '/equipment' do %><div>Equipment List</div><% end %></li>
+            <li><%= link_to rentals_path do %><div>Share Equipment</div><% end %></li>
+          </ul>
+        </li>
+        <li><%= link_to signout_path do %><div>Sign Out</div><% end %></li>
+        <% else %>
+        <li><%= link_to signin_path do %><div>Sign In</div><% end %></li>
+        <% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

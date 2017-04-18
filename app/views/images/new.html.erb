@@ -1,12 +1,15 @@
 <h3>Upload Image</h3>
+<h5><div>Keep it 1125 x 600</h5>
 <%= form_for @image do |f| %>
   <label class="btn btn-primary" style="width: 120px"> Choose File
     <%= f.file_field :file, id: 'choose-file', style: 'display: none' %>
   </label>
   <br>
+  <br>
   <select name="image[page]" id="image_page" style="width: 120px; margin-left: 5px">
     <option value="Banner">Banner</option>
   </select>
+  <br>
   <br>
   <%= f.submit 'upload', class: 'btn btn-primary', style: 'width: 120px' %>
 <% end %>

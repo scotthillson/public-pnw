@@ -42,29 +42,65 @@ class ProspectApplications extends ViewComponent{
     });
   }
 
-  approve(application) {
-    return true;
+  approved(application) {
+    if (application.approved_at) {
+      return (application.approved_at);
+    }
+    return (
+      <div
+      className="btn btn-xs btn-success"
+      >approve
+      </div>
+    );
+  }
+
+  signed(application) {
+    if (application.approved_at) {
+      return (application.waiver_signed_at);
+    }
+    return (
+      <div
+      className="btn btn-xs btn-info"
+      >signed
+      </div>
+    );
+  }
+
+  paid(application) {
+    if (application.dues_paid_at) {
+      return (application.dues_paid_at);
+    }
+    return (
+      <div
+      className="btn btn-xs btn-success"
+      >paid
+      </div>
+    );
+  }
+
+  taken(application) {
+    if (application.photo_taken_at) {
+      return (application.photo_taken_at);
+    }
+    return (
+      <div
+      className="btn btn-xs btn-info"
+      >taken
+      </div>
+    );
   }
 
   application(application) {
-    let approved = <div
-      onClick={this.approve}
-      className="btn btn-xs btn-success"
-      >approve
-      </div>;
-    if (application.approved_at) {
-      approved = application.approved_at
-    }
     return (
         <tr className="text-center" key={ application.id }>
           <td><a href={`/prospect_applications/${application.id}`}>{ application.name }</a></td>
           <td>{ application.email }</td>
           <td>{ application.created_at }</td>
           <td>{ application.status }</td>
-          <td>{ approved }</td>
-          <td>{ application.waiver_signed_at }</td>
-          <td>{ application.dues_paid_at }</td>
-          <td>{ application.photo_taken_at }</td>
+          <td>{ this.approved(application) }</td>
+          <td>{ this.signed(application) }</td>
+          <td>{ this.paid(application) }</td>
+          <td>{ this.taken(application) }</td>
         </tr>
     );
   }

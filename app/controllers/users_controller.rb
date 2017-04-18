@@ -1,23 +1,19 @@
 class UsersController < ApplicationController
-  
-  before_action :admin_only, only: [:index, :new, :create, :edit, :destroy]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+
+  before_action :admin_only, only: [:index, :new, :create, :destroy, :swap_role]
+  before_action :set_user, only: [:update, :destroy, :swap_role]
   before_action :digest_token, only: [:signup, :set_password]
-  
+
   def index
     @users = User.all
   end
-  
-  def show
-    redirect_to '/404'
-  end
-  
+
   def signup
     if !@user
       redirect_to '/404'
     end
   end
-  
+
   def digest_token
     if current_user
       redirect_to root_path, notice: 'You can\'t sign up if you\'re already signed in...'
@@ -25,7 +21,7 @@ class UsersController < ApplicationController
       @user = User.find_by_token params[:token]
     end
   end
-  
+
   def set_password
     if params[:user][:password].length < 8
       flash[:notice] = 'Minimum password length is 8'
@@ -44,10 +40,10 @@ class UsersController < ApplicationController
       render :signup
     end
   end
-  
+
   def forgot_password
   end
-  
+
   def password_email
     @user = User.find_by_email params[:email]
     if !@user
@@ -61,11 +57,11 @@ class UsersController < ApplicationController
       redirect_to signin_url, notice: 'We sent you an email with further instructions and we await your return.'
     end
   end
-  
+
   def new
     @user = User.new
   end
-  
+
   def create
     @user = User.new(user_params)
     if @user.refresh
@@ -78,10 +74,16 @@ class UsersController < ApplicationController
       render :new
     end
   end
-  
-  def edit
+
+  def swap_role
+    if @user.role == 'member'
+      @user.update(role: 'advanced')
+    elsif @user.role != 'admin'
+      @user.update(role: 'member')
+    end
+    redirect_to users_url
   end
-  
+
   def update
     if @user.update(user_params)
       redirect_to users_url, notice: 'User was successfully updated'
@@ -89,7 +91,7 @@ class UsersController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     if @user.destroy
       redirect_to users_url, notice: 'User was successfully destroyed.'
@@ -97,15 +99,15 @@ class UsersController < ApplicationController
       redirect_to users_url, notice: 'Something didn\'t work?'
     end
   end
-  
+
   private
-  
+
   def set_user
     @user = User.find(params[:id])
   end
-  
+
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
   end
-  
+
 end

@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
 
-  before_action :advanced_only
+  before_action :turn_back
   before_action :set_member, only: [:show, :edit, :update, :destroy]
 
   def update_members

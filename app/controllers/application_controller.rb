@@ -9,19 +9,19 @@ class ApplicationController < ActionController::Base
   helper_method :admin?
 
   def admin_only
-    if !admin?
+    unless admin?
       redirect_to root_path
     end
   end
 
   def advanced_only
-    if !advanced?
+    unless advanced?
       redirect_to root_path
     end
   end
 
   def turn_back
-    if !current_user
+    unless current_user
       redirect_to signin_path
     end
   end

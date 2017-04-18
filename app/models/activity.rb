@@ -1,4 +1,4 @@
-# An activity is a local copy of D4H activity/incident/events
+# An activity is a local copy of D4H a activity/incident/event/exercise
 
 class Activity < ActiveRecord::Base
 
