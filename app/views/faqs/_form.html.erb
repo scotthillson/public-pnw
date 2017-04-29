@@ -1,6 +1,6 @@
 <%= form_for(@search) do |f| %>
   <% if @search.errors.any? %>
-    <div id="error_explanation">
+    <div class="error-explanation">
       <p><%= pluralize(@search.errors.count, "error") %> prohibited this search from being saved:</p>
       <ul>
       <% @search.errors.full_messages.each do |message| %>

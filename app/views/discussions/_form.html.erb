@@ -1,6 +1,6 @@
 <%= form_for @discussion do |f| %>
   <% if @discussion.errors.any? %>
-    <div id="error_explanation">
+    <div class="error-explanation">
       <ul>
       <% @discussion.errors.full_messages.each do |message| %>
         <li><%= message %></li>

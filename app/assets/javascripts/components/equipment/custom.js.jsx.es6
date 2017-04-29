@@ -70,6 +70,16 @@ class CustomEquipment extends ViewComponent {
   }
 
   equipment() {
+    if (this.props.print) {
+      return (
+        <PrintEquipment
+          categories={this.props.categories}
+          equipmentItem={this.props.equipmentItem}
+          list={this.props.sessionEquipment}
+          team={this.props.team}
+        />
+      );
+    }
     let list = [];
     for (var k in this.props.sessionEquipment) {
       list.push(

@@ -1,6 +1,6 @@
 <%= form_for(@carpool, html: {style: 'width:500px; float:left'}) do |f| %>
   <% if @carpool.errors.any? %>
-    <div id="error_explanation">
+    <div class="error-explanation">
       <ul>
       <% @carpool.errors.full_messages.each do |message| %>
         <li><%= message %></li>

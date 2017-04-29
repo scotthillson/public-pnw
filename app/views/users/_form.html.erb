@@ -1,7 +1,7 @@
 <%= form_for @user, class: 'text-center', html: { style: 'width:300px;margin:auto' } do |f| %>
   <% if @user.errors.any? %>
     <br>
-    <div id="error_explanation">
+    <div class="error-explanation">
       <ul>
       <% @user.errors.full_messages.each do |message| %>
         <li><%= message %></li>

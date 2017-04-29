@@ -132,6 +132,22 @@ class EquipmentLayout extends ViewComponent {
   }
 
   equipment() {
+    if (this.props.team.id == 0) {
+      return (
+        <CustomEquipment
+          categories={this.props.categories}
+          checked={this.props.checked}
+          checkEquipment={this.props.checkEquipment}
+          detail={this.props.detail}
+          editEquipment={this.props.editEquipment}
+          equipmentItem={this.equipmentItem}
+          print={this.props.print}
+          sessionEquipment={this.props.sessionEquipment}
+          setEquipment={this.props.setEquipment}
+          team={this.props.team}
+        />
+      );
+    }
     if (this.props.print){
       return (
         <PrintEquipment
@@ -140,19 +156,6 @@ class EquipmentLayout extends ViewComponent {
           equipmentItem={this.equipmentItem}
           list={this.props.list}
           team={this.props.team}
-        />
-      );
-    }
-    if (this.props.team.id == 0) {
-      return (
-        <CustomEquipment
-          checked={this.props.checked}
-          checkEquipment={this.props.checkEquipment}
-          detail={this.props.detail}
-          editEquipment={this.props.editEquipment}
-          equipmentItem={this.equipmentItem}
-          sessionEquipment={this.props.sessionEquipment}
-          setEquipment={this.props.setEquipment}
         />
       );
     }

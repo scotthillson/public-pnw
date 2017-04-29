@@ -1,6 +1,6 @@
 <%= form_for(@sponsor) do |f| %>
   <% if @sponsor.errors.any? %>
-    <div id="error_explanation">
+    <div class="error-explanation">
       <ul>
       <% @sponsor.errors.full_messages.each do |message| %>
         <li><%= message %></li>

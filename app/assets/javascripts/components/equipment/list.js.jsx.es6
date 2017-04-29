@@ -77,7 +77,7 @@ class EquipmentList extends ViewComponent {
       if (c.team_id == this.props.team.id || this.firstAid(c)) {
         list.push (
           <div className="row equipment-row text-center" key={`cat-${c.id}`}>
-            <div className="equipment-12">
+            <div className="equipment-list-head">
               {c.display_name}
             </div>
           </div>

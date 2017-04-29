@@ -1,6 +1,6 @@
 <%= form_for(@rental, html: {style: 'width:500px'}) do |f| %>
   <% if @rental.errors.any? %>
-    <div id="error_explanation">
+    <div class="error-explanation">
       <ul>
       <% @rental.errors.full_messages.each do |message| %>
         <li><%= message %></li>

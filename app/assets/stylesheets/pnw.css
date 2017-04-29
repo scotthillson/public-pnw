@@ -2,12 +2,8 @@ tr th, tr td {
   font-size: 15px;
   font-weight: normal;
 }
-#error_explanation {
+.error-explanation {
   background-color: #B396EF;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  -khtml-border-radius: 10px;
 }
 .pnw-wrap{
   margin: 15px 0;
@@ -46,12 +42,21 @@ tr th, tr td {
   float: left;
   margin: 1px;
   width: 48%;
-  border-radius: 5px;
+}
+.equipment-10 {
+  float: left;
+  width: 75%;
+  margin: 1px 10%;
 }
 .equipment-12 {
   float: left;
   width: 75%;
-  border-radius: 5px;
+}
+.equipment-head {
+  width: 98%;
+}
+.equipment-list-head {
+  width: 80%;
 }
 .equipment-row {
   width: 80%;
@@ -67,15 +72,11 @@ tr th, tr td {
     -webkit-box-shadow: none;
     box-shadow: none;
 }
-.panel-heading {
-  border-radius: 5px;
-}
 .panel > .row {
   margin: 5px -15px;
 }
 .recipient {
   margin: 2px;
-  border-radius: 4px;
   background-color: rgba(125,180,94,0.4);
 }
 @media print {
@@ -113,7 +114,6 @@ tr th, tr td {
           user-select: none;
   background-image: none;
   border: 1px solid transparent;
-  border-radius: 4px;
 }
 .callout {
   min-width: 1200px;
@@ -138,4 +138,7 @@ tr th, tr td {
 }
 .equipment-links {
   position: relative;
+}
+.btn-wrap, .error-explanation, .equipment-6, .equipment-12, .panel-heading, .recipient{
+  border-radius: 4px;
 }
