@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   before_action :advanced_only
 
   def index
-    render json: Message.all, include: :member, status: :ok
+    render json: {data: Message.all}, include: :member, status: :ok
   end
 
   def update_messages
