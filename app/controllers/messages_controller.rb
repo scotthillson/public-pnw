@@ -1,9 +1,13 @@
 class MessagesController < ApplicationController
 
-  before_action :advanced_only
+  before_action :advanced_only, except: [:index]
 
   def index
-    render json: {data: Message.all}, include: :member, status: :ok
+    if valid_api_token
+      render json: { data: Message.all }, include: :member, status: :ok
+    else
+      render json: { error: "Unauthorized" }, status: 401
+    end
   end
 
   def update_messages

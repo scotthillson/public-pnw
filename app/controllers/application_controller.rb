@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def valid_api_token
+    params[:access_token] == Rails.application.secrets.api_admin
+  end
+
   def admin?
     session[:role] == 'admin'
   end
