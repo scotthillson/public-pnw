@@ -7,9 +7,12 @@ class Member < ActiveRecord::Base
 
   has_many :incident_members
   has_many :incidents, through: :incident_members
-  has_many :messages, foreign_key: :from, primary_key: :mobile_phone
 
   scope :members, -> { where('d4h_id is not null').order(:name) }
+
+  def messages
+    Message.where('from_phone = ? or to_phone = ?', mobile_phone, mobile_phone)
+  end
 
   def self.get_members
     if DateTime.now.to_i - D4h.first.last_member_sync.to_i > 999

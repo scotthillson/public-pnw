@@ -2,13 +2,170 @@ class ReviewProspectApplication extends ViewComponent {
 
   constructor() {
     super();
+    this.bindThisToComponent(
+      'approve',
+      'sign',
+      'pay',
+      'photo',
+      'create',
+      'destroy',
+      'updateApplication'
+    );
     this.state = {
+      application: {},
       fields: {}
     }
   }
 
   componentDidMount() {
-    this.setState({ fields: this.props.fields });
+    this.setState({ fields: this.props.fields, application: this.props.application });
+  }
+
+  updateApplication(application) {
+    $.ajax( {
+      type: 'patch',
+      url: `/prospect_applications/${this.props.application.id}`,
+      context: this,
+      data: application,
+      dataType: 'json',
+      success: (data) => {
+        this.setState({ application: data });
+      },
+      error: (jqXHR) => {
+        console.log(jqXHR);
+      }
+    });
+  }
+
+  now() {
+    return moment(Date.now()).utcOffset(0).format('YYYY-MM-DDTHH:mm:ss');
+  }
+
+  approve() {
+    let application = _.clone(this.state.application);
+    application.approved_at = this.now();
+    this.updateApplication(application);
+  }
+
+  sign() {
+    let application = _.clone(this.state.application);
+    application.waiver_signed_at = this.now();
+    this.updateApplication(application);
+  }
+
+  pay() {
+    let application = _.clone(this.state.application);
+    application.dues_paid_at = this.now();
+    this.updateApplication(application);
+  }
+
+  photo() {
+    let application = _.clone(this.state.application);
+    application.photo_taken_at = this.now();
+    this.updateApplication(application);
+  }
+
+  create() {
+    let application = _.clone(this.state.application);
+    application.d4h = this.now();
+    this.updateApplication(application);
+  }
+
+  destroy() {
+    let application = _.clone(this.state.application);
+    return true;
+  }
+
+  approved() {
+    if (this.state.application.approved_at) {
+      return (
+        <div className="btn-sm btn-default">
+          {`Approved ${moment(this.state.application.approved_at).format('YYYY-MM-DD-HHmm')}`}
+        </div>
+      );
+    }
+    return (
+      <div
+        onClick={this.approve}
+        className="btn-sm btn-success btn-space">
+        Approve
+      </div>
+    );
+  }
+
+  signed() {
+    if (this.state.application.waiver_signed_at) {
+      return (
+        <div className="btn-sm btn-default">
+          {`Waiver signed ${moment(this.state.application.waiver_signed_at).format('YYYY-MM-DD-HHmm')}`}
+        </div>
+      );
+    }
+      return (
+      <div
+        onClick={this.sign}
+        className="btn-sm btn-info btn-space">
+        Waiver Signed
+      </div>
+    );
+  }
+
+  paid() {
+    if (this.state.application.dues_paid_at) {
+      return (
+        <div className="btn-sm btn-default">
+          {`Dues paid ${moment(this.state.application.dues_paid_at).format('YYYY-MM-DD-HHmm')}`}
+        </div>
+      );
+    }
+    return (
+      <div
+        onClick={this.pay}
+        className="btn-sm btn-success btn-space">
+        Dues Paid
+      </div>
+    );
+  }
+
+  taken() {
+    if (this.state.application.photo_taken_at) {
+      return (
+        <div className="btn-sm btn-default">
+          {`Photo taken ${moment(this.state.application.photo_taken_at).format('YYYY-MM-DD-HHmm')}`}
+        </div>
+      );
+    }
+    return (
+      <div
+        onClick={this.photo}
+        className="btn-sm btn-info btn-space">
+        Photo Taken
+      </div>
+    );
+  }
+
+  created() {
+    if (this.state.application.d4h) {
+      return (
+        <div className="btn-sm btn-default">
+          {`D4H created ${moment(this.state.application.d4h).format('YYYY-MM-DD-HHmm')}`}
+        </div>
+      );
+    }
+    return (
+      <div
+        onClick={this.create}
+        className="btn-sm btn-success btn-space">
+        D4H created
+      </div>
+    );
+  }
+
+  deleted() {
+    return (
+      <div className="btn-sm btn-default">
+      </div>
+    );
   }
 
   render(){
@@ -28,7 +185,7 @@ class ReviewProspectApplication extends ViewComponent {
                   placeholder="first and last name"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['name']}
+                  value={this.props.fields['name']}
                 />
               </div>
             </div>
@@ -40,7 +197,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="date"
                   readOnly="true"
-                  value={this.state.fields['birthday']}
+                  value={this.props.fields['birthday']}
                 />
               </div>
             </div>
@@ -55,7 +212,7 @@ class ReviewProspectApplication extends ViewComponent {
                   placeholder="moreinfo@pnwsar.org"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['email']}
+                  value={this.props.fields['email']}
                 />
               </div>
             </div>
@@ -70,7 +227,7 @@ class ReviewProspectApplication extends ViewComponent {
                   type="text"
                   placeholder="555-555-5555"
                   readOnly="true"
-                  value={this.state.fields['mobilePhone']}
+                  value={this.props.fields['mobilePhone']}
                 />
               </div>
             </div>
@@ -83,7 +240,7 @@ class ReviewProspectApplication extends ViewComponent {
                   type="text"
                   placeholder="555-555-5555"
                   readOnly="true"
-                  value={this.state.fields['homePhone']}
+                  value={this.props.fields['homePhone']}
                 />
               </div>
             </div>
@@ -96,7 +253,7 @@ class ReviewProspectApplication extends ViewComponent {
                   type="text"
                   placeholder="555-555-5555"
                   readOnly="true"
-                  value={this.state.fields['workPhone']}
+                  value={this.props.fields['workPhone']}
                 />
               </div>
             </div>
@@ -110,7 +267,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['address']}
+                  value={this.props.fields['address']}
                 />
               </div>
             </div>
@@ -122,7 +279,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['city']}
+                  value={this.props.fields['city']}
                 />
               </div>
             </div>
@@ -134,7 +291,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['addressState']}
+                  value={this.props.fields['addressState']}
                 />
               </div>
             </div>
@@ -146,7 +303,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['postal']}
+                  value={this.props.fields['postal']}
                 />
               </div>
             </div>
@@ -160,7 +317,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['employer']}
+                  value={this.props.fields['employer']}
                 />
               </div>
             </div>
@@ -172,7 +329,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['job']}
+                  value={this.props.fields['job']}
                 />
               </div>
             </div>
@@ -185,7 +342,7 @@ class ReviewProspectApplication extends ViewComponent {
                 className="form-control"
                 type="text"
                 readOnly="true"
-                  value={this.state.fields['emergencyOne']}
+                  value={this.props.fields['emergencyOne']}
               />
             </div>
             <div className="col-md-4">
@@ -195,7 +352,7 @@ class ReviewProspectApplication extends ViewComponent {
                 className="form-control"
                 type="text"
                 readOnly="true"
-                  value={this.state.fields['emergencyPhoneOne']}
+                  value={this.props.fields['emergencyPhoneOne']}
               />
             </div>
             <div className="col-md-4">
@@ -205,7 +362,7 @@ class ReviewProspectApplication extends ViewComponent {
                 className="form-control"
                 type="text"
                 readOnly="true"
-                  value={this.state.fields['emergencyRelationshipOne']}
+                  value={this.props.fields['emergencyRelationshipOne']}
               />
             </div>
           </div>
@@ -217,7 +374,7 @@ class ReviewProspectApplication extends ViewComponent {
                 className="form-control"
                 type="text"
                 readOnly="true"
-                  value={this.state.fields['emergencyTwo']}
+                  value={this.props.fields['emergencyTwo']}
               />
             </div>
             <div className="col-md-4">
@@ -227,7 +384,7 @@ class ReviewProspectApplication extends ViewComponent {
                 className="form-control"
                 type="text"
                 readOnly="true"
-                  value={this.state.fields['emergencyPhoneTwo']}
+                  value={this.props.fields['emergencyPhoneTwo']}
               />
             </div>
             <div className="col-md-4">
@@ -237,7 +394,7 @@ class ReviewProspectApplication extends ViewComponent {
                 className="form-control"
                 type="text"
                 readOnly="true"
-                  value={this.state.fields['emergencyRelationshipTwo']}
+                  value={this.props.fields['emergencyRelationshipTwo']}
               />
             </div>
           </div>
@@ -250,7 +407,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   placeholder="first and last name"
                   readOnly="true"
-                  value={this.state.fields['referenceOne']}
+                  value={this.props.fields['referenceOne']}
                   type="text"
                 />
               </div>
@@ -262,7 +419,7 @@ class ReviewProspectApplication extends ViewComponent {
                 className="form-control"
                 type="text"
                 readOnly="true"
-                  value={this.state.fields['referencePhoneOne']}
+                  value={this.props.fields['referencePhoneOne']}
               />
             </div>
           </div>
@@ -275,7 +432,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['referenceAddressOne']}
+                  value={this.props.fields['referenceAddressOne']}
                 />
               </div>
             </div>
@@ -287,7 +444,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['referenceCityOne']}
+                  value={this.props.fields['referenceCityOne']}
                 />
               </div>
             </div>
@@ -299,7 +456,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['referenceStateOne']}
+                  value={this.props.fields['referenceStateOne']}
                 />
               </div>
             </div>
@@ -311,7 +468,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['referencePostalOne']}
+                  value={this.props.fields['referencePostalOne']}
                 />
               </div>
             </div>
@@ -326,7 +483,7 @@ class ReviewProspectApplication extends ViewComponent {
                   placeholder="first and last name"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['referenceTwo']}
+                  value={this.props.fields['referenceTwo']}
                 />
               </div>
             </div>
@@ -337,7 +494,7 @@ class ReviewProspectApplication extends ViewComponent {
                 className="form-control"
                 type="text"
                 readOnly="true"
-                value={this.state.fields['referencePhoneTwo']}
+                value={this.props.fields['referencePhoneTwo']}
               />
             </div>
           </div>
@@ -350,7 +507,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['referenceAddressTwo']}
+                  value={this.props.fields['referenceAddressTwo']}
                 />
               </div>
             </div>
@@ -362,7 +519,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['referenceCityTwo']}
+                  value={this.props.fields['referenceCityTwo']}
                 />
               </div>
             </div>
@@ -374,7 +531,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['referenceStateTwo']}
+                  value={this.props.fields['referenceStateTwo']}
                 />
               </div>
             </div>
@@ -386,7 +543,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['referencePostalTwo']}
+                  value={this.props.fields['referencePostalTwo']}
                 />
               </div>
             </div>
@@ -401,7 +558,7 @@ class ReviewProspectApplication extends ViewComponent {
                   placeholder="first and last name"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['referenceThree']}
+                  value={this.props.fields['referenceThree']}
                 />
               </div>
             </div>
@@ -412,7 +569,7 @@ class ReviewProspectApplication extends ViewComponent {
                 className="form-control"
                 type="text"
                 readOnly="true"
-                  value={this.state.fields['referencePhoneThree']}
+                  value={this.props.fields['referencePhoneThree']}
               />
             </div>
           </div>
@@ -425,7 +582,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['referenceAddressThree']}
+                  value={this.props.fields['referenceAddressThree']}
                 />
               </div>
             </div>
@@ -437,7 +594,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['referenceCityThree']}
+                  value={this.props.fields['referenceCityThree']}
                 />
               </div>
             </div>
@@ -449,7 +606,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['referenceStateThree']}
+                  value={this.props.fields['referenceStateThree']}
                 />
               </div>
             </div>
@@ -461,7 +618,7 @@ class ReviewProspectApplication extends ViewComponent {
                   className="form-control"
                   type="text"
                   readOnly="true"
-                  value={this.state.fields['referencePostalThree']}
+                  value={this.props.fields['referencePostalThree']}
                 />
               </div>
             </div>
@@ -469,7 +626,7 @@ class ReviewProspectApplication extends ViewComponent {
           <div className="row">
             <div className="col-md-2">
               <SharedBoolean
-                currentValue={this.state.fields['physicalShape']}
+                currentValue={this.props.fields['physicalShape']}
                 readOnly="true"
               />
             </div>
@@ -486,7 +643,7 @@ class ReviewProspectApplication extends ViewComponent {
                   type="text"
                   className="form-control"
                   readOnly="true"
-                  value={this.state.fields['explainPhysical']}
+                  value={this.props.fields['explainPhysical']}
                 />
               </div>
             </div>
@@ -494,7 +651,7 @@ class ReviewProspectApplication extends ViewComponent {
           <div className="row">
             <div className="col-md-2">
               <SharedBoolean
-                currentValue={this.state.fields['firstAid']}
+                currentValue={this.props.fields['firstAid']}
                 readOnly="true"
               />
             </div>
@@ -510,7 +667,7 @@ class ReviewProspectApplication extends ViewComponent {
                 type="text"
                 className="form-control"
                 readOnly="true"
-                  value={this.state.fields['firstAidIssued']}
+                  value={this.props.fields['firstAidIssued']}
               />
             </div>
           </div>
@@ -523,7 +680,7 @@ class ReviewProspectApplication extends ViewComponent {
                   type="text"
                   className="form-control"
                   readOnly="true"
-                  value={this.state.fields['certifications']}
+                  value={this.props.fields['certifications']}
                 />
               </div>
             </div>
@@ -531,7 +688,7 @@ class ReviewProspectApplication extends ViewComponent {
           <div className="row">
             <div className="col-md-2">
               <SharedBoolean
-                currentValue={this.state.fields['license']}
+                currentValue={this.props.fields['license']}
                 readOnly="true"
               />
             </div>
@@ -542,7 +699,7 @@ class ReviewProspectApplication extends ViewComponent {
           <div className="row">
             <div className="col-md-2">
               <SharedBoolean
-                currentValue={this.state.fields['felony']}
+                currentValue={this.props.fields['felony']}
                 readOnly="true"
               />
             </div>
@@ -553,7 +710,7 @@ class ReviewProspectApplication extends ViewComponent {
           <div className="row form-group">
             <div className="col-md-2">
               <SharedBoolean
-                currentValue={this.state.fields['felonyConviction']}
+                currentValue={this.props.fields['felonyConviction']}
                 readOnly="true"
               />
             </div>
@@ -569,7 +726,7 @@ class ReviewProspectApplication extends ViewComponent {
                   name="primaryReason"
                   className="form-control"
                   readOnly="true"
-                  value={this.state.fields['primaryReason']}
+                  value={this.props.fields['primaryReason']}
                 />
               </div>
             </div>
@@ -579,7 +736,7 @@ class ReviewProspectApplication extends ViewComponent {
               <input
                 type="checkbox"
                 readOnly="true"
-                checked={this.state.fields['liability']}
+                checked={this.props.fields['liability']}
               />
             </div>
             <div className="col-md-11">
@@ -591,7 +748,7 @@ class ReviewProspectApplication extends ViewComponent {
               <input
                 type="checkbox"
                 readOnly="true"
-                checked={this.state.fields['acknowledge']}
+                checked={this.props.fields['acknowledge']}
                 />
             </div>
             <div className="col-md-11">
@@ -600,36 +757,16 @@ class ReviewProspectApplication extends ViewComponent {
           </div>
         </form>
         <div className="col-md-12">
-          <button
-            onClick={this.approveApplication}
-            className="btn btn-sm btn-success btn-space">
-            Approve
-          </button>
-          <button
-            onClick={this.waiverSigned}
-            className="btn btn-sm btn-default btn-space">
-            Waiver Signed
-          </button>
-          <button
-            onClick={this.duesPaid}
-            className="btn btn-sm btn-success btn-space">
-            Dues Paid
-          </button>
-          <button
-            onClick={this.photoTaken}
-            className="btn btn-sm btn-default btn-space">
-            Photo Taken
-          </button>
-          <button
-            onClick={this.d4hCreated}
-            className="btn btn-sm btn-success btn-space">
-            D4H created
-          </button>
-          <button
+          {this.approved()}
+          {this.signed()}
+          {this.paid()}
+          {this.taken()}
+          {this.created()}
+          <div
             onClick={this.destroy}
-            className="btn btn-sm btn-danger btn-space">
+            className="btn-sm btn-danger btn-space">
             Delete
-          </button>
+          </div>
         </div>
       </div>
     );

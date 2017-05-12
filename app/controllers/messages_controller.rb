@@ -3,10 +3,19 @@ class MessagesController < ApplicationController
   before_action :advanced_only, except: [:index]
 
   def index
-    if valid_api_token
-      render json: { data: Message.all }, include: :member, status: :ok
+    messages = User.my_messages(params)
+    if messages
+      render json: messages, status: :ok
     else
       render json: { error: "Unauthorized" }, status: 401
+    end
+  end
+
+  def create
+    if Message.create_with_token(params)
+      render json: { success: true, messages: User.my_messages(params) }, status: :ok
+    else
+      render json: { success: false }, status: :unprocessable_entity
     end
   end
 

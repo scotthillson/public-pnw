@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170411173610) do
+ActiveRecord::Schema.define(version: 20170512213451) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -233,8 +233,8 @@ ActiveRecord::Schema.define(version: 20170411173610) do
     t.datetime "date_sent"
     t.string   "account"
     t.string   "messaging_service_sid"
-    t.string   "from"
-    t.string   "to"
+    t.string   "from_phone"
+    t.string   "to_phone"
     t.string   "body"
     t.string   "num_media"
     t.string   "num_segments"
@@ -417,6 +417,7 @@ ActiveRecord::Schema.define(version: 20170411173610) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "activated",                   default: false
+    t.datetime "last_seen"
   end
 
 end

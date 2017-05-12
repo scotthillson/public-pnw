@@ -26,15 +26,15 @@ class ProspectApplications extends ViewComponent{
     });
   }
 
-  updateApplication(applicaiton) {
+  updateApplication(application) {
     $.ajax( {
       type: 'patch',
-      url: `/prospect_applications/${applicaiton.id}`,
+      url: `/prospect_applications/${application.id}`,
       context: this,
       data: application,
       dataType: 'json',
       success: (data) => {
-        this.setState({ prospectApplications: data });
+        this.updateApplications(data);
       },
       error: (jqXHR) => {
         console.log(jqXHR);
@@ -42,25 +42,67 @@ class ProspectApplications extends ViewComponent{
     });
   }
 
+  updateApplications(data) {
+    let applications = _.clone(this.state.prospectApplications);
+    let application = _.find(this.state.prospectApplications, {id: data.id});
+    application = data;
+    this.setState({ prospectApplications: applications });
+  }
+
+  now() {
+    return moment(Date.now()).utcOffset(0).format('YYYY-MM-DDTHH:mm:ss');
+  }
+
+  approve(application) {
+   application.approved_at = this.now();
+   this.updateApplication(application);
+ }
+
+  sign(application) {
+    application.waiver_signed_at = this.now();
+    this.updateApplication(application);
+  }
+
+  pay(application) {
+    application.dues_paid_at = this.now();
+    this.updateApplication(application);
+  }
+
+  photo(application) {
+    application.photo_taken_at = this.now();
+    this.updateApplication(application);
+  }
+
+  create(application) {
+    application.d4h = this.now();
+    this.updateApplication(application);
+  }
+
   approved(application) {
     if (application.approved_at) {
-      return (application.approved_at);
+      return (
+        moment(application.approved_at).format('YYYY-MM-DD-HHmm')
+      );
     }
     return (
       <div
       className="btn btn-xs btn-success"
+      onClick={this.approve.bind(this, application)}
       >approve
       </div>
     );
   }
 
   signed(application) {
-    if (application.approved_at) {
-      return (application.waiver_signed_at);
+    if (application.waiver_signed_at) {
+      return (
+        moment(application.waiver_signed_at).format('YYYY-MM-DD-HHmm')
+      );
     }
     return (
       <div
       className="btn btn-xs btn-info"
+      onClick={this.sign.bind(this, application)}
       >signed
       </div>
     );
@@ -68,11 +110,14 @@ class ProspectApplications extends ViewComponent{
 
   paid(application) {
     if (application.dues_paid_at) {
-      return (application.dues_paid_at);
+      return (
+        moment(application.dues_paid_at).format('YYYY-MM-DD-HHmm')
+      );
     }
     return (
       <div
       className="btn btn-xs btn-success"
+      onClick={this.pay.bind(this, application)}
       >paid
       </div>
     );
@@ -80,11 +125,29 @@ class ProspectApplications extends ViewComponent{
 
   taken(application) {
     if (application.photo_taken_at) {
-      return (application.photo_taken_at);
+      return (
+        moment(application.photo_taken_at).format('YYYY-MM-DD-HHmm')
+      );
     }
     return (
       <div
       className="btn btn-xs btn-info"
+      onClick={this.photo.bind(this, application)}
+      >taken
+      </div>
+    );
+  }
+
+  created(application) {
+    if (application.d4h) {
+      return (
+        moment(application.d4h).format('YYYY-MM-DD-HHmm')
+      );
+    }
+    return (
+      <div
+      className="btn btn-xs btn-success"
+      onClick={this.create.bind(this, application)}
       >taken
       </div>
     );
@@ -95,8 +158,7 @@ class ProspectApplications extends ViewComponent{
         <tr className="text-center" key={ application.id }>
           <td><a href={`/prospect_applications/${application.id}`}>{ application.name }</a></td>
           <td>{ application.email }</td>
-          <td>{ application.created_at }</td>
-          <td>{ application.status }</td>
+          <td>{ moment(application.created_at).format('YYYY MM DD HHmm') }</td>
           <td>{ this.approved(application) }</td>
           <td>{ this.signed(application) }</td>
           <td>{ this.paid(application) }</td>
@@ -122,7 +184,6 @@ class ProspectApplications extends ViewComponent{
               <th className="text-center">Name</th>
               <th className="text-center">Email</th>
               <th className="text-center">Created</th>
-              <th className="text-center">Status</th>
               <th className="text-center">Approved</th>
               <th className="text-center">Waiver Signed</th>
               <th className="text-center">Dues Paid</th>

@@ -21,8 +21,14 @@ class Message < ActiveRecord::Base
     "cant"
   ]
 
+  def self.create_with_token(params)
+    user = User.find_by_token(params.access_token)
+    return false unless user
+    store_message(OpenStruct.new(params))
+  end
+
   def member
-    Member.where('mobile_phone = ? or mobile_phone = ?', from, to).first
+    Member.where('mobile_phone = ? or mobile_phone = ?', from_phone, to_phone).first
   end
 
   def incident_members
@@ -65,8 +71,8 @@ class Message < ActiveRecord::Base
       date_updated: m.date_updated,
       date_sent: m.date_sent,
       messaging_service_sid: m.messaging_service_sid,
-      from: m.from.tr('^0-9',''),
-      to: m.to.tr('^0-9',''),
+      from_phone: m.from.tr('^0-9',''),
+      to_phone: m.to.tr('^0-9',''),
       body: m.body,
       num_media: m.num_media,
       num_segments: m.num_segments,

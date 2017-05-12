@@ -1,7 +1,7 @@
 class ProspectApplicationsController < ApplicationController
-  
+
   before_action :advanced_only
-  
+
   def index
     respond_to do |format|
       format.html
@@ -10,16 +10,17 @@ class ProspectApplicationsController < ApplicationController
       end
     end
   end
-  
+
   def show
     application = ProspectApplication.find(params[:id])
     @fields = Hash[application.attributes.map{|k,v| [k.camelize(:lower), v]}]
+    @application = application
   end
-  
+
   def prospect_application
     render component: "ApplicationLanding"
   end
-  
+
   def submit_application
     respond_to do |format|
       application = ProspectApplication.new(application_params)
@@ -30,11 +31,25 @@ class ProspectApplicationsController < ApplicationController
       end
     end
   end
-  
+
+  def update
+    application = ProspectApplication.find(params[:id])
+    if application
+      if application.update(application_params.except(:id, :created_at, :updated_at))
+        render json: application, status: :ok
+      else
+        render json: {errors: application.errors}, status: :unprocessable_entity
+      end
+    else
+      render json: {errors: 'record not found'}, status: :unprocessable_entity
+    end
+  end
+
   private
-  
+
   def application_params
     params.permit(
+      :id,
       :name,
       :email,
       :birthday,
@@ -87,8 +102,12 @@ class ProspectApplicationsController < ApplicationController
       :waiver_signed_at,
       :dues_paid_at,
       :approved_at,
-      :d4h
+      :d4h,
+      :updated_at,
+      :created_at,
+      :status,
+      :approved_by
     )
   end
-  
+
 end

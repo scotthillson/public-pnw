@@ -62,7 +62,7 @@ class ProspectApplication extends ViewComponent {
       errorMessage: null
     };
   }
-  
+
   fieldChange(field, type, e) {
     if (type == 'checkboxChecks'){
       return this.checkboxes(field);
@@ -74,7 +74,7 @@ class ProspectApplication extends ViewComponent {
     newState.checkType = type;
     this.setState(newState, this.sanityChecks);
   }
-  
+
   showErrors(name) {
     let field = document.getElementsByName(name)[0];
     let className = field.className;
@@ -83,7 +83,7 @@ class ProspectApplication extends ViewComponent {
     }
     return 1;
   }
-  
+
   fixErrors(name) {
     let field = document.getElementsByName(name)[0];
     let className = field.className;
@@ -91,11 +91,11 @@ class ProspectApplication extends ViewComponent {
     field.className = fix;
     return 0;
   }
-  
+
   sanityChecks() {
     this[this.state.checkType](this.state.checkField);
   }
-  
+
   wordChecks(field) {
     if (!this.state.fields[field].blank && !this.state.fields[field].value){
       this.showErrors(field);
@@ -107,7 +107,7 @@ class ProspectApplication extends ViewComponent {
       this.showErrors(field);
     }
   }
-  
+
   numberChecks(field) {
     if (/^[\d-]+$/.test(this.state.fields[field].value)){
       this.fixErrors(field);
@@ -116,7 +116,7 @@ class ProspectApplication extends ViewComponent {
       this.showErrors(field);
     }
   }
-  
+
   emailChecks(field) {
     if (/^([A-Za-z0-9_\-\.])+\this.([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(this.state.fields[field].value)){
       this.fixErrors(field);
@@ -125,7 +125,7 @@ class ProspectApplication extends ViewComponent {
       this.showErrors(field);
     }
   }
-  
+
   mixChecks(field) {
     if (/^[a-zA-z\s\d._-]+$/.test(this.state.fields[field].value) && this.state.fields[field].value){
       this.fixErrors(field);
@@ -134,7 +134,7 @@ class ProspectApplication extends ViewComponent {
       this.showErrors(field);
     }
   }
-  
+
   stateChecks(field) {
     if (/^[A-z]+$/.test(this.state.fields[field].value) && this.state.fields[field].value){
       this.fixErrors(field);
@@ -143,18 +143,18 @@ class ProspectApplication extends ViewComponent {
       this.showErrors(field);
     }
   }
-  
+
   lengthChecks(field) {
     if (!this.state.fields[field].value){
       return this.showErrors(field);
     }
     this.fixErrors(field);
   }
-  
+
   skipChecks() {
     return 0;
   }
-  
+
   checkboxes(field) {
     let newValue = "true";
     if (this.state.fields[field].value == "true"){
@@ -167,14 +167,14 @@ class ProspectApplication extends ViewComponent {
     newState.checkType = 'checkboxChecks';
     this.setState(newState, this.sanityChecks);
   }
-  
+
   checkboxChecks(field) {
     if (this.state.fields[field].value.toString() != "true"){
       return this.showErrors(field);
     }
     return this.fixErrors(field);
   }
-  
+
   startSubmit() {
     let errors = 0;
     for (var key of Object.keys(this.state.fields)){
@@ -187,11 +187,11 @@ class ProspectApplication extends ViewComponent {
       window.scrollTo(0,0);
     }
   }
-  
+
   finishSubmit() {
     this.props.submitApplication(this.paramsForRuby())
   }
-  
+
   paramsForRuby() {
     let result = {};
     for (var field of Array.from(this.state.fields)){
@@ -207,7 +207,7 @@ class ProspectApplication extends ViewComponent {
     }
     return result;
   }
-  
+
   render() {
     return (
     <div className="form-container regular-form">
@@ -801,12 +801,12 @@ class ProspectApplication extends ViewComponent {
             <label name="acknowledge" style={{padding: '5px'}}>By submitting this application I certify that the information set forth in this application is true and complete to the best of my knowledge.</label>
           </div>
         </div>
-        <input
-          className="btn btn-primary"
-          value="Submit Application"
-          type="button"
-          onClick={this.startSubmit}
-        />
+        <button
+          className="g-recaptcha btn btn-primary"
+          data-sitekey="6Lc5-h0UAAAAANl0DjEo1dk5BEQWi8snrkjBiRQq"
+          data-callback={this.startSubmit}>
+          Submit Application
+        </button>
         <p>Pacific Northwest Search and Rescue, Inc. does not discriminate against race, religion, sex, or national origin. Pacific Northwest Search and Rescue, Inc. is a non-profit volunteer search and rescue organization (501(c)(3), ID# 93-119739)</p>
       </form>
     </div>
