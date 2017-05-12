@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
 
-  # For APIs, you may want to use :null_session instead?
   protect_from_forgery
-  # force_ssl
+  force_ssl = true
 
   helper_method :current_user
   helper_method :advanced?

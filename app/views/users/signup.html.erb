@@ -11,6 +11,7 @@
     <br>
     <%= f.password_field :password_confirmation, class: 'form-control' %>
   </div>
+  <br>
   <%= hidden_field_tag :token, @user.token %>
   <input name="commit" type="submit" value="Sign Up" class="btn btn-sm btn-primary">
 <% end %>
