@@ -81,7 +81,7 @@ class ProspectApplications extends ViewComponent{
   approved(application) {
     if (application.approved_at) {
       return (
-        moment(application.approved_at).format('YYYY-MM-DD-HHmm')
+        moment(application.approved_at).format('YYYY-MM-DD')
       );
     }
     return (
@@ -96,7 +96,7 @@ class ProspectApplications extends ViewComponent{
   signed(application) {
     if (application.waiver_signed_at) {
       return (
-        moment(application.waiver_signed_at).format('YYYY-MM-DD-HHmm')
+        moment(application.waiver_signed_at).format('YYYY-MM-DD')
       );
     }
     return (
@@ -111,7 +111,7 @@ class ProspectApplications extends ViewComponent{
   paid(application) {
     if (application.dues_paid_at) {
       return (
-        moment(application.dues_paid_at).format('YYYY-MM-DD-HHmm')
+        moment(application.dues_paid_at).format('YYYY-MM-DD')
       );
     }
     return (
@@ -126,7 +126,7 @@ class ProspectApplications extends ViewComponent{
   taken(application) {
     if (application.photo_taken_at) {
       return (
-        moment(application.photo_taken_at).format('YYYY-MM-DD-HHmm')
+        moment(application.photo_taken_at).format('YYYY-MM-DD')
       );
     }
     return (
@@ -141,7 +141,7 @@ class ProspectApplications extends ViewComponent{
   created(application) {
     if (application.d4h) {
       return (
-        moment(application.d4h).format('YYYY-MM-DD-HHmm')
+        moment(application.d4h).format('YYYY-MM-DD')
       );
     }
     return (
@@ -156,13 +156,14 @@ class ProspectApplications extends ViewComponent{
   application(application) {
     return (
         <tr className="text-center" key={ application.id }>
-          <td><a href={`/prospect_applications/${application.id}`}>{ application.name }</a></td>
+          <td><a className="btn btn-xs btn-primary" href={`/prospect_applications/${application.id}`}>{ application.name }</a></td>
           <td>{ application.email }</td>
-          <td>{ moment(application.created_at).format('YYYY MM DD HHmm') }</td>
+          <td>{ moment(application.created_at).format('YYYY-MM-DD') }</td>
           <td>{ this.approved(application) }</td>
           <td>{ this.signed(application) }</td>
           <td>{ this.paid(application) }</td>
           <td>{ this.taken(application) }</td>
+          <td>{ this.created(application) }</td>
         </tr>
     );
   }
@@ -188,6 +189,7 @@ class ProspectApplications extends ViewComponent{
               <th className="text-center">Waiver Signed</th>
               <th className="text-center">Dues Paid</th>
               <th className="text-center">Photo Taken</th>
+              <th className="text-center">D4H</th>
             </tr>
           </thead>
           <tbody>
