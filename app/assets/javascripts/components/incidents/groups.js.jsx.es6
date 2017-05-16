@@ -60,14 +60,14 @@ class IncidentGroups extends ViewComponent {
 
   render() {
     return (
-      <div className="col-md-6">
+      <span className="col-md-4">
         <select
           className="form-control"
           onChange={this.addTeam.bind(this)}
           value={0}>
           {this.groups()}
         </select>
-      </div>
+      </span>
     );
   }
 

@@ -1,4 +1,4 @@
-class IncidentSelect extends ViewComponent {
+class IncidentButtons extends ViewComponent {
 
   constructor() {
     super();
@@ -29,32 +29,6 @@ class IncidentSelect extends ViewComponent {
     );
   }
 
-  incidents() {
-    if (this.props.loading) {
-      return(
-        <span>Loading</span>
-      );
-    }
-    if (this.props.incidents.length < 1 ) {
-      return(
-        <span>Create a new indicent period to begin a callout.</span>
-      );
-    }
-    let incidents = [];
-    for (var i of this.props.incidents) {
-      incidents.push(
-        <option key={i.id} value={i.id}>{i.reference}</option>
-      );
-    }
-    return (
-      <select
-        className="form-control"
-        onChange={this.props.selectIncident.bind(this)}>
-        {incidents}
-      </select>
-    );
-  }
-
   render() {
     return (
       <div className="bottom-margin">
@@ -64,12 +38,9 @@ class IncidentSelect extends ViewComponent {
           new incident period?
         </span>
         {this.operationalButton()}
-        <span className="col-md-4 pull-right">
-          {this.incidents()}
-        </span>
       </div>
     );
   }
 }
 
-window.IncidentSelect = IncidentSelect;
+window.IncidentButtons = IncidentButtons;

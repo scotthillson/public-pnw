@@ -49,7 +49,7 @@ class NewMessage extends ViewComponent {
           <span className="col-md-4">{this.props.recipients.length} recipients</span>
           <span className="col-md-4">{150-this.state.message.length} characters remaining</span>
           <span
-            className="col-md-1 btn-xs btn-primary"
+            className="col-md-1 btn-xs btn-primary text-center"
             onClick={this.sendMessage}>Send
           </span>
         </div>

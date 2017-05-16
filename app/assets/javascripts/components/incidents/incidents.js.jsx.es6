@@ -5,7 +5,8 @@ class Incidents extends ViewComponent {
     this.bindThisToComponent(
       'selectIncident',
       'newIncident',
-      'loadIncidents'
+      'loadIncidents',
+      'incidents'
     )
     this.state = {
       operational: true
@@ -103,17 +104,38 @@ class Incidents extends ViewComponent {
     }
   }
 
+  incidents() {
+    if (this.props.loading) {
+      return(
+        <span>Loading</span>
+      );
+    }
+    if (this.props.incidents.length < 1 ) {
+      return(
+        <span>Create a new indicent period to begin a callout.</span>
+      );
+    }
+    let incidents = [];
+    for (var i of this.props.incidents) {
+      incidents.push(
+        <option key={i.id} value={i.id}>{i.reference}</option>
+      );
+    }
+    return (
+      <select
+        className="form-control"
+        onChange={this.selectIncident.bind(this)}>
+        {incidents}
+      </select>
+    );
+  }
+
   render() {
     return (
       <div>
-        <IncidentSelect
-          incidents={this.props.incidents}
-          loading={this.props.loading}
-          newIncident={this.newIncident}
-          operational={this.props.operational}
-          selectIncident={this.selectIncident}
-          setOperational={this.props.setOperational}
-        />
+        <span className="col-md-4">
+          {this.incidents()}
+        </span>
         <IncidentMembers
           addRecipients={this.props.addRecipients}
           error={this.props.error}

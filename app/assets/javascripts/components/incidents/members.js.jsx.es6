@@ -80,7 +80,7 @@ class IncidentMembers extends ViewComponent {
 
   render() {
     return (
-      <div className="col-md-6">
+      <span className="col-md-4">
         <input
           className="form-control"
           list="members"
@@ -91,7 +91,7 @@ class IncidentMembers extends ViewComponent {
           value={this.state.name}
         />
         {this.members()}
-      </div>
+      </span>
     );
   }
 

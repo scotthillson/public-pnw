@@ -3,6 +3,7 @@
 <head>
   <title>Pacific Northwest Search and Rescue</title>
   <meta name="description" content="Serving Oregon's Clackams County and neighboring communinities since 1993">
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDPtTSOT4WozZ6wJBAaybk6W33KH4hBrKc"></script>
   <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Open+Sans:400,700', media: 'all' %>
   <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Lato', media: 'all' %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
@@ -24,7 +25,7 @@
 </head>
 <body>
   <%= render '/layouts/nav' %>
-  <div class="page-header" style="margin:5px 30px">
+  <div class="page-header">
     <% if current_page?('/') ||
       current_page?('/join') ||
       current_page?('/donate') ||
