@@ -52,21 +52,21 @@ class Responders extends ViewComponent {
         _.remove(incident_members, { id: avail.id });
         avail = this.responder(avail);
       } else {
-        avail = <span className="recipient-column"></span>
+        avail = <span className="responder-column"></span>
       }
       let unknown = _.find(incident_members, {status: 'unknown'})
       if (unknown) {
         _.remove(incident_members, { id: unknown.id });
         unknown = this.responder(unknown);
       } else {
-        unknown = <span className="recipient-column"></span>
+        unknown = <span className="responder-column"></span>
       }
       let unavail = _.find(incident_members, {status: 'unavailable'})
       if (unavail) {
         _.remove(incident_members, { id: unavail.id });
         unavail = this.responder(unavail);
       } else {
-        unavail = <span className="recipient-column"></span>
+        unavail = <span className="responder-column"></span>
       }
       i += 1;
       recipients.push (

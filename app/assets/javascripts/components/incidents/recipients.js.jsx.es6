@@ -12,18 +12,13 @@ class Recipients extends ViewComponent {
   recipient(r) {
     let note = '';
     if (r.status_id != 1) {
-      note = 'non-op';
+      note = 'unavailable ';
     }
     return (
-      <span className={`recipient-column ${r.status}`} key={r.id}>
-        <div>
-          <span>
-            {r.name}
-            {note}
-          </span>
-          {this.dropButton(r)}
-        </div>
-      </span>
+      <div className={`${note}recipient-column row`} key={r.id}>
+        <span className="pull-left">{r.name}</span>
+        {this.dropButton(r)}
+      </div>
     );
   }
 
@@ -47,11 +42,7 @@ class Recipients extends ViewComponent {
     let names = this.sortedNames();
     for (var r of names) {
       recipients.push (
-        <div className="row" key={r.id}>
-          <span className="recipient-column"></span>
-            {this.recipient(r)}
-          <span className="recipient-column"></span>
-        </div>
+        this.recipient(r)
       );
     }
     return recipients;

@@ -108,6 +108,7 @@ class Incidents extends ViewComponent {
       <div>
         <IncidentSelect
           incidents={this.props.incidents}
+          loading={this.props.loading}
           newIncident={this.newIncident}
           operational={this.props.operational}
           selectIncident={this.selectIncident}

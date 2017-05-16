@@ -107,15 +107,17 @@ class IncidentMaster extends ViewComponent {
 
   addRecipients(recipients) {
     let newRecipients = _.clone(this.state.recipients);
-    newRecipients.push.apply(newRecipients, recipients);
+    for (var r of recipients) {
+      if ( !_.find(newRecipients, { id: r.id })) {
+        newRecipients.push(r);
+      }
+    }
     this.setState({ recipients: newRecipients });
   }
 
   loading() {
-    if (this.state.members.length < 1) {
-      if (this.state.groups.length < 1) {
-        return true;
-      }
+    if (this.state.members.length < 1 || this.state.groups.length < 1) {
+      return true;
     }
   }
 

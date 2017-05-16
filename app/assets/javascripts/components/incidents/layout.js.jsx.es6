@@ -10,6 +10,7 @@ class IncidentsLayout extends ViewComponent {
           groups={this.props.groups}
           incident={this.props.incident}
           incidents={this.props.incidents}
+          loading={this.props.loading}
           members={this.props.members}
           messages={this.props.messages}
           operational={this.props.operational}

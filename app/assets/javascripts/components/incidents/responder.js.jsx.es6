@@ -102,7 +102,7 @@ class Responder extends ViewComponent {
       note = 'non-op';
     }
     return (
-      <span className={`recipient-column ${r.status}`} key={r.id}>
+      <span className={`responder-column ${r.status}`} key={r.id}>
         <div>
           <span>
             {r.name}

@@ -35,7 +35,7 @@ class IncidentMembers extends ViewComponent {
     let name = this.state.name;
     let member = _.find(this.props.members, { name: name })
     if (member) {
-      this.props.addRecipients([member.id]);
+      this.props.addRecipients([member]);
       this.setState({ name: '' });
     }
   }

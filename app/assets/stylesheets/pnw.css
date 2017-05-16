@@ -121,12 +121,17 @@ tr th, tr td {
   line-height: 1;
   margin: 30px;
 }
-.recipient-column {
+.responder-column {
   line-height: 20px;
   width: 32%;
   margin: 2px 5px;
   float: left;
   padding: 2.5px 0 2.5px 5px;
+}
+.recipient-column {
+  line-height: 20px;
+  width: 32%;
+  margin-left: 0;
 }
 .available {
   background-color: rgba(200,250,145,0.5);
