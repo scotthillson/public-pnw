@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170512213451) do
+ActiveRecord::Schema.define(version: 20170515224410) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -190,6 +190,19 @@ ActiveRecord::Schema.define(version: 20170512213451) do
     t.datetime "return_to_base"
     t.datetime "leave_base"
     t.datetime "home_at"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "horizon_accuracy"
+    t.integer  "vert_accuracy"
+    t.datetime "reported_at"
+    t.datetime "created_at"
+    t.string   "altitude"
+    t.string   "course"
+    t.string   "speed"
+    t.string   "lat"
+    t.string   "lng"
   end
 
   create_table "members", force: :cascade do |t|

@@ -1,5 +1,12 @@
 class IncidentSelect extends ViewComponent {
 
+  constructor() {
+    super();
+    this.bindThisToComponent(
+      'setOperational'
+    )
+  }
+
   setOperational() {
     let operational = true;
     if (this.props.operational) {

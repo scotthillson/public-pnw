@@ -122,6 +122,7 @@ tr th, tr td {
   margin: 30px;
 }
 .recipient-column {
+  line-height: 20px;
   width: 32%;
   margin: 2px 5px;
   float: left;

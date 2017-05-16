@@ -12,10 +12,12 @@ class IncidentsLayout extends ViewComponent {
           incidents={this.props.incidents}
           members={this.props.members}
           messages={this.props.messages}
+          operational={this.props.operational}
           setGroups={this.props.setGroups}
           setIncident={this.props.setIncident}
           setIncidents={this.props.setIncidents}
           setMembers={this.props.setMembers}
+          setOperational={this.props.setOperational}
         />
         <NewMessage
           error={this.props.error}

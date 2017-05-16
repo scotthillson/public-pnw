@@ -14,13 +14,13 @@ class Messages extends ViewComponent {
   loadMessages() {
     $.ajax({
       method: 'get',
-      url: '/messages',
+      url: '/incident_messages',
       dataType: 'json',
       success: (data) => {
         this.props.setMessages(data);
       },
       error: (jqXHR) => {
-        this.prps.error();
+        this.props.error();
         console.log(jqXHR);
       }
     });

@@ -46,12 +46,12 @@ class NewMessage extends ViewComponent {
           </div>
         </div>
         <div className="row bottom-margin">
-          <span>{150-this.state.message.length} characters remaining</span>
+          <span className="col-md-4">{150-this.state.message.length} characters remaining</span>
           <span
-            className="btn btn-primary btn-xs pull-right btn-pnw"
+            className="btn btn-primary btn-xs pull-right btn-pnw col-md-4"
             onClick={this.sendMessage}>Send
           </span>
-          <span className="pull-right">{this.props.recipients.length} recipients</span>
+          <span className="pull-right col-md-4">{this.props.recipients.length} recipients</span>
         </div>
       </div>
     );

@@ -35,11 +35,16 @@ Rails.application.routes.draw do
     post 'incidents/:id/add_members', to: 'incidents#add_members'
     delete 'incidents/:id/remove_member', to: 'incidents#remove_member'
 
+  resources :locations
+    post 'report_location', to: 'locations#new_with_token'
+
   resources :members
     get 'update_members', to: 'members#update_members'
 
   resources :messages
     get 'update_messages', to: 'messages#update_messages'
+    get 'incident_messages', to: 'messages#incident'
+    post 'new_message', to: 'messages#new_with_token'
 
   resources :posts, constraints: {format: :html}
     get 'posts/:id/activate', to: 'posts#activate', as: :activate_post

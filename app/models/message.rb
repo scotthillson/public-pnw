@@ -22,9 +22,17 @@ class Message < ActiveRecord::Base
   ]
 
   def self.create_with_token(params)
-    user = User.find_by_token(params.access_token)
+    user = User.find_by_token(params[:token])
     return false unless user
     store_message(OpenStruct.new(params))
+  end
+
+  def self.store_message(m)
+    m = Message.create(
+      body: m.body,
+      to_phone: "api",
+      from_phone: m.from
+    )
   end
 
   def member
@@ -45,7 +53,7 @@ class Message < ActiveRecord::Base
       from: from,
       to: '15039290055',
       body: body})
-    store_message(message)
+    store_twilio_message(message)
   end
 
   def self.get_message(message)
@@ -59,20 +67,20 @@ class Message < ActiveRecord::Base
     client = Twilio::REST::Client.new @sid, @token
     client.account.messages.list.each do |message|
       unless find_by(sid: message.sid)
-        store_message(message, 0)
+        store_twilio_message(message, 0)
       end
     end
   end
 
-  def self.store_message(m)
+  def self.store_twilio_message(m)
     Message.create(
       sid: m.sid,
       date_created: m.date_created,
       date_updated: m.date_updated,
       date_sent: m.date_sent,
       messaging_service_sid: m.messaging_service_sid,
-      from_phone: m.from.tr('^0-9',''),
-      to_phone: m.to.tr('^0-9',''),
+      from_phone: m.from_phone.tr('^0-9',''),
+      to_phone: m.to_phone.tr('^0-9',''),
       body: m.body,
       num_media: m.num_media,
       num_segments: m.num_segments,

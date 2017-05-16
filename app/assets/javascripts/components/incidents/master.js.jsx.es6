@@ -11,7 +11,8 @@ class IncidentMaster extends ViewComponent {
       'setIncident',
       'setIncidents',
       'setMembers',
-      'setMessages'
+      'setMessages',
+      'setOperational'
     );
     this.state = {
       error: false,
@@ -20,8 +21,13 @@ class IncidentMaster extends ViewComponent {
       incidents: [],
       members: [],
       messages: [],
+      operational: false,
       recipients: []
     };
+  }
+
+  setOperational(operational) {
+    this.setState({ operational: operational });
   }
 
   setMembers(members) {
@@ -42,7 +48,7 @@ class IncidentMaster extends ViewComponent {
   }
 
   sendMessageResult(data) {
-    console.log('BIG TODO BRO');
+    console.log('BIG TODO BRO BIG TODO');
   }
 
   setMessages(messages) {
@@ -127,6 +133,7 @@ class IncidentMaster extends ViewComponent {
           loading={this.loading()}
           members={this.state.members}
           messages={this.state.messages}
+          operational={this.state.operational}
           recipients={this.state.recipients}
           sendMessageResult={this.sendMessageResult}
           setGroups={this.setGroups}
@@ -134,6 +141,7 @@ class IncidentMaster extends ViewComponent {
           setIncidents={this.setIncidents}
           setMembers={this.setMembers}
           setMessages={this.setMessages}
+          setOperational={this.setOperational}
         />
       </div>
     );

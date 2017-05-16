@@ -14,7 +14,7 @@ class IncidentsController < ApplicationController
   end
 
   def active
-    render json: Incident.active, include: :incident_members, status: :ok
+    render json: Incident.all, include: :incident_members, status: :ok
   end
 
   def show

@@ -1,6 +1,10 @@
 class MessagesController < ApplicationController
 
-  before_action :advanced_only, except: [:index]
+  before_action :advanced_only, except: [:index, :new_with_token]
+
+  def incident
+    render json: Message.all, status: :ok
+  end
 
   def index
     messages = User.my_messages(params)
@@ -11,8 +15,12 @@ class MessagesController < ApplicationController
     end
   end
 
-  def create
-    if Message.create_with_token(params)
+  def new
+    render json: { success: true }, status: :ok
+  end
+
+  def new_with_token
+    if Message.create_with_token(params.permit(:to, :from, :body, :token))
       render json: { success: true, messages: User.my_messages(params) }, status: :ok
     else
       render json: { success: false }, status: :unprocessable_entity

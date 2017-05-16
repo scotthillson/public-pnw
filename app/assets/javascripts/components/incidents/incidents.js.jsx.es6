@@ -3,7 +3,9 @@ class Incidents extends ViewComponent {
   constructor() {
     super();
     this.bindThisToComponent(
-      'selectIncident'
+      'selectIncident',
+      'newIncident',
+      'loadIncidents'
     )
     this.state = {
       operational: true
@@ -107,7 +109,9 @@ class Incidents extends ViewComponent {
         <IncidentSelect
           incidents={this.props.incidents}
           newIncident={this.newIncident}
+          operational={this.props.operational}
           selectIncident={this.selectIncident}
+          setOperational={this.props.setOperational}
         />
         <IncidentMembers
           addRecipients={this.props.addRecipients}

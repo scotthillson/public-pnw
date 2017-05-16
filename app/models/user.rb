@@ -8,10 +8,10 @@ class User < ActiveRecord::Base
   before_save :downcase_email
 
   def self.my_messages(params)
-    unless params[:access_token]
+    unless params[:token]
       return false
     end
-    user = find_by_token(params[:access_token])
+    user = find_by_token(params[:token])
     unless user
       return false
     end
