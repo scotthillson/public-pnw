@@ -30,8 +30,10 @@ class Message < ActiveRecord::Base
   def self.store_message(m)
     m = Message.create(
       body: m.body,
-      to_phone: "api",
-      from_phone: m.from
+      date_sent: m.date_sent,
+      to_phone: m.to_phone,
+      from_phone: m.from,
+      direction: m.direction
     )
   end
 

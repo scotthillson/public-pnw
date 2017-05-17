@@ -9,9 +9,9 @@ class Location < ActiveRecord::Base
   def self.store_location(l, user_id)
     create(
       user_id: user_id,
-      horizon_accuracy: l.horizon_accuracy,
-      vert_accuracy: l.vert_accuracy,
-      #reported_at: DateTime.strptime(l.time),
+      horizon_accuracy: l.horz,
+      vert_accuracy: l.vert,
+      reported_at: l.time,
       altitude: l.alt,
       course: l.course,
       speed: l.speed,

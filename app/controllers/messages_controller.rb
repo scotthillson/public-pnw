@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
   end
 
   def new_with_token
-    if Message.create_with_token(params.permit(:to, :from, :body, :token))
+    if Message.create_with_token(message_params)
       render json: { success: true, messages: User.my_messages(params) }, status: :ok
     else
       render json: { success: false }, status: :unprocessable_entity
@@ -50,8 +50,6 @@ class MessagesController < ApplicationController
 
   def message_params
     params.permit(
-      :date_created,
-      :date_updated,
       :date_sent,
       :to,
       :from,

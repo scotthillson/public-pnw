@@ -13,8 +13,8 @@ class LocationsController < ApplicationController
   def location_params
     params.permit(
       :token,
-      :horizon_accuracy,
-      :vert_accuracy,
+      :horz,
+      :vert,
       :course,
       :speed,
       :time,
