@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     unless member
       return false
     end
-    member.messages
+    member.messages.reverse
   end
 
   def downcase_email
