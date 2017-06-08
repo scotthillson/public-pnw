@@ -69,7 +69,7 @@ class Message < ActiveRecord::Base
     client = Twilio::REST::Client.new @sid, @token
     client.account.messages.list.each do |message|
       unless find_by(sid: message.sid)
-        store_twilio_message(message, 0)
+        store_twilio_message(message)
       end
     end
   end

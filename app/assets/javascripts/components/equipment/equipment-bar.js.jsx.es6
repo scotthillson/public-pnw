@@ -49,6 +49,16 @@ class EquipmentBar extends ViewComponent {
         custom
       </div>
     ];
+    if (this.props.role) {
+      buts.unshift(
+        <div
+          key="personal"
+          className="btn btn-xs btn-default"
+          onClick={this.props.setTeam.bind(this,'personal')}>
+          personal
+        </div>
+      )
+    }
     for (var team of this.props.teams) {
       if (_.map(this.props.categories, 'team_id').includes(String(team.id))) {
         let name = team.name;

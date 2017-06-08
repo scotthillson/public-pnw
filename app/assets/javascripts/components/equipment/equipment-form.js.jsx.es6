@@ -44,6 +44,11 @@ class EquipmentForm extends ViewComponent {
   }
 
   categoryOptions() {
+    if (this.props.personal == true) {
+      return (
+        <option key="personal" value="Personal">Personal</option>
+      );
+    }
     if (!this.props.categories) {
       return;
     }
@@ -55,10 +60,9 @@ class EquipmentForm extends ViewComponent {
   }
 
   options() {
-    console.log(this.props);
-    if (this.props.custom == true) {
+    if (this.props.personal == true) {
       return (
-        <option value="Personal">Personal</option>
+        <option key="personal" value="Personal">Personal</option>
       );
     }
     return (

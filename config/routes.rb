@@ -56,9 +56,9 @@ Rails.application.routes.draw do
     get 'rentals/:id/reserve', to: 'rentals#reserve', as: :reserve_rental
 
   resources :sessions, constraints: {format: :html}
+    post 'new_signin', to: 'sessions#create'
     get 'signout', to: 'sessions#destroy'
     get 'signin', to: 'sessions#new'
-    get 'sessions/new'
 
   resources :sponsors, contraints: {format: :html}
 

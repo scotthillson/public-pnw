@@ -23,10 +23,10 @@ class Equipment extends ViewComponent {
       categories: [],
       category: null,
       checked: [],
-      custom: false,
       detail: 'short description',
       equipment: null,
       list: [],
+      personal: false,
       print: false,
       sessionEquipment: {},
       teams: [],
@@ -105,7 +105,7 @@ class Equipment extends ViewComponent {
 
   newCustom() {
     this.setState(
-      { custom: true,
+      { personal: true,
         team: { local_name: 'custom' },
         equipment: {
           importance: 'Personal',
@@ -124,7 +124,7 @@ class Equipment extends ViewComponent {
           quantity: 1
         },
         category: null,
-        custom: false
+        personal: false
       }
     );
   }
@@ -187,7 +187,7 @@ class Equipment extends ViewComponent {
         <EquipmentForm
           cancel={this.cancelEquipment}
           categories={this.state.categories}
-          custom={this.state.custom}
+          personal={this.state.personal}
           fieldChange={this.equipmentChange}
           loadEquipment={this.loadEquipment}
           equipment={this.state.equipment}
