@@ -40,9 +40,8 @@ Rails.application.configure do
     port:                 587,
     domain:               'gmail.com',
     user_name:            'scott.hillson@gmail.com',
-    password:             'br0wn13s',
-    authentication:       'plain',
-    enable_starttls_auto: true  }
+    password:             'drxouhsqflziwwwf',
+    authentication:       'plain'}
 
   config.action_mailer.default_url_options = { host: 'pnwsar.org' }
 
