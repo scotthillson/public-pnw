@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170515224410) do
+ActiveRecord::Schema.define(version: 20170524222752) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -92,6 +92,12 @@ ActiveRecord::Schema.define(version: 20170515224410) do
     t.integer  "sort"
     t.integer  "updated_by"
     t.integer  "user_id"
+    t.datetime "purchased_at"
+    t.datetime "manufactured_at"
+    t.string   "supplier"
+    t.decimal  "value"
+    t.string   "identifier"
+    t.string   "marks"
   end
 
   create_table "equipment_categories", force: :cascade do |t|
@@ -102,6 +108,18 @@ ActiveRecord::Schema.define(version: 20170515224410) do
     t.datetime "updated_at"
     t.datetime "created_at"
     t.integer  "sort"
+  end
+
+  create_table "equipment_logs", force: :cascade do |t|
+    t.string   "note"
+    t.string   "status"
+    t.boolean  "used"
+    t.integer  "minutes"
+    t.integer  "equipment_id"
+    t.integer  "user_id"
+    t.integer  "created_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "events", force: :cascade do |t|

@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
     if messages
       render json: messages, status: :ok
     else
-      render json: { error: "Unauthorized" }, status: 401
+      render json: [{ error: "Unauthorized" }], status: 401
     end
   end
 

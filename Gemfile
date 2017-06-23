@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.2.0'
+
 # Image magick stuff for good
 gem 'mini_magick'
 # We need jquery and turbolinks to play nice

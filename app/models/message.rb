@@ -11,6 +11,11 @@ class Message < ActiveRecord::Base
     "responding"
   ]
 
+  AVAILABLE_MATCH = [
+    "available",
+    "responding"
+  ]
+
   UNAVAILABLE = [
     "not available",
     "unavailable",
@@ -20,6 +25,11 @@ class Message < ActiveRecord::Base
     "can't",
     "cant"
   ]
+
+  def whatsapp
+    puts self.from_phone
+    self
+  end
 
   def self.create_with_token(params)
     user = User.find_by_token(params[:token])
