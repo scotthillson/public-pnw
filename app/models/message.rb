@@ -26,11 +26,6 @@ class Message < ActiveRecord::Base
     "cant"
   ]
 
-  def whatsapp
-    puts self.from_phone
-    self
-  end
-
   def self.create_with_token(params)
     user = User.find_by_token(params[:token])
     return false unless user
