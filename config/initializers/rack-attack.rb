@@ -43,7 +43,17 @@ class Rack::Attack
   self.blocklist('block shitheads') do |req|
     # Requests are blocked if the return value is truthy
     req.ip == '162.216.152.60' ||
-    req.ip[0..5] == '65.208'
+    req.ip[0..5] == '65.208' ||
+    req.ip == '50.252.24.17' ||
+    req.ip == '162.216.152.53' ||
+    req.ip == '199.48.160.67' ||
+    req.ip == '199.48.160.81' ||
+    req.ip == '158.69.132.117' ||
+    req.ip == '144.217.173.212' ||
+    req.ip == '89.248.163.3' ||
+    req.ip == '144.217.34.60' ||
+    req.ip == '144.217.173.209' ||
+    req.ip == '149.56.81.59'
   end
 
 end

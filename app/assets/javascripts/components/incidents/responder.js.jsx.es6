@@ -6,7 +6,11 @@ class Responder extends ViewComponent {
     }
     $.ajax({
       method: 'patch',
-      data: {status: status, member_id: r.id, incident_id: this.props.incident.id},
+      data: {
+        status: status,
+        member_id: r.id,
+        incident_id: this.props.incident.id
+      },
       url: `update_incident_member`,
       dataType: 'json',
       success: (data) => {

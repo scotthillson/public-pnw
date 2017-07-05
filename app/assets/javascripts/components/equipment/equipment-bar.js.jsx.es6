@@ -34,7 +34,7 @@ class EquipmentBar extends ViewComponent {
         <div
           className="btn btn-xs btn-primary"
           onClick={this.props.newCustom}>
-          custom item
+          personal item
         </div>
       );
     }

@@ -176,6 +176,7 @@ class ProspectApplication extends ViewComponent {
   }
 
   startSubmit() {
+    console.log('wut wut wut');
     let errors = 0;
     for (var key of Object.keys(this.state.fields)){
       errors += this[this.state.fields[key].check](key);
@@ -804,7 +805,7 @@ class ProspectApplication extends ViewComponent {
         <button
           className="g-recaptcha btn btn-primary"
           data-sitekey="6Lc5-h0UAAAAANl0DjEo1dk5BEQWi8snrkjBiRQq"
-          data-callback={this.startSubmit}>
+          data-callback="startSubmit">
           Submit Application
         </button>
         <p>Pacific Northwest Search and Rescue, Inc. does not discriminate against race, religion, sex, or national origin. Pacific Northwest Search and Rescue, Inc. is a non-profit volunteer search and rescue organization (501(c)(3), ID# 93-119739)</p>

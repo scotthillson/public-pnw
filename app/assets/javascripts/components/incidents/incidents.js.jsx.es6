@@ -115,6 +115,9 @@ class Incidents extends ViewComponent {
         <span>Create a new indicent period to begin a callout.</span>
       );
     }
+    if (!this.props.incident) {
+      this.props.setIncident(this.props.incidents[0].id);
+    }
     let incidents = [];
     for (var i of this.props.incidents) {
       incidents.push(
