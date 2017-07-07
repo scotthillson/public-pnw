@@ -27,13 +27,13 @@ class Message < ActiveRecord::Base
   ]
 
   def self.create_with_token(params)
-    user = User.find_by_token(params[:token])
-    return false unless user
+    token = DeviceToken.find_by_token(params[:token])
+    return false unless token && token.verified_at
     store_message(OpenStruct.new(params))
   end
 
   def self.store_message(m)
-    m = Message.create(
+    Message.create(
       body: m.body,
       date_sent: m.date_sent,
       to_phone: m.to_phone,

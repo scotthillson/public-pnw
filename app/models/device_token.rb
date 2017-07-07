@@ -13,7 +13,7 @@ class DeviceToken < ActiveRecord::Base
       mobile_phone: sanitized_phone(params),
       code: params[:code]
       )
-    return nil unless device_token && device_token.expiry > DateTime.now
+    return nil unless device_token && device_token.created_at + 86400 > DateTime.now
     device_token.verified_at = DateTime.now
     device_token.save
     device_token.token
@@ -42,7 +42,7 @@ class DeviceToken < ActiveRecord::Base
       true
     rescue Twilio::REST::RequestError => e
       puts e.message
-      false
+      true
     end
   end
 
