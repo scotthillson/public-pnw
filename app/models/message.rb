@@ -50,15 +50,11 @@ class Message < ActiveRecord::Base
     member.incident_members
   end
 
-  def self.test
-    Message.send('5039290055','5038500198','hello world!')
-  end
-
-  def self.send_message(to, from, body)
+  def self.send_message(to, body)
     client = Twilio::REST::Client.new @sid, @token
     message = client.account.messages.create({
-      from: from,
-      to: '15039290055',
+      from: '15038500198',
+      to: '15039290055', #fix this to go live duhh
       body: body})
     store_twilio_message(message)
   end

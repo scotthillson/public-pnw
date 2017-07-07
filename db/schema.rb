@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170705182454) do
+ActiveRecord::Schema.define(version: 20170706175953) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -64,6 +64,17 @@ ActiveRecord::Schema.define(version: 20170705182454) do
     t.datetime "last_search_sync"
     t.datetime "updated_at"
     t.datetime "created_at"
+  end
+
+  create_table "device_tokens", force: :cascade do |t|
+    t.string   "token"
+    t.string   "code"
+    t.string   "mobile_phone"
+    t.integer  "expiry"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "verified_at"
   end
 
   create_table "discussions", force: :cascade do |t|

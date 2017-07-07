@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
+  get 'verify_authentication_code', to: 'device_tokens#verify'
+  get 'request_authentication_code', to: 'device_tokens#generate'
+
   resources :activities
     get 'update_activities', to: 'activities#update_activities'
 
