@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
   protect_from_forgery
-  # force_ssl = true
+  force_ssl = true
 
   helper_method :current_user
   helper_method :advanced?
