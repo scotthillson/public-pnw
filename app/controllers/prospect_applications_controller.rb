@@ -1,6 +1,6 @@
 class ProspectApplicationsController < ApplicationController
 
-  before_action :advanced_only
+  before_action :advanced_only, except: [:prospect_application, :submit_application]
 
   def index
     respond_to do |format|
@@ -27,6 +27,7 @@ class ProspectApplicationsController < ApplicationController
       if application.save
         format.json { render json: {success: true}, status: :ok }
       else
+        puts application.errors.inspect
         format.json { render json: {errors: application.errors}, status: :ok }
       end
     end
@@ -107,6 +108,8 @@ class ProspectApplicationsController < ApplicationController
       :created_at,
       :status,
       :approved_by
+    ).merge(
+      client_ip: request.remote_ip
     )
   end
 

@@ -6,7 +6,7 @@
   <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Open+Sans:400,700', media: 'all' %>
   <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Lato', media: 'all' %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
   <%= csrf_meta_tags %>
   <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
@@ -21,7 +21,6 @@
   <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="msapplication-TileImage" content="/mstile-144x144.png">
-  <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
   <%= render '/layouts/nav' %>

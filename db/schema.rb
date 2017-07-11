@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170706175953) do
+ActiveRecord::Schema.define(version: 20170711171714) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "d4h_id"
@@ -375,6 +375,7 @@ ActiveRecord::Schema.define(version: 20170706175953) do
     t.datetime "updated_at"
     t.string   "status"
     t.integer  "approved_by"
+    t.string   "client_ip"
   end
 
   create_table "rentals", force: :cascade do |t|

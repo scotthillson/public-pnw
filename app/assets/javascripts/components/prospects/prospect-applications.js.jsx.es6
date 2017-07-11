@@ -18,6 +18,7 @@ class ProspectApplications extends ViewComponent{
       context: this,
       dataType: 'json',
       success: (data) => {
+        console.log(this.state);
         this.setState({ prospectApplications: data });
       },
       error: (jqXHR) => {

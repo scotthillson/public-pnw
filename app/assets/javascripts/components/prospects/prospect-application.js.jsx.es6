@@ -4,8 +4,8 @@ class ProspectApplication extends ViewComponent {
     super();
     this.bindThisToComponent(
       'checkboxes',
-      'startSubmit',
-      'finishSubmit'
+      'finishSubmit',
+      'startSubmit'
     );
     this.state = {
       fields:{
@@ -98,49 +98,49 @@ class ProspectApplication extends ViewComponent {
 
   wordChecks(field) {
     if (!this.state.fields[field].blank && !this.state.fields[field].value){
-      this.showErrors(field);
+      return this.showErrors(field);
     }
-    else if (/^[a-zA-z\s._-]+$/.test(this.state.fields[field].value)){
-      this.fixErrors(field);
+    else if (/^['a-zA-z\s._-]+$/.test(this.state.fields[field].value)){
+      return this.fixErrors(field);
     }
     else{
-      this.showErrors(field);
+      return this.showErrors(field);
     }
   }
 
   numberChecks(field) {
     if (/^[\d-]+$/.test(this.state.fields[field].value)){
-      this.fixErrors(field);
+      return this.fixErrors(field);
     }
     else{
-      this.showErrors(field);
+      return this.showErrors(field);
     }
   }
 
   emailChecks(field) {
-    if (/^([A-Za-z0-9_\-\.])+\this.([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(this.state.fields[field].value)){
-      this.fixErrors(field);
+    if (/^\S+@\S+\.\S+$/.test(this.state.fields[field].value)){
+      return this.fixErrors(field);
     }
     else{
-      this.showErrors(field);
+      return this.showErrors(field);
     }
   }
 
   mixChecks(field) {
-    if (/^[a-zA-z\s\d._-]+$/.test(this.state.fields[field].value) && this.state.fields[field].value){
-      this.fixErrors(field);
+    if (/^[!'a-zA-z\s\d._-]+$/.test(this.state.fields[field].value) && this.state.fields[field].value){
+      return this.fixErrors(field);
     }
     else{
-      this.showErrors(field);
+      return this.showErrors(field);
     }
   }
 
   stateChecks(field) {
     if (/^[A-z]+$/.test(this.state.fields[field].value) && this.state.fields[field].value){
-      this.fixErrors(field);
+      return this.fixErrors(field);
     }
     else {
-      this.showErrors(field);
+      return this.showErrors(field);
     }
   }
 
@@ -148,7 +148,7 @@ class ProspectApplication extends ViewComponent {
     if (!this.state.fields[field].value){
       return this.showErrors(field);
     }
-    this.fixErrors(field);
+    return this.fixErrors(field);
   }
 
   skipChecks() {
@@ -177,13 +177,17 @@ class ProspectApplication extends ViewComponent {
 
   startSubmit() {
     let errors = 0;
-    for (var key of Object.keys(this.state.fields)){
-      errors += this[this.state.fields[key].check](key);
+    for (var field of Object.keys(this.state.fields)){
+      errors += this[this.state.fields[field].check](field);
     }
     if (errors < 1){
+      this.setState({errorMessage: null});
       this.finishSubmit();
     }
     else{
+      this.setState({
+        errorMessage: 'Please correct highlighted fields and resubmit.'
+      });
       window.scrollTo(0,0);
     }
   }
@@ -194,27 +198,39 @@ class ProspectApplication extends ViewComponent {
 
   paramsForRuby() {
     let result = {};
-    for (var field of Array.from(this.state.fields)){
-      if (field.value){
-        if (field.value == "true"){
-          field.value = true;
-        }
-        if (field.value == "false"){
-          field.value = false;
-          result[field.key.snake_case()] = field.value;
-        }
+    for (var field of Object.keys(this.state.fields)){
+      let val = this.state.fields[field].value;
+      if (val == "true"){
+        val = true;
       }
+      if (val == "false"){
+        val = false;
+      }
+      result[field.snake_case()] = val;
     }
     return result;
   }
 
+  titleMessage() {
+    if (this.state.errorMessage) {
+      return (
+        <div className="col-md-12 error-danger text-center">
+          <p>{this.state.errorMessage}</p>
+        </div>
+      );
+    } else {
+      return (
+        <div className="col-md-12">
+          <p className="lead text-center">New Membership Application</p>
+        </div>
+      );
+    }
+  }
+
   render() {
-    window.startSubmitApplication = this.startSubmit;
     return (
     <div className="form-container regular-form">
-      <div className="col-md-12">
-        <p className="lead text-center">New Membership Application</p>
-      </div>
+      {this.titleMessage()}
       <form className="col-md-12 form-horizontal" role="form">
         <div className="row form-group">
           <div className="col-md-6">
@@ -802,12 +818,11 @@ class ProspectApplication extends ViewComponent {
             <label name="acknowledge" style={{padding: '5px'}}>By submitting this application I certify that the information set forth in this application is true and complete to the best of my knowledge.</label>
           </div>
         </div>
-        <button
-          className="g-recaptcha btn btn-primary"
-          data-sitekey="6Lc5-h0UAAAAANl0DjEo1dk5BEQWi8snrkjBiRQq"
-          data-callback="startSubmitApplication">
+        <div
+          className="btn btn-primary"
+          onClick={this.startSubmit}>
           Submit Application
-        </button>
+        </div>
         <p>Pacific Northwest Search and Rescue, Inc. does not discriminate against race, religion, sex, or national origin. Pacific Northwest Search and Rescue, Inc. is a non-profit volunteer search and rescue organization (501(c)(3), ID# 93-119739)</p>
       </form>
     </div>

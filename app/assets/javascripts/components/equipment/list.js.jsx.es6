@@ -41,7 +41,7 @@ class EquipmentList extends ViewComponent {
   }
 
   editButton(e) {
-    if (this.props.role == 'admin') {
+    if (this.props.role == 'admin' || this.props.role == 'advanced') {
       return (
         <div
           className="btn btn-xs btn-warning btn-pnw"

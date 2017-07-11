@@ -2,8 +2,12 @@ class ApplicationLanding extends ViewComponent {
 
   constructor() {
     super();
+    this.bindThisToComponent(
+      'submitApplication'
+    );
     this.state = {
-      successfulSubmit: false
+      successfulSubmit: false,
+      submitFail: false
     };
   }
 
@@ -11,16 +15,19 @@ class ApplicationLanding extends ViewComponent {
     $.ajax({
       type: 'post',
       url: '/submit_new_member_application',
+      context: this,
       data: data,
       dataType: 'json',
-      context: this,
       success: (data) => {
         if (data.success == true) {
           this.setState({ successfulSubmit: true });
+        } else {
+          this.setState({ submitFail: true });
         }
       },
       error: (jqXHR) => {
         console.log(jqXHR);
+        this.setState({ submitFail: true });
       }
     });
   }
@@ -31,6 +38,14 @@ class ApplicationLanding extends ViewComponent {
         <div className="text-center">
           <h3>Your application has been received!</h3>
           <p>We'll be in touch. Until then, don't get lost!</p>
+        </div>
+      );
+    }
+    if (this.state.submitFail) {
+      return (
+        <div className="text-center">
+          <p>There was a problem submitting your application.
+          Please contact us so that we can resolve the error!</p>
         </div>
       );
     }

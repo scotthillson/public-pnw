@@ -95,7 +95,7 @@ class EquipmentBar extends ViewComponent {
   }
 
   adminButtons() {
-    if (this.props.role == 'admin') {
+    if (this.props.role == 'admin' || this.props.role == 'advanced') {
       return (
         <span>
           <div
