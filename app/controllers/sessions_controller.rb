@@ -1,7 +1,5 @@
 class SessionsController < ApplicationController
 
-  force_ssl = true
-
   def new
     if session[:user_id]
       redirect_to '/'
