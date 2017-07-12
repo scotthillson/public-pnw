@@ -1,5 +1,7 @@
 class ProspectApplicationsController < ApplicationController
 
+  force_ssl = true
+
   before_action :advanced_only, except: [:prospect_application, :submit_application]
 
   def index
