@@ -8,6 +8,9 @@ class ProspectApplicationsController < ApplicationController
       format.json do
         render json: ProspectApplication.all
       end
+      format.csv do
+        send_data ProspectApplication.csv_export
+      end
     end
   end
 

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get 'update_activities', to: 'activities#update_activities'
 
   resources :prospect_applications
+    get 'apply', to: 'prospect_applications#prospect_application'
     get 'prospect_application', to: 'prospect_applications#prospect_application'
     post 'submit_new_member_application', to: 'prospect_applications#submit_application'
 

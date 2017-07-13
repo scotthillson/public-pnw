@@ -1,5 +1,5 @@
 class ProspectApplication < ActiveRecord::Base
-  
+
   validates_presence_of :name
   validates_presence_of :email
   validates_presence_of :birthday
@@ -36,6 +36,42 @@ class ProspectApplication < ActiveRecord::Base
   validates_presence_of :reference_city_three
   validates_presence_of :reference_state_three
   validates_presence_of :reference_postal_three
+  row = []
   validates_presence_of :primary_reason
-  
+
+  def self.csv_export
+    CSV.generate do |csv|
+      csv << [
+        'Name',
+        'Birthday',
+        'Email',
+        'Mobile',
+        'Home',
+        'Work',
+        'Address',
+        'City',
+        'State',
+        'Postal',
+        'Employer',
+        'Job Title'
+      ]
+      ProspectApplication.all.each do |r|
+        row = []
+        row << r.name
+        row << r.email
+        row << r.birthday
+        row << r.mobile_phone
+        row << r.home_phone
+        row << r.work_phone
+        row << r.address
+        row << r.city
+        row << r.address_state
+        row << r.postal
+        row << r.employer
+        row << r.job
+        csv << row
+      end
+    end
+  end
+
 end

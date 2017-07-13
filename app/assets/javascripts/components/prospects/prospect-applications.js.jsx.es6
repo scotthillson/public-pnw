@@ -157,7 +157,7 @@ class ProspectApplications extends ViewComponent{
   application(application) {
     return (
         <tr className="text-center" key={ application.id }>
-          <td><a className="btn btn-xs btn-primary" href={`/prospect_applications/${application.id}`}>{ application.name }</a></td>
+          <td><a href={`/prospect_applications/${application.id}`}>{ application.name }</a></td>
           <td>{ application.email }</td>
           <td>{ moment(application.created_at).format('YYYY-MM-DD') }</td>
           <td>{ this.approved(application) }</td>
@@ -183,7 +183,7 @@ class ProspectApplications extends ViewComponent{
         <table className="table">
           <thead>
             <tr>
-              <th className="text-center">Name</th>
+              <th className="text-center"><a className="btn btn-xs btn-primary" href="/prospect_applications.csv">Export</a></th>
               <th className="text-center">Email</th>
               <th className="text-center">Created</th>
               <th className="text-center">Approved</th>
