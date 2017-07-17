@@ -52,3 +52,5 @@ gem 'seed_dump'
 gem 'rollbar'
 # store it in the daaat
 gem 'activerecord-session_store'
+#
+gem 'rack-ssl-enforcer'
