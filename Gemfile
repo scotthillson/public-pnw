@@ -52,5 +52,7 @@ gem 'seed_dump'
 gem 'rollbar'
 # store it in the daaat
 gem 'activerecord-session_store'
-#
+# enforce ssl
 gem 'rack-ssl-enforcer'
+# kill timeouts!
+gem 'rack-timeout'
