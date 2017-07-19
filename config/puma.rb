@@ -12,7 +12,7 @@ rails_env = "development"
 environment rails_env
 
 # Set up socket location
-# bind "unix://#{shared_dir}/sockets/puma.sock"
+bind "unix://#{shared_dir}/sockets/puma.sock"
 
 # Logging
 stdout_redirect "log/puma.stdout.log", "log/puma.stderr.log", true
