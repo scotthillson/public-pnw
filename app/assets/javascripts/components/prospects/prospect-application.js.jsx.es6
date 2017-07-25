@@ -186,7 +186,7 @@ class ProspectApplication extends ViewComponent {
     }
     else{
       this.setState({
-        errorMessage: 'Please correct highlighted fields and resubmit.'
+        errorMessage: 'Please correct highlighted fields.'
       });
       window.scrollTo(0,0);
     }
@@ -214,7 +214,7 @@ class ProspectApplication extends ViewComponent {
   titleMessage() {
     if (this.state.errorMessage) {
       return (
-        <div className="col-md-12 error-danger text-center">
+        <div className="col-md-12 error-title text-center">
           <p>{this.state.errorMessage}</p>
         </div>
       );

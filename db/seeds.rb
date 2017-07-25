@@ -218,5 +218,5 @@ Group.create!([
   {name: "TRT (Trail Running Team)", d4h_id: 4595}
 ])
 User.create!([
-  {email: "scott.hillson@gmail.com", password: "wutwut"}
+  {email: "scott.hillson@gmail.com", password: "wutwut", role: 'admin'}
 ])

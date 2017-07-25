@@ -6,8 +6,14 @@
   margin-top: 8px;
 }
 .error-danger {
-  background-color: #ffe9a9;
+  background-color: #d9534f;
+  color: #ddd;
+}
+.error-title {
+  color: #d9534f;
+  font-size: 48px;
 }
 .btn-space {
   margin: 5px;
 }
+  

@@ -2,6 +2,7 @@ class ProspectApplication < ActiveRecord::Base
 
   validates_presence_of :name
   validates_presence_of :email
+  validates_uniqueness_of :email, case_sensitive: false
   validates_presence_of :birthday
   validates_presence_of :mobile_phone
   validates_presence_of :home_phone
@@ -36,7 +37,6 @@ class ProspectApplication < ActiveRecord::Base
   validates_presence_of :reference_city_three
   validates_presence_of :reference_state_three
   validates_presence_of :reference_postal_three
-  row = []
   validates_presence_of :primary_reason
 
   def self.csv_export
