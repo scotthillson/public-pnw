@@ -154,17 +154,17 @@ class ProspectApplications extends ViewComponent{
     );
   }
 
-  application(application) {
+  application(appl) {
     return (
-        <tr className="text-center" key={ application.id }>
-          <td><a href={`/prospect_applications/${application.id}`}>{ application.name }</a></td>
-          <td>{ application.email }</td>
-          <td>{ moment(application.created_at).format('YYYY-MM-DD') }</td>
-          <td>{ this.approved(application) }</td>
-          <td>{ this.signed(application) }</td>
-          <td>{ this.paid(application) }</td>
-          <td>{ this.taken(application) }</td>
-          <td>{ this.created(application) }</td>
+        <tr className="text-center" key={ appl.id }>
+          <td><a href={ `/prospect_applications/${appl.id}` }>{ `${appl.first_name} ${appl.last_name}` }</a></td>
+          <td>{ appl.email }</td>
+          <td>{ moment(appl.created_at).format('YYYY-MM-DD') }</td>
+          <td>{ this.approved(appl) }</td>
+          <td>{ this.signed(appl) }</td>
+          <td>{ this.paid(appl) }</td>
+          <td>{ this.taken(appl) }</td>
+          <td>{ this.created(appl) }</td>
         </tr>
     );
   }

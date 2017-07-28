@@ -176,20 +176,31 @@ class ReviewProspectApplication extends ViewComponent {
         </div>
         <form className="col-md-12 form-horizontal" role="form">
           <div className="row form-group">
-            <div className="col-md-6">
-              <label>Your Name</label>
+            <div className="col-md-4">
+              <label>First Name</label>
               <div>
                 <input
-                  name="name"
+                  name="firstName"
                   className="form-control"
-                  placeholder="first and last name"
                   type="text"
                   readOnly="true"
-                  value={this.props.fields['name']}
+                  value={this.props.fields['firstName']}
                 />
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
+              <label>Last Name</label>
+              <div>
+                <input
+                  name="lastName"
+                  className="form-control"
+                  type="text"
+                  readOnly="true"
+                  value={this.props.fields['lastName']}
+                />
+              </div>
+            </div>
+            <div className="col-md-4">
               <label>Date of Birth</label>
               <div>
                 <input

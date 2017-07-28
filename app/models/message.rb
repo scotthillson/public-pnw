@@ -11,11 +11,6 @@ class Message < ActiveRecord::Base
     "responding"
   ]
 
-  AVAILABLE_MATCH = [
-    "available",
-    "responding"
-  ]
-
   UNAVAILABLE = [
     "not available",
     "unavailable",
@@ -99,13 +94,6 @@ class Message < ActiveRecord::Base
     )
   end
 
-  def self_translate(choice)
-    if choice == 'available'
-      translation = 'available'
-    elsif choice == 'unavailable'
-      translation = 'unavailable'
-    end
-  end
 
   def translate
     if UNAVAILABLE.include? body.downcase

@@ -7,7 +7,8 @@ class ApplicationLanding extends ViewComponent {
     );
     this.state = {
       successfulSubmit: false,
-      submitFail: false
+      submitFail: false,
+      errors: []
     };
   }
 
@@ -22,7 +23,7 @@ class ApplicationLanding extends ViewComponent {
         if (data.success == true) {
           this.setState({ successfulSubmit: true });
         } else {
-          this.setState({ submitFail: true });
+          this.setState({ submitFail: true, errors: data.errors });
         }
       },
       error: (jqXHR) => {
@@ -42,10 +43,17 @@ class ApplicationLanding extends ViewComponent {
       );
     }
     if (this.state.submitFail) {
+      let errors = [];
+      for (var error in this.state.errors) {
+        errors.push(
+          <p key={error}>{ error } {this.state.errors[error]}</p>
+        );
+      }
       return (
         <div className="text-center">
           <p>There was a problem submitting your application.
           Please contact us so that we can resolve the error!</p>
+          { errors }
         </div>
       );
     }

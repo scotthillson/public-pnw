@@ -54,7 +54,8 @@ class ProspectApplicationsController < ApplicationController
   def application_params
     params.permit(
       :id,
-      :name,
+      :first_name,
+      :last_name,
       :email,
       :birthday,
       :mobile_phone,

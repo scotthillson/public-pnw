@@ -55,7 +55,8 @@ class MessagesController < ApplicationController
       :from,
       :body,
       :token,
-      :direction
+      :direction,
+      :uuid
     )
   end
 

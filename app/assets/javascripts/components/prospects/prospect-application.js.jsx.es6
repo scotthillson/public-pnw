@@ -9,7 +9,8 @@ class ProspectApplication extends ViewComponent {
     );
     this.state = {
       fields:{
-        name: {check: 'wordChecks', value: null},
+        firstName: {check: 'wordChecks', value: null},
+        lastName: {check: 'wordChecks', value: null},
         email: {check: 'emailChecks', value: null},
         birthday: {check: 'lengthChecks', value: null},
         mobilePhone: {check: 'numberChecks', value: null},
@@ -233,19 +234,31 @@ class ProspectApplication extends ViewComponent {
       {this.titleMessage()}
       <form className="col-md-12 form-horizontal" role="form">
         <div className="row form-group">
-          <div className="col-md-6">
-            <label>Your Name</label>
+          <div className="col-md-4">
+            <label>First Name</label>
             <div>
               <input
-                name="name"
+                name="firstName"
                 className="form-control"
                 type="text"
-                value={this.state.fields['name'].value}
-                onChange={this.fieldChange.bind(this, 'name', 'wordChecks')}
+                value={this.state.fields['firstName'].value}
+                onChange={this.fieldChange.bind(this, 'firstName', 'wordChecks')}
               />
             </div>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-4">
+            <label>Last Name</label>
+            <div>
+              <input
+                name="lastName"
+                className="form-control"
+                type="text"
+                value={this.state.fields['lastName'].value}
+                onChange={this.fieldChange.bind(this, 'lastName', 'wordChecks')}
+              />
+            </div>
+          </div>
+          <div className="col-md-4">
             <label>Date of Birth</label>
             <div>
               <input
