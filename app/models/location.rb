@@ -1,9 +1,9 @@
 class Location < ActiveRecord::Base
 
   def self.create_with_token(params)
-    user = User.find_by_token(params[:token])
-    return false unless user
-    store_location(OpenStruct.new(params), user.id)
+    user_id = DeviceToken.find_by_token(params[:token]).user_id
+    return false unless user_id
+    store_location(OpenStruct.new(params), user_id)
   end
 
   def self.store_location(l, user_id)

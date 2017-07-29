@@ -28,12 +28,14 @@ class Message < ActiveRecord::Base
   end
 
   def self.store_message(m)
+    m.uuid = SecureRandom.uuid unless m.uuid
     Message.create(
       body: m.body,
       date_sent: m.date_sent,
       to_phone: m.to_phone,
       from_phone: m.from,
-      direction: m.direction
+      direction: m.direction,
+      uuid: m.uuid
     )
   end
 

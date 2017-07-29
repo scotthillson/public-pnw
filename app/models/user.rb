@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
     unless params[:token]
       return false
     end
-    user = find_by_token(params[:token])
+    token = DeviceToken.find_by_token(params[:token])
+    user = find(token.user_id)
     unless user
       return false
     end
