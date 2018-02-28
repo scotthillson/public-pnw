@@ -1,6 +1,6 @@
 class ProspectApplicationsController < ApplicationController
 
-  before_action :advanced_only, except: [:prospect_application, :submit_application]
+  before_action :advanced_only#, except: [:prospect_application, :submit_application]
 
   def index
     respond_to do |format|

@@ -52,5 +52,7 @@ gem 'seed_dump'
 gem 'rollbar'
 # store it in the daaat
 gem 'activerecord-session_store'
-# kill timeouts!
-gem 'rack-timeout'
+# background stuff
+gem 'delayed_job_active_record'
+# stuff for background stuff
+gem 'daemons'

@@ -5,12 +5,8 @@ class Activity < ActiveRecord::Base
   has_one :event
 
   def self.get_activities
-    if DateTime.now.to_i - D4h.first.last_activity_sync.to_i > 3600
-      D4h.offsetter('activities', method(:update_activity))
-      track = D4h.first
-      track.last_activity_sync = DateTime.now
-      track.save
-    end
+    track = D4h.first
+    track.get_activities
   end
 
   def self.update_activity(remote_activity)
@@ -28,9 +24,12 @@ class Activity < ActiveRecord::Base
     activity.activity_type = remote_activity['activity']
     activity.reference = remote_activity['ref']
     activity.description = remote_activity['description']
-    activity.start_on = remote_activity['date']
-    activity.end_on = remote_activity['enddate']
+    start_on = Time.at(remote_activity['date'].to_s[0..9].to_i)
+    end_on = Time.at(remote_activity['enddate'].to_s[0..9].to_i)
+    activity.start_on = start_on
+    activity.end_on = end_on
     activity.save
+    Attendance.get_attendance(activity)
   end
 
 end

@@ -149,7 +149,7 @@ class ProspectApplications extends ViewComponent{
       <div
       className="btn btn-xs btn-success"
       onClick={this.create.bind(this, application)}
-      >taken
+      >created
       </div>
     );
   }
@@ -188,7 +188,7 @@ class ProspectApplications extends ViewComponent{
               <th className="text-center">Created</th>
               <th className="text-center">Approved</th>
               <th className="text-center">Waiver Signed</th>
-              <th className="text-center">Dues Paid</th>
+              <th className="text-center">App Fee Paid</th>
               <th className="text-center">Photo Taken</th>
               <th className="text-center">D4H</th>
             </tr>

@@ -4,7 +4,6 @@ class ProspectApplication < ActiveRecord::Base
   validates_presence_of :last_name
   validates_presence_of :email
   validates_uniqueness_of :email, case_sensitive: false
-  validates_presence_of :birthday
   validates_presence_of :mobile_phone
   validates_presence_of :home_phone
   validates_presence_of :work_phone

@@ -7,6 +7,7 @@ class Member < ActiveRecord::Base
 
   has_many :incident_members
   has_many :incidents, through: :incident_members
+  has_many :attendances
 
   scope :members, -> { where('d4h_id is not null').order(:name) }
 
@@ -57,6 +58,10 @@ class Member < ActiveRecord::Base
         user.save
       end
     end
+  end
+
+  def attendance
+    attendances.where('status = ? and start_on < ?', 'attending', DateTime.now).sum(:duration)/60
   end
 
 end

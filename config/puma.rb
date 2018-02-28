@@ -6,7 +6,7 @@ threads 1, 6
 
 app_dir = File.expand_path("../..", __FILE__)
 shared_dir = "#{app_dir}/shared"
-rails_env = "production"
+rails_env = "development"
 
 # rails environment, default is development
 environment rails_env

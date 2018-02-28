@@ -1,7 +1,11 @@
 class MembersController < ApplicationController
 
   before_action :turn_back
-  before_action :set_member, only: [:show, :edit, :update, :destroy]
+  before_action :set_member, only: :show
+
+  def show
+    @attendances = @member.attendances.where(status: 'attending')
+  end
 
   def update_members
     if Member.get_members

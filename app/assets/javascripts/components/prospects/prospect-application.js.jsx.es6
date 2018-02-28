@@ -128,7 +128,7 @@ class ProspectApplication extends ViewComponent {
   }
 
   mixChecks(field) {
-    if (/^[!'a-zA-z\s\d._-]+$/.test(this.state.fields[field].value) && this.state.fields[field].value){
+    if (/^[!;():?'a-zA-z\s\d.,_-]+$/.test(this.state.fields[field].value) && this.state.fields[field].value){
       return this.fixErrors(field);
     }
     else{

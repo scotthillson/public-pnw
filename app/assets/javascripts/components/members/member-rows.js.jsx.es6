@@ -49,6 +49,7 @@ class MemberRows extends ViewComponent {
     if (member.on_call && operational) {
       onCall = <i className="fa fa-check" aria-hidden="true"></i>;
     }
+    console.log(member);
     return (
       <tr key={member.d4h_id}>
         <td>
@@ -61,6 +62,7 @@ class MemberRows extends ViewComponent {
         <td>{ member.mobile_phone }</td>
         <td>{ member.email }</td>
         <td>{ member.reference }</td>
+        <td>{ member.attendance }</td>
         <td className="text-center">{ operational }</td>
         <td className="text-center">{ onCall }</td>
       </tr>
@@ -139,31 +141,32 @@ class MemberRows extends ViewComponent {
 
   render() {
     return (
-    <div>
-      <MemberButtons
-        mode={this.state.mode}
-        operational={this.operational}
-        nonOperational={this.nonOperational}
-        onCall={this.onCall}
-        offCall={this.offCall}
-        everyone={this.everyone}
-      />
-      <table className="table">
-        <thead>
-          <tr>
-            <th>{this.members().length}</th>
-            <th>Mobile</th>
-            <th>Email</th>
-            <th>Position</th>
-            <th className="text-center">Operational</th>
-            <th className="text-center">{this.loading()}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.members()}
-        </tbody>
-      </table>
-    </div>
+      <div>
+        <MemberButtons
+          mode={this.state.mode}
+          operational={this.operational}
+          nonOperational={this.nonOperational}
+          onCall={this.onCall}
+          offCall={this.offCall}
+          everyone={this.everyone}
+        />
+        <table className="table">
+          <thead>
+            <tr>
+              <th>{this.members().length}</th>
+              <th>Mobile</th>
+              <th>Email</th>
+              <th>Position</th>
+              <th>Hours</th>
+              <th className="text-center">Operational</th>
+              <th className="text-center">{this.loading()}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.members()}
+          </tbody>
+        </table>
+      </div>
     );
   }
 }
