@@ -1,5 +1,0 @@
-describe Twilio do
-  
-  
-  
-end

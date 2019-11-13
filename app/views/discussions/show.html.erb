@@ -1,6 +1,0 @@
-<p><%= @discussion.subject %></p>
-<p><%= @discussion.body %></p>
-<% @discussion.comments.each do |c| %>
-  <p><%= c.author.name %></p>
-  <p><%= c.body %></p>
-<% end %>

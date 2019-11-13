@@ -1,7 +1,0 @@
-<div>Keep it 1125 x 600 <%= link_to 'New Image', new_image_path, class: 'btn btn-primary' %></div>
-<br>
-<% @images.each do |image| %>
-  <%= link_to 'delete', image, method: :delete, data: { confirm: ' Are you sure you want to destroy this image?' }, class: 'btn btn-danger btn-sm', style: 'margin: 4px' %>
-  <img width="800px" src="<%= image.filename %>" alt="image">
-  <br>
-<% end %>
