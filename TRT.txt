@@ -1,43 +1,55 @@
 Pacific Northwest Search and Rescue, Inc
-Trail Running Team Membership, Deployment, & Equipment Guidelines Effective: April 2017
+Trail Running Team Membership, Deployment, & Equipment Guidelines Effective: December 2019
 
-This document covers requirements and guidelines regarding membership, deployment, and equipment as applicable to a trail running team as a function of PNWSAR search and rescue ground operations.
-The trail running team (TRT) will be used on an as-needed basis to supplement the core competencies of PNWSAR when rapid coverage of trail systems is needed.
-The utilization of running teams allows large distances of trails and roads to be covered quickly that vehicles or mountain bikes cannot easily access. This team can also be utilized to reach a subject(s) quickly to begin care and formulate an extraction plan.
+This document specifies guidelines for the PNWSAR Trail Running Team - A vigorous search and rescue specialty team and training program for advanced athletic capability and skills to safely respond to SAR missions when timing is critical.
+Request the TRT:
+ - When a hasty response is indicated
+ - For long distance and/or time sensitive assignments - If the search area is mostly on trail
+Membership
+1. Eligibility: TRT membership is open to any PNWSAR Type 2 team member in good standing. All PNWSAR members and trainees are welcome at TRT training exercises. TRT membership will be evaluated on an ongoing basis and at the discretion of senior members and the PNWSAR board of directors.
+2. Fitness: All TRT members must be able to run 10 kilometers on a trail with equipment. Team members should demonstrate this at least once a year. It is recommended that all TRT members take part in very regular endurance exercises individually and as a group (you should be hanging out in zone 3 at least once or twice a week).
+3. Readiness: TRT members prioritize efficiency, timeliness, and readiness to serve in a hasty function.
+4. Equipment: Equipment as defined below should be carried or worn during missions. TRT members are trained to be experts in the use of minimal gear.
 
-Membership Guidelines & Responsibilities:
-1. Eligibility: TRT membership will be available to any PNWSAR team member in good standing that has been active for at least six months. TRT membership will be evaluated on an ongoing basis by meeting the equipment and fitness criteria below.
-2. Equipment: Basic equipment as defined below must be obtained, maintained in good working order, and carried in order to be deployed.
-3. Fitness: All TRT members must be able to run 10 miles on a trail wearing a pack that contains the minimum required equipment outlined below. Team members must demonstrate this annually. It is recommended that all TRT members complete a 10 mile team run with a pack bi-monthly, or have a race result of at least 10 miles in place of the bi-monthly team run.
-Deployment Guidelines:
-1. Due to the fact that a trail running team carries minimal equipment for maximum movement efficiency divided amongst team members, deployed team members must remain together at all times in the field.
-2. Eye protection will be carried by all members. Helmets may be required at the discretion of the PIC. If helmets are not worn or carried into the field, this may impact individuals’ ability to participate in rescue operation where normally helmets would be required. Determination will be made by the TL on a case by case basis.
 Required Equipment:
 Team Equipment:
- - Map
- - Compass and GPS
- - Team Radio
- - InReach
+(Collectively, each deployed team should together have)
+ - (2) VHF Radios (SAR-orange capable)
  - First Aid Kit (team minimum required)
+ - Subject Kit (warming, nutrition, hydration, dry layer, sit pad, blanket)
+ - Map
+ - Pink Flagging, Marker
+ - InReach
 Individual Equipment:
- - Clothing (no cotton)
- - Suitable short or long sleeve shirt, and pants or tights
- - Orange or electric blue outer layer
- - Suitable running shoes, athletic socks
-
-TRT SAR pack
- - Assignment nutrition plus additional nutrition for subject(s)
- - Headlamp, extra batteries and backup light source
- - 1.0L water in bottles or a hydration bladder
- - Filtration or water purification backup
- - Rain Gear & extra clothing – weather appropriate
- - Fire Starter
- - 5x7 emergency blanket or bivy
- - Knife
+(Pack the lightest gear that works)
+Clothing:
+ - Trail Running Shoes
+ - Short/Long Sleeve T-Shirt
+ - Running Shorts/Pants/Tights
+ - Base Layer Top
+ - Base Layer Bottom
+ - Shell Top (Orange or Blue)
+ - Shell Bottom
+ - Gloves
+ - Hat or Buff
+ - Extra Socks
+ - Insulating Layer (for stopping)
+ - Eye Pro
+ - Helmet (at discretion of PIC/TL)
+Winter:
+ - Microspikes
+Within Reach:
+ - 1L Water + Filter/Purification
+ - GPS device
+ - Compass
+ - Nutrition
  - Whistle
- - Pink Flagging
- - Toilet Paper
- - SOAP note
- - Pen
- - Eye protection
- - Helmet (optional, may be required at discretion of PIC)
+Additional Equipment:
+ - Headlamp + Backup
+ - Personal First Aid
+ - SOAP Note
+ - Pencil / Marker
+ - Fire Starter, Lighter
+ - Toilet Paper / Paper Towels
+ - Knife or Trauma Shears
+ - Trekking Poles (optional)
